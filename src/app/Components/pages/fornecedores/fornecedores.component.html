@@ -1,0 +1,77 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Fornecedores</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Fornecedores</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+  
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="form-inline">
+        <div class="form-group mb-2">
+            <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Documento</th>
+                <th>Ativo</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="fornecedores && fornecedores.length">
+            <tr *ngFor="let fornecedor of fornecedoresFiltrados">
+                <td></td>
+                <td>{{fornecedor.nome}}</td>
+                <td>{{fornecedor.documento}}</td>
+                <td *ngIf="fornecedor.ativo == true">Sim</td>
+                <td *ngIf="fornecedor.ativo == false">Não</td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-warning" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" tooltip="Excluir"><i class="fa fa-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!fornecedores.length">
+            <tr>
+                <td colspan="7" class="text-center">
+                    <h4>
+                        Nenhum item encontrado!
+                    </h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</section>
+<!-- /.content -->
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        This is a modal.
+    </div>
+</ng-template>

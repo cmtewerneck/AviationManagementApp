@@ -1,7 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { TooltipModule} from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/main/header/header.component';
 import { FooterComponent } from './Components/main/footer/footer.component';
@@ -12,6 +17,17 @@ import { ControlSidebarComponent } from './Components/main/control-sidebar/contr
 import { ContatoComponent } from './Components/pages/contato/contato.component';
 import { HomepageComponent } from './Components/pages/homepage/homepage.component';
 import { PageNotFoundComponent } from './Components/pages/page-not-found/page-not-found.component';
+import { FornecedoresComponent } from './Components/pages/fornecedores/fornecedores.component';
+import { OperacoesComponent } from './Components/pages/operacoes/operacoes.component';
+import { CoordenacaoComponent } from './Components/pages/coordenacao/coordenacao.component';
+import { AeronavesComponent } from './Components/pages/aeronaves/aeronaves.component';
+import { ManutencaoComponent } from './Components/pages/manutencao/manutencao.component';
+import { TripulacaoComponent } from './Components/pages/tripulacao/tripulacao.component';
+import { AeromedicoComponent } from './Components/pages/aeromedico/aeromedico.component';
+import { FerramentariaComponent } from './Components/pages/ferramentaria/ferramentaria.component';
+import { VeiculosComponent } from './Components/pages/veiculos/veiculos.component';
+import { UsuariosComponent } from './Components/pages/usuarios/usuarios.component';
+import { ClientesComponent } from './Components/pages/clientes/clientes.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +40,27 @@ import { PageNotFoundComponent } from './Components/pages/page-not-found/page-no
     ControlSidebarComponent,
     HomepageComponent,
     ContatoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FornecedoresComponent,
+    OperacoesComponent,
+    CoordenacaoComponent,
+    AeronavesComponent,
+    ManutencaoComponent,
+    TripulacaoComponent,
+    AeromedicoComponent,
+    FerramentariaComponent,
+    VeiculosComponent,
+    UsuariosComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

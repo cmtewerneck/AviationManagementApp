@@ -1,0 +1,79 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Aeronaves</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Aeronaves</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+  
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="form-inline">
+        <div class="form-group mb-2">
+            <input type="text" class="form-control mr 2" placeholder="Buscar">
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Matrícula</th>
+                <th>Fabricante</th>
+                <th>Categoria</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Peso Vazio</th>
+                <th>Horas Totais</th>
+                <th>Horas Restantes</th>
+                <th>Vencimento CA</th>
+                <th>Vencimento CM</th>
+                <th>Vencimento Reta</th>
+                <th>Última Pesagem</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="aeronaves && aeronaves.length">
+            <tr *ngFor="let aeronave of aeronavesFiltradas">
+                <td></td>
+                <td>{{aeronave.matricula}}</td>
+                <td>{{aeronave.fabricante}}</td>
+                <td>{{aeronave.categoria}}</td>
+                <td>{{aeronave.modelo}}</td>
+                <td>{{aeronave.ano}}</td>
+                <td>{{aeronave.pesoVazio}}</td>
+                <td>{{aeronave.horasTotais}}</td>
+                <td>{{aeronave.horasRestantes}}</td>
+                <td>{{aeronave.vencimentoCA}}</td>
+                <td>{{aeronave.vencimentoCM}}</td>
+                <td>{{aeronave.vencimentoReta}}</td>
+                <td>{{aeronave.ultimaPesagem}}</td>
+                <td>
+                    <button class="btn btn-success"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!aeronaves.length">
+            <tr>
+                <td colspan="7" class="text-center">
+                    <h4>
+                        Nenhum item encontrado!
+                    </h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</section>
+<!-- /.content -->
