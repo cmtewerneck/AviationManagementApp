@@ -19,4 +19,17 @@ export class FornecedorService {
   ObterPorId(id: string): Observable<Fornecedor> {
     return this.http.get<Fornecedor>(`${this.baseURL}/${id}`);
   }
+
+  AdicionarFornecedor(fornecedor: Fornecedor) {
+    return this.http.post(this.baseURL, fornecedor);
+  }
+
+  EditarFornecedor(fornecedor: Fornecedor) {
+    return this.http.put(`${this.baseURL}/${fornecedor.id}`, fornecedor);
+  }
+
+  ExcluirFornecedor(id: string) {
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
+
 }
