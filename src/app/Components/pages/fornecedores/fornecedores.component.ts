@@ -3,6 +3,7 @@ import { FornecedorService } from '../../../_services/fornecedor.service';
 import { Fornecedor } from 'src/app/_models/Fornecedor';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fornecedores',
@@ -21,7 +22,8 @@ export class FornecedoresComponent implements OnInit {
   constructor(
     private fornecedorService: FornecedorService,
     private modalService: BsModalService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
     ) { }
 
   _filtroLista: string;
@@ -56,7 +58,9 @@ export class FornecedoresComponent implements OnInit {
       () => {
         template.hide();
         this.ObterTodos();
+        this.toastr.success('Excluido com sucesso');
       }, error => {
+        this.toastr.error('Erro ao tentar excluir');
         console.log(error);
       }
     );
@@ -92,8 +96,9 @@ export class FornecedoresComponent implements OnInit {
     this.fornecedorService.ObterTodos().subscribe(
       (_fornecedores: Fornecedor[]) => {
       this.fornecedores = _fornecedores;
-      console.log(_fornecedores);
+      this.fornecedoresFiltrados = this.fornecedores;
     }, error => {
+        this.toastr.error(`Erro de carregamento: ${error}`);
         console.log(error);
     });
   }
@@ -107,7 +112,9 @@ export class FornecedoresComponent implements OnInit {
             (novoFornecedor: Fornecedor) => {
               template.hide();
               this.ObterTodos();
+              this.toastr.success('Adicionado com sucesso');
             }, error => {
+              this.toastr.error(`Erro ao adicionar: ${error}`);
               console.log(error);
             }
           );
@@ -118,7 +125,9 @@ export class FornecedoresComponent implements OnInit {
                 () => {
                   template.hide();
                   this.ObterTodos();
+                  this.toastr.success('Alterações salvas com sucesso');
                 }, error => {
+                  this.toastr.error(`Erro ao editar: ${error}`);
                   console.log(error);
                 }
               );

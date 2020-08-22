@@ -6,6 +6,8 @@ import { TooltipModule} from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/main/header/header.component';
@@ -28,6 +30,7 @@ import { FerramentariaComponent } from './Components/pages/ferramentaria/ferrame
 import { VeiculosComponent } from './Components/pages/veiculos/veiculos.component';
 import { UsuariosComponent } from './Components/pages/usuarios/usuarios.component';
 import { ClientesComponent } from './Components/pages/clientes/clientes.component';
+import { RegisterComponent } from './Components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { ClientesComponent } from './Components/pages/clientes/clientes.componen
     HomepageComponent,
     ContatoComponent,
     PageNotFoundComponent,
+    RegisterComponent,
     FornecedoresComponent,
     OperacoesComponent,
     CoordenacaoComponent,
@@ -58,10 +62,12 @@ import { ClientesComponent } from './Components/pages/clientes/clientes.componen
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ToastrModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

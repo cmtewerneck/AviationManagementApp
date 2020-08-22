@@ -8,9 +8,9 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Acesse o sistema</p>
 
-        <form action="../../index3.html" method="post">
+        <form action="../../index3.html" #loginForm="ngForm" method="post" (ngSubmit)="login()">
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" />
+            <input type="email" id="email" name="email" required class="form-control" placeholder="Email" [(ngModel)]="model.email"/>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Senha" />
+            <input type="password" id="password" name="password" required class="form-control" placeholder="Senha" [(ngModel)]="model.password"/>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -36,7 +36,7 @@
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">
                 Entrar
               </button>
             </div>
@@ -48,7 +48,7 @@
           <a href="forgot-password.html">Esqueci meus dados</a>
         </p>
         <p class="mb-0">
-          <a href="register.html" class="text-center">Nova Conta</a>
+          <a routerLink="/register" class="text-center">Nova Conta</a>
         </p>
       </div>
       <!-- /.login-card-body -->

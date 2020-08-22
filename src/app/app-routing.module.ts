@@ -16,11 +16,16 @@ import { FerramentariaComponent } from './Components/pages/ferramentaria/ferrame
 import { VeiculosComponent } from './Components/pages/veiculos/veiculos.component';
 import { UsuariosComponent } from './Components/pages/usuarios/usuarios.component';
 import { ClientesComponent } from './Components/pages/clientes/clientes.component';
+import { RegisterComponent } from './Components/register/register.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: '',
