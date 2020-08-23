@@ -17,6 +17,7 @@ import { VeiculosComponent } from './Components/pages/veiculos/veiculos.componen
 import { UsuariosComponent } from './Components/pages/usuarios/usuarios.component';
 import { ClientesComponent } from './Components/pages/clientes/clientes.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -34,54 +35,67 @@ const routes: Routes = [
       {
         path: '',
         component: HomepageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'contato',
         component: ContatoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'fornecedores',
         component: FornecedoresComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'veiculos',
         component: VeiculosComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'usuarios',
         component: UsuariosComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'ferramentaria',
         component: FerramentariaComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'clientes',
         component: ClientesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'aeronaves',
         component: AeronavesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'manutencao',
         component: ManutencaoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'tripulacao',
         component: TripulacaoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'coordenacao',
         component: CoordenacaoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'operacao-aeromedica',
         component: AeromedicoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'operacoes',
         component: OperacoesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: '**',

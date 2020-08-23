@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Aeronave } from '../_models/Aeronave';
 
@@ -10,7 +10,8 @@ export class AeronaveService {
 
   baseURL = 'https://localhost:44302/api/v1/aeronaves';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   ObterTodos(): Observable<Aeronave[]> {
     return this.http.get<Aeronave[]>(this.baseURL);

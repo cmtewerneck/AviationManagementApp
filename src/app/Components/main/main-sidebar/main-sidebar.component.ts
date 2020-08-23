@@ -13,4 +13,8 @@ export class MainSidebarComponent implements OnInit {
   ngOnInit() {
   }
 
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
 }

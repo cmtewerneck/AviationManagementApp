@@ -25,9 +25,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['']);
+          this.toastr.success('Você está ONLINE!');
         },
         error => {
-          this.toastr.error('Falha ao tentar logar!');
+          this.toastr.error('Falha ao tentar logar. Confirme seus dados de acesso.');
         }
       )
     }

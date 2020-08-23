@@ -13,14 +13,9 @@ export class ControlSidebarComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private router: Router,
-    private authService: AuthService
   ) { }
 
   ngOnInit() {
-  }
-
-  loggedIn() {
-    return this.authService.loggedIn();
   }
 
   logout() {

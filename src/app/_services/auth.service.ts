@@ -19,20 +19,21 @@ export class AuthService {
       map((response: any) => {
         const user = response;
         if (user) {
-          localStorage.setItem('token', user.token);
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          console.log(user);
+          localStorage.setItem('token', user.data.accessToken);
+          this.decodedToken = this.jwtHelper.decodeToken(user.data.accessToken);
         }
       })
     );
   }
-  
+
   register(model: any) {
     return this.http.post(`${this.baseURL}nova-conta`, model);
   }
 
   loggedIn() {
     const token = localStorage.getItem('token');
-    return this.jwtHelper.isTokenExpired(token);
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
 }

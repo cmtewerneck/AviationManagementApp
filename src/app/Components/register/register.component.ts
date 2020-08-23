@@ -48,6 +48,7 @@ export class RegisterComponent implements OnInit {
   cadastrarUsuario() {
     if (this.registerForm.valid) {
       this.user = Object.assign({password: this.registerForm.get('passwords.password').value},
+      {confirmPassword: this.registerForm.get('passwords.confirmPassword').value},
       this.registerForm.value);
       console.log(this.user);
       this.authService.register(this.user).subscribe(
@@ -63,11 +64,11 @@ export class RegisterComponent implements OnInit {
                 break;
                 default:
                   this.toastr.error(`Erro no cadastro! CODE: ${element.code}`);
-                break;
+                  break;
             }
           });
         }
-      )
+      );
     }
   }
 
