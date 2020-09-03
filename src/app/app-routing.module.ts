@@ -32,75 +32,20 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
-      {
-        path: '',
-        component: HomepageComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'contato',
-        component: ContatoComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'fornecedores',
-        component: FornecedoresComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'veiculos',
-        component: VeiculosComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'usuarios',
-        component: UsuariosComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'ferramentaria',
-        component: FerramentariaComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'clientes',
-        component: ClientesComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'aeronaves',
-        component: AeronavesComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'manutencao',
-        component: ManutencaoComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'tripulacao',
-        component: TripulacaoComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'coordenacao',
-        component: CoordenacaoComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'operacao-aeromedica',
-        component: AeromedicoComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'operacoes',
-        component: OperacoesComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: '**',
-        component: PageNotFoundComponent,
-      }]
+      { path: '', component: HomepageComponent, canActivate: [AuthGuard], },
+      { path: 'contato', component: ContatoComponent, canActivate: [AuthGuard], },
+      { path: 'fornecedores', component: FornecedoresComponent, canActivate: [AuthGuard], },
+      { path: 'veiculos', component: VeiculosComponent, canActivate: [AuthGuard], },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard], },
+      { path: 'ferramentaria', component: FerramentariaComponent, canActivate: [AuthGuard], },
+      { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard], },
+      { path: 'aeronaves', component: AeronavesComponent, canActivate: [AuthGuard], },
+      { path: 'manutencao', component: ManutencaoComponent, canActivate: [AuthGuard], },
+      { path: 'tripulacao', component: TripulacaoComponent, canActivate: [AuthGuard], },
+      { path: 'coordenacao', component: CoordenacaoComponent, canActivate: [AuthGuard], },
+      { path: 'operacao-aeromedica', component: AeromedicoComponent, canActivate: [AuthGuard], },
+      { path: 'operacoes', component: OperacoesComponent, canActivate: [AuthGuard], },
+      { path: '**', component: PageNotFoundComponent, }]
   }
 ];
 

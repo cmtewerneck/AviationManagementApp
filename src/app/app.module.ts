@@ -8,6 +8,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/main/header/header.component';
@@ -62,6 +64,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BrowserModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
+    TabsModule.forRoot(),
+    NgxMaskModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     AppRoutingModule,
