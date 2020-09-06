@@ -21,4 +21,16 @@ export class TripulanteService {
     return this.http.get<Tripulante>(`${this.baseURL}/${id}`);
   }
 
+  AdicionarTripulante(tripulante: Tripulante) {
+    return this.http.post(this.baseURL, tripulante);
+  }
+
+  EditarTripulante(tripulante: Tripulante) {
+    return this.http.put(`${this.baseURL}/${tripulante.id}`, tripulante);
+  }
+
+  ExcluirTripulante(id: string) {
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
+
 }

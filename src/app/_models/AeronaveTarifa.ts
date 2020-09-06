@@ -1,5 +1,4 @@
 export interface AeronaveTarifa {
-        aeronaveId: string;
         data: Date;
         vencimento: Date;
         valor: number;
@@ -7,4 +6,6 @@ export interface AeronaveTarifa {
         arquivo: string;
         numeracao: string;
         orgaoEmissor: string;
+
+        aeronaveId: string;
 }

@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './Components/pages/page-not-found/page-no
 import { FornecedoresComponent } from './Components/pages/fornecedores/fornecedores.component';
 import { OperacoesComponent } from './Components/pages/operacoes/operacoes.component';
 import { CoordenacaoComponent } from './Components/pages/coordenacao/coordenacao.component';
+import { ProdutosComponent } from './Components/pages/produtos/produtos.component';
 import { AeronavesComponent } from './Components/pages/aeronaves/aeronaves.component';
 import { ManutencaoComponent } from './Components/pages/manutencao/manutencao.component';
 import { TripulacaoComponent } from './Components/pages/tripulacao/tripulacao.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: '', component: HomepageComponent, canActivate: [AuthGuard], },
       { path: 'contato', component: ContatoComponent, canActivate: [AuthGuard], },
       { path: 'fornecedores', component: FornecedoresComponent, canActivate: [AuthGuard], },
+      { path: 'produtos', component: ProdutosComponent, canActivate: [AuthGuard], },
       { path: 'veiculos', component: VeiculosComponent, canActivate: [AuthGuard], },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard], },
       { path: 'ferramentaria', component: FerramentariaComponent, canActivate: [AuthGuard], },

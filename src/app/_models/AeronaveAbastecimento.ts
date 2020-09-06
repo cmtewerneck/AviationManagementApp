@@ -1,5 +1,4 @@
 export interface AeronaveAbastecimento {
-        aeronaveId: string;
         data: Date;
         litros: number;
         local: string;
@@ -8,4 +7,6 @@ export interface AeronaveAbastecimento {
         fornecedora: string;
         responsavel: string;
         observacoes: string;
+
+        aeronaveId: string;
 }

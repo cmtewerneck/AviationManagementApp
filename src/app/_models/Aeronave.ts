@@ -16,5 +16,5 @@ export interface Aeronave {
         ultimaPesagem?: Date;
         vencimentoReta?: Date;
         aeronavesAbastecimentos: AeronaveAbastecimento[];
-        aeronaveTarifas: AeronaveTarifa[];
+        aeronavesTarifas: AeronaveTarifa[];
 }

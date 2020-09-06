@@ -1,18 +1,19 @@
 export interface Tripulante {
+    id: string;
     nome: string;
     cpf: string;
-    email: string;
+    email?: string;
     dataNascimento?: Date;
     dataAdmissao?: Date;
-    sexo: string;
+    sexo?: string;
     cargo: string;
-    estadoCivil: string;
-    salario?: number;
-    situacao: string;
-    rg: string;
-    orgaoEmissor: string;
-    tituloEleitor: string;
-    numeroPis: string;
-    numeroCtps: string;
-    numeroCnh: string;
+    estadoCivil?: string;
+    salario?: string;
+    situacao?: string;
+    rg?: string;
+    orgaoEmissor?: string;
+    tituloEleitor?: string;
+    numeroPis?: string;
+    numeroCtps?: string;
+    numeroCnh?: string;
 }

@@ -22,6 +22,7 @@ import { ContatoComponent } from './Components/pages/contato/contato.component';
 import { HomepageComponent } from './Components/pages/homepage/homepage.component';
 import { PageNotFoundComponent } from './Components/pages/page-not-found/page-not-found.component';
 import { FornecedoresComponent } from './Components/pages/fornecedores/fornecedores.component';
+import { ProdutosComponent } from './Components/pages/produtos/produtos.component';
 import { OperacoesComponent } from './Components/pages/operacoes/operacoes.component';
 import { CoordenacaoComponent } from './Components/pages/coordenacao/coordenacao.component';
 import { AeronavesComponent } from './Components/pages/aeronaves/aeronaves.component';
@@ -49,6 +50,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     PageNotFoundComponent,
     RegisterComponent,
     FornecedoresComponent,
+    ProdutosComponent,
     OperacoesComponent,
     CoordenacaoComponent,
     AeronavesComponent,

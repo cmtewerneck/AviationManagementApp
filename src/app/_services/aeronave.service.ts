@@ -13,12 +13,24 @@ export class AeronaveService {
   constructor(private http: HttpClient) {
   }
 
-  ObterTodos(): Observable<Aeronave[]> {
+  ObterTodas(): Observable<Aeronave[]> {
     return this.http.get<Aeronave[]>(this.baseURL);
   }
 
   ObterPorId(id: string): Observable<Aeronave> {
     return this.http.get<Aeronave>(`${this.baseURL}/${id}`);
+  }
+
+  AdicionarAeronave(aeronave: Aeronave) {
+    return this.http.post(this.baseURL, aeronave);
+  }
+
+  EditarAeronave(aeronave: Aeronave) {
+    return this.http.put(`${this.baseURL}/${aeronave.id}`, aeronave);
+  }
+
+  ExcluirAeronave(id: string) {
+    return this.http.delete(`${this.baseURL}/${id}`);
   }
 
 }
