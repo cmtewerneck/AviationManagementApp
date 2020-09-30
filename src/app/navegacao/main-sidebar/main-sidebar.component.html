@@ -1,0 +1,156 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a routerLink="/" class="brand-link">
+    <span class="brand-text font-weight-light" style="text-align: center">Aviation Management</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a *ngIf="usuarioLogado()" href="javascript:void(0)"> {{email}} </a>
+        <!---->
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Home
+            </p>
+          </a>
+        </li>
+        <!-- FORNECEDORES MENU-->
+        <li class="nav-item">
+          <a routerLink="/fornecedores/listar-todos" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-user-circle"></i>
+            <p>
+              Fornecedores
+            </p>
+          </a>
+        </li>
+        <!-- PRODUTOS MENU-->
+        <li class="nav-item">
+          <a routerLink="/produtos" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-shopping-basket"></i>
+            <p>
+              Produtos
+            </p>
+          </a>
+        </li>
+        <!-- OPERAÇÕES MENU-->
+        <li class="nav-item">
+          <a routerLink="/operacoes" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fab fa-hire-a-helper"></i>
+            <p>
+              Operações
+            </p>
+          </a>
+        </li>
+        <!-- COORDENAÇÃO MENU-->
+        <li class="nav-item">
+          <a routerLink="/coordenacao" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-location-arrow"></i>
+            <p>
+              Coordenação de Voo
+            </p>
+          </a>
+        </li>
+        <!-- AERONAVES MENU-->
+        <li class="nav-item">
+          <a routerLink="/aeronaves" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-helicopter"></i>
+            <p>
+              Aeronaves
+            </p>
+          </a>
+        </li>
+        <!-- MANUTENÇÃO MENU-->
+        <li class="nav-item">
+          <a routerLink="/manutencao" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-tools"></i>
+            <p>
+              Controle de Manutenção
+            </p>
+          </a>
+        </li>
+        <!-- TRIPULAÇÃO MENU-->
+        <li class="nav-item">
+          <a routerLink="/tripulacao" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-user-circle"></i>
+            <p>
+              Tripulantes
+            </p>
+          </a>
+        </li>
+        <!-- CLIENTES MENU-->
+        <li class="nav-item">
+          <a routerLink="/clientes" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-user-circle"></i>
+            <p>
+              Clientes
+            </p>
+          </a>
+        </li>
+        <!-- AEROMÉDICO MENU-->
+        <li class="nav-item">
+          <a routerLink="/operacao-aeromedica" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-user-md"></i>
+            <p>
+              Operação Aeromédica
+            </p>
+          </a>
+        </li>
+        <!-- FERRAMENTARIA MENU-->
+        <li class="nav-item">
+          <a routerLink="/ferramentaria" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-hammer"></i>
+            <p>
+              Estoque
+            </p>
+          </a>
+        </li>
+        <!-- VEÍCULOS MENU-->
+        <li class="nav-item">
+          <a routerLink="/veiculos" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-car"></i>
+            <p>
+              Veículos
+            </p>
+          </a>
+        </li>
+        <!-- USUÁRIOS MENU-->
+        <li class="nav-item">
+          <a routerLink="/usuarios" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Usuários
+            </p>
+          </a>
+        </li>
+        <!-- CONTATO MENU-->
+        <li class="nav-item">
+          <a routerLink="/contato" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon fas fa-headset"></i>
+            <p>
+              Contato
+            </p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

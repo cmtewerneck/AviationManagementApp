@@ -1,3 +1,4 @@
+// MÓDULOS
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -10,60 +11,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgBrazil } from 'ng-brazil';
+import { TextMaskModule } from 'angular2-text-mask';
+import { NavegacaoModule } from './navegacao/navegacao.module';
 
+// COMPONENTES
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/main/header/header.component';
-import { FooterComponent } from './Components/main/footer/footer.component';
-import { LoginComponent } from './Components/login/login.component';
-import { MainComponent } from './Components/main/main.component';
-import { MainSidebarComponent } from './Components/main/main-sidebar/main-sidebar.component';
-import { ControlSidebarComponent } from './Components/main/control-sidebar/control-sidebar.component';
-import { ContatoComponent } from './Components/pages/contato/contato.component';
-import { HomepageComponent } from './Components/pages/homepage/homepage.component';
-import { PageNotFoundComponent } from './Components/pages/page-not-found/page-not-found.component';
-import { FornecedoresComponent } from './Components/pages/fornecedores/fornecedores.component';
-import { ProdutosComponent } from './Components/pages/produtos/produtos.component';
-import { OperacoesComponent } from './Components/pages/operacoes/operacoes.component';
-import { CoordenacaoComponent } from './Components/pages/coordenacao/coordenacao.component';
-import { AeronavesComponent } from './Components/pages/aeronaves/aeronaves.component';
-import { ManutencaoComponent } from './Components/pages/manutencao/manutencao.component';
-import { TripulacaoComponent } from './Components/pages/tripulacao/tripulacao.component';
-import { AeromedicoComponent } from './Components/pages/aeromedico/aeromedico.component';
-import { FerramentariaComponent } from './Components/pages/ferramentaria/ferramentaria.component';
-import { VeiculosComponent } from './Components/pages/veiculos/veiculos.component';
-import { UsuariosComponent } from './Components/pages/usuarios/usuarios.component';
-import { ClientesComponent } from './Components/pages/clientes/clientes.component';
-import { RegisterComponent } from './Components/register/register.component';
+import { HomepageComponent } from './Components/homepage/homepage.component';
+import { ProdutosComponent } from './Components/produtos/produtos.component';
+import { TripulacaoComponent } from './Components/tripulacao/tripulacao.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    MainComponent,
-    MainSidebarComponent,
-    ControlSidebarComponent,
     HomepageComponent,
-    ContatoComponent,
-    PageNotFoundComponent,
-    RegisterComponent,
-    FornecedoresComponent,
     ProdutosComponent,
-    OperacoesComponent,
-    CoordenacaoComponent,
-    AeronavesComponent,
-    ManutencaoComponent,
     TripulacaoComponent,
-    AeromedicoComponent,
-    FerramentariaComponent,
-    VeiculosComponent,
-    UsuariosComponent,
-    ClientesComponent
   ],
   imports: [
     BrowserModule,
+    NavegacaoModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     TabsModule.forRoot(),
@@ -71,6 +39,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     AppRoutingModule,
+    TextMaskModule,
+    NgBrazil,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,0 +1,170 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Produtos</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Produtos</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="d-flex">
+      <div class="form-inline mr-auto">
+        <div class="form-group mb-2">
+            <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-success" (click)="novoProduto(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Produto</button>
+      </div>
+    </div>
+  <table class="table table-hover" style="white-space: nowrap">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                <button class="btn btn-primary" (click)="alternarImagem()">
+                  <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+                </button>
+              </th>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Ativo</th>
+              <th>Opções</th>
+          </tr>
+      </thead>
+      <tbody *ngIf="produtos && produtos.length">
+          <tr *ngFor="let produto of produtosFiltrados">
+              <td>
+                <img *ngIf="mostrarImagem" src="https://localhost:44302/images/{{produto.imagem}}"
+                  [style.width.px]="imagemLargura"
+                  [style.margin.px]="imagemMargem">                
+              </td>
+              <td>{{produto.nome}}</td>
+              <td>{{produto.descricao}}</td>
+              <td>{{produto.valor}}</td>
+              <td>{{produto.ativo}}</td>
+              <td>
+                  <div class="btn-group">
+                      <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="editarProduto(produto, template)"><i class="fa fa-edit"></i></button>
+                      <button class="btn btn-sm btn-danger" tooltip="Excluir" (click)="excluirProduto(produto, confirm)"><i class="fa fa-trash"></i></button>
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+      <tfoot *ngIf="!produtos">
+          <tr>
+              <td colspan="7" class="text-center">
+                  <h4>
+                      Nenhum item encontrado!
+                  </h4>
+              </td>
+          </tr>
+      </tfoot>
+  </table>
+  </div>
+</section>
+<!-- /.content -->
+
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1"
+   role="dialog" aria-labelledby="dialog-sizes-name1">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 id="dialog-sizes-name1" class="modal-title pull-left">Novo Produto</h4>
+      <button type="button" class="close pull-right" (click)="template.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="registerForm">
+        <div class="form-row">
+          
+          <div class="form-group col-md-6">
+            <label>Nome</label>
+            <input type="text" class="form-control" 
+            [ngClass]="{'is-invalid': registerForm.get('nome').errors && registerForm.get('nome').touched}"  
+            formControlName="nome" placeholder="Insira seu nome">
+                <div *ngIf="registerForm.get('nome').hasError('required') && registerForm.get('nome').touched" class="invalid-feedback">Nome é obrigatório</div>
+                <div *ngIf="registerForm.get('nome').hasError('minlength') && registerForm.get('nome').touched" class="invalid-feedback">Nome deve ter no mínimo 2 caracteres</div>
+                <div *ngIf="registerForm.get('nome').hasError('maxlength') && registerForm.get('nome').touched" class="invalid-feedback">Nome deve ter no máximo 200 caracteres</div>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Valor</label>
+            <input type="text" class="form-control" 
+            [ngClass]="{'is-invalid': registerForm.get('valor').errors && registerForm.get('valor').touched}"  
+            formControlName="valor" placeholder="Insira o valor">
+                <div *ngIf="registerForm.get('valor').hasError('required') && registerForm.get('valor').touched" class="invalid-feedback">Valor é obrigatório</div>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Ativo?</label>
+            <input type="text" class="form-control" formControlName="ativo">
+          </div>
+        </div> 
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label>Descrição</label>
+            <input type="text" class="form-control" 
+            [ngClass]="{'is-invalid': registerForm.get('descricao').errors && registerForm.get('descricao').touched}"  
+            formControlName="descricao" placeholder="Insira a descricao">
+                <div *ngIf="registerForm.get('descricao').hasError('required') && registerForm.get('descricao').touched" class="invalid-feedback">Descricao é obrigatório</div>
+                <div *ngIf="registerForm.get('descricao').hasError('minlength') && registerForm.get('descricao').touched" class="invalid-feedback">Descricao deve ter no mínimo 5 caracteres</div>
+                <div *ngIf="registerForm.get('descricao').hasError('maxlength') && registerForm.get('descricao').touched" class="invalid-feedback">Descricao deve ter no máximo 1000 caracteres</div>
+          </div>
+        </div> 
+
+      </form>
+    </div>
+    <div class="modal-footer d-flex">
+      <button class="btn btn-secondary" (click)="template.hide()">
+        Fechar
+      </button>
+      <button class="btn btn-primary ml-auto" [disabled]="!registerForm.valid" (click)="salvarAlteracao(template)">
+        Adicionar
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title pull-left">
+            Excluindo Produto
+          </h4>
+          <button type="button" class="close pull-right" (click)="confirm.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <p>{{bodyDeletarProduto}}</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+          <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+            CENCELAR
+          </button>
+          <button type="button" class="btn btn-outline-danger" (click)="confirmeDelete(confirm)">
+              EXCLUIR
+          </button>
+      </div>
+    </div>
+</div>
+</div>
