@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/conta/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/User';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-
   model: any = {};
   loginForm: FormGroup;
   errors: any[] = [];
@@ -19,8 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private router: Router,
+    private route: ActivatedRoute,
     public fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     if (localStorage.getItem('token') !== null) {
@@ -37,23 +38,29 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.dirty && this.loginForm.valid){
+    if (this.loginForm.dirty && this.loginForm.valid) {
       this.user = Object.assign({}, this.user, this.loginForm.value);
 
-      this.authService.login(this.user)
-        .subscribe(
-          success => { this.processarSucesso(success); },
-          error => { this.processarFalha(error); }
-        );
+      this.authService.login(this.user).subscribe(
+        (success) => {
+          this.processarSucesso(success);
+        },
+        (error) => {
+          this.processarFalha(error);
+        }
+      );
     }
   }
 
   processarSucesso(response: any) {
-    this.router.navigate(['']);
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    if (returnUrl) this.router.navigate([returnUrl]);
+    else this.router.navigate(['']);
+
     this.toastr.success('Você está Online!', 'ACESSO PERMITIDO', {
       closeButton: true,
       progressBar: true,
-      timeOut: 2000
+      timeOut: 2000,
     });
 
     this.errors = [];

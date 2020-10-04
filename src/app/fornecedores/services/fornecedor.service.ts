@@ -11,15 +11,16 @@ export class FornecedorService extends BaseService {
 
   constructor(private http: HttpClient) { super(); }
 
+
   ObterTodos(): Observable<Fornecedor[]> {
     return this.http
-      .get<Fornecedor[]>(this.urlServiceV1 + 'fornecedores')
+      .get<Fornecedor[]>(this.urlServiceV1 + 'fornecedores', this.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError));
   }
 
   ObterPorId(id: string): Observable<Fornecedor> {
     return this.http
-      .get<Fornecedor>(this.urlServiceV1 + 'fornecedores/' + id, super.ObterAuthHeaderJson())
+      .get<Fornecedor>(this.urlServiceV1 + 'fornecedores/' + id, this.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError));
   }
 
@@ -33,7 +34,7 @@ export class FornecedorService extends BaseService {
 
   EditarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
     return this.http
-      .put(this.urlServiceV1 + 'fornecedores/' + fornecedor.id, fornecedor, super.ObterAuthHeaderJson())
+      .put(this.urlServiceV1 + 'fornecedores/' + fornecedor.id, fornecedor, this.ObterAuthHeaderJson())
       .pipe(
         map(super.extractData),
         catchError(super.serviceError));
@@ -41,15 +42,15 @@ export class FornecedorService extends BaseService {
 
   ExcluirFornecedor(id: string): Observable<Fornecedor> {
     return this.http
-      .delete(this.urlServiceV1 + 'fornecedores/' + id, super.ObterAuthHeaderJson())
-      .pipe(  
+      .delete(this.urlServiceV1 + 'fornecedores/' + id, this.ObterAuthHeaderJson())
+      .pipe(
         map(super.extractData),
         catchError(super.serviceError));
   }
 
   AtualizarEndereco(endereco: Endereco): Observable<Endereco> {
     return this.http
-      .put(this.urlServiceV1 + 'fornecedores/endereco/' + endereco.id, endereco, super.ObterAuthHeaderJson())
+      .put(this.urlServiceV1 + 'fornecedores/endereco/' + endereco.id, endereco, this.ObterAuthHeaderJson())
       .pipe(
         map(super.extractData),
         catchError(super.serviceError));
@@ -60,6 +61,5 @@ export class FornecedorService extends BaseService {
       .get<CepConsulta>(`https://cors-anywhere.herokuapp.com/https://viacep.com.br/ws/${cep}/json/`)
       .pipe(catchError(super.serviceError));
   }
-
 
 }
