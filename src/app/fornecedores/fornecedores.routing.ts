@@ -10,32 +10,40 @@ import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { FornecedorAppComponent } from './fornecedor.app.component';
 import { FornecedorResolve } from './services/fornecedor.resolve';
+import { FornecedorGuard } from './services/fornecedor.guard';
 
 
 const fornecedoresRouterConfig: Routes = [
     {
         path: '', component: FornecedorAppComponent,
         children: [
-            { path: 'listar-todos', component: FornecedoresComponent },
-            { path: 'adicionar-novo', component: NovoComponent },
+            { path: 'listar-todos', component: FornecedoresComponent, canActivate: [FornecedorGuard] },
+            {
+                path: 'adicionar-novo', component: NovoComponent,
+                canDeactivate: [FornecedorGuard],
+                canActivate: [FornecedorGuard],
+                data: [{ claim: { nome: 'Fornecedor', valor: 'Adicionar' } }],
+            },
             {
                 path: 'detalhes/:id', component: DetalhesComponent,
                 resolve: {
                     fornecedor: FornecedorResolve
-                }
+                },
+                data: [{ claim: { nome: 'Fornecedor', valor: 'Atualizar' } }],
             },
             {
                 path: 'editar/:id', component: EditarComponent,
                 resolve: {
                     fornecedor: FornecedorResolve
-                }
-                // canActivate: [FornececedorGuard],
-                // data: [{ claim: { nome: 'Fornecedor', valor: 'Atualizar' } }],
+                },
+                canDeactivate: [FornecedorGuard],
+                canActivate: [FornecedorGuard],
+                data: [{ claim: { nome: 'Fornecedor', valor: 'Atualizar' } }],
             },
             {
                 path: 'excluir/:id', component: ExcluirComponent,
-                // canActivate: [FornececedorGuard],
-                // data: [{ claim: { nome: 'Fornecedor', valor: 'Excluir' } }],
+                canActivate: [FornecedorGuard],
+                data: [{ claim: { nome: 'Fornecedor', valor: 'Excluir' } }],
                 resolve: {
                     fornecedor: FornecedorResolve
                 }

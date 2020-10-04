@@ -28,5 +28,4 @@ export class ControlSidebarComponent implements OnInit {
     });
     this.router.navigate(['/conta/login']);
   }
-
 }

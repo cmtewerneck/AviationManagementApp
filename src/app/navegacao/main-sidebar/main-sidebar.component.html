@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside *ngIf="usuarioLogado()" class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a routerLink="/" class="brand-link">
     <span class="brand-text font-weight-light" style="text-align: center">Aviation Management</span>
@@ -42,7 +42,7 @@
         </li>
         <!-- PRODUTOS MENU-->
         <li class="nav-item">
-          <a routerLink="/produtos" class="nav-link" routerLinkActive="active">
+          <a routerLink="/produtos/listar-todos" class="nav-link" routerLinkActive="active">
             <i class="nav-icon fas fa-shopping-basket"></i>
             <p>
               Produtos

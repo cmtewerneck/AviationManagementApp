@@ -1,16 +1,17 @@
-<div class="wrapper">
+<div [ngClass]="{ 'wrapper': usuarioLogado() }">
 
-  <app-header></app-header>
+  <app-header *ngIf="usuarioLogado()"></app-header>
 
-  <app-main-sidebar></app-main-sidebar>
+  <app-main-sidebar *ngIf="usuarioLogado()"></app-main-sidebar>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div [ngClass]="{ 'content-wrapper': usuarioLogado() }">
     <router-outlet></router-outlet>
   </div>
   <!-- /.content-wrapper -->
 
-  <app-control-sidebar></app-control-sidebar>
+  <app-control-sidebar *ngIf="usuarioLogado()"></app-control-sidebar>
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="usuarioLogado()"></app-footer>
 </div>
+

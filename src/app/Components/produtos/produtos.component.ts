@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ProdutoService } from '../../_services/produto.service';
-import { Produto } from 'src/app/_models/Produto';
+import { Produto } from 'src/app/produtos/Produto';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';

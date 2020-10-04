@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ControlSidebarComponent } from './control-sidebar/control-sidebar.component';
 import { MainSidebarComponent } from './main-sidebar/main-sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
         FooterComponent,
         MainSidebarComponent,
         PageNotFoundComponent,
-        ControlSidebarComponent
+        ControlSidebarComponent,
+        AcessoNegadoComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +30,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
         FooterComponent,
         MainSidebarComponent,
         PageNotFoundComponent,
-        ControlSidebarComponent
+        ControlSidebarComponent,
+        AcessoNegadoComponent
     ]
 })
 export class NavegacaoModule { }

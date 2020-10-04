@@ -11,7 +11,7 @@ import { CepConsulta, Endereco } from '../models/Endereço';
 import { Fornecedor } from '../models/Fornecedor';
 import { FornecedorService } from '../services/fornecedor.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar',
@@ -33,6 +33,7 @@ export class EditarComponent implements OnInit {
   genericValidator: GenericValidator;
   displayMessage: DisplayMessage = {};
   textoDocumento: string = '';
+  mudancasNaoSalvas: boolean;
 
   MASKS = utilsBr.MASKS;
   tipoFornecedor: number;
@@ -199,6 +200,7 @@ export class EditarComponent implements OnInit {
 
   validarFormulario(){
     this.displayMessage = this.genericValidator.processarMensagens(this.fornecedorForm);
+    this.mudancasNaoSalvas = true;
   }
 
   buscarCep(cep: string) {
@@ -239,6 +241,7 @@ export class EditarComponent implements OnInit {
 
   processarSucesso(response: any) {
     this.errors = [];
+    this.mudancasNaoSalvas = false;
 
     let toast = this.toastr.success('Fornecedor atualizado com sucesso!', 'Sucesso!');
     if (toast) {
@@ -273,7 +276,7 @@ export class EditarComponent implements OnInit {
     this.errors = [];
 
     this.toastr.success('Endereço atualizado com sucesso!', 'Sucesso!');
-    this.fornecedor.endereco = endereco
+    this.fornecedor.endereco = endereco;
   }
 
   processarFalhaEndereco(fail: any) {

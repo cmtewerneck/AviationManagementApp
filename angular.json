@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["js-brasil", "angular2-text-mask", "rxjs/internal/operators/tap"],
             "outputPath": "dist/AviationManagementApp",
             "index": "src/index.html",
             "main": "src/main.ts",
