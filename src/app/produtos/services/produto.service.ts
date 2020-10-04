@@ -14,19 +14,19 @@ export class ProdutoService extends BaseService {
 
     obterTodos(): Observable<Produto[]> {
         return this.http
-            .get<Produto[]>(this.urlServiceV1 + 'produtos', super.ObterAuthHeaderJson())
+            .get<Produto[]>(this.urlServiceV1 + 'produtos', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     obterPorId(id: string): Observable<Produto> {
         return this.http
-            .get<Produto>(this.urlServiceV1 + 'produtos/' + id, super.ObterAuthHeaderJson())
+            .get<Produto>(this.urlServiceV1 + 'produtos/' + id, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     novoProduto(produto: Produto): Observable<Produto> {
         return this.http
-            .post(this.urlServiceV1 + 'produtos', produto, super.ObterAuthHeaderJson())
+            .post(this.urlServiceV1 + 'produtos', produto, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -34,7 +34,7 @@ export class ProdutoService extends BaseService {
 
     atualizarProduto(produto: Produto): Observable<Produto> {
         return this.http
-            .put(this.urlServiceV1 + 'produtos/' + produto.id, produto, super.ObterAuthHeaderJson())
+            .put(this.urlServiceV1 + 'produtos/' + produto.id, produto, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -42,7 +42,7 @@ export class ProdutoService extends BaseService {
 
     excluirProduto(id: string): Observable<Produto> {
         return this.http
-            .delete(this.urlServiceV1 + 'produtos/' + id, super.ObterAuthHeaderJson())
+            .delete(this.urlServiceV1 + 'produtos/' + id, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -50,7 +50,7 @@ export class ProdutoService extends BaseService {
 
     obterFornecedores(): Observable<Fornecedor[]> {
         return this.http
-            .get<Fornecedor[]>(this.urlServiceV1 + 'fornecedores')
+            .get<Fornecedor[]>(this.urlServiceV1 + 'fornecedores', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

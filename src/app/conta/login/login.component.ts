@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/conta/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/User';
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private router: Router,
+    private route: ActivatedRoute,
     public fb: FormBuilder,
     private authService: AuthService) { }
 
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.dirty && this.loginForm.valid){
+    if (this.loginForm.dirty && this.loginForm.valid) {
       this.user = Object.assign({}, this.user, this.loginForm.value);
 
       this.authService.login(this.user)
@@ -49,7 +50,12 @@ export class LoginComponent implements OnInit {
   }
 
   processarSucesso(response: any) {
-    this.router.navigate(['']);
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    if (returnUrl)
+      this.router.navigate([returnUrl]);
+    else
+      this.router.navigate(['']);
+
     this.toastr.success('Você está Online!', 'ACESSO PERMITIDO', {
       closeButton: true,
       progressBar: true,
