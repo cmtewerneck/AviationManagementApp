@@ -19,7 +19,7 @@ export class FornecedorService extends BaseService {
 
   ObterPorId(id: string): Observable<Fornecedor> {
     return this.http
-      .get<Fornecedor>(this.urlServiceV1 + 'fornecedores/' + id, super.obterHeaderJson())
+      .get<Fornecedor>(this.urlServiceV1 + 'fornecedores/' + id, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError));
   }
 

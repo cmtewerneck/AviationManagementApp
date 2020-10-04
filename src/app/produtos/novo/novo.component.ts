@@ -59,7 +59,7 @@ export class NovoComponent implements OnInit {
       },
       descricao: {
         required: 'Informe a Descrição',
-        minlength: 'Mínimo de 2 caracteres',
+        minlength: 'Mínimo de 5 caracteres',
         maxlength: 'Máximo de 1000 caracteres'
       },
       imagem: {
@@ -82,7 +82,7 @@ export class NovoComponent implements OnInit {
      this.produtoForm = this.fb.group({
        fornecedorId: ['', [Validators.required]],
        nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
+       descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
        imagem: ['', [Validators.required]],
        valor: ['', [Validators.required]],
        ativo: [true]

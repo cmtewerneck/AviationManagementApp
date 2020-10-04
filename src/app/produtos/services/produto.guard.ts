@@ -25,8 +25,8 @@ export class ProdutoGuard implements CanActivate, CanDeactivate<NovoComponent> {
         }
 
         let user = this.localStorageUtils.obterUsuario();
-
         let claim: any = routeAc.data[0];
+        
         if (claim !== undefined) {
             let claim = routeAc.data[0]['claim'];
 
