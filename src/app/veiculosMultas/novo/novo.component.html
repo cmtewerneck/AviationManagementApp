@@ -1,0 +1,94 @@
+<div class="container main-container">
+    
+    <h3>Nova Multa </h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <form enctype="multipart/form-data" (ngSubmit)="adicionarVeiculoMulta()" [formGroup]="veiculoMultaForm">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Auto</label>
+                    <div>
+                        <input class="form-control" id="autoInfracao" type="text" placeholder="Auto de Infração (requerido)" formControlName="autoInfracao" [ngClass]="{'is-invalid': displayMessage.autoInfracao }" />
+                        <span class="text-danger" *ngIf="displayMessage.autoInfracao">
+                            <p [innerHTML]="displayMessage.autoInfracao"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Placa</label>
+                    <select class="form-control" id="veiculoId" formControlName="veiculoId" [ngClass]="{'is-invalid': displayMessage.veiculoId }">
+                        <option *ngFor="let veiculo of veiculos" value="{{ veiculo.id }}">{{ veiculo.placa }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage.veiculoId">
+                        <p [innerHTML]="displayMessage.veiculoId"></p>
+                    </span>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label class="control-label">Data</label>
+                    <div>
+                        <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
+                        <span class="text-danger" *ngIf="displayMessage.data">
+                            <p [innerHTML]="displayMessage.data"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Descrição</label>
+                    <div>
+                        <input class="form-control" id="descricao" type="text" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.descricao">
+                            <p [innerHTML]="displayMessage.descricao"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Classificação</label>
+                    <div>
+                        <input class="form-control" id="classificacao" type="text" formControlName="classificacao" />
+                    </div>
+                </div>
+
+                <div class="form-group  col-md-4">
+                    <label class="control-label">Motorista</label>
+                    <div>
+                        <input class="form-control" id="motorista" type="text" formControlName="motorista" />
+                    </div>
+                </div>             
+                               
+                <div class="form-group  col-md-4">
+                    <label class="control-label">Pagamento</label>
+                    <div>
+                        <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
+                            <option value="true">Pago</option>
+                            <option value="false">Pendente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!veiculoMultaForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/veiculos-multas/listar-todos">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

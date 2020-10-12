@@ -1,0 +1,152 @@
+<div class="container main-container">
+    
+    <h3>Nova Aeronave </h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <form enctype="multipart/form-data" (ngSubmit)="adicionarAeronave()" [formGroup]="aeronaveForm">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Matrícula</label>
+                    <div>
+                        <input class="form-control" id="matricula" type="text" placeholder="Matrícula (requerido)" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
+                        <span class="text-danger" *ngIf="displayMessage.matricula">
+                            <p [innerHTML]="displayMessage.matricula"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Fabricante</label>
+                    <div>
+                        <input class="form-control" id="fabricante" type="text" placeholder="Fabricante (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.fabricante}" />
+                        <span class="text-danger" *ngIf="displayMessage.fabricante">
+                            <p [innerHTML]="displayMessage.fabricante"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Categoria</label>
+                    <div>
+                        <input class="form-control" id="categoria" type="text" placeholder="Categoria (requerido)" formControlName="categoria" [ngClass]="{'is-invalid': displayMessage.categoria}" />
+                        <span class="text-danger" *ngIf="displayMessage.categoria">
+                            <p [innerHTML]="displayMessage.categoria"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Modelo</label>
+                    <div>
+                        <input class="form-control" id="modelo" type="text" placeholder="Modelo (requerido)" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo}" />
+                        <span class="text-danger" *ngIf="displayMessage.modelo">
+                            <p [innerHTML]="displayMessage.modelo"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Ano</label>
+                    <div>
+                        <input class="form-control" id="ano" type="number" placeholder="Ano" formControlName="ano" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Peso Vazio</label>
+                    <div>
+                        <input class="form-control" id="pezoVazio" type="number" placeholder="Peso Vazio" formControlName="pesoVazio" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Horas Totais</label>
+                    <div>
+                        <input class="form-control" id="horasTotais" type="number" placeholder="Horas Totais" formControlName="horasTotais" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Horas Restantes</label>
+                    <div>
+                        <input class="form-control" id="horasRestantes" type="number" placeholder="Horas Restantes" formControlName="horasRestantes" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento CA</label>
+                    <div>
+                        <input class="form-control" id="vencimentoCa" type="date" placeholder="Vencimento CA" formControlName="vencimentoCa" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento CM</label>
+                    <div>
+                        <input class="form-control" id="vencimentoCm" type="date" placeholder="Vencimento CM" formControlName="vencimentoCm" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Última Pesagem</label>
+                    <div>
+                        <input class="form-control" id="ultimaPesagem" type="date" placeholder="Última Pesagem" formControlName="ultimaPesagem" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento Reta</label>
+                    <div>
+                        <input class="form-control" id="vencimentoReta" type="date" placeholder="Vencimento Reta" formControlName="vencimentoReta" />
+                    </div>
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Imagem do Produto</label>
+                    
+                    <div class="custom-file">
+                        <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': displayMessage.imagem }">
+                        <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                        
+                        <span *ngIf='imagemNome'><br>{{ imagemNome }} <br></span>
+                        
+                        <span class="text-danger" *ngIf="displayMessage.imagem">
+                            <p [innerHTML]="displayMessage.imagem"></p>
+                        </span>
+                    </div>
+                    
+                    <div *ngIf='imagemNome' class="row">
+                        <div class="col col-md-6">
+                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="3 / 4" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
+                            [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+                            (loadImageFailed)="loadImageFailed()"></image-cropper>
+                        </div>
+                        <div class="col col-md-6">
+                            <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!aeronaveForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/aeronaves/listar-todos">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

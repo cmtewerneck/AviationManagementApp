@@ -1,0 +1,48 @@
+<div class="container main-container">
+  <h4>Excluir: {{ cliente.primeiroNome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-6">
+          <dl>
+              <dt>
+                  Primeiro Nome
+              </dt>
+              <dd>
+                  {{ cliente.primeiroNome }}
+              </dd>
+              <dt>
+                  Último Nome
+              </dt>
+              <dd>
+                  {{ cliente.ultimoNome }}
+              </dd>
+              <dt>
+                  CPF
+              </dt>
+              <dd>
+                  {{ cliente.cpf | cpf }}
+              </dd>
+              <dt>
+                  E-mail
+              </dt>
+              <dd>
+                  {{ cliente.email }}
+              </dd>
+              <dt>
+                Telefone
+              </dt>
+              <dd>
+                {{ cliente.telefone }}
+              </dd>
+          </dl>
+
+          <div>
+              <a (click)="excluirCliente()" href="javascript:void(0)" class="btn btn-danger">Excluir</a>&nbsp;
+              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>

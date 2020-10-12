@@ -1,0 +1,150 @@
+<div class="container main-container">
+
+  <h3>Editar Aeronave - {{ aeronave.matricula }}</h3>
+
+  <hr>
+  <div class="row">
+      <div class="col-md-10">
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+            <p style="color: white"> Processando... </p>
+        </ngx-spinner>
+          <form enctype="multipart/form-data" (ngSubmit)="editarAeronave()" [formGroup]="aeronaveForm">
+
+              <div class="alert alert-danger" *ngIf="errors.length > 0">
+                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                  <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                  </ul>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Matrícula</label>
+                    <div>
+                        <input class="form-control" id="matricula" type="text" placeholder="Matrícula (requerido)" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
+                        <span class="text-danger" *ngIf="displayMessage.matricula">
+                            <p [innerHTML]="displayMessage.matricula"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Fabricante</label>
+                    <div>
+                        <input class="form-control" id="fabricante" type="text" placeholder="Fabricante (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.fabricante}" />
+                        <span class="text-danger" *ngIf="displayMessage.fabricante">
+                            <p [innerHTML]="displayMessage.fabricante"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Categoria</label>
+                    <div>
+                        <input class="form-control" id="categoria" type="text" placeholder="Categoria (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.categoria}" />
+                        <span class="text-danger" *ngIf="displayMessage.categoria">
+                            <p [innerHTML]="displayMessage.categoria"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Modelo</label>
+                    <div>
+                        <input class="form-control" id="modelo" type="text" placeholder="Modelo (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.modelo}" />
+                        <span class="text-danger" *ngIf="displayMessage.modelo">
+                            <p [innerHTML]="displayMessage.modelo"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Ano</label>
+                    <div>
+                        <input class="form-control" id="ano" type="number" placeholder="Ano" formControlName="ano" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Peso Vazio</label>
+                    <div>
+                        <input class="form-control" id="pezoVazio" type="number" placeholder="Peso Vazio" formControlName="pesoVazio" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Horas Totais</label>
+                    <div>
+                        <input class="form-control" id="horasTotais" type="number" placeholder="Horas Totais" formControlName="horasTotais" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Horas Restantes</label>
+                    <div>
+                        <input class="form-control" id="horasRestantes" type="number" placeholder="Horas Restantes" formControlName="horasRestantes" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento CA</label>
+                    <div>
+                        <input class="form-control" id="vencimentoCa" type="date" placeholder="Vencimento CA" formControlName="vencimentoCa" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento CM</label>
+                    <div>
+                        <input class="form-control" id="vencimentoCm" type="date" placeholder="Vencimento CM" formControlName="vencimentoCm" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Última Pesagem</label>
+                    <div>
+                        <input class="form-control" id="ultimaPesagem" type="date" placeholder="Última Pesagem" formControlName="ultimaPesagem" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Vencimento Reta</label>
+                    <div>
+                        <input class="form-control" id="vencimentoReta" type="date" placeholder="Vencimento Reta" formControlName="vencimentoReta" />
+                    </div>
+                </div>
+            </div>          
+                
+                <div *ngIf="!imagemPreview" class="form-group">
+                  <label>Imagem Atual</label><br>
+                  <img [src]="imagemOriginalSrc" style="width: 70px; height: 100px;"/>
+                </div>
+                <div *ngIf="imagemPreview" class="form-group">
+                  <label>Nova Imagem</label><br>
+                  <img [src]="imagemPreview" style="width: 70px; height: 100px;"/>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Imagem da Aeronave</label>
+
+                  <div class="custom-file">
+                      <input type="file" accept="image/jpg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" #fileInput (change)="upload(fileInput.files)" [ngClass]="{'is-invalid': displayMessage.imagem }">
+                      <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                      <span class="text-danger" *ngIf="displayMessage.imagem">
+                          <p [innerHTML]="displayMessage.imagem"></p>
+                      </span>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <input type="submit" [disabled]="!aeronaveForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                  <a class="btn btn-info" href="/aeronaves/listar-todos">Voltar</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

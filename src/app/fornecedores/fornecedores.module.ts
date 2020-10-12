@@ -14,6 +14,7 @@ import { NgBrazil } from 'ng-brazil';
 import { FornecedoresComponent } from './lista/fornecedores.component';
 import { FornecedorAppComponent } from './fornecedor.app.component';
 import { NovoComponent } from './novo/novo.component';
+import { ListaProdutosComponent } from './produtos/lista.produtos.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
@@ -30,7 +31,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         NovoComponent,
         ExcluirComponent,
         EditarComponent,
-        DetalhesComponent
+        DetalhesComponent,
+        ListaProdutosComponent
     ],
     imports: [
         CommonModule,

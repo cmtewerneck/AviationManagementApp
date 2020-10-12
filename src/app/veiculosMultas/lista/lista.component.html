@@ -1,0 +1,79 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Multas</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Multas</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+      <div class="d-flex">
+        <div class="form-inline mr-auto">
+          <div class="form-group mb-2">
+              <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-success" [routerLink]="['/veiculos-multas/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Nova Multa</a>
+          <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+        </div>
+      </div>
+    <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+            <tr>
+                <th>Auto</th>
+                <th>Data</th>
+                <th>Placa</th>
+                <th>Descrição</th>
+                <th>Motirista</th>
+                <th>Pagamento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="veiculosMultas && veiculosMultas.length">
+            <tr *ngFor="let veiculoMulta of veiculosMultasFiltrados">
+                <td>{{ veiculoMulta.autoInfracao }}</td>
+                <td>{{ veiculoMulta.data }}</td>
+                <td>{{ veiculoMulta.placaVeiculo }}</td>
+                <td>{{ veiculoMulta.descricao }}</td>
+                <td>{{ veiculoMulta.motorista }}</td>
+                <td *ngIf="veiculoMulta.situacao == true">Pago</td>
+                <td *ngIf="veiculoMulta.situacao == false">Pendente</td>
+                
+                <td class="text-right">
+                    <a class="btn btn-warning" [routerLink]="['/veiculos-multas/detalhes',veiculoMulta.id]">
+                        <span class="fa fa-search"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-info" [routerLink]="['/veiculos-multas/editar',veiculoMulta.id]">
+                        <span class="fa fa-pencil-alt"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-danger" [routerLink]="['/veiculos-multas/excluir',veiculoMulta.id]">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!veiculosMultas">
+            <tr>
+                <td colspan="7" class="text-center">
+                    <h4>
+                        Nenhum item encontrado!
+                    </h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</section>
+<!-- /.content -->

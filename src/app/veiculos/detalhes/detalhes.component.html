@@ -1,0 +1,70 @@
+<div class="container main-container">
+  <h4>Detalhes: {{ veiculo.placa }} </h4>
+  <br>
+
+  <div class="row">
+      <div class="col-md-4">
+          <img src="{{ imagens }}{{ veiculo.imagem }}" style="width: 300px; height: 428px">
+      </div>
+      <div class="col-md-6">
+          <dl>
+              <dt>
+                  Placa
+              </dt>
+              <dd>
+                  {{ veiculo.placa }}
+              </dd>
+              <dt>
+                  UF Placa
+              </dt>
+              <dd>
+                  {{ veiculo.ufPlaca }}
+              </dd>
+              <dt>
+                Ano
+              </dt>
+              <dd>
+                {{ veiculo.ano }}
+              </dd>
+              <dt>
+                Próprio
+              </dt>
+              <dd>
+                {{ veiculo.proprio }}
+              </dd>
+              <dt>
+                Km Atual
+              </dt>
+              <dd>
+                {{ veiculo.kmAtual }}
+              </dd>
+              <dt>
+                Modelo
+              </dt>
+              <dd>
+                {{ veiculo.modelo }}
+              </dd>
+              <dt>
+                Renavam
+              </dt>
+              <dd>
+                {{ veiculo.renavam }}
+              </dd>
+              <dt>
+                Combustível
+              </dt>
+              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 1">Gasolina</dd>
+              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 2">Álcool</dd>
+              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 3">Diesel</dd>
+              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 4">Flex</dd>
+              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 5">Elétrico</dd>
+          </dl>
+
+          <div>
+              <a class="btn btn-warning" [routerLink]="['/veiculos/editar',veiculo.id]">Editar</a>&nbsp;
+              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>

@@ -15,6 +15,9 @@ exports.config = {
   capabilities: {
     browserName: 'chrome'
   },
+  suites: {
+    produto: './src/cadastro-produto/app.cadastro-produto.e2e-spec.ts'
+  },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',

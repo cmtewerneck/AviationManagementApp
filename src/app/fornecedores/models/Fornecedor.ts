@@ -1,4 +1,4 @@
-//import { Produto } from '../../produtos/models/Produto';
+import { Produto } from '../../produtos/models/Produto';
 import { Endereco } from './Endereço';
 
 export class Fornecedor {
@@ -9,5 +9,5 @@ export class Fornecedor {
         tipoFornecedor: number;
 
         endereco: Endereco;
-  //      produtos: Produto[];
+        produtos: Produto[];
 }

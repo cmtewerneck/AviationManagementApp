@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FornecedoresComponent } from './lista/fornecedores.component';
 
-import { AuthGuard } from '../auth/auth.guard';
 import { NovoComponent } from './novo/novo.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditarComponent } from './editar/editar.component';
@@ -17,7 +16,10 @@ const fornecedoresRouterConfig: Routes = [
     {
         path: '', component: FornecedorAppComponent,
         children: [
-            { path: 'listar-todos', component: FornecedoresComponent, canActivate: [FornecedorGuard] },
+            {   path: 'listar-todos', component: FornecedoresComponent,
+                canActivate: [FornecedorGuard],
+                data: [{ claim: { nome: 'Fornecedor', valor: 'Consultar' } }],
+            },
             {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [FornecedorGuard],

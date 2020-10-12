@@ -20,6 +20,38 @@ const routes: Routes = [
             loadChildren: () => import('./produtos/produtos.module')
             .then(m => m.ProdutoModule)
         },
+        { path: 'tripulantes',
+            loadChildren: () => import('./tripulantes/tripulantes.module')
+            .then(m => m.TripulanteModule)
+        },
+        { path: 'estoque',
+            loadChildren: () => import('./estoque/estoque.module')
+            .then(m => m.EstoqueModule)
+        },
+        { path: 'aeronaves',
+            loadChildren: () => import('./aeronaves/aeronaves.module')
+            .then(m => m.AeronaveModule)
+        },
+        { path: 'veiculos',
+            loadChildren: () => import('./veiculos/veiculo.module')
+            .then(m => m.VeiculoModule)
+        },
+        { path: 'veiculos-multas',
+            loadChildren: () => import('./veiculosMultas/veiculosMultas.module')
+            .then(m => m.VeiculoMultaModule)
+        },
+        { path: 'clientes',
+            loadChildren: () => import('./clientes/clientes.module')
+            .then(m => m.ClientesModule)
+        },
+        { path: 'oficios-recebidos',
+            loadChildren: () => import('./oficiosRecebidos/oficiosRecebidos.module')
+            .then(m => m.OficiosRecebidosModule)
+        },
+        { path: 'oficios-emitidos',
+            loadChildren: () => import('./oficiosEmitidos/oficiosEmitidos.module')
+            .then(m => m.OficiosEmitidosModule)
+        },
         { path: 'acesso-negado', component: AcessoNegadoComponent },
         { path: '**', component: PageNotFoundComponent }
 ];

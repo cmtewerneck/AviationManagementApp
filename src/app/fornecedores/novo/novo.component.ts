@@ -5,17 +5,16 @@ import { utilsBr } from 'js-brasil';
 import { NgBrazilValidators } from 'ng-brazil';
 import { StringUtils } from 'src/app/utils/string-utils';
 import { ToastrService } from 'ngx-toastr';
-import { DisplayMessage, GenericValidator, ValidationMessages } from 'src/app/utils/generic-form-validation';
 import { Fornecedor } from '../models/Fornecedor';
 import { FornecedorService } from '../services/fornecedor.service';
 import { CepConsulta } from '../models/Endereço';
-import { fromEvent, merge, Observable } from 'rxjs';
+import { FormBaseComponent } from 'src/app/base-components/form-base.component';
 
 @Component({
   selector: 'app-novo',
   templateUrl: './novo.component.html'
 })
-export class NovoComponent implements OnInit {
+export class NovoComponent extends FormBaseComponent implements OnInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
@@ -29,16 +28,13 @@ export class NovoComponent implements OnInit {
 
   textoDocumento: string = 'CPF requerido';
 
-  validationMessages: ValidationMessages;
-  genericValidator: GenericValidator;
-  displayMessage: DisplayMessage = {};
-
   constructor(
     private fornecedorService: FornecedorService,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService
     ) {
+      super();
       this.validationMessages = {
         nome: {
           required: 'O nome é obrigatório',
@@ -87,7 +83,7 @@ export class NovoComponent implements OnInit {
         }
       };
 
-      this.genericValidator = new GenericValidator(this.validationMessages);
+      super.configurarMensagensValidacaoBase(this.validationMessages);
 
     }
 
@@ -116,10 +112,10 @@ export class NovoComponent implements OnInit {
       this.tipoFornecedorForm().valueChanges
         .subscribe(() => {
           this.trocarValidacaoDocumento();
-          this.configurarElementosValidacao();
-          this.validarFormulario();
+          super.configurarValidacaoFormularioBase(this.formInputElements, this.fornecedorForm);
+          super.validarFormulario(this.fornecedorForm);
       });
-      this.configurarElementosValidacao();
+      super.configurarValidacaoFormularioBase(this.formInputElements, this.fornecedorForm);
     }
 
     trocarValidacaoDocumento() {
@@ -165,20 +161,6 @@ export class NovoComponent implements OnInit {
         }
       });
     }
-
-  configurarElementosValidacao() {
-    let controlBlurs: Observable<any>[] = this.formInputElements
-      .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
-
-    merge(...controlBlurs).subscribe(() => {
-      this.validarFormulario();
-    });
-  }
-
-  validarFormulario() {
-    this.displayMessage = this.genericValidator.processarMensagens(this.fornecedorForm);
-    this.mudancasNaoSalvas = true;
-  }
 
   adicionarFornecedor() {
     if (this.fornecedorForm.dirty && this.fornecedorForm.valid) {

@@ -1,0 +1,87 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Veículos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Veículos</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+      <div class="d-flex">
+        <div class="form-inline mr-auto">
+          <div class="form-group mb-2">
+              <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-danger" [routerLink]="['/veiculos-multas/adicionar-novo']"><i class="fas fa-receipt"></i>&nbsp;&nbsp;Nova Multa</a>&nbsp;
+          <a class="btn btn-success" [routerLink]="['/veiculos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Veículo</a>
+          <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+        </div>
+      </div>
+    <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+            <tr>
+              <th>
+                <button (click)="alternarImagem()" class="btn btn-primary">
+                  <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+                </button>
+              </th>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Renavam</th>
+                <th>Combustível</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="veiculos && veiculos.length">
+            <tr *ngFor="let veiculo of veiculosFiltrados">
+                <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ veiculo.imagem }}" style="width: 70px; height: 100px"></td>
+                <td>{{ veiculo.placa }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.ano }}</td>
+                <td>{{ veiculo.renavam }}</td>
+                <td *ngIf="veiculo.tipoCombustivel == 1">Gasolina</td>
+                <td *ngIf="veiculo.tipoCombustivel == 2">Álcool</td>
+                <td *ngIf="veiculo.tipoCombustivel == 3">Diesel</td>
+                <td *ngIf="veiculo.tipoCombustivel == 4">Flex</td>
+                <td *ngIf="veiculo.tipoCombustivel == 5">Elétrico</td>
+                
+                <td class="text-right">
+                    <a class="btn btn-warning" [routerLink]="['/veiculos/detalhes',veiculo.id]">
+                        <span class="fa fa-search"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-info" [routerLink]="['/veiculos/editar',veiculo.id]">
+                        <span class="fa fa-pencil-alt"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-danger" [routerLink]="['/veiculos/excluir',veiculo.id]">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!veiculos">
+            <tr>
+                <td colspan="7" class="text-center">
+                    <h4>
+                        Nenhum item encontrado!
+                    </h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</section>
+<!-- /.content -->

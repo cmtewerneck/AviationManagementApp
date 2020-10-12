@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { Produto } from '../models/Produto';
 import { ProdutoService } from '../services/produto.service';
 
@@ -9,8 +10,11 @@ import { ProdutoService } from '../services/produto.service';
 })
 export class ListaComponent implements OnInit {
 
+  imagens: string = environment.imagensUrl;
+
   public produtos: Produto[];
   errorMessage: string;
+  mostrarImagem = true;
 
   produto: Produto;
   produtosFiltrados: Produto[];
@@ -36,6 +40,10 @@ export class ListaComponent implements OnInit {
     return this.produtos.filter(
       produto => produto.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
+  }
+
+  alternarImagem() {
+    this.mostrarImagem = !this.mostrarImagem;
   }
 
   ObterTodos() {

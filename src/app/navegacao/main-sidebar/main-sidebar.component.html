@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside *ngIf="usuarioLogado()" class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a routerLink="/" class="brand-link">
+  <a routerLink="/" class="brand-link text-center">
     <span class="brand-text font-weight-light" style="text-align: center">Aviation Management</span>
   </a>
 
@@ -20,7 +20,7 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
@@ -31,51 +31,152 @@
             </p>
           </a>
         </li>
-        <!-- FORNECEDORES MENU-->
-        <li class="nav-item">
-          <a routerLink="/fornecedores/listar-todos" class="nav-link" routerLinkActive="active">
+
+        <!-- FORNECEDORES MENU-->        
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Fornecedores
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/fornecedores/listar-todos" class="nav-link">
+                <p>Lista de Fornecedores</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/fornecedores/adicionar-novo" class="nav-link">
+                <p>Novo Fornecedor</p>
+              </a>
+            </li>
+          </ul>
         </li>
+        
         <!-- PRODUTOS MENU-->
-        <li class="nav-item">
-          <a routerLink="/produtos/listar-todos" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-shopping-basket"></i>
             <p>
               Produtos
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/produtos/listar-todos" class="nav-link">
+                <p>Lista de Produtos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Novo Produto</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
         <!-- OPERAÇÕES MENU-->
-        <li class="nav-item">
-          <a routerLink="/operacoes" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fab fa-hire-a-helper"></i>
             <p>
               Operações
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="pages/layout/top-nav.html" class="nav-link">
+                <p>Diário de Bordo</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <p>Escala</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/layout/boxed.html" class="nav-link">
+                <p>Papeleta</p>
+              </a>
+            </li>
+          </ul>
         </li>
+        
         <!-- COORDENAÇÃO MENU-->
-        <li class="nav-item">
-          <a routerLink="/coordenacao" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-location-arrow"></i>
             <p>
               Coordenação de Voo
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/produtos/listar-todos" class="nav-link">
+                <p>Voos Agendados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Frequências</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>SpiderTracks</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Manifesto de P&B</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Manifesto de Bagagem</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Lista de Passageiros</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Supervisão de Voo</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
         <!-- AERONAVES MENU-->
-        <li class="nav-item">
-          <a routerLink="/aeronaves" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-helicopter"></i>
             <p>
               Aeronaves
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/aeronaves/listar-todos" class="nav-link">
+                <p>Lista de Aeronaves</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves/adicionar-novo" class="nav-link">
+                <p>Nova Aeronave</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
         <!-- MANUTENÇÃO MENU-->
         <li class="nav-item">
           <a routerLink="/manutencao" class="nav-link" routerLinkActive="active">
@@ -85,24 +186,119 @@
             </p>
           </a>
         </li>
+
         <!-- TRIPULAÇÃO MENU-->
-        <li class="nav-item">
-          <a routerLink="/tripulacao" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Tripulantes
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/tripulantes/listar-todos" class="nav-link">
+                <p>Lista de Tripulantes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Novo Tripulante</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
+        <!-- BIBLIOTECA MENU-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Biblioteca Técnica
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/tripulantes/listar-todos" class="nav-link">
+                <p>Manuais da Empresa</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Manuais de Voo</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Legislação</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Modelos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <!-- CLIENTES MENU-->
-        <li class="nav-item">
-          <a routerLink="/clientes" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Clientes
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/clientes/listar-todos" class="nav-link">
+                <p>Lista de Clientes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/clientes/adicionar-novo" class="nav-link">
+                <p>Novo Cliente</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
+        <!-- OFÍCIOS MENU-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>
+              Ofícios
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/oficios-recebidos/listar-todos" class="nav-link">
+                <p>Ofícios Recebidos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/oficios-recebidos/adicionar-novo" class="nav-link">
+                <p>Novo Recebimento</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/oficios-emitidos/listar-todos" class="nav-link">
+                <p>Ofícios Emitidos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/oficios-emitidos/adicionar-novo" class="nav-link">
+                <p>Novo Ofício</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <!-- AEROMÉDICO MENU-->
         <li class="nav-item">
           <a routerLink="/operacao-aeromedica" class="nav-link" routerLinkActive="active">
@@ -112,24 +308,68 @@
             </p>
           </a>
         </li>
-        <!-- FERRAMENTARIA MENU-->
-        <li class="nav-item">
-          <a routerLink="/ferramentaria" class="nav-link" routerLinkActive="active">
+
+        <!-- ESTOQUE MENU-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-hammer"></i>
             <p>
               Estoque
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/estoque/listar-todos" class="nav-link">
+                <p>Lista de Itens</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/estoque/adicionar-novo" class="nav-link">
+                <p>Novo Item</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/estoque/adicionar-novo" class="nav-link">
+                <p>Nova Movimentação</p>
+              </a>
+            </li>
+          </ul>
         </li>
+        
         <!-- VEÍCULOS MENU-->
-        <li class="nav-item">
-          <a routerLink="/veiculos" class="nav-link" routerLinkActive="active">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-car"></i>
             <p>
               Veículos
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/veiculos/listar-todos" class="nav-link">
+                <p>Lista de Veículos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/veiculos/adicionar-novo" class="nav-link">
+                <p>Novo Veículo</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/veiculos-multas/adicionar-novo" class="nav-link">
+                <p>Nova Multa</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/veiculos-gastos/adicionar-novo" class="nav-link">
+                <p>Novo Gasto</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
         <!-- USUÁRIOS MENU-->
         <li class="nav-item">
           <a routerLink="/usuarios" class="nav-link" routerLinkActive="active">
@@ -139,6 +379,7 @@
             </p>
           </a>
         </li>
+
         <!-- CONTATO MENU-->
         <li class="nav-item">
           <a routerLink="/contato" class="nav-link" routerLinkActive="active">

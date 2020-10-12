@@ -28,7 +28,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NavegacaoModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     // httpInterceptorProviders

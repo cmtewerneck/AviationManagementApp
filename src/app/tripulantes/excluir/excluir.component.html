@@ -1,0 +1,111 @@
+<div class="container main-container">
+  <h4>Excluir: {{ tripulante.nome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-4">
+          <img src="{{ imagens }}{{ tripulante.imagem }}" style="width: 300px; height: 428px">
+      </div>
+      <div class="col-md-6">
+          <dl>
+            <dt>
+                Nome
+            </dt>
+            <dd>
+                {{ tripulante.nome }}
+            </dd>
+            <dt>
+                CPF
+            </dt>
+            <dd>
+                {{ tripulante.cpf }}
+            </dd>
+            <dt>
+                E-mail
+            </dt>
+            <dd>
+                {{ tripulante.email }}
+            </dd>
+            <dt>
+                Data de Nascimento
+            </dt>
+            <dd>
+                {{ tripulante.dataNascimento }}
+            </dd>
+            <dt>
+                Data de Admissão
+            </dt>
+            <dd>
+              {{ tripulante.dataAdmissao }}
+            </dd>
+            <dt>
+                Sexo
+            </dt>
+            <dd>
+              {{ tripulante.sexo }}
+            </dd>
+            <dt>
+                Cargo
+            </dt>
+            <dd>
+              {{ tripulante.cargo }}
+            </dd>
+            <dt>
+                Salário
+            </dt>
+            <dd>
+              {{ tripulante.salario | currencyBrazil }}
+            </dd>
+            <dt>
+                Situação
+            </dt>
+            <dd>
+              {{ tripulante.situacao }}
+            </dd>
+            <dt>
+                RG
+            </dt>
+            <dd>
+              {{ tripulante.rg }}
+            </dd>
+            <dt>
+                Órgão Emissor
+            </dt>
+            <dd>
+              {{ tripulante.orgaoEmissor }}
+            </dd>
+            <dt>
+                Título de Eleitor
+            </dt>
+            <dd>
+              {{ tripulante.tituloEleitor }}
+            </dd>
+            <dt>
+                Número PIS
+            </dt>
+            <dd>
+              {{ tripulante.numeroPis }}
+            </dd>
+            <dt>
+                Número CTPS
+            </dt>
+            <dd>
+              {{ tripulante.numeroCtps }}
+            </dd>
+            <dt>
+                Número CNH
+            </dt>
+            <dd>
+              {{ tripulante.numeroCnh }}
+            </dd>
+          </dl>
+
+          <div>
+              <a (click)="excluirTripulante()" href="javascript:void(0)" class="btn btn-danger">Excluir</a>&nbsp;
+              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>
