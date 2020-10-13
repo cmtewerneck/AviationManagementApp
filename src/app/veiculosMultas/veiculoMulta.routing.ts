@@ -13,9 +13,9 @@ const veiculoMultaRouterConfig: Routes = [
     {
         path: '', component: VeiculoMultaAppComponent,
         children: [
-             { 
+             {
                 path: 'listar-todos', component: ListaComponent,
-                data: [{ claim: { nome: 'Veiculo', valor: 'Consulta' } }]
+                data: [{ claim: { nome: 'Veiculo', valor: 'Consultar' } }]
              },
              {
                 path: 'adicionar-novo', component: NovoComponent,

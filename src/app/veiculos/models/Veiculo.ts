@@ -1,6 +1,6 @@
 import { VeiculoMulta } from '../../veiculosMultas/models/VeiculoMulta';
 
-export interface Veiculo {
+export class Veiculo {
     id: string;
     placa: string;
     ufPlaca: string;

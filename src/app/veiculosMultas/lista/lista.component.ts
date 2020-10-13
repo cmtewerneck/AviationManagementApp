@@ -34,7 +34,7 @@ export class ListaComponent implements OnInit {
   filtrarVeiculoMulta(filtrarPor: string): VeiculoMulta[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.veiculosMultas.filter(
-      veiculoMulta => veiculoMulta.placaVeiculo.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      veiculoMulta => veiculoMulta.autoInfracao.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 

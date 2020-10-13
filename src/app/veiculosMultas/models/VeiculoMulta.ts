@@ -7,7 +7,6 @@ export interface VeiculoMulta {
     descricao: string;
     data: Date;
     situacao: boolean;
-
     placaVeiculo: string;
   }
 
