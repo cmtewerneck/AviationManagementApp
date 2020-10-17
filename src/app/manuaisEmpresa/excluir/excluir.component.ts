@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { AeronaveTarifa } from '../models/AeronaveTarifa';
-import { AeronaveTarifaService } from '../services/aeronaveTarifa.service';
+import { ManualEmpresa } from '../models/ManualEmpresa';
+import { ManualEmpresaService } from '../services/manualEmpresa.service';
 
 @Component({
   selector: 'app-excluir',
@@ -11,20 +11,19 @@ import { AeronaveTarifaService } from '../services/aeronaveTarifa.service';
 })
 export class ExcluirComponent {
 
+  manualEmpresa: ManualEmpresa;
   errors: any[] = [];
 
-  aeronaveTarifa: AeronaveTarifa;
-
-  constructor(private aeronaveTarifaService: AeronaveTarifaService,
+  constructor(private manualEmpresaService: ManualEmpresaService,
               private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrService) {
 
-    this.aeronaveTarifa = this.route.snapshot.data['aeronaveTarifa'];
+    this.manualEmpresa = this.route.snapshot.data['manualEmpresa'];
   }
 
-  public excluirAeronaveTarifa() {
-    this.aeronaveTarifaService.excluirAeronaveTarifa(this.aeronaveTarifa.id)
+  public excluirManualEmpresa() {
+    this.manualEmpresaService.excluirManualEmpresa(this.manualEmpresa.id)
       .subscribe(
       evento => { this.sucessoExclusao(evento) },
       ()     => { this.falha() }
@@ -33,10 +32,10 @@ export class ExcluirComponent {
 
   public sucessoExclusao(evento: any) {
 
-    const toast = this.toastr.success('Tarifa excluida com Sucesso!', 'Good bye :D');
+    const toast = this.toastr.success('Manual excluido!', 'Sucesso');
     if (toast) {
       toast.onHidden.subscribe(() => {
-        this.router.navigate(['/aeronaves-tarifas/listar-todos']);
+        this.router.navigate(['/manuais-empresa/listar-todos']);
       });
     }
   }

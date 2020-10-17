@@ -44,6 +44,10 @@ const routes: Routes = [
             loadChildren: () => import('./veiculos/veiculo.module')
             .then(m => m.VeiculoModule)
         },
+        { path: 'manuais-empresa',
+            loadChildren: () => import('./manuaisEmpresa/manuaisEmpresa.module')
+            .then(m => m.ManualEmpresaModule)
+        },
         { path: 'veiculos-multas',
             loadChildren: () => import('./veiculosMultas/veiculosMultas.module')
             .then(m => m.VeiculoMultaModule)

@@ -133,6 +133,11 @@
             </li>
             <li class="nav-item">
               <a routerLink="/produtos/adicionar-novo" class="nav-link">
+                <p>Fichas Operacionais</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/produtos/adicionar-novo" class="nav-link">
                 <p>Manifesto de P&B</p>
               </a>
             </li>
@@ -184,17 +189,50 @@
                 <p>Novo Abastecimento</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves-tarifas/listar-todos" class="nav-link">
+                <p>Lista de Tarifas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves-tarifas/adicionar-novo" class="nav-link">
+                <p>Nova Tarifa</p>
+              </a>
+            </li>
           </ul>
         </li>
 
         <!-- MANUTENÇÃO MENU-->
-        <li class="nav-item">
-          <a routerLink="/manutencao" class="nav-link" routerLinkActive="active">
-            <i class="nav-icon fas fa-tools"></i>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Controle de Manutenção
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/tripulantes/listar-todos" class="nav-link">
+                <p>Lista de Ordens de Serviço</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Nova Ordem de Serviço</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Lista de Mecânicos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+                <p>Novo Mecânicos</p>
+              </a>
+            </li>
+          </ul>
         </li>
 
         <!-- TRIPULAÇÃO MENU-->
@@ -231,12 +269,12 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/tripulantes/listar-todos" class="nav-link">
+              <a routerLink="/manuais-empresa/listar-todos" class="nav-link">
                 <p>Manuais da Empresa</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+              <a routerLink="/manuais-voo/listar-todos" class="nav-link">
                 <p>Manuais de Voo</p>
               </a>
             </li>

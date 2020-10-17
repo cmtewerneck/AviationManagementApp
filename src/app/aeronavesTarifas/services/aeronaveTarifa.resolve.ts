@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { AeronaveTarifa } from '../mode../models/AeronaveTarifa
+import { AeronaveTarifa } from '../models/AeronaveTarifa';
 import { AeronaveTarifaService } from './aeronaveTarifa.service';
 
 @Injectable()

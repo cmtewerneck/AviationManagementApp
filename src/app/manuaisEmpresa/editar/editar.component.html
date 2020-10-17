@@ -1,0 +1,78 @@
+<div class="container main-container">
+
+  <h3>Editar Manual - {{ manualEmpresa.sigla }}</h3>
+
+  <hr>
+  <div class="row">
+      <div class="col-md-10">
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+            <p style="color: white"> Processando... </p>
+        </ngx-spinner>
+          <form enctype="multipart/form-data" (ngSubmit)="editarManualEmpresa()" [formGroup]="manualEmpresaForm">
+
+              <div class="alert alert-danger" *ngIf="errors.length > 0">
+                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                  <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                  </ul>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-8">
+                    <label class="control-label">Descrição</label>
+                    <div>
+                        <input class="form-control" id="descricao" type="text" placeholder="Descrição (requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.descricao">
+                            <p [innerHTML]="displayMessage.descricao"></p>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label class="control-label">Sigla</label>
+                    <div>
+                        <input class="form-control" id="sigla" type="text" placeholder="Sigla (requerido)" formControlName="sigla" [ngClass]="{'is-invalid': displayMessage.sigla }" />
+                        <span class="text-danger" *ngIf="displayMessage.sigla">
+                            <p [innerHTML]="displayMessage.sigla"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Revisão Atual</label>
+                    <div>
+                        <input class="form-control" id="revisaoAtual" type="number" placeholder="Revisão Atual (requerido)" formControlName="revisaoAtual" [ngClass]="{'is-invalid': displayMessage.revisaoAtual }" />
+                        <span class="text-danger" *ngIf="displayMessage.revisaoAtual">
+                            <p [innerHTML]="displayMessage.revisaoAtual"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Data da Revisão</label>
+                    <div>
+                        <input class="form-control" id="dataRevisao" type="date" placeholder="Data da Revisão (requerido)" formControlName="dataRevisao" [ngClass]="{'is-invalid': displayMessage.dataRevisao }" />
+                        <span class="text-danger" *ngIf="displayMessage.dataRevisao">
+                            <p [innerHTML]="displayMessage.dataRevisao"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Revisão em Análise</label>
+                    <div>
+                        <input class="form-control" id="revisaoAnalise" type="number" placeholder="Revisão em Análise" formControlName="revisaoAnalise" [ngClass]="{'is-invalid': displayMessage.revisaoAnalise }" />
+                    </div>
+                </div>
+            </div>
+
+              <div class="form-group">
+                  <input type="submit" [disabled]="!manualEmpresaForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                  <a class="btn btn-info" href="/manuais-empresa/listar-todos">Voltar</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
