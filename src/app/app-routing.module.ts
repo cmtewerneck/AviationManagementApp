@@ -32,6 +32,14 @@ const routes: Routes = [
             loadChildren: () => import('./aeronaves/aeronaves.module')
             .then(m => m.AeronaveModule)
         },
+        { path: 'aeronaves-abastecimentos',
+            loadChildren: () => import('./aeronavesAbastecimentos/aeronavesAbastecimentos.module')
+            .then(m => m.AeronaveAbastecimentoModule)
+        },
+        { path: 'aeronaves-tarifas',
+            loadChildren: () => import('./aeronavesTarifas/aeronavesTarifas.module')
+            .then(m => m.AeronaveTarifaModule)
+        },
         { path: 'veiculos',
             loadChildren: () => import('./veiculos/veiculo.module')
             .then(m => m.VeiculoModule)
@@ -39,6 +47,10 @@ const routes: Routes = [
         { path: 'veiculos-multas',
             loadChildren: () => import('./veiculosMultas/veiculosMultas.module')
             .then(m => m.VeiculoMultaModule)
+        },
+        { path: 'veiculos-gastos',
+            loadChildren: () => import('./veiculosGastos/veiculosGastos.module')
+            .then(m => m.VeiculoGastoModule)
         },
         { path: 'clientes',
             loadChildren: () => import('./clientes/clientes.module')

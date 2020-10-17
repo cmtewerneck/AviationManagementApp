@@ -1,0 +1,84 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Detalhes do Abastecimento</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/aeronaves/listar-todos">Aeronaves</a></li>
+            <li class="breadcrumb-item active">Abastecimentos</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+      <div>
+        <h4>Cupom: {{ aeronaveAbastecimento.cupom }} </h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                <label class="control-label">Data</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.data }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Matrícula</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.matriculaAeronave }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Litros</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.litros }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Local</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.local }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Cupom</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.cupom }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Nota Fiscal</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.notaFiscal }}
+            </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Responsável</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveAbastecimento.responsavel }}
+            </dd>
+            <dt class="col-sm-2">
+              <label class="control-label">Observações</label>
+          </dt>
+          <dd class="col-sm-10">
+              {{ aeronaveAbastecimento.observacoes }}
+          </dd>
+        </dl>
+      </div>
+  
+      <div>
+        <a class="btn btn-dark" [routerLink]="['/aeronaves-abastecimentos/editar',aeronaveAbastecimento.id]">Editar</a>&nbsp;
+        <a class="btn btn-info" [routerLink]="['/aeronaves-abastecimentos/listar-todos']">Voltar</a>
+      </div>
+  
+  </div>
+</section>
+<!-- /.content -->
