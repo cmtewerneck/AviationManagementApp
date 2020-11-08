@@ -1,0 +1,221 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do Diário de Bordo</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Diários de Bordo</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <h4>Diário de Bordo: {{ diarioBordo.matricula }} - {{diarioBordo.data}} </h4>
+      <hr />
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Data</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.data | date }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Base</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.base }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Comandante</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.comandante }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Comandante Canac</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.comandanteCanac }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Copiloto</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.copiloto }}
+        </dd>  
+        <dt class="col-sm-2">
+          <label class="control-label">Copiloto Canac</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.copilotoCanac }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Matrícula</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.matricula }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">De</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.de }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Para</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.para }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Hora Acionamento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.horaAcionamento }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Hora Decolagem</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.horaDecolagem }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Hora Pouso</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.horaPouso }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Hora Corte</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.horaCorte }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Diurno</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalDiurno }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Noturno</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalNoturno }}
+        </dd>  
+        <dt class="col-sm-2">
+          <label class="control-label">Total IFR</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalIfr }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Navegação</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalNavegacao }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Decimal</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalDecimal }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Pousos</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.pousos }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">POB</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.pob }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Combustível Decolagem</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.combustivelDecolagem }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Combustível Abastecido</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.combustivelAbastecido }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Cupom de Abastecimento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.cupomAbastecimento }}
+        </dd>    
+        <dt class="col-sm-2">
+          <label class="control-label">Natureza</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.natureza }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Pré Voo</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.preVoo }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Pós Voo</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.posVoo }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Chefe da Missão</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.chefeMissao }}
+        </dd>   
+        <dt class="col-sm-2">
+          <label class="control-label">Discrepâncias</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.discrepancias }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Ações Corretivas</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.acoesCorretivas }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Mecânico Responsável</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.mecanicoResponsavel }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Observações</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.observacoes }}
+        </dd>
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/diarios-bordo/editar', diarioBordo.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/diarios-bordo/listar-todos']">Voltar</a>
+    </div>
+    
+  </div>
+</section>
+<!-- /.content -->

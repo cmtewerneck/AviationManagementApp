@@ -18,7 +18,7 @@
               </div>
 
               <div class="row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label class="control-label">Matrícula</label>
                     <div>
                         <input class="form-control" id="matricula" type="text" placeholder="Matrícula (requerido)" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
@@ -38,10 +38,10 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label class="control-label">Categoria</label>
                     <div>
-                        <input class="form-control" id="categoria" type="text" placeholder="Categoria (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.categoria}" />
+                        <input class="form-control" id="categoria" type="text" placeholder="Categoria (requerido)" formControlName="categoria" [ngClass]="{'is-invalid': displayMessage.categoria}" />
                         <span class="text-danger" *ngIf="displayMessage.categoria">
                             <p [innerHTML]="displayMessage.categoria"></p>
                         </span>
@@ -51,9 +51,19 @@
                 <div class="form-group col-md-3">
                     <label class="control-label">Modelo</label>
                     <div>
-                        <input class="form-control" id="modelo" type="text" placeholder="Modelo (requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.modelo}" />
+                        <input class="form-control" id="modelo" type="text" placeholder="Modelo (requerido)" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo}" />
                         <span class="text-danger" *ngIf="displayMessage.modelo">
                             <p [innerHTML]="displayMessage.modelo"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label class="control-label">Número de Série</label>
+                    <div>
+                        <input class="form-control" id="numeroSerie" type="text" placeholder="Número de Série (requerido)" formControlName="numeroSerie" [ngClass]="{'is-invalid': displayMessage.numeroSerie}" />
+                        <span class="text-danger" *ngIf="displayMessage.numeroSerie">
+                            <p [innerHTML]="displayMessage.numeroSerie"></p>
                         </span>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ import { NavegacaoModule } from './navegacao/navegacao.module';
 
 // COMPONENTES
 import { AppComponent } from './app.component';
+import { HomepageService } from './Components/homepage/homepage.service';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 // import { ErrorInterceptor } from './_services/error.handler.service';
@@ -28,10 +29,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NavegacaoModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     // httpInterceptorProviders
+    HomepageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

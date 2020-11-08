@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { BaseService } from '../../_services/base.service';
+
+@Injectable()
+export class HomepageService extends BaseService {
+
+    constructor(private http: HttpClient) { super(); }
+
+    obterQuantidadeAeronavesCadastradas(): Observable<number> {
+        return this.http
+            .get<number>(this.urlServiceV1 + 'aeronaves/quantidade', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterQuantidadeTripulantesCadastrados(): Observable<number> {
+        return this.http
+            .get<number>(this.urlServiceV1 + 'tripulantes/quantidade', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+}

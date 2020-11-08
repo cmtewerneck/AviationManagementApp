@@ -28,6 +28,18 @@ const routes: Routes = [
             loadChildren: () => import('./estoque/estoque.module')
             .then(m => m.EstoqueModule)
         },
+        { path: 'diarios-bordo',
+            loadChildren: () => import('./diariosBordo/diariosBordo.module')
+            .then(m => m.DiarioBordoModule)
+        },
+        { path: 'contas-pagar',
+            loadChildren: () => import('./contasPagar/contasPagar.module')
+            .then(m => m.ContasPagarModule)
+        },
+        { path: 'contas-receber',
+            loadChildren: () => import('./contasReceber/contasReceber.module')
+            .then(m => m.ContasReceberModule)
+        },
         { path: 'aeronaves',
             loadChildren: () => import('./aeronaves/aeronaves.module')
             .then(m => m.AeronaveModule)
@@ -40,6 +52,10 @@ const routes: Routes = [
             loadChildren: () => import('./aeronavesTarifas/aeronavesTarifas.module')
             .then(m => m.AeronaveTarifaModule)
         },
+        { path: 'voos-agendados',
+            loadChildren: () => import('./voosAgendados/voosAgendados.module')
+            .then(m => m.VooAgendadoModule)
+        },
         { path: 'veiculos',
             loadChildren: () => import('./veiculos/veiculo.module')
             .then(m => m.VeiculoModule)
@@ -47,6 +63,14 @@ const routes: Routes = [
         { path: 'manuais-empresa',
             loadChildren: () => import('./manuaisEmpresa/manuaisEmpresa.module')
             .then(m => m.ManualEmpresaModule)
+        },
+        { path: 'manuais-voo',
+            loadChildren: () => import('./manuaisVoo/manuaisVoo.module')
+            .then(m => m.ManualVooModule)
+        },
+        { path: 'legislacoes',
+            loadChildren: () => import('./legislacoes/legislacao.module')
+            .then(m => m.LegislacaoModule)
         },
         { path: 'veiculos-multas',
             loadChildren: () => import('./veiculosMultas/veiculosMultas.module')

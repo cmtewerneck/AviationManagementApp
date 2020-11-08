@@ -1,0 +1,99 @@
+<div class="container main-container">
+
+  <h3>Editar Conta a Receber</h3>
+
+  <hr>
+  <div class="row">
+      <div class="col-md-10">
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+            <p style="color: white"> Processando... </p>
+        </ngx-spinner>
+          <form enctype="multipart/form-data" (ngSubmit)="editarContasReceber()" [formGroup]="contasReceberForm">
+
+              <div class="alert alert-danger" *ngIf="errors.length > 0">
+                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                  <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                  </ul>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Data Vencimento</label>
+                    <div>
+                        <input class="form-control" id="dataVencimento" type="date" formControlName="dataVencimento" [ngClass]="{'is-invalid': displayMessage.dataVencimento }" />
+                        <span class="text-danger" *ngIf="displayMessage.dataVencimento">
+                            <p [innerHTML]="displayMessage.dataVencimento"></p>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Descrição</label>
+                    <div>
+                        <input class="form-control" id="descricao" type="text" placeholder="Descrição (requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.descricao">
+                            <p [innerHTML]="displayMessage.descricao"></p>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Valor a Pagar</label>
+                    <div>
+                        <input class="form-control" id="valorPagar" type="text" placeholder="Valor a Pagar (requerido)" formControlName="valorPagar" [ngClass]="{'is-invalid': displayMessage.valorPagar }" />
+                        <span class="text-danger" *ngIf="displayMessage.valorPagar">
+                            <p [innerHTML]="displayMessage.valorPagar"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Código de Barras</label>
+                    <div>
+                        <input class="form-control" id="codigoBarras" type="text" placeholder="Código de Barras" formControlName="codigoBarras" [ngClass]="{'is-invalid': displayMessage.codigoBarras }"/>
+                        <span class="text-danger" *ngIf="displayMessage.codigoBarras">
+                            <p [innerHTML]="displayMessage.codigoBarras"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Situação</label>
+                    <div>
+                        <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
+                            <option value="true">Pago</option>
+                            <option value="false">Não Pago</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Data do Recebimento</label>
+                    <div>
+                        <input class="form-control" id="dataRecebimento" type="date" formControlName="dataRecebimento" />
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Valor Recebido</label>
+                    <div>
+                        <input class="form-control" id="valorRecebido" type="text" formControlName="valorRecebido" />
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Forma de Pagamento</label>
+                    <div>
+                        <input class="form-control" id="formaPagamento" type="text" formControlName="formaPagamento" />
+                    </div>
+                </div>
+            </div>
+
+              <div class="form-group">
+                  <input type="submit" [disabled]="!contasReceberForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                  <a class="btn btn-info" href="/contas-receber/listar-todos">Voltar</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

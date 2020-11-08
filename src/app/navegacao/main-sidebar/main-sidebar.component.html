@@ -89,13 +89,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
+              <a routerLink="/diarios-bordo/listar-todos" class="nav-link">
                 <p>Diário de Bordo</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                <p>Escala</p>
+              <a routerLink="/diarios-bordo/adicionar-novo" class="nav-link">
+                <p>Novo Diário</p>
               </a>
             </li>
             <li class="nav-item">
@@ -117,7 +117,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/produtos/listar-todos" class="nav-link">
+              <a routerLink="/voos-agendados/listar-todos" class="nav-link">
                 <p>Voos Agendados</p>
               </a>
             </li>
@@ -279,7 +279,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
+              <a routerLink="/legislacoes/listar-todos" class="nav-link">
                 <p>Legislação</p>
               </a>
             </li>
@@ -309,6 +309,29 @@
             <li class="nav-item">
               <a routerLink="/clientes/adicionar-novo" class="nav-link">
                 <p>Novo Cliente</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- FINANCEIRO MENU-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-dollar-sign"></i>
+            <p>
+              Financeiro
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/contas-pagar/listar-todos" class="nav-link">
+                <p>Contas a Pagar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/contas-receber/listar-todos" class="nav-link">
+                <p>Contas a Receber</p>
               </a>
             </li>
           </ul>

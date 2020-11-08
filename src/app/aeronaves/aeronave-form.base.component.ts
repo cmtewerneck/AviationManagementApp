@@ -36,6 +36,11 @@ export abstract class AeronaveBaseComponent extends FormBaseComponent {
                 minlength: 'Mínimo de 2 caracteres',
                 maxlength: 'Máximo de 20 caracteres'
             },
+            numeroSerie: {
+                required: 'Número de Série é obrigatório',
+                minlength: 'Mínimo de 1 caracter',
+                maxlength: 'Máximo de 20 caracteres'
+            },
             imagem: {
                 required: 'Informe a Imagem',
             }

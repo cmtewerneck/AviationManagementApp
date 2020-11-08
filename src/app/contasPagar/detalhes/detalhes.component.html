@@ -1,0 +1,83 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes da Conta</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Contas a Pagar</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <h4>Conta a Pagar: {{ contasPagar.dataVencimento | date }} - {{contasPagar.valorPagar | currencyBrazil}} </h4>
+      <hr />
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Data do Vencimento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.dataVencimento | date }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Descrição</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.descricao }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Valor a Pagar</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.valorPagar | currencyBrazil }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Código de Barras</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.codigoBarras }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Situação</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.situacao }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Data do Pagamento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.dataPagamento | date }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Valor Pago</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.valorPago | currencyBrazil }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Forma de Pagamento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ contasPagar.formaPagamento }}
+        </dd>        
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/contas-pagar/editar', contasPagar.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/contas-pagar/listar-todos']">Voltar</a>
+    </div>
+    
+  </div>
+</section>
+<!-- /.content -->

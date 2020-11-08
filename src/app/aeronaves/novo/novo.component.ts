@@ -38,6 +38,7 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
        fabricante: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        categoria: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
        modelo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+       numeroSerie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
        ano: [''],
        pesoVazio: [''],
        horasTotais: [''],
