@@ -1,6 +1,8 @@
 import { AeronaveAbastecimento } from 'src/app/aeronavesAbastecimentos/models/AeronaveAbastecimento';
 import { AeronaveTarifa } from 'src/app/aeronavesTarifas/models/AeronaveTarifa';
 import { VooAgendado } from 'src/app/voosAgendados/models/VooAgendado';
+import { DiarioBordo } from 'src/app/diariosBordo/models/DiarioBordo';
+import { OrdemServico } from 'src/app/ordemServico/models/OrdemServico';
 
 export interface Aeronave {
     id: string;
@@ -23,4 +25,6 @@ export interface Aeronave {
     aeronaveTarifa: AeronaveTarifa[];
     aeronaveAbastecimento: AeronaveAbastecimento[];
     vooAgendado: VooAgendado[];
+    diarioBordo: DiarioBordo[];
+    ordemServico: OrdemServico[];
   }

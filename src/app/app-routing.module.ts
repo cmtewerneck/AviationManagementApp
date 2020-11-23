@@ -40,6 +40,10 @@ const routes: Routes = [
             loadChildren: () => import('./contasReceber/contasReceber.module')
             .then(m => m.ContasReceberModule)
         },
+        { path: 'ordem-servico',
+            loadChildren: () => import('./ordemServico/ordemServico.module')
+            .then(m => m.OrdemServicoModule)
+        },
         { path: 'aeronaves',
             loadChildren: () => import('./aeronaves/aeronaves.module')
             .then(m => m.AeronaveModule)
@@ -83,6 +87,10 @@ const routes: Routes = [
         { path: 'clientes',
             loadChildren: () => import('./clientes/clientes.module')
             .then(m => m.ClientesModule)
+        },
+        { path: 'mecanicos',
+            loadChildren: () => import('./mecanicos/mecanicos.module')
+            .then(m => m.MecanicoModule)
         },
         { path: 'oficios-recebidos',
             loadChildren: () => import('./oficiosRecebidos/oficiosRecebidos.module')

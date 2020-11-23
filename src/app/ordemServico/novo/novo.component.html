@@ -1,0 +1,222 @@
+<div class="container main-container">
+    
+    <h3>Nova Ordem de Serviço</h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <form enctype="multipart/form-data" (ngSubmit)="adicionarOrdemServico()" [formGroup]="ordemServicoForm">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Número da OS</label>
+                    <div>
+                        <input class="form-control" id="numeroOrdem" type="text" placeholder="Número da OS (requerido)" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
+                        <span class="text-danger" *ngIf="displayMessage.numeroOrdem">
+                            <p [innerHTML]="displayMessage.numeroOrdem"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Abertura</label>
+                    <div>
+                        <input class="form-control" id="dataAbertura" type="date" formControlName="dataAbertura" [ngClass]="{'is-invalid': displayMessage.dataAbertura }" />
+                        <span class="text-danger" *ngIf="displayMessage.dataAbertura">
+                            <p [innerHTML]="displayMessage.dataAbertura"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Tipo</label>
+                    <div>
+                        <input class="form-control" id="tipo" type="text" placeholder="Tipo" formControlName="tipo" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Matrícula</label>
+                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
+                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
+                        <p [innerHTML]="displayMessage.aeronaveId"></p>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Modelo</label>
+                    <div>
+                        <input class="form-control" id="modelo" type="text" placeholder="Modelo" formControlName="modelo" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Nº de Série</label>
+                    <div>
+                        <input class="form-control" id="numeroSerie" type="text" placeholder="Nº de Série" formControlName="numeroSerie" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">TTSN</label>
+                    <div>
+                        <input class="form-control" id="ttsn" type="text" placeholder="TTSN" formControlName="ttsn" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">TCSN Pousos</label>
+                    <div>
+                        <input class="form-control" id="tcsnPousos" type="text" placeholder="TCSN Pousos" formControlName="tcsnPousos" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Motor</label>
+                    <div>
+                        <input class="form-control" id="motor" type="text" placeholder="Motor" formControlName="motor" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Modelo (Motor)</label>
+                    <div>
+                        <input class="form-control" id="modeloMotor" type="text" placeholder="Modelo do Motor" formControlName="modeloMotor" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Nº de Série (Motor)</label>
+                    <div>
+                        <input class="form-control" id="numeroSerieMotor" type="text" placeholder="Nº de Série do Motor" formControlName="numeroSerieMotor" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">TTSN (Motor)</label>
+                    <div>
+                        <input class="form-control" id="ttsnMotor" type="text" placeholder="TTSN do Motor" formControlName="ttsnMotor" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">TCSN Ciclos (Motor)</label>
+                    <div>
+                        <input class="form-control" id="tcsnCiclos" type="text" placeholder="TCSN Ciclos" formControlName="tcsnCiclos" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Fechamento</label>
+                    <div>
+                        <input class="form-control" id="dataFechamento" type="date" formControlName="dataFechamento" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Serviços Programados</label>
+                    <div>
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="descricaoServicosProgramados" placeholder="Descrição dos Serviços Programados (requerido)" formControlName="descricaoServicosProgramados" [ngClass]="{'is-invalid': displayMessage.descricaoServicosProgramados }"></textarea>
+                        <span class="text-danger" *ngIf="displayMessage.descricaoServicosProgramados">
+                            <p [innerHTML]="displayMessage.descricaoServicosProgramados"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Serviços Realizados</label>
+                    <div>
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="descricaoServicosRealizados" placeholder="Descrição dos Serviços Realizados" formControlName="descricaoServicosProgramados"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label class="control-label">Requisição de Materiais</label>
+                    <div>
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="requisicaoMateriais" placeholder="Requisição de Materiais" formControlName="requisicaoMateriais"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Tempo Gasto</label>
+                    <div>
+                        <input class="form-control" id="tempoGasto" type="text" placeholder="Tempo Total Gasto" formControlName="tempoGasto" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Realizado Por</label>
+                    <div>
+                        <input class="form-control" id="realizadoPor" type="text" placeholder="Realizado Por" formControlName="realizadoPor" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">CANAC</label>
+                    <div>
+                        <input class="form-control" id="realizadoPorAnac" type="text" placeholder="CANAC" formControlName="realizadoPorAnac" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Realizado</label>
+                    <div>
+                        <input class="form-control" id="dataRealizacao" type="date" formControlName="dataRealizacao" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Inspecionado Por</label>
+                    <div>
+                        <input class="form-control" id="inspecionadoPor" type="text" placeholder="Inspecionado Por" formControlName="inspecionadoPor" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">CANAC</label>
+                    <div>
+                        <input class="form-control" id="inspecionadoPorAnac" type="text" placeholder="CANAC" formControlName="inspecionadoPorAnac" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Inspecionado</label>
+                    <div>
+                        <input class="form-control" id="dataInspecao" type="date" formControlName="dataInspecao" />
+                    </div>
+                </div>          
+            </div>          
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!ordemServicoForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/ordem-servico/listar-todos">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

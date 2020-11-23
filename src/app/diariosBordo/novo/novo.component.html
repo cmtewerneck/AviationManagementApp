@@ -97,12 +97,12 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Matrícula</label>
-                    <div>
-                        <input class="form-control" id="matricula" type="text" placeholder="Matricula (requerido)" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula }" />
-                        <span class="text-danger" *ngIf="displayMessage.matricula">
-                            <p [innerHTML]="displayMessage.matricula"></p>
-                        </span>
-                    </div>
+                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
+                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
+                        <p [innerHTML]="displayMessage.aeronaveId"></p>
+                    </span>
                 </div>
 
                 <div class="form-group col-md-4">

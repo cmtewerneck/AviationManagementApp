@@ -46,19 +46,28 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
+                    <label class="control-label">CANAC</label>
+                    <div>
+                        <input class="form-control" id="canac" type="text" formControlName="canac" [ngClass]="{'is-invalid': displayMessage.canac }"/>
+                        <span class="text-danger" *ngIf="displayMessage.canac">
+                            <p [innerHTML]="displayMessage.canac"></p>
+                        </span>
+                    </div>
+                </div> 
+                <div class="form-group col-md-3">
                     <label class="control-label">Data de Nascimento</label>
                     <div>
                         <input class="form-control" id="dataNascimento" type="date" formControlName="dataNascimento" />
                     </div>
                 </div>                
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label class="control-label">Data de Admissão</label>
                     <div>
                         <input class="form-control" id="dataAdmissao" type="date" formControlName="dataAdmissao" />
                     </div>
                 </div> 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label class="control-label">Sexo</label>
                     <div>
                         <input class="form-control" id="sexo" type="text" formControlName="sexo" />

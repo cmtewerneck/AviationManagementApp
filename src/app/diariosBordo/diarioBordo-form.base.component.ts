@@ -1,4 +1,4 @@
-import { DiarioBordo } from './models/DiarioBordo';
+import { Aeronave, DiarioBordo } from './models/DiarioBordo';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -7,6 +7,7 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 export abstract class DiarioBordoBaseComponent extends FormBaseComponent {
 
     diarioBordo: DiarioBordo;
+    aeronaves: Aeronave[];
     errors: any[] = [];
     diarioBordoForm: FormGroup;
 
@@ -44,10 +45,8 @@ export abstract class DiarioBordoBaseComponent extends FormBaseComponent {
                 minlength: 'Mínimo de 6 caracteres',
                 maxlength: 'Máximo de 6 caracteres'
             },
-            matricula: {
-                required: 'Matrícula é obrigatória',
-                minlength: 'Mínimo de 5 caracteres',
-                maxlength: 'Máximo de 5 caracteres'
+            aeronaveId: {
+                required: 'Escolha uma aeronave'
             },
             de: {
                 required: 'Origem é obrigatória',

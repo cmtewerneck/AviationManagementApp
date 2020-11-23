@@ -7,6 +7,7 @@ export interface Tripulante {
     dataAdmissao: Date;
     sexo: string;
     cargo: string;
+    canac: string;
     estadoCivil: string;
     salario: number;
     situacao: string;

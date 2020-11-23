@@ -37,6 +37,7 @@ export class NovoComponent extends TripulanteBaseComponent implements OnInit {
     ngOnInit(): void {
       this.tripulanteForm = this.fb.group({
           nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+          canac: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
           cpf: ['', [Validators.required, NgBrazilValidators.cpf]],
           email: ['', [Validators.email]],
           dataNascimento: [''],

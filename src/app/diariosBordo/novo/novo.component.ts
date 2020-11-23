@@ -20,14 +20,18 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.diarioBordoForm = this.fb.group({
+    this.diarioBordoService.obterAeronaves()
+       .subscribe(
+         aeronaves => this.aeronaves = aeronaves);
+
+    this.diarioBordoForm = this.fb.group({
        data: ['', [Validators.required]],
        base: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
        comandante: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
        comandanteCanac: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
        copiloto: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
        copilotoCanac: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-       matricula: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+       aeronaveId: ['', [Validators.required]],
        de: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
        para: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
        horaAcionamento: ['', [Validators.required]],

@@ -1,0 +1,83 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Ordens de Serviço</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Ordens de Serviço</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+      <div class="d-flex">
+        <div class="form-inline mr-auto">
+          <div class="form-group mb-2">
+              <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-success" [routerLink]="['/ordem-servico/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Nova OS </a>
+          <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+        </div>
+      </div>
+    <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+            <tr>
+                <th>Número da OS</th>
+                <th>Abertura</th>
+                <th>Matrícula</th>
+                <th>Modelo</th>
+                <th>Nº de Série</th>
+                <th>TTSN</th>
+                <th>Fechamento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="ordensServico && ordensServico.length">
+          <tr *ngFor="let ordemServico of ordensServicoFiltrados">
+                <td>{{ ordemServico.numeroOrdem }}</td>
+                <td>{{ ordemServico.dataAbertura | date }}</td>
+                <td>{{ ordemServico.matriculaAeronave }}</td>
+                <td>{{ ordemServico.modelo }}</td>
+                <td>{{ ordemServico.numeroSerie }}</td>
+                <td>{{ ordemServico.ttsn }}</td>
+                <td>{{ ordemServico.dataFechamento | date }}</td>
+                
+                <td class="text-right">
+                  <a class="btn btn-primary" (click)="gerarPdf(ordemServico)">
+                    <span class="fa fa-download"></span>
+                </a>&nbsp;
+                    <a class="btn btn-warning" [routerLink]="['/ordem-servico/detalhes',ordemServico.id]">
+                        <span class="fa fa-search"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-info" [routerLink]="['/ordem-servico/editar',ordemServico.id]">
+                        <span class="fa fa-pencil-alt"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-danger" [routerLink]="['/ordem-servico/excluir',ordemServico.id]">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!ordensServico">
+            <tr>
+                <td colspan="7" class="text-center">
+                    <h4>
+                        Nenhum item encontrado!
+                    </h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</section>
+<!-- /.content -->

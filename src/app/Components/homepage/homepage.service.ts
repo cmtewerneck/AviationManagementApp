@@ -20,4 +20,10 @@ export class HomepageService extends BaseService {
             .get<number>(this.urlServiceV1 + 'tripulantes/quantidade', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
+
+    obterQuantidadeOrdensAbertas(): Observable<number> {
+        return this.http
+            .get<number>(this.urlServiceV1 + 'ordem-servico/quantidade', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
 }

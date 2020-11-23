@@ -1,0 +1,111 @@
+<div class="container main-container">
+  <h4>Excluir {{ mecanico.nome }} </h4>
+  <br>
+  <h5>Você tem certeza disso?</h5>
+
+  <div class="row">
+      <div class="col-md-4">
+          <img src="{{ imagens }}{{ mecanico.imagem }}" style="width: 300px; height: 428px">
+      </div>
+      <div class="col-md-6">
+          <dl>
+              <dt>
+                  Nome
+              </dt>
+              <dd>
+                  {{ mecanico.nome }}
+              </dd>
+              <dt>
+                  CPF
+              </dt>
+              <dd>
+                  {{ mecanico.cpf }}
+              </dd>
+              <dt>
+                  E-mail
+              </dt>
+              <dd>
+                  {{ mecanico.email }}
+              </dd>
+              <dt>
+                  Data de Nascimento
+              </dt>
+              <dd>
+                  {{ mecanico.dataNascimento }}
+              </dd>
+              <dt>
+                  Data de Admissão
+              </dt>
+              <dd>
+                {{ mecanico.dataAdmissao }}
+              </dd>
+              <dt>
+                  Sexo
+              </dt>
+              <dd>
+                {{ mecanico.sexo }}
+              </dd>
+              <dt>
+                  Cargo
+              </dt>
+              <dd>
+                {{ mecanico.cargo }}
+              </dd>
+              <dt>
+                  Salário
+              </dt>
+              <dd>
+                {{ mecanico.salario | currencyBrazil }}
+              </dd>
+              <dt>
+                  Situação
+              </dt>
+              <dd>
+                {{ mecanico.situacao }}
+              </dd>
+              <dt>
+                  RG
+              </dt>
+              <dd>
+                {{ mecanico.rg }}
+              </dd>
+              <dt>
+                  Órgão Emissor
+              </dt>
+              <dd>
+                {{ mecanico.orgaoEmissor }}
+              </dd>
+              <dt>
+                  Título de Eleitor
+              </dt>
+              <dd>
+                {{ mecanico.tituloEleitor }}
+              </dd>
+              <dt>
+                  Número PIS
+              </dt>
+              <dd>
+                {{ mecanico.numeroPis }}
+              </dd>
+              <dt>
+                  Número CTPS
+              </dt>
+              <dd>
+                {{ mecanico.numeroCtps }}
+              </dd>
+              <dt>
+                  Número CNH
+              </dt>
+              <dd>
+                {{ mecanico.numeroCnh }}
+              </dd>
+          </dl>
+
+          <div>
+              <a class="btn btn-warning" [routerLink]="['/mecanicos/editar', mecanico.id]">Editar</a>&nbsp;
+              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+          </div>
+      </div>
+  </div>
+
+</div>

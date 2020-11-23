@@ -45,6 +45,7 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
       
       this.tripulanteForm = this.fb.group({
         nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+        canac: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
         cpf: ['', [Validators.required, NgBrazilValidators.cpf]],
         email: ['', [Validators.email]],
         dataNascimento: [''],
@@ -66,6 +67,7 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
       this.tripulanteForm.patchValue({
           id: this.tripulante.id,
           nome: this.tripulante.nome,
+          canac: this.tripulante.canac,
           cpf: this.tripulante.cpf,
           email: this.tripulante.email,
           dataNascimento: this.tripulante.dataNascimento,

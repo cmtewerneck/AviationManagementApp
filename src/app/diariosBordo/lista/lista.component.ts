@@ -34,7 +34,7 @@ export class ListaComponent implements OnInit {
   filtrarDiarioBordo(filtrarPor: string): DiarioBordo[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.diariosBordo.filter(
-      diarioBordo => diarioBordo.matricula.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      diarioBordo => diarioBordo.matriculaAeronave.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 

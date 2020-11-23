@@ -6,7 +6,8 @@ export interface DiarioBordo {
     comandanteCanac: string;
     copiloto: string;
     copilotoCanac: string;
-    matricula: string;
+    aeronaveId: string;
+    matriculaAeronave: string;
     de: string;
     para: string;
     horaAcionamento: string;
@@ -31,4 +32,9 @@ export interface DiarioBordo {
     discrepancias: string;
     acoesCorretivas: string;
     mecanicoResponsavel: string;
-  }
+}
+
+export interface Aeronave {
+  id: string;
+  matricula: string;
+}

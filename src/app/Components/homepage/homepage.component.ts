@@ -9,12 +9,14 @@ export class HomepageComponent implements OnInit {
 
   aeronavesCadastradas: number;
   tripulantesCadastrados: number;
+  ordensAbertas: number;
 
   constructor(private homepageService: HomepageService) { }
 
   ngOnInit(): void {
     this.obterQuantidadeAeronavesCadastradas();
     this.obterQuantidadeTripulantesCadastrados();
+    this.obterQuantidadeOrdensAbertas();
   }
 
   obterQuantidadeAeronavesCadastradas() {
@@ -31,6 +33,16 @@ export class HomepageComponent implements OnInit {
     this.homepageService.obterQuantidadeTripulantesCadastrados().subscribe(
       (_tripulantes: number) => {
         this.tripulantesCadastrados = _tripulantes;
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  obterQuantidadeOrdensAbertas() {
+    this.homepageService.obterQuantidadeOrdensAbertas().subscribe(
+      (_ordens: number) => {
+        this.ordensAbertas = _ordens;
       },
       error => {
         console.log(error);

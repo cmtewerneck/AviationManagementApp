@@ -22,6 +22,11 @@ export abstract class TripulanteBaseComponent extends FormBaseComponent {
                 minlength: 'Mínimo 2 caracteres',
                 maxlength: 'Máximo 200 caracteres'
               },
+              canac: {
+                required: 'O CANAC é obrigatório',
+                minlength: 'Mínimo 6 caracteres',
+                maxlength: 'Máximo 6 caracteres'
+              },
               cpf: {
                 required: 'CPF é obrigatório',
                 cpf: 'CPF em formato inválido'
