@@ -40,6 +40,10 @@ const routes: Routes = [
             loadChildren: () => import('./contasReceber/contasReceber.module')
             .then(m => m.ContasReceberModule)
         },
+        { path: 'servicos',
+            loadChildren: () => import('./servicos/servico.module')
+            .then(m => m.ServicoModule)
+        },
         { path: 'ordem-servico',
             loadChildren: () => import('./ordemServico/ordemServico.module')
             .then(m => m.OrdemServicoModule)

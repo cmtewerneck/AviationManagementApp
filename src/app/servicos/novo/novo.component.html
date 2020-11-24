@@ -1,0 +1,42 @@
+<div class="container main-container">
+    
+    <h3>Novo Serviço</h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <form enctype="multipart/form-data" (ngSubmit)="adicionarServico()" [formGroup]="servicoForm">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+            <div class="row">
+                <div class="form-group col-md-9">
+                    <label class="control-label">Descrição</label>
+                    <div>
+                        <input class="form-control" id="descricao" type="text" placeholder="(requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.descricao">
+                            <p [innerHTML]="displayMessage.descricao"></p>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Custo</label>
+                    <div>
+                        <input class="form-control" id="custo" type="text" formControlName="custo" />
+                    </div>
+                </div>                        
+            </div>          
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!servicoForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/servicos/listar-todos">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
