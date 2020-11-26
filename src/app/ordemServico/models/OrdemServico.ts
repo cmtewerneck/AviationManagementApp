@@ -2,16 +2,9 @@ export class OrdemServico {
   id: string;
   numeroOrdem: string;
   tipo: string;
-  aeronaveId: string;
-  matriculaAeronave: string;
-  modelo: string;
-  numeroSerie: string;
   ttsn: string;
   tcsnPousos: string;
   dataAbertura: Date;
-  motor: string;
-  modeloMotor: string;
-  numeroSerieMotor: string;
   ttsnMotor: string;
   tcsnCiclos: string;
   dataFechamento?: Date;
@@ -25,9 +18,16 @@ export class OrdemServico {
   inspecionadoPor: string;
   inspecionadoPorAnac: string;
   dataInspecao?: Date;
+  aeronaveId: string;
+  matriculaAeronave: string;
 }
 
 export interface Aeronave {
   id: string;
   matricula: string;
+  modelo: string;
+  numeroSerie: string;
+  motor: string;
+  modeloMotor: string;
+  numeroSerieMotor: string;
 }

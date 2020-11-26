@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ServicoService } from '../services/servico.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ServicoBaseComponent } from '../servico-form.base.component';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-editar',
@@ -30,14 +31,16 @@ export class EditarComponent extends ServicoBaseComponent implements OnInit {
       this.spinner.show();
 
       this.servicoForm = this.fb.group({
+        codigo: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
         descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
         custo: ['']
       });
 
       this.servicoForm.patchValue({
           id: this.servico.id,
+          codigo: this.servico.codigo,
           descricao: this.servico.descricao,
-          custo: this.servico.custo
+          custo: CurrencyUtils.DecimalParaString(this.servico.custo)
         });
 
       setTimeout(() => {
@@ -52,6 +55,8 @@ export class EditarComponent extends ServicoBaseComponent implements OnInit {
       editarServico() {
         if (this.servicoForm.dirty && this.servicoForm.valid) {
           this.servico = Object.assign({}, this.servico, this.servicoForm.value);
+
+          this.servico.custo = CurrencyUtils.StringParaDecimal(this.servico.custo);
 
           this.servicoService.atualizarServico(this.servico)
           .subscribe(

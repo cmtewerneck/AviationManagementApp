@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { VeiculoGasto } from '../models/veiculoGasto';
+import { VeiculoGasto } from '../models/VeiculoGasto';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

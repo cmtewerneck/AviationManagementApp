@@ -1,3 +1,4 @@
+import { VeiculoGasto } from '../../veiculosGastos/models/VeiculoGasto';
 import { VeiculoMulta } from '../../veiculosMultas/models/VeiculoMulta';
 
 export class Veiculo {
@@ -14,4 +15,5 @@ export class Veiculo {
     tipoCombustivel: number;
 
     veiculosMultas: VeiculoMulta[];
+    veiculosGastos: VeiculoGasto[];
 }

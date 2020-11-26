@@ -32,6 +32,7 @@
     <table class="table table-hover" style="white-space: nowrap">
         <thead class="thead-dark">
             <tr>
+                <th>Código</th>
                 <th>Descrição</th>
                 <th>Custo</th>
                 <th></th>
@@ -39,6 +40,7 @@
         </thead>
         <tbody *ngIf="servicos && servicos.length">
           <tr *ngFor="let servico of servicosFiltrados">
+                <td>{{ servico.codigo }}</td>
                 <td>{{ servico.descricao }}</td>
                 <td>{{ servico.custo | currencyBrazil }}</td>
                 

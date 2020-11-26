@@ -18,9 +18,14 @@ export abstract class ServicoBaseComponent extends FormBaseComponent {
 
         this.validationMessages = {
             descricao: {
-                required: 'Número da Ordem é obrigatória',
+                required: 'Descrição é obrigatória',
                 minlength: 'A mensagem precisa ter no mínimo 1 caracteres',
                 maxlength: 'A mensagem deve ter no máximo 50 caracteres'
+            },
+            codigo: {
+                required: 'Código é obrigatório',
+                minlength: 'A mensagem precisa ter no mínimo 1 caracteres',
+                maxlength: 'A mensagem deve ter no máximo 10 caracteres'
             },
         };
 

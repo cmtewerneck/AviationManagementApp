@@ -52,6 +52,9 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         vencimentoCm: [''],
         ultimaPesagem: [''],
         vencimentoReta: [''],
+        motor: [''],
+        modeloMotor: [''],
+        numeroSerieMotor: [''],
         imagem: ['']
         });
 
@@ -69,6 +72,9 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         vencimentoCa: this.aeronave.vencimentoCa,
         vencimentoCm: this.aeronave.vencimentoCm,
         ultimaPesagem: this.aeronave.ultimaPesagem,
+        motor: this.aeronave.motor,
+        modeloMotor: this.aeronave.modeloMotor,
+        numeroSerieMotor: this.aeronave.numeroSerieMotor,
         vencimentoReta: this.aeronave.vencimentoReta
       });
 

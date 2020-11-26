@@ -47,6 +47,9 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
        vencimentoCm: [''],
        ultimaPesagem: [''],
        vencimentoReta: [''],
+       motor: [''],
+       modeloMotor: [''],
+       numeroSerieMotor: [''],
        imagem: ['', [Validators.required]]
     });
   }

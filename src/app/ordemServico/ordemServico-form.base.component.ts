@@ -27,7 +27,7 @@ export abstract class OrdemServicoBaseComponent extends FormBaseComponent {
                 required: 'Escolha uma aeronave'
             },
             dataAbertura: {
-                required: 'Destinatário é obrigatório',
+                required: 'Abertura é obrigatória',
             },
             descricaoServicosProgramados: {
                 required: 'Mensagem é obrigatória',

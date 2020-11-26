@@ -57,8 +57,8 @@ export class ListaComponent implements OnInit {
     doc.text('Ordem de Serviço Nº: ' + ordemServico.numeroOrdem, 15, 20);
     doc.text('Data de Abertura: ' + ordemServico.dataAbertura, 15, 30);
     doc.text('Matrícula: ' + ordemServico.matriculaAeronave, 15, 40);
-    doc.text('Modelo: ' + ordemServico.modelo, 15, 50);
-    doc.text('Nº de Série: ' + ordemServico.numeroSerie, 15, 60);
+      //doc.text('Modelo: ' + ordemServico.aeronaveModelo, 15, 50);
+      //doc.text('Nº de Série: ' + ordemServico.aeronaveNumeroSerie, 15, 60);
     doc.text('TTSN: ' + ordemServico.ttsn, 15, 70);
     doc.text('TCSN Pousos: ' + ordemServico.tcsnPousos, 15, 80);
 

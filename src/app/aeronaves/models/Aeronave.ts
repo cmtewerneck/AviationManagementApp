@@ -21,6 +21,9 @@ export interface Aeronave {
     vencimentoReta?: Date;
     imagem: string;
     imagemUpload: string;
+    motor: string;
+    modeloMotor: string;
+    numeroSerieMotor: string;
 
     aeronaveTarifa: AeronaveTarifa[];
     aeronaveAbastecimento: AeronaveAbastecimento[];

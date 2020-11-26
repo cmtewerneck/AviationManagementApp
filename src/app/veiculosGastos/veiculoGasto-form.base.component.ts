@@ -1,4 +1,4 @@
-import { Veiculo, VeiculoGasto } from './models/veiculoGasto';
+import { Veiculo, VeiculoGasto } from './models/VeiculoGasto';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';

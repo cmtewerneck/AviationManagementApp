@@ -7,10 +7,10 @@ export interface Produto {
     valor: number;
     ativo: true;
     fornecedorId: string;
-    nomeFornecedor: string;
-  }
+    fornecedorNome: string;
+}
 
 export interface Fornecedor {
     id: string;
     nome: string;
-  }
+}

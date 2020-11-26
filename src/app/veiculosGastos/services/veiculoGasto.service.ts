@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { Veiculo, VeiculoGasto } from '../models/veiculoGasto';
+import { Veiculo, VeiculoGasto } from '../models/VeiculoGasto';
 
 @Injectable()
 export class VeiculoGastoService extends BaseService {

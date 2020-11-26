@@ -22,6 +22,7 @@ export class NovoComponent extends ServicoBaseComponent implements OnInit {
   ngOnInit(): void {
 
     this.servicoForm = this.fb.group({
+       codigo: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
        descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
        custo: ['']
      });

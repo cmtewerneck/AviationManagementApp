@@ -35,7 +35,16 @@
             <input type="hidden" id="id" name="id" value="">
             
             <div class="row">
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-3">
+                    <label class="control-label">Código</label>
+                    <div>
+                        <input class="form-control" id="codigo" type="text" placeholder="(requerido)" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.codigo }" />
+                        <span class="text-danger" *ngIf="displayMessage.codigo">
+                            <p [innerHTML]="displayMessage.codigo"></p>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-7">
                     <label class="control-label">Descrição</label>
                     <div>
                         <input class="form-control" id="descricao" type="text" placeholder="(requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
@@ -44,13 +53,13 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label class="control-label">Custo</label>
                     <div>
                         <input class="form-control" id="custo" type="text" formControlName="custo" />
                     </div>
                 </div>                        
-            </div>   
+            </div>    
             
             <div class="form-group">
                 <input type="submit" value="Editar" class="btn btn-success">&nbsp;

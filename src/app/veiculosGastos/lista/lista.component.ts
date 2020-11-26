@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { VeiculoGasto } from '../models/veiculoGasto';
+import { VeiculoGasto } from '../models/VeiculoGasto';
 import { VeiculoGastoService } from '../services/veiculoGasto.service';
 
 @Component({

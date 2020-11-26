@@ -35,7 +35,7 @@
             <input type="hidden" id="id" name="id" value="">
             
             <div class="row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label class="control-label">Número da OS</label>
                     <div>
                         <input class="form-control" id="numeroOrdem" type="text" placeholder="Número da OS (requerido)" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
@@ -44,8 +44,8 @@
                         </span>
                     </div>
                 </div>
-
-                <div class="form-group col-md-3">
+                
+                <div class="form-group col-md-4">
                     <label class="control-label">Abertura</label>
                     <div>
                         <input class="form-control" id="dataAbertura" type="date" formControlName="dataAbertura" [ngClass]="{'is-invalid': displayMessage.dataAbertura }" />
@@ -54,14 +54,16 @@
                         </span>
                     </div>
                 </div>
-
-                <div class="form-group col-md-3">
+                
+                <div class="form-group col-md-4">
                     <label class="control-label">Tipo</label>
                     <div>
                         <input class="form-control" id="tipo" type="text" placeholder="Tipo" formControlName="tipo" />
                     </div>
                 </div>
-
+            </div>
+            
+            <div class="row">
                 <div class="form-group col-md-3">
                     <label class="control-label">Matrícula</label>
                     <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
@@ -70,61 +72,22 @@
                     <span class="text-danger" *ngIf="displayMessage.aeronaveId">
                         <p [innerHTML]="displayMessage.aeronaveId"></p>
                     </span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Modelo</label>
-                    <div>
-                        <input class="form-control" id="modelo" type="text" placeholder="Modelo" formControlName="modelo" />
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Nº de Série</label>
-                    <div>
-                        <input class="form-control" id="numeroSerie" type="text" placeholder="Nº de Série" formControlName="numeroSerie" />
-                    </div>
-                </div>
-
+                </div>              
+            
                 <div class="form-group col-md-3">
                     <label class="control-label">TTSN</label>
                     <div>
                         <input class="form-control" id="ttsn" type="text" placeholder="TTSN" formControlName="ttsn" />
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-3">
                     <label class="control-label">TCSN Pousos</label>
                     <div>
                         <input class="form-control" id="tcsnPousos" type="text" placeholder="TCSN Pousos" formControlName="tcsnPousos" />
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Motor</label>
-                    <div>
-                        <input class="form-control" id="motor" type="text" placeholder="Motor" formControlName="motor" />
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Modelo (Motor)</label>
-                    <div>
-                        <input class="form-control" id="modeloMotor" type="text" placeholder="Modelo do Motor" formControlName="modeloMotor" />
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Nº de Série (Motor)</label>
-                    <div>
-                        <input class="form-control" id="numeroSerieMotor" type="text" placeholder="Nº de Série do Motor" formControlName="numeroSerieMotor" />
-                    </div>
-                </div>
-
+                
                 <div class="form-group col-md-3">
                     <label class="control-label">TTSN (Motor)</label>
                     <div>
@@ -132,7 +95,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label">TCSN Ciclos (Motor)</label>
@@ -140,7 +103,7 @@
                         <input class="form-control" id="tcsnCiclos" type="text" placeholder="TCSN Ciclos" formControlName="tcsnCiclos" />
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-6">
                     <label class="control-label">Fechamento</label>
                     <div>

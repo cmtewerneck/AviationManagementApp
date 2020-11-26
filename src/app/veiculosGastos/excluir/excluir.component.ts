@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { VeiculoGasto } from '../models/veiculoGasto';
+import { VeiculoGasto } from '../models/VeiculoGasto';
 import { VeiculoGastoService } from '../services/veiculoGasto.service';
 
 @Component({
