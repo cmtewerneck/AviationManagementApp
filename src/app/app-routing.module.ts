@@ -108,6 +108,10 @@ const routes: Routes = [
             loadChildren: () => import('./oficiosEmitidos/oficiosEmitidos.module')
             .then(m => m.OficiosEmitidosModule)
         },
+        { path: 'instrutores',
+            loadChildren: () => import('./instrutores/instrutores.module')
+            .then(m => m.InstrutorModule)
+        },
         { path: 'acesso-negado', component: AcessoNegadoComponent },
         { path: '**', component: PageNotFoundComponent }
 ];

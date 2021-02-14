@@ -7,33 +7,22 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
-import interactionPlugin from '@fullcalendar/interaction'; 
-import listPlugin from '@fullcalendar/list';
-
-import { VooAgendadoRoutingModule } from './vooAgendado.routing';
-import { VooAgendadoAppComponent } from './vooAgendado.app.component';
+import { InstrutorRoutingModule } from './instrutor.routing';
+import { InstrutorAppComponent } from './instrutor.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
 import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
-import { VooAgendadoService } from './services/vooAgendado.service';
+import { InstrutorService } from './services/instrutor.service';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { VooAgendadoResolve } from './services/vooAgendado.resolve';
-import { VooAgendadoGuard } from './services/vooAgendado.guard';
-
-FullCalendarModule.registerPlugins([ 
-  dayGridPlugin,
-  interactionPlugin,
-  listPlugin
-]);
+import { InstrutorResolve } from './services/instrutor.resolve';
+import { InstrutorGuard } from './services/instrutor.guard';
 
 @NgModule({
   declarations: [
-    VooAgendadoAppComponent,
+    InstrutorAppComponent,
     ListaComponent,
     NovoComponent,
     EditarComponent,
@@ -42,7 +31,7 @@ FullCalendarModule.registerPlugins([
   ],
   imports: [
     CommonModule,
-    VooAgendadoRoutingModule,
+    InstrutorRoutingModule,
     RouterModule,
     ModalModule.forRoot(),
     NgBrazil,
@@ -50,13 +39,12 @@ FullCalendarModule.registerPlugins([
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageCropperModule,
-    FullCalendarModule // register FullCalendar with you app
+    ImageCropperModule
   ],
   providers: [
-    VooAgendadoService,
-    VooAgendadoResolve,
-    VooAgendadoGuard
+    InstrutorService,
+    InstrutorResolve,
+    InstrutorGuard
   ]
 })
-export class VooAgendadoModule { }
+export class InstrutorModule { }

@@ -20,6 +20,10 @@
     "@angular/platform-browser-dynamic": "~10.0.2",
     "@angular/router": "~10.0.2",
     "@auth0/angular-jwt": "^5.0.1",
+    "@fullcalendar/angular": "^5.5.0",
+    "@fullcalendar/daygrid": "^5.5.0",
+    "@fullcalendar/interaction": "^5.5.0",
+    "@fullcalendar/list": "^5.5.0",
     "admin-lte": "^3.0.5",
     "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.5.0",
@@ -38,7 +42,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.1",
+    "@angular-devkit/build-angular": "^0.1100.7",
     "@angular/cli": "~10.0.1",
     "@angular/compiler-cli": "~10.0.2",
     "@types/jasmine": "~3.5.0",
