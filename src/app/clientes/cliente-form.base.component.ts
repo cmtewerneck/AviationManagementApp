@@ -17,22 +17,24 @@ export abstract class ClienteBaseComponent extends FormBaseComponent {
         super();
 
         this.validationMessages = {
-            primeiroNome: {
-                required: 'Primeiro Nome é obrigatório',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 200 caracteres'
+            nome: {
+                required: 'Nome é obrigatório',
+                maxlength: 'Máximo de 100 caracteres'
             },
-            ultimoNome: {
-                required: 'Último Nome é obrigatório',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 200 caracteres'
+            documento: {
+                required: 'Documento é obrigatório',
+                cpf: 'CPF em formato inválido',
+                cnpj: 'CNPJ em formato inválido'
+            },
+            estadoCivil: {
+                maxlength: 'Máximo de 20 caracteres'
+            },
+            telefone: {
+                maxlength: 'Máximo de 20 caracteres'
             },
             email: {
-                email: 'Formato de e-mail inválido'
-            },
-            cpf: {
-                required: 'CPF é obrigatório',
-                cpf: 'CPF em formato inválido'
+                email: 'Formato de e-mail inválido',
+                maxlength: 'Máximo de 50 caracteres'
             }
         };
 

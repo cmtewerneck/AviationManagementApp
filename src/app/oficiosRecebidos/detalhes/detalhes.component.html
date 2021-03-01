@@ -1,64 +1,57 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Detalhes do Ofício</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Ofícios Recebidos</li>
-          </ol>
-        </div>
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do Ofício</h1>
       </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                <label class="control-label">Numeração</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ oficioRecebido.numeracao }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Data</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ oficioRecebido.data }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Remetente</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ oficioRecebido.remetente }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Assunto</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ oficioRecebido.assunto }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Situação</label>
-            </dt>
-            <dd class="col-sm-10">
-                <input [checked]="oficioRecebido.situacao" class="check-box" disabled="disabled" type="checkbox">
-            </dd>
-            
-        </dl>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Ofícios Recebidos</li>
+        </ol>
       </div>
-  
-      <div>
-        <a class="btn btn-dark" [routerLink]="['/oficios-recebidos/editar',oficioRecebido.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" [routerLink]="['/oficios-recebidos/listar-todos']">Voltar</a>
-      </div>
-  
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Numeração</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ oficioRecebido.numeracao }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Data</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ oficioRecebido.data | date }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Remetente</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ oficioRecebido.remetente }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Assunto</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ oficioRecebido.assunto }}
+        </dd>
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/oficios-recebidos/editar',oficioRecebido.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/oficios-recebidos/listar-todos']">Voltar</a>
+    </div>
+    
   </div>
-  </section>
-  <!-- /.content -->
+</section>
+<!-- /.content -->

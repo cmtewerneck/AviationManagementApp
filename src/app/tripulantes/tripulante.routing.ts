@@ -15,18 +15,18 @@ const tripulanteRouterConfig: Routes = [
         children: [
         {   path: 'listar-todos', component: ListaComponent,
             canActivate: [TripulanteGuard],
-            data: [{ claim: { nome: 'Tripulante', valor: 'Consultar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Consultar' } }],
         },
         {
             path: 'adicionar-novo', component: NovoComponent,
             canDeactivate: [TripulanteGuard],
             canActivate: [TripulanteGuard],
-            data: [{ claim: { nome: 'Tripulante', valor: 'Adicionar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Adicionar' } }],
         },
         {
             path: 'editar/:id', component: EditarComponent,
             canActivate: [TripulanteGuard],
-            data: [{ claim: { nome: 'Tripulante', valor: 'Atualizar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Atualizar' } }],
             resolve: {
                 tripulante: TripulanteResolve
             }
@@ -40,7 +40,7 @@ const tripulanteRouterConfig: Routes = [
         {
             path: 'excluir/:id', component: ExcluirComponent,
             canActivate: [TripulanteGuard],
-            data: [{ claim: { nome: 'Tripulante', valor: 'Excluir' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Excluir' } }],
             resolve: {
                 tripulante: TripulanteResolve
             }

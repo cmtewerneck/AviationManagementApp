@@ -29,10 +29,10 @@
   
     <dl class="row">
         <dt class="col-sm-2">
-            <label class="control-label">Descrição</label>
+            <label class="control-label">Título</label>
           </dt>
           <dd class="col-sm-10">
-            {{ vooAgendado.descricao }}
+            {{ vooAgendado.title }}
           </dd>
           <dt class="col-sm-2">
             <label class="control-label">Matrícula</label>
@@ -44,19 +44,19 @@
             <label class="control-label">Começa Em</label>
           </dt>
           <dd class="col-sm-10">
-            {{ vooAgendado.comecaEm }}
+            {{ vooAgendado.start }}
           </dd>
           <dt class="col-sm-2">
             <label class="control-label">Termina Em</label>
           </dt>
           <dd class="col-sm-10">
-            {{ vooAgendado.terminaEm }}
+            {{ vooAgendado.end }}
           </dd>
           <dt class="col-sm-2">
             <label class="control-label">Dia Todo</label>
           </dt>
           <dd class="col-sm-10">
-            <input [checked]="vooAgendado.diaTodo" class="check-box" disabled="disabled" type="checkbox">
+            <input [checked]="vooAgendado.allDay" class="check-box" disabled="disabled" type="checkbox">
           </dd>
     </dl>
   

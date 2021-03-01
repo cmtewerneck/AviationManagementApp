@@ -5,17 +5,17 @@ import { utilsBr } from 'js-brasil';
 import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class AeronaveAbastecimentoBaseComponent extends FormBaseComponent {
-
+    
     aeronaveAbastecimento: AeronaveAbastecimento;
     aeronaves: Aeronave[];
     errors: any[] = [];
     aeronaveAbastecimentoForm: FormGroup;
-
+    
     MASKS = utilsBr.MASKS;
-
+    
     constructor() {
         super();
-
+        
         this.validationMessages = {
             aeronaveId: {
                 required: 'Escolha uma aeronave',
@@ -23,25 +23,34 @@ export abstract class AeronaveAbastecimentoBaseComponent extends FormBaseCompone
             data: {
                 required: 'Data é obrigatória'
             },
+            litros: {
+                required: 'Quantidade é obrigatória'
+            },
             local: {
                 required: 'Local é obrigatório',
-                minlength: 'Mínimo de 1 caracteres',
-                maxlength: 'Máximo de 50 caracteres'
+                maxlength: 'Máximo de 20 caracteres'
             },
             cupom: {
                 required: 'Cupom é obrigatório',
-                minlength: 'Mínimo de 1 caracteres',
-                maxlength: 'Máximo de 30 caracteres'
+                maxlength: 'Máximo de 20 caracteres'
             },
-            litros: {
-                required: 'Quantidade é obrigatória'
+            fornecedora: {
+                required: 'Fornecedora é obrigatório',
+                maxlength: 'Máximo de 20 caracteres'
+            },
+            responsavel: {
+                required: 'Responsável é obrigatório',
+                maxlength: 'Máximo de 20 caracteres'
+            },
+            observacoes: {
+                maxlength: 'Máximo de 100 caracteres'
             }
         };
-
+        
         super.configurarMensagensValidacaoBase(this.validationMessages);
     }
-
+    
     protected configurarValidacaoFormulario(formInputElements: ElementRef[]) {
-            super.configurarValidacaoFormularioBase(formInputElements, this.aeronaveAbastecimentoForm);
+        super.configurarValidacaoFormularioBase(formInputElements, this.aeronaveAbastecimentoForm);
     }
 }

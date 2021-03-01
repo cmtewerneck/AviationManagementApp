@@ -7,12 +7,12 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './detalhes.component.html'
 })
 export class DetalhesComponent {
-
+  
   ordemServico: OrdemServico;
-
+  
   constructor(private route: ActivatedRoute) {
-
+    
     this.ordemServico = this.route.snapshot.data['ordemServico'];
   }
-
+  
 }

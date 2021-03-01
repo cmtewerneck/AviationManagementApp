@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { Aeronave, DiarioBordo } from '../models/DiarioBordo';
+import { Aeronave, DiarioBordo, Tripulante } from '../models/DiarioBordo';
 
 @Injectable()
 export class DiarioBordoService extends BaseService {
@@ -51,6 +51,12 @@ export class DiarioBordoService extends BaseService {
     obterAeronaves(): Observable<Aeronave[]> {
         return this.http
             .get<Aeronave[]>(this.urlServiceV1 + 'aeronaves', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterColaboradores(): Observable<Tripulante[]> {
+        return this.http
+            .get<Tripulante[]>(this.urlServiceV1 + 'colaboradores', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

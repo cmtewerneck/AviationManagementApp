@@ -10,78 +10,74 @@ import { OrdemServicoBaseComponent } from '../ordemServico-form.base.component';
   templateUrl: './novo.component.html'
 })
 export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private ordemServicoService: OrdemServicoService,
-              private router: Router,
-              private toastr: ToastrService) { super(); }
-
-  ngOnInit(): void {
-
-    this.ordemServicoService.obterAeronaves()
-       .subscribe(
-         aeronaves => this.aeronaves = aeronaves);
-
-    this.ordemServicoForm = this.fb.group({
-       numeroOrdem: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
-       tipo: [''],
-       aeronaveId: ['', [Validators.required]],
-       ttsn: [''],
-       tcsnPousos: [''],
-       dataAbertura: ['', [Validators.required]],
-       ttsnMotor: [''],
-       tcsnCiclos: [''],
-       dataFechamento: [''],
-       descricaoServicosProgramados: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1000)]],
-       descricaoServicosRealizados: [''],
-       tempoGasto: [''],
-       requisicaoMateriais: [''],
-       realizadoPor: [''],
-       realizadoPorAnac: [''],
-       dataRealizacao: [''],
-       inspecionadoPor: [''],
-       inspecionadoPorAnac: [''],
-       dataInspecao: ['']
-     });
-  }
-
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
-
-  adicionarOrdemServico() {
-    if (this.ordemServicoForm.dirty && this.ordemServicoForm.valid) {
-      this.ordemServico = Object.assign({}, this.ordemServico, this.ordemServicoForm.value);
-
-      // this.formResult = JSON.stringify(this.produto);
-
-      this.ordemServicoService.novoOrdemServico(this.ordemServico)
-        .subscribe(
-          sucesso => { this.processarSucesso(sucesso) },
-          falha => { this.processarFalha(falha) }
-        );
-
-      this.mudancasNaoSalvas = false;
-    }
-  }
-
-  processarSucesso(response: any) {
-    this.ordemServicoForm.reset();
-    this.errors = [];
-
-    let toast = this.toastr.success('Ordem de Serviço cadastrada com sucesso!', 'Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/ordem-servico/listar-todos']);
-      });
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.errors = fail.error.errors;
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-}
-
+    private ordemServicoService: OrdemServicoService,
+    private router: Router,
+    private toastr: ToastrService) { super(); }
+    
+    ngOnInit(): void {
+      
+      this.ordemServicoService.obterAeronaves()
+      .subscribe(
+        aeronaves => this.aeronaves = aeronaves);
+        
+        this.ordemServicoForm = this.fb.group({
+          numeroOrdem: ['', [Validators.required, Validators.maxLength(20)]],
+          tipo: ['', Validators.maxLength(20)],
+          ttsn: ['', Validators.maxLength(20)],
+          tcsnPousos: ['', Validators.maxLength(20)],
+          dataAbertura: ['', [Validators.required]],
+          ttsnMotor: ['', Validators.maxLength(20)],
+          tcsnCiclos: ['', Validators.maxLength(20)],
+          dataFechamento: [''],
+          requisicaoMateriais: ['', Validators.maxLength(300)],
+          realizadoPor: ['', Validators.maxLength(20)],
+          realizadoPorAnac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
+          dataRealizacao: [''],
+          inspecionadoPor: ['', Validators.maxLength(20)],
+          inspecionadoPorAnac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
+          dataInspecao: [''],
+          aeronaveId: ['', [Validators.required]]
+        });
+      }
+      
+      ngAfterViewInit(): void {
+        super.configurarValidacaoFormulario(this.formInputElements);
+      }
+      
+      adicionarOrdemServico() {
+        if (this.ordemServicoForm.dirty && this.ordemServicoForm.valid) {
+          this.ordemServico = Object.assign({}, this.ordemServico, this.ordemServicoForm.value);
+          
+          // this.formResult = JSON.stringify(this.produto);
+          
+          this.ordemServicoService.novoOrdemServico(this.ordemServico)
+          .subscribe(
+            sucesso => { this.processarSucesso(sucesso) },
+            falha => { this.processarFalha(falha) }
+            );
+            
+            this.mudancasNaoSalvas = false;
+          }
+        }
+        
+        processarSucesso(response: any) {
+          this.ordemServicoForm.reset();
+          this.errors = [];
+          
+          let toast = this.toastr.success('Ordem de Serviço cadastrada com sucesso!', 'Sucesso!');
+          if (toast) {
+            toast.onHidden.subscribe(() => {
+              this.router.navigate(['/ordem-servico/listar-todos']);
+            });
+          }
+        }
+        
+        processarFalha(fail: any) {
+          this.errors = fail.error.errors;
+          this.toastr.error('Ocorreu um erro!', 'Opa :(');
+        }
+      }

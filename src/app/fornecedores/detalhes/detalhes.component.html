@@ -22,39 +22,74 @@
       <h4>{{ fornecedor.nome }}</h4>
       <hr />
       <dl class="row">
-          <dt class="col-sm-2">
+        <dt class="col-sm-2">
           <label class="control-label">Nome</label>
-      </dt>
-          <dd class="col-sm-10">
-              {{ fornecedor.nome }}
-          </dd>
-          <dt class="col-sm-2">
-              <label class="control-label">Documento</label>
-      </dt>
-          <dd class="col-sm-10">
-              {{fornecedor.tipoFornecedor === 1 ? (fornecedor.documento | cpf) : (fornecedor.documento | cnpj ) }}
-          </dd>
-          <dt class="col-sm-2">
-              <label class="control-label">Ativo</label>
-      </dt>
-          <dd class="col-sm-10">
-              <input [checked]="fornecedor.ativo" class="check-box" disabled="disabled" type="checkbox">
-          </dd>
+        </dt>
+        <dd class="col-sm-10">
+          {{ fornecedor.nome }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Tipo de Pessoa</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="fornecedor.tipoPessoa == 1">Física</dd>
+        <dd class="col-sm-10" *ngIf="fornecedor.tipoPessoa == 2">Jurídica</dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Documento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{fornecedor.tipoPessoa === 1 ? (fornecedor.documento | cpf) : (fornecedor.documento | cnpj ) }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Sexo</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="fornecedor.sexo == 1">Masculino</dd>
+        <dd class="col-sm-10" *ngIf="fornecedor.sexo == 2">Feminino</dd>
+        <dd class="col-sm-10" *ngIf="fornecedor.sexo == 3">Outro</dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Estado Civil</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ fornecedor.estadoCivil }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Ativo</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="fornecedor.ativo == true">Sim</dd>
+        <dd class="col-sm-10" *ngIf="fornecedor.ativo == false">Não</dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Telefone</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ fornecedor.telefone | telefone }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">E-mail</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ fornecedor.email }}
+        </dd>
       </dl>
     </div>
-
+    
     <div class="row">
       <br>
       <iframe width="100%" height="450" frameborder="0" style="border:0; padding-bottom: 50px;" [src]="enderecoMap" allowfullscreen></iframe>
     </div>
-
+    
     <div>
       <a class="btn btn-dark" [routerLink]="['/fornecedores/editar',fornecedor.id]">Editar</a>&nbsp;
       <a class="btn btn-info" [routerLink]="['/fornecedores/listar-todos']">Voltar</a>
     </div>
-
+    
     <lista-produto [produtos]="fornecedor.produtos"></lista-produto>
-
-</div>
+    
+  </div>
 </section>
 <!-- /.content -->

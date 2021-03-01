@@ -5,36 +5,33 @@ import { utilsBr } from 'js-brasil';
 import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class LegislacaoBaseComponent extends FormBaseComponent {
-
+    
     legislacao: Legislacao;
     errors: any[] = [];
     legislacaoForm: FormGroup;
-
+    
     MASKS = utilsBr.MASKS;
-
+    
     constructor() {
         super();
-
+        
         this.validationMessages = {
             titulo: {
                 required: 'Modelo é obrigatório',
-                minlength: 'Mínimo de 5 caracteres',
-                maxlength: 'Máximo de 150 caracteres'
+                maxlength: 'Máximo de 50 caracteres'
             },
             tipo: {
-                required: 'Modelo é obrigatório',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 20 caracteres'
+                required: 'Tipo é obrigatório',
             },
             numero: {
-                required: 'Modelo é obrigatório'
+                required: 'Número é obrigatório'
             }
         };
-
+        
         super.configurarMensagensValidacaoBase(this.validationMessages);
     }
-
+    
     protected configurarValidacaoFormulario(formInputElements: ElementRef[]) {
-            super.configurarValidacaoFormularioBase(formInputElements, this.legislacaoForm);
+        super.configurarValidacaoFormularioBase(formInputElements, this.legislacaoForm);
     }
 }

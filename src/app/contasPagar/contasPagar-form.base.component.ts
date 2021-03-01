@@ -16,19 +16,21 @@ export abstract class ContasPagarBaseComponent extends FormBaseComponent {
         super();
 
         this.validationMessages = {
-            dataVencimento: {
-                required: 'Data é obrigatória'
-            },
             descricao: {
                 required: 'Descrição é obrigatória',
-                minlength: 'Mínimo de 1 caracteres',
-                maxlength: 'Máximo de 100 caracteres'
+                maxlength: 'Máximo de 50 caracteres'
+            },
+            codigoBarras: {
+                maxlength: 'Máximo de 50 caracteres'
+            },
+            situacao: {
+                required: 'Situação é obrigatória'
+            },
+            formaPagamento: {
+                maxlength: 'Máximo de 30 caracteres'
             },
             valorPagar: {
                 required: 'Valor é obrigatório'
-            },
-            codigoBarras: {
-                maxlength: 'Máximo de 100 caracteres'
             }
         };
 

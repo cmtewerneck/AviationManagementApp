@@ -34,15 +34,15 @@ export class EditarComponent extends AeronaveTarifaBaseComponent implements OnIn
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
 
-      this.aeronaveTarifaForm = this.fb.group({
+        this.aeronaveTarifaForm = this.fb.group({
           aeronaveId: ['', [Validators.required]],
           data: ['', [Validators.required]],
           vencimento: ['', [Validators.required]],
           valor: ['', [Validators.required]],
-          orgaoEmissor: ['', [Validators.required]],
-          numeracao: ['', [Validators.required]],
-          situacao: [0]
-       });
+          situacao: [0],
+          numeracao: ['', [Validators.required, Validators.maxLength(30)]],
+          orgaoEmissor: ['', [Validators.required]]
+        });
 
       this.aeronaveTarifaForm.patchValue({
           id: this.aeronaveTarifa.id,
@@ -69,6 +69,7 @@ export class EditarComponent extends AeronaveTarifaBaseComponent implements OnIn
           this.aeronaveTarifa = Object.assign({}, this.aeronaveTarifa, this.aeronaveTarifaForm.value);
 
           this.aeronaveTarifa.valor = CurrencyUtils.StringParaDecimal(this.aeronaveTarifa.valor);
+          
           this.aeronaveTarifaService.atualizarAeronaveTarifa(this.aeronaveTarifa)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

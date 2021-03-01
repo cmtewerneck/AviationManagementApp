@@ -29,14 +29,15 @@ export abstract class AeronaveTarifaBaseComponent extends FormBaseComponent {
             valor: {
                 required: 'Valor é obrigatório'
             },
-            orgaoEmissor: {
-                required: 'Órgão Emissor é obrigatório'
-            },
-            numeracao: {
-                required: 'Numeração é obrigatória'
-            },
             situacao: {
                 required: 'Situação é obrigatória'
+            },
+            numeracao: {
+                required: 'Numeração é obrigatória',
+                maxlength: 'Máximo de 30 caracteres'
+            },
+            orgaoEmissor: {
+                required: 'Órgão Emissor é obrigatório'
             }
         };
 

@@ -23,7 +23,8 @@
                             <p [innerHTML]="displayMessage.data"></p>
                         </span>
                     </div>
-                </div>                
+                </div>      
+
                 <div class="form-group col-md-4">
                     <label class="control-label">Matrícula</label>
                     <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
@@ -33,6 +34,7 @@
                         <p [innerHTML]="displayMessage.aeronaveId"></p>
                     </span>
                 </div>
+
                 <div class="form-group col-md-4">
                     <label class="control-label">Litros</label>
                     <div>
@@ -66,7 +68,10 @@
                 <div class="form-group col-md-4">
                     <label class="control-label">Nota Fiscal</label>
                     <div>
-                        <input class="form-control" id="notaFiscal" type="text" placeholder="Nota Fiscal" formControlName="notaFiscal" />
+                        <input class="form-control" id="notaFiscal" type="text" placeholder="Nota Fiscal" formControlName="notaFiscal" [ngClass]="{'is-invalid': displayMessage.notaFiscal }" />
+                        <span class="text-danger" *ngIf="displayMessage.notaFiscal">
+                            <p [innerHTML]="displayMessage.notaFiscal"></p>
+                        </span>
                     </div>
                 </div> 
             </div>
@@ -75,21 +80,52 @@
                 <div class="form-group col-md-4">
                     <label class="control-label">Fornecedora</label>
                     <div>
-                        <input class="form-control" id="fornecedora" type="text" placeholder="Fornecedora" formControlName="fornecedora" />
+                        <input class="form-control" id="fornecedora" type="text" placeholder="Fornecedora" formControlName="fornecedora" [ngClass]="{'is-invalid': displayMessage.fornecedora }" />
+                        <span class="text-danger" *ngIf="displayMessage.fornecedora">
+                            <p [innerHTML]="displayMessage.fornecedora"></p>
+                        </span>
                     </div>
                 </div>
+
                 <div class="form-group col-md-4">
                     <label class="control-label">Responsável</label>
                     <div>
-                        <input class="form-control" id="responsavel" type="text" placeholder="Responsável" formControlName="responsavel" />
-                    </div>
-                </div>         
-                <div class="form-group col-md-4">
-                    <label class="control-label">Observações</label>
-                    <div>
-                        <input class="form-control" id="observacoes" type="text" placeholder="Observações" formControlName="observacoes" />
+                        <input class="form-control" id="responsavel" type="text" placeholder="(requerido)" formControlName="responsavel" [ngClass]="{'is-invalid': displayMessage.responsavel }" />
+                        <span class="text-danger" *ngIf="displayMessage.responsavel">
+                            <p [innerHTML]="displayMessage.responsavel"></p>
+                        </span>
                     </div>
                 </div> 
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Valor</label>
+                    <div>
+                        <input class="form-control" id="valor" type="text" placeholder="(opcional)" formControlName="valor" />
+                    </div>
+                </div>    
+            </div>    
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Observações</label>
+                    <div>
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="observacoes" placeholder="Observações (opcional)" formControlName="observacoes" [ngClass]="{'is-invalid': displayMessage.observacoes }"></textarea>
+                        <span class="text-danger" *ngIf="displayMessage.observacoes">
+                            <p [innerHTML]="displayMessage.observacoes"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Comprovante de Abastecimento</label>
+                
+                <div class="custom-file">
+                    <input type="file" accept="application/pdf" class="custom-file-input" id="arquivo" formControlName="arquivo" (change)="fileChangeEvent($event)">
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                    
+                    <span *ngIf='arquivoNome'><br>{{ arquivoNome }} <br></span>
+                </div>
             </div>
                 
                 <div class="form-group">

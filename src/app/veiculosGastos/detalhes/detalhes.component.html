@@ -1,71 +1,70 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Detalhes do Gasto</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item"><a routerLink="/veiculos/listar-todos">Veículos</a></li>
-            <li class="breadcrumb-item active">Gastos</li>
-          </ol>
-        </div>
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do Gasto</h1>
       </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                <label class="control-label">Data</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ veiculoGasto.data }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Valor</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ veiculoGasto.valor }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Placa</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ veiculoGasto.placaVeiculo }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Descrição</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ veiculoGasto.descricao }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Motorista</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ veiculoGasto.motorista }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Pagamento</label>
-            </dt>
-            <dd class="col-sm-10">
-                <input [checked]="veiculoGasto.situacao" class="check-box" disabled="disabled" type="checkbox">
-            </dd>
-        </dl>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/veiculos/listar-todos">Veículos</a></li>
+          <li class="breadcrumb-item active">Gastos</li>
+        </ol>
       </div>
-  
-      <div>
-        <a class="btn btn-dark" [routerLink]="['/veiculos-gastos/editar',veiculoGasto.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" [routerLink]="['/veiculos-gastos/listar-todos']">Voltar</a>
-      </div>
-  
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <hr />
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Data</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ veiculoGasto.data | date }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Valor</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ veiculoGasto.valor | currencyBrazil }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Placa</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ veiculoGasto.placaVeiculo }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Descrição</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ veiculoGasto.descricao }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Motorista</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ veiculoGasto.nomeMotorista }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Pagamento</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="veiculoGasto.situacao == true">Pago</dd>
+        <dd class="col-sm-10" *ngIf="veiculoGasto.situacao == false">Pendente</dd>
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/veiculos-gastos/editar',veiculoGasto.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/veiculos-gastos/listar-todos']">Voltar</a>
+    </div>
+    
   </div>
-  </section>
-  <!-- /.content -->
+</section>
+<!-- /.content -->

@@ -8,14 +8,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './detalhes.component.html'
 })
 export class DetalhesComponent {
-
+  
   imagens: string = environment.imagensUrl;
-
+  
   tripulante: Tripulante;
-
+  
   constructor(private route: ActivatedRoute) {
-
+    
     this.tripulante = this.route.snapshot.data['tripulante'];
   }
-
+  
 }

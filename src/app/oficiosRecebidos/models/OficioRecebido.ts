@@ -1,10 +1,10 @@
 export class OficioRecebido {
   id: string;
   data: Date;
+  numeracao: string;
   assunto: string;
   remetente: string;
-  situacao: boolean;
-  numeracao: string;
+
   arquivo: string;
   arquivoUpload: string;
 }

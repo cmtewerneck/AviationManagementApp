@@ -10,59 +10,60 @@ import { ManualEmpresaBaseComponent } from '../manualEmpresa-form.base.component
   templateUrl: './novo.component.html'
 })
 export class NovoComponent extends ManualEmpresaBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private manualEmpresaService: ManualEmpresaService,
-              private router: Router,
-              private toastr: ToastrService) {super(); }
-
-  ngOnInit(): void {
-
+    private manualEmpresaService: ManualEmpresaService,
+    private router: Router,
+    private toastr: ToastrService) {super(); }
+    
+    ngOnInit(): void {
+      
       this.manualEmpresaForm = this.fb.group({
-       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-       sigla: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-       revisaoAtual: ['', [Validators.required]],
-       dataRevisao: ['', [Validators.required]],
-       revisaoAnalise: [''],
-       arquivo: [''],
-     });
-  }
-
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
-
-  adicionarManualEmpresa() {
-    if (this.manualEmpresaForm.dirty && this.manualEmpresaForm.valid) {
-      this.manualEmpresa = Object.assign({}, this.manualEmpresa, this.manualEmpresaForm.value);
-
-      this.manualEmpresaService.novoManualEmpresa(this.manualEmpresa)
+        descricao: ['', [Validators.required, Validators.maxLength(50)]],
+        sigla: ['', [Validators.required, Validators.maxLength(10)]],
+        revisaoAtual: ['', [Validators.required]],
+        dataRevisao: ['', [Validators.required]],
+        revisaoAnalise: [''],
+        arquivo: ['']
+      });
+    }
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    adicionarManualEmpresa() {
+      if (this.manualEmpresaForm.dirty && this.manualEmpresaForm.valid) {
+        this.manualEmpresa = Object.assign({}, this.manualEmpresa, this.manualEmpresaForm.value);
+        
+        // IMPLEMENTAR UPLOAD DO ARQUIVO PDF DO MANUAL
+        
+        this.manualEmpresaService.novoManualEmpresa(this.manualEmpresa)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },
           falha => { this.processarFalha(falha) }
-        );
-
-      this.mudancasNaoSalvas = false;
-    }
-  }
-
-  processarSucesso(response: any) {
-    this.manualEmpresaForm.reset();
-    this.errors = [];
-
-    let toast = this.toastr.success('Manual cadastrado com sucesso!', 'Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/manuais-empresa/listar-todos']);
-      });
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.errors = fail.error.errors;
-    this.toastr.error('Ocorreu um erro!', 'Opa...');
-  }
-}
-
+          );
+          
+          this.mudancasNaoSalvas = false;
+        }
+      }
+      
+      processarSucesso(response: any) {
+        this.manualEmpresaForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Manual cadastrado com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/manuais-empresa/listar-todos']);
+          });
+        }
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa...');
+      }
+    } 

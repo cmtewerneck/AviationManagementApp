@@ -13,51 +13,55 @@ import { AeronaveBaseComponent } from '../aeronave-form.base.component';
   templateUrl: './editar.component.html'
 })
 export class EditarComponent extends AeronaveBaseComponent implements OnInit {
-
+  
   imagens: string = environment.imagensUrl;
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   imageBase64: any;
   imagemPreview: any;
   imagemNome: string;
   imagemOriginalSrc: string;
   
   constructor(private fb: FormBuilder,
-              private aeronaveService: AeronaveService,
-              private router: Router,
-              private spinner: NgxSpinnerService,
-              private route: ActivatedRoute,
-              private toastr: ToastrService) {
-
+    private aeronaveService: AeronaveService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
+      
       super();
       this.aeronave = this.route.snapshot.data['aeronave'];
     }
     
     ngOnInit(): void {
-
+      
       this.spinner.show();
-
+      
       this.aeronaveForm = this.fb.group({
         matricula: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-        fabricante: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-        categoria: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-        modelo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-        numeroSerie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+        fabricante: ['', [Validators.required,Validators.maxLength(50)]],
+        categoria: ['', [Validators.required, Validators.maxLength(20)]],
+        modelo: ['', [Validators.required, Validators.maxLength(30)]],
+        numeroSerie: ['', Validators.maxLength(20)],
         ano: [''],
         pesoVazio: [''],
+        pesoBasico: [''],
         horasTotais: [''],
         horasRestantes: [''],
-        vencimentoCa: [''],
-        vencimentoCm: [''],
+        vencimentoCA: [''],
+        vencimentoCVA: [''],
+        vencimentoCM: [''],
         ultimaPesagem: [''],
+        proximaPesagem: [''],
         vencimentoReta: [''],
-        motor: [''],
-        modeloMotor: [''],
-        numeroSerieMotor: [''],
+        vencimentoCasco: [''],
+        motor: ['', Validators.maxLength(30)],
+        modeloMotor: ['', Validators.maxLength(30)],
+        numeroSerieMotor: ['', Validators.maxLength(30)],
         imagem: ['']
-        });
-
+      });
+      
       this.aeronaveForm.patchValue({
         id: this.aeronave.id,
         matricula: this.aeronave.matricula,
@@ -66,77 +70,86 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         modelo: this.aeronave.modelo,
         numeroSerie: this.aeronave.numeroSerie,
         ano: this.aeronave.ano,
-        pesoVazio: this.aeronave.pesoVazio,
-        horasTotais: this.aeronave.horasTotais,
-        horasRestantes: this.aeronave.horasRestantes,
-        vencimentoCa: this.aeronave.vencimentoCa,
-        vencimentoCm: this.aeronave.vencimentoCm,
+        pesoVazio: CurrencyUtils.DecimalParaString(this.aeronave.pesoVazio),
+        pesoBasico: CurrencyUtils.DecimalParaString(this.aeronave.pesoBasico),
+        horasTotais: CurrencyUtils.DecimalParaString(this.aeronave.horasTotais),
+        horasRestantes: CurrencyUtils.DecimalParaString(this.aeronave.horasRestantes),
+        vencimentoCA: this.aeronave.vencimentoCA,
+        vencimentoCVA: this.aeronave.vencimentoCVA,
+        vencimentoCM: this.aeronave.vencimentoCM,
         ultimaPesagem: this.aeronave.ultimaPesagem,
+        proximaPesagem: this.aeronave.proximaPesagem,
+        vencimentoReta: this.aeronave.vencimentoReta,
+        vencimentoCasco: this.aeronave.vencimentoCasco,
         motor: this.aeronave.motor,
         modeloMotor: this.aeronave.modeloMotor,
-        numeroSerieMotor: this.aeronave.numeroSerieMotor,
-        vencimentoReta: this.aeronave.vencimentoReta
+        numeroSerieMotor: this.aeronave.numeroSerieMotor
       });
-
+      
       this.imagemOriginalSrc = this.imagens + this.aeronave.imagem;
-
+      
       setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
+        this.spinner.hide();
+      }, 1000);
     }
-
-      ngAfterViewInit(): void {
-        super.configurarValidacaoFormulario(this.formInputElements);
-      }
-
-      editarAeronave() {
-        if (this.aeronaveForm.dirty && this.aeronaveForm.valid) {
-          this.aeronave = Object.assign({}, this.aeronave, this.aeronaveForm.value);
-
-          if (this.imageBase64) {
-            this.aeronave.imagemUpload = this.imageBase64;
-            this.aeronave.imagem = this.imagemNome;
-          }
-
-          this.aeronaveService.atualizarAeronave(this.aeronave)
-          .subscribe(
-            sucesso => { this.processarSucesso(sucesso) },
-            falha => { this.processarFalha(falha) }
-            );
-
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    editarAeronave() {
+      if (this.aeronaveForm.dirty && this.aeronaveForm.valid) {
+        this.aeronave = Object.assign({}, this.aeronave, this.aeronaveForm.value);
+        
+        if (this.imageBase64) {
+          this.aeronave.imagemUpload = this.imageBase64;
+          this.aeronave.imagem = this.imagemNome;
+        }
+        
+        this.aeronave.pesoVazio = CurrencyUtils.StringParaDecimal(this.aeronave.pesoVazio);
+        this.aeronave.pesoBasico = CurrencyUtils.StringParaDecimal(this.aeronave.pesoBasico);
+        this.aeronave.horasTotais = CurrencyUtils.StringParaDecimal(this.aeronave.horasTotais);
+        this.aeronave.horasRestantes = CurrencyUtils.StringParaDecimal(this.aeronave.horasRestantes);
+        
+        this.aeronaveService.atualizarAeronave(this.aeronave)
+        .subscribe(
+          sucesso => { this.processarSucesso(sucesso) },
+          falha => { this.processarFalha(falha) }
+          );
+          
           this.mudancasNaoSalvas = false;
-          }
         }
-
-        processarSucesso(response: any) {
-          this.aeronaveForm.reset();
-          this.errors = [];
-
-          let toast = this.toastr.success('Aeronave editada com sucesso!', 'Sucesso!');
-          if (toast) {
-            toast.onHidden.subscribe(() => {
-              this.router.navigate(['/aeronaves/listar-todos']);
-            });
-          }
+      }
+      
+      processarSucesso(response: any) {
+        this.aeronaveForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Aeronave editada com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/aeronaves/listar-todos']);
+          });
         }
-
-        processarFalha(fail: any) {
-          this.errors = fail.error.errors;
-          this.toastr.error('Ocorreu um erro!', 'Opa :(');
-        }
-
-        upload(file: any) {
-          this.imagemNome = file[0].name;
-
-          var reader = new FileReader();
-          reader.onload = this.manipularReader.bind(this);
-          reader.readAsBinaryString(file[0]);
-        }
-
-        manipularReader(readerEvt: any) {
-          var binaryString = readerEvt.target.result;
-          this.imageBase64 = btoa(binaryString);
-          this.imagemPreview = 'data:image/jpeg;base64,' + this.imageBase64;
-        }
-
-}
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      }
+      
+      upload(file: any) {
+        this.imagemNome = file[0].name;
+        
+        var reader = new FileReader();
+        reader.onload = this.manipularReader.bind(this);
+        reader.readAsBinaryString(file[0]);
+      }
+      
+      manipularReader(readerEvt: any) {
+        var binaryString = readerEvt.target.result;
+        this.imageBase64 = btoa(binaryString);
+        this.imagemPreview = 'data:image/jpeg;base64,' + this.imageBase64;
+      }
+      
+    }

@@ -42,6 +42,7 @@
                 <th>Matrícula</th>
                 <th>Fabricante</th>
                 <th>Categoria</th>
+                <th>Vencimento CVA</th>
                 <th>Modelo</th>
                 <th>Horas Totais</th>
                 <th>Horas Restantes</th>
@@ -54,6 +55,7 @@
                 <td>{{ aeronave.matricula }}</td>
                 <td>{{ aeronave.fabricante }}</td>
                 <td>{{ aeronave.categoria }}</td>
+                <td>{{ aeronave.vencimentoCVA | date }}</td>
                 <td>{{ aeronave.modelo }}</td>
                 <td>{{ aeronave.horasTotais }}</td>
                 <td>{{ aeronave.horasRestantes }}</td>

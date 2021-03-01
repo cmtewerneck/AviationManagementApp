@@ -11,79 +11,81 @@ import { LegislacaoBaseComponent } from '../legislacao-form.base.component';
   templateUrl: './editar.component.html'
 })
 export class EditarComponent extends LegislacaoBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private legislacaoService: LegislacaoService,
-              private router: Router,
-              private spinner: NgxSpinnerService,
-              private route: ActivatedRoute,
-              private toastr: ToastrService) {
-
+    private legislacaoService: LegislacaoService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
+      
       super();
       this.legislacao = this.route.snapshot.data['legislacao'];
     }
-
+    
     ngOnInit(): void {
-
+      
       this.spinner.show();
-
+      
       this.legislacaoForm = this.fb.group({
-        titulo: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(150)]],
-        tipo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+        titulo: ['', [Validators.required, Validators.maxLength(50)]],
+        tipoLegislacao: ['', Validators.required],
         numero: ['', [Validators.required]],
         emenda: [''],
-        data: [''],
+        dataEmenda: [''],
         arquivo: ['']
       });
-
+      
       this.legislacaoForm.patchValue({
-          id: this.legislacao.id,
-          titulo: this.legislacao.titulo,
-          tipo: this.legislacao.tipo,
-          numero: this.legislacao.numero,
-          emenda: this.legislacao.emenda,
-          data: this.legislacao.data
-        });
-
+        id: this.legislacao.id,
+        titulo: this.legislacao.titulo,
+        tipo: this.legislacao.tipoLegislacao,
+        numero: this.legislacao.numero,
+        emenda: this.legislacao.emenda,
+        data: this.legislacao.dataEmenda
+      });
+      
       setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
+        this.spinner.hide();
+      }, 1000);
     }
-
-      ngAfterViewInit(): void {
-        super.configurarValidacaoFormulario(this.formInputElements);
-      }
-
-      editarLegislacao() {
-        if (this.legislacaoForm.dirty && this.legislacaoForm.valid) {
-          this.legislacao = Object.assign({}, this.legislacao, this.legislacaoForm.value);
-
-          this.legislacaoService.atualizarLegislacao(this.legislacao)
-          .subscribe(
-            sucesso => { this.processarSucesso(sucesso) },
-            falha => { this.processarFalha(falha) }
-            );
-
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    editarLegislacao() {
+      if (this.legislacaoForm.dirty && this.legislacaoForm.valid) {
+        this.legislacao = Object.assign({}, this.legislacao, this.legislacaoForm.value);
+        
+        // INSERIR UPLOAD DO ARQUIVO PDF
+        
+        this.legislacaoService.atualizarLegislacao(this.legislacao)
+        .subscribe(
+          sucesso => { this.processarSucesso(sucesso) },
+          falha => { this.processarFalha(falha) }
+          );
+          
           this.mudancasNaoSalvas = false;
-          }
         }
-
-        processarSucesso(response: any) {
-          this.legislacaoForm.reset();
-          this.errors = [];
-
-          let toast = this.toastr.success('Legislacao editada com sucesso!', 'Sucesso!');
-          if (toast) {
-            toast.onHidden.subscribe(() => {
-              this.router.navigate(['/legislacoes/listar-todos']);
-            });
-          }
+      }
+      
+      processarSucesso(response: any) {
+        this.legislacaoForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Legislação editada com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/legislacoes/listar-todos']);
+          });
         }
-
-        processarFalha(fail: any) {
-          this.errors = fail.error.errors;
-          this.toastr.error('Ocorreu um erro!', 'Opa :(');
-        }
-}
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      }
+    }

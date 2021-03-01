@@ -15,6 +15,7 @@ export class ExcluirComponent {
   imagens: string = environment.imagensUrl;
 
   cliente: Cliente;
+  errors: any[] = [];
 
   constructor(private clienteService: ClienteService,
               private route: ActivatedRoute,

@@ -32,7 +32,7 @@
           <label class="control-label">Tipo</label>
         </dt>
         <dd class="col-sm-10">
-          {{ legislacao.tipo }}
+          {{ legislacao.tipoLegislacao }}
         </dd>
         <dt class="col-sm-2">
           <label class="control-label">Número</label>
@@ -47,10 +47,10 @@
           {{ legislacao.emenda }}
         </dd>
         <dt class="col-sm-2">
-          <label class="control-label">Data</label>
+          <label class="control-label">Data da Emenda</label>
         </dt>
         <dd class="col-sm-10">
-          {{ legislacao.data | date }}
+          {{ legislacao.dataEmenda | date }}
         </dd>        
       </dl>
     </div>

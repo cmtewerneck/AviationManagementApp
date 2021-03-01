@@ -1,75 +1,79 @@
 <div class="container main-container">
-
-  <h3>Editar Legislacao</h3>
-
-  <hr>
-  <div class="row">
-      <div class="col-md-10">
-        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
-            <p style="color: white"> Processando... </p>
-        </ngx-spinner>
-          <form enctype="multipart/form-data" (ngSubmit)="editarLegislacao()" [formGroup]="legislacaoForm">
-
-              <div class="alert alert-danger" *ngIf="errors.length > 0">
-                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
-                  <ul>
-                      <li *ngFor="let error of errors">{{ error }}</li>
-                  </ul>
-              </div>
-
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label class="control-label">Título</label>
-                    <div>
-                        <textarea cols="40" rows="3" maxlength="150" class="form-control" id="titulo" placeholder="Título (requerido)" formControlName="titulo" [ngClass]="{'is-invalid': displayMessage.titulo }"></textarea>
-                        <span class="text-danger" *ngIf="displayMessage.titulo">
-                            <p [innerHTML]="displayMessage.titulo"></p>
-                        </span>
-                    </div>
-                </div>
-            </div>
+    
+    <h3>Editar Legislacao</h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+                <p style="color: white"> Processando... </p>
+            </ngx-spinner>
+            <form enctype="multipart/form-data" (ngSubmit)="editarLegislacao()" [formGroup]="legislacaoForm">
                 
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tipo</label>
-                    <div>
-                        <input class="form-control" id="tipo" type="text" placeholder="Tipo (requerido)" formControlName="tipo" [ngClass]="{'is-invalid': displayMessage.tipo }" />
-                        <span class="text-danger" *ngIf="displayMessage.tipo">
-                            <p [innerHTML]="displayMessage.tipo"></p>
-                        </span>
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+                <input type="hidden" id="id" name="id" value="">
+                
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Título</label>
+                        <div>
+                            <input class="form-control" id="titulo" type="text" placeholder="(requerido)" formControlName="titulo" [ngClass]="{'is-invalid': displayMessage.titulo }" />
+                            <span class="text-danger" *ngIf="displayMessage.titulo">
+                                <p [innerHTML]="displayMessage.titulo"></p>
+                            </span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Número</label>
-                    <div>
-                        <input class="form-control" id="numero" type="number" placeholder="Número (requerido)" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero }" />
-                        <span class="text-danger" *ngIf="displayMessage.numero">
-                            <p [innerHTML]="displayMessage.numero"></p>
-                        </span>
+                
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Tipo</label>
+                        <div>
+                            <select class="form-control" id="tipoLegislacao" formControlName="tipoLegislacao" [ngClass]="{ 'is-invalid': displayMessage.tipoLegislacao }">
+                                <option value="1">RBAC</option>
+                                <option value="2">RBHA</option>
+                                <option value="3">IS</option>
+                                <option value="4">IAC</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Número</label>
+                        <div>
+                            <input class="form-control" id="numero" type="number" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero }" />
+                            <span class="text-danger" *ngIf="displayMessage.numero">
+                                <p [innerHTML]="displayMessage.numero"></p>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Emenda</label>
+                        <div>
+                            <input class="form-control" id="emenda" type="number" placeholder="(opcional)" formControlName="emenda" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Data da Emenda</label>
+                        <div>
+                            <input class="form-control" id="dataEmenda" type="date" formControlName="dataEmenda" />
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Emenda</label>
-                    <div>
-                        <input class="form-control" id="emenda" type="number" placeholder="Emenda" formControlName="emenda" [ngClass]="{'is-invalid': displayMessage.emenda }" />
-                    </div>
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!legislacaoForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/legislacoes/listar-todos">Voltar</a>
                 </div>
-
-                <div class="form-group col-md-3">
-                    <label class="control-label">Data</label>
-                    <div>
-                        <input class="form-control" id="data" type="date" placeholder="Data" formControlName="data" />
-                    </div>
-                </div>
-            </div>
-
-              <div class="form-group">
-                  <input type="submit" [disabled]="!legislacaoForm.valid" value="Editar" class="btn btn-primary">&nbsp;
-                  <a class="btn btn-info" href="/legislacoes/listar-todos">Voltar</a>
-              </div>
-          </form>
-      </div>
-  </div>
+            </form>
+        </div>
+    </div>
 </div>

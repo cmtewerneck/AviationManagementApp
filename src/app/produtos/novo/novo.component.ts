@@ -12,9 +12,9 @@ import { ProdutoBaseComponent } from '../produto-form.base.component';
   templateUrl: './novo.component.html'
 })
 export class NovoComponent extends ProdutoBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -25,89 +25,89 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
   transform: ImageTransform = {};
   imageUrl: string;
   imagemNome: string;
-
+  
   constructor(private fb: FormBuilder,
-              private produtoService: ProdutoService,
-              private router: Router,
-              private toastr: ToastrService) {super();}
-
-  ngOnInit(): void {
-
-     this.produtoService.obterFornecedores()
-       .subscribe(
-         fornecedores => this.fornecedores = fornecedores);
-
-     this.produtoForm = this.fb.group({
-       fornecedorId: ['', [Validators.required]],
-       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-       descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
-       imagem: ['', [Validators.required]],
-       valor: ['', [Validators.required]],
-       ativo: [true]
-     });
-  }
-
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
-
-  adicionarProduto() {
-    if (this.produtoForm.dirty && this.produtoForm.valid) {
-      this.produto = Object.assign({}, this.produto, this.produtoForm.value);
-
-      // this.formResult = JSON.stringify(this.produto);
-
-      this.produto.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
-      this.produto.imagem = this.imagemNome;
-      this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor);
-
-      this.produtoService.novoProduto(this.produto)
-        .subscribe(
-          sucesso => { this.processarSucesso(sucesso) },
-          falha => { this.processarFalha(falha) }
-        );
-
-      this.mudancasNaoSalvas = false;
-    }
-  }
-
-  processarSucesso(response: any) {
-    this.produtoForm.reset();
-    this.errors = [];
-
-    let toast = this.toastr.success('Produto cadastrado com sucesso!', 'Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/produtos/listar-todos']);
-      });
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.errors = fail.error.errors;
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-    this.imagemNome = event.currentTarget.files[0].name;
-  }
-
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-
-  imageLoaded() {
-    this.showCropper = true;
-  }
-
-  cropperReady(sourceImageDimensions: Dimensions) {
-    console.log('Cropper ready', sourceImageDimensions);
-  }
-
-  loadImageFailed() {
-    this.errors.push('O formato do arquivo ' + this.imagemNome + ' não é aceito.');
-  }
-
-}
-
+    private produtoService: ProdutoService,
+    private router: Router,
+    private toastr: ToastrService) {super();}
+    
+    ngOnInit(): void {
+      
+      this.produtoService.obterFornecedores()
+      .subscribe(
+        fornecedores => this.fornecedores = fornecedores);
+        
+        this.produtoForm = this.fb.group({
+          fornecedorId: ['', [Validators.required]],
+          nome: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+          descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
+          imagem: ['', [Validators.required]],
+          valor: ['', [Validators.required]],
+          ativo: [true]
+        });
+      }
+      
+      ngAfterViewInit(): void {
+        super.configurarValidacaoFormulario(this.formInputElements);
+      }
+      
+      adicionarProduto() {
+        if (this.produtoForm.dirty && this.produtoForm.valid) {
+          this.produto = Object.assign({}, this.produto, this.produtoForm.value);
+          
+          // this.formResult = JSON.stringify(this.produto);
+          
+          this.produto.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
+          this.produto.imagem = this.imagemNome;
+          
+          this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor);
+          
+          this.produtoService.novoProduto(this.produto)
+          .subscribe(
+            sucesso => { this.processarSucesso(sucesso) },
+            falha => { this.processarFalha(falha) }
+            );
+            
+            this.mudancasNaoSalvas = false;
+          }
+        }
+        
+        processarSucesso(response: any) {
+          this.produtoForm.reset();
+          this.errors = [];
+          
+          let toast = this.toastr.success('Produto cadastrado com sucesso!', 'Sucesso!');
+          if (toast) {
+            toast.onHidden.subscribe(() => {
+              this.router.navigate(['/produtos/listar-todos']);
+            });
+          }
+        }
+        
+        processarFalha(fail: any) {
+          this.errors = fail.error.errors;
+          this.toastr.error('Ocorreu um erro!', 'Opa :(');
+        }
+        
+        fileChangeEvent(event: any): void {
+          this.imageChangedEvent = event;
+          this.imagemNome = event.currentTarget.files[0].name;
+        }
+        
+        imageCropped(event: ImageCroppedEvent) {
+          this.croppedImage = event.base64;
+        }
+        
+        imageLoaded() {
+          this.showCropper = true;
+        }
+        
+        cropperReady(sourceImageDimensions: Dimensions) {
+          console.log('Cropper ready', sourceImageDimensions);
+        }
+        
+        loadImageFailed() {
+          this.errors.push('O formato do arquivo ' + this.imagemNome + ' não é aceito.');
+        }
+        
+      }

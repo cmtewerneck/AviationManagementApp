@@ -9,52 +9,53 @@ import { TripulanteService } from '../services/tripulante.service';
   templateUrl: './lista.component.html'
 })
 export class ListaComponent implements OnInit {
-
+  
   imagens: string = environment.imagensUrl;
-
+  
   mostrarImagem = true;
-
+  
   public tripulantes: Tripulante[];
   errorMessage: string;
-
+  
   tripulante: Tripulante;
   tripulantesFiltrados: Tripulante[];
-
+  
   constructor(private tripulanteService: TripulanteService,
-              private toastr: ToastrService) { }
-
-  ngOnInit(): void {
-    this.ObterTodos();
-  }
-
-  alternarImagem() {
-    this.mostrarImagem = !this.mostrarImagem;
-  }
-
-  _filtroLista: string;
-  get filtroLista(): string {
-    return this._filtroLista;
-  }
-  set filtroLista(value: string) {
-    this._filtroLista = value;
-    this.tripulantesFiltrados = this.filtroLista ? this.filtrarTripulante(this.filtroLista) : this.tripulantes;
-  }
-
-  filtrarTripulante(filtrarPor: string): Tripulante[] {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.tripulantes.filter(
-      tripulante => tripulante.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1
-    );
-  }
-
-  ObterTodos() {
-    this.tripulanteService.obterTodos().subscribe(
-      (_tripulantes: Tripulante[]) => {
-      this.tripulantes = _tripulantes;
-      this.tripulantesFiltrados = this.tripulantes;
-    }, error => {
-        this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
-        console.log(error);
-    });
-  }
-}
+    private toastr: ToastrService) { }
+    
+    ngOnInit(): void {
+      this.ObterTodos();
+    }
+    
+    alternarImagem() {
+      this.mostrarImagem = !this.mostrarImagem;
+    }
+    
+    _filtroLista: string;
+    get filtroLista(): string {
+      return this._filtroLista;
+    }
+    set filtroLista(value: string) {
+      this._filtroLista = value;
+      this.tripulantesFiltrados = this.filtroLista ? this.filtrarTripulante(this.filtroLista) : this.tripulantes;
+    }
+    
+    filtrarTripulante(filtrarPor: string): Tripulante[] {
+      filtrarPor = filtrarPor.toLocaleLowerCase();
+      return this.tripulantes.filter(
+        tripulante => tripulante.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+        );
+      }
+      
+      ObterTodos() {
+        this.tripulanteService.obterTodos().subscribe(
+          (_tripulantes: Tripulante[]) => {
+            this.tripulantes = _tripulantes;
+            this.tripulantesFiltrados = this.tripulantes;
+          }, error => {
+            this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
+            console.log(error);
+          });
+        }
+      }
+      

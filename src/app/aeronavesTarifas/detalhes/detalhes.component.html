@@ -36,16 +36,10 @@
                 {{ aeronaveTarifa.matriculaAeronave }}
             </dd>
             <dt class="col-sm-2">
-                <label class="control-label">Numeração</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveTarifa.numeracao }}
-            </dd>
-            <dt class="col-sm-2">
                 <label class="control-label">Vencimento</label>
             </dt>
             <dd class="col-sm-10">
-                {{ aeronaveTarifa.vencimento }}
+                {{ aeronaveTarifa.vencimento | date }}
             </dd>
             <dt class="col-sm-2">
                 <label class="control-label">Valor</label>
@@ -54,17 +48,22 @@
                 {{ aeronaveTarifa.valor | currencyBrazil }}
             </dd>
             <dt class="col-sm-2">
-                <label class="control-label">Órgão Emissor</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveTarifa.orgaoEmissor }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Pagamento</label>
+                <label class="control-label">Situação</label>
             </dt>
             <dd class="col-sm-10">
               <input [checked]="aeronaveTarifa.situacao" class="check-box" disabled="disabled" type="checkbox">
             </dd>
+            <dt class="col-sm-2">
+                <label class="control-label">Numeração</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ aeronaveTarifa.numeracao }}
+            </dd>
+            <dt class="col-sm-2">
+              <label class="control-label">Órgão Emissor</label>
+            </dt>
+            <dd class="col-sm-10" *ngIf="aeronaveTarifa.orgaoEmissor == 1">DECEA</dd>
+            <dd class="col-sm-10" *ngIf="aeronaveTarifa.orgaoEmissor == 2">Infraero</dd>
         </dl>
       </div>
   

@@ -10,62 +10,65 @@ import { VooAgendadoBaseComponent } from '../vooAgendado-form.base.component';
   templateUrl: './novo.component.html'
 })
 export class NovoComponent extends VooAgendadoBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private vooAgendadoService: VooAgendadoService,
-              private router: Router,
-              private toastr: ToastrService) {super(); }
-
-  ngOnInit(): void {
-
-     this.vooAgendadoService.obterAeronaves()
-       .subscribe(
-         aeronaves => this.aeronaves = aeronaves);
-
-     this.vooAgendadoForm = this.fb.group({
-       aeronaveId: ['', [Validators.required]],
-       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-       comecaEm: ['', [Validators.required]],
-       terminaEm: ['', [Validators.required]],
-       diaTodo: [true]
-     });
-  }
-
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
-
-  adicionarVooAgendado() {
-    if (this.vooAgendadoForm.dirty && this.vooAgendadoForm.valid) {
-      this.vooAgendado = Object.assign({}, this.vooAgendado, this.vooAgendadoForm.value);
-
-      this.vooAgendadoService.novoVooAgendado(this.vooAgendado)
-        .subscribe(
-          sucesso => { this.processarSucesso(sucesso) },
-          falha => { this.processarFalha(falha) }
-        );
-
-      this.mudancasNaoSalvas = false;
-    }
-  }
-
-  processarSucesso(response: any) {
-    this.vooAgendadoForm.reset();
-    this.errors = [];
-
-    let toast = this.toastr.success('Agendamento cadastrado com sucesso!', 'Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/voos-agendados/listar-todos']);
-      });
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.errors = fail.error.errors;
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-}
-
+    private vooAgendadoService: VooAgendadoService,
+    private router: Router,
+    private toastr: ToastrService) {super(); }
+    
+    ngOnInit(): void {
+      
+      this.vooAgendadoService.obterAeronaves()
+      .subscribe(
+        aeronaves => this.aeronaves = aeronaves);
+        
+        this.vooAgendadoForm = this.fb.group({
+          title: ['', [Validators.required, Validators.maxLength(30)]],
+          start: [''],
+          end: [''],
+          allDay: [true],
+          editable: [true],
+          durationEditable: [true],
+          backgroundColor: ['', [Validators.required, Validators.maxLength(20)]],
+          textColor: ['', [Validators.required, Validators.maxLength(20)]],
+          aeronaveId: ['', [Validators.required]]
+        });
+      }
+      
+      ngAfterViewInit(): void {
+        super.configurarValidacaoFormulario(this.formInputElements);
+      }
+      
+      adicionarVooAgendado() {
+        if (this.vooAgendadoForm.dirty && this.vooAgendadoForm.valid) {
+          this.vooAgendado = Object.assign({}, this.vooAgendado, this.vooAgendadoForm.value);
+          
+          this.vooAgendadoService.novoVooAgendado(this.vooAgendado)
+          .subscribe(
+            sucesso => { this.processarSucesso(sucesso) },
+            falha => { this.processarFalha(falha) }
+            );
+            
+            this.mudancasNaoSalvas = false;
+          }
+        }
+        
+        processarSucesso(response: any) {
+          this.vooAgendadoForm.reset();
+          this.errors = [];
+          
+          let toast = this.toastr.success('Voo agendado com sucesso!', 'Sucesso!');
+          if (toast) {
+            toast.onHidden.subscribe(() => {
+              this.router.navigate(['/voos-agendados/listar-todos']);
+            });
+          }
+        }
+        
+        processarFalha(fail: any) {
+          this.errors = fail.error.errors;
+          this.toastr.error('Ocorreu um erro!', 'Opa :(');
+        }
+      }

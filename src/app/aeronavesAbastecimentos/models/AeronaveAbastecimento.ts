@@ -1,7 +1,5 @@
 export interface AeronaveAbastecimento {
   id: string;
-  aeronaveId: string;
-  matriculaAeronave: string;
   data: Date;
   litros: number;
   local: string;
@@ -9,7 +7,14 @@ export interface AeronaveAbastecimento {
   notaFiscal: string;
   fornecedora: string;
   responsavel: string;
+  valor?: number;
   observacoes: string;
+
+  comprovante: string;
+  comprovanteUpload: string;
+
+  aeronaveId: string;
+  matriculaAeronave: string;
 }
 
 export interface Aeronave {

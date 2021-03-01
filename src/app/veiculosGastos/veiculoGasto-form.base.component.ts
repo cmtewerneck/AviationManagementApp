@@ -1,47 +1,48 @@
-import { Veiculo, VeiculoGasto } from './models/VeiculoGasto';
+import { Veiculo, VeiculoGasto, Colaborador } from './models/VeiculoGasto';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
 import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class VeiculoGastoBaseComponent extends FormBaseComponent {
-
+    
     veiculoGasto: VeiculoGasto;
     veiculos: Veiculo[];
+    colaboradores: Colaborador[];
     errors: any[] = [];
     veiculoGastoForm: FormGroup;
-
+    
     MASKS = utilsBr.MASKS;
-
+    
     constructor() {
         super();
-
+        
         this.validationMessages = {
-            veiculoId: {
-                required: 'Escolha um veículo',
+            data: {
+                required: 'Data é obrigatória'
+            },
+            descricao: {
+                required: 'Descrição é obrigatória',
+                maxlength: 'Máximo de 50 caracteres'
+            },
+            situacao: {
+                required: 'Situação é obrigatória'
             },
             valor: {
                 required: 'Valor é obrigatório'
             },
-            descricao: {
-                required: 'Descrição é obrigatória',
-                minlength: 'Mínimo de 1 caracteres',
-                maxlength: 'Máximo de 200 caracteres'
+            veiculoId: {
+                required: 'Escolha um veículo'
             },
-            motorista: {
-                required: 'Motorista é obrigatória',
-                minlength: 'Mínimo de 1 caracteres',
-                maxlength: 'Máximo de 50 caracteres'
-            },
-            data: {
-                required: 'Data é obrigatória'
+            motoristaId: {
+                required: 'Escolha um motorista'
             }
         };
-
+        
         super.configurarMensagensValidacaoBase(this.validationMessages);
     }
-
+    
     protected configurarValidacaoFormulario(formInputElements: ElementRef[]) {
-            super.configurarValidacaoFormularioBase(formInputElements, this.veiculoGastoForm);
+        super.configurarValidacaoFormularioBase(formInputElements, this.veiculoGastoForm);
     }
 }

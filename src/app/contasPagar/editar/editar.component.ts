@@ -12,87 +12,89 @@ import { CurrencyUtils } from 'src/app/utils/currency-utils';
   templateUrl: './editar.component.html'
 })
 export class EditarComponent extends ContasPagarBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private contasPagarService: ContasPagarService,
-              private router: Router,
-              private spinner: NgxSpinnerService,
-              private route: ActivatedRoute,
-              private toastr: ToastrService) {
-
+    private contasPagarService: ContasPagarService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
+      
       super();
       this.contasPagar = this.route.snapshot.data['contasPagar'];
     }
-
+    
     ngOnInit(): void {
-
+      
       this.spinner.show();
-
+      
       this.contasPagarForm = this.fb.group({
-        dataVencimento: ['', [Validators.required]],
-        descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-        codigoBarras: ['', [Validators.maxLength(100)]],
+        // CONTAS
+        dataVencimento: [''],
+        descricao: ['', [Validators.required, Validators.maxLength(50)]],
+        codigoBarras: ['', Validators.maxLength(50)],
+        situacao: ['', [Validators.required]],
+        formaPagamento: ['', Validators.maxLength(30)],
+        // CONTAS PAGAR
         valorPagar: ['', [Validators.required]],
-        situacao: [0],
-        dataPagamento: [''],
         valorPago: [''],
-        formaPagamento: ['']
+        dataPagamento: ['']
       });
-
+      
       this.contasPagarForm.patchValue({
-          id: this.contasPagar.id,
-          dataVencimento: this.contasPagar.dataVencimento,
-          descricao: this.contasPagar.descricao,
-          codigoBarras: this.contasPagar.codigoBarras,
-          valorPagar: CurrencyUtils.DecimalParaString(this.contasPagar.valorPagar),
-          valorPago: CurrencyUtils.DecimalParaString(this.contasPagar.valorPago),
-          situacao: this.contasPagar.situacao,
-          dataPagamento: this.contasPagar.dataPagamento,
-          formaPagamento: this.contasPagar.formaPagamento
-        });
-
+        id: this.contasPagar.id,
+        dataVencimento: this.contasPagar.dataVencimento,
+        descricao: this.contasPagar.descricao,
+        codigoBarras: this.contasPagar.codigoBarras,
+        situacao: this.contasPagar.situacao,
+        formaPagamento: this.contasPagar.formaPagamento,
+        valorPagar: CurrencyUtils.DecimalParaString(this.contasPagar.valorPagar),
+        valorPago: CurrencyUtils.DecimalParaString(this.contasPagar.valorPago),
+        dataPagamento: this.contasPagar.dataPagamento
+      });
+      
       setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
+        this.spinner.hide();
+      }, 1000);
     }
-
-      ngAfterViewInit(): void {
-        super.configurarValidacaoFormulario(this.formInputElements);
-      }
-
-      editarContasPagar() {
-        if (this.contasPagarForm.dirty && this.contasPagarForm.valid) {
-          this.contasPagar = Object.assign({}, this.contasPagar, this.contasPagarForm.value);
-
-          this.contasPagar.valorPagar = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPagar);
-          this.contasPagar.valorPago = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPago);
-
-          this.contasPagarService.atualizarContasPagar(this.contasPagar)
-          .subscribe(
-            sucesso => { this.processarSucesso(sucesso) },
-            falha => { this.processarFalha(falha) }
-            );
-
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    editarContasPagar() {
+      if (this.contasPagarForm.dirty && this.contasPagarForm.valid) {
+        this.contasPagar = Object.assign({}, this.contasPagar, this.contasPagarForm.value);
+        
+        this.contasPagar.valorPagar = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPagar);
+        this.contasPagar.valorPago = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPago);
+        
+        this.contasPagarService.atualizarContasPagar(this.contasPagar)
+        .subscribe(
+          sucesso => { this.processarSucesso(sucesso) },
+          falha => { this.processarFalha(falha) }
+          );
+          
           this.mudancasNaoSalvas = false;
-          }
         }
-
-        processarSucesso(response: any) {
-          this.contasPagarForm.reset();
-          this.errors = [];
-
-          let toast = this.toastr.success('Conta editada com sucesso!', 'Sucesso!');
-          if (toast) {
-            toast.onHidden.subscribe(() => {
-              this.router.navigate(['/contas-pagar/listar-todos']);
-            });
-          }
+      }
+      
+      processarSucesso(response: any) {
+        this.contasPagarForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Conta editada com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/contas-pagar/listar-todos']);
+          });
         }
-
-        processarFalha(fail: any) {
-          this.errors = fail.error.errors;
-          this.toastr.error('Ocorreu um erro!', 'Opa :(');
-        }
-}
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      }
+    }

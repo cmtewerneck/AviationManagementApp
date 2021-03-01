@@ -1,0 +1,45 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do Curso</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Cursos</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Código</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ curso.codigo }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Descrição</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ curso.descricao }}
+        </dd>        
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/cursos/editar', curso.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/cursos/listar-todos']">Voltar</a>
+    </div>
+    
+  </div>
+</section>
+<!-- /.content -->

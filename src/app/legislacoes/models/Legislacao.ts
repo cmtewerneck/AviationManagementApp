@@ -1,10 +1,11 @@
 export interface Legislacao {
     id: string;
     titulo: string;
-    tipo: string;
+    tipoLegislacao: number;
     numero: number;
     emenda?: number;
-    data?: Date;
+    dataEmenda?: Date;
+    
     arquivo: string;
     arquivoUpload: string;
   }

@@ -10,61 +10,60 @@ import { OficioEmitidoBaseComponent } from '../oficioEmitido-form.base.component
   templateUrl: './novo.component.html'
 })
 export class NovoComponent extends OficioEmitidoBaseComponent implements OnInit {
-
+  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   constructor(private fb: FormBuilder,
-              private oficioEmitidoService: OficioEmitidoService,
-              private router: Router,
-              private toastr: ToastrService) { super(); }
-
-  ngOnInit(): void {
-     this.oficioEmitidoForm = this.fb.group({
-       data: ['', [Validators.required]],
-       mensagem: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
-       assunto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-       numeracao: ['', [Validators.required]],
-       responsavel: [''],
-       destinatario: ['', [Validators.required]],
-       arquivo: ['']
-     });
-  }
-
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
-
-  adicionarOficioEmitido() {
-    if (this.oficioEmitidoForm.dirty && this.oficioEmitidoForm.valid) {
-      this.oficioEmitido = Object.assign({}, this.oficioEmitido, this.oficioEmitidoForm.value);
-
-      // this.formResult = JSON.stringify(this.produto);
-
-      this.oficioEmitidoService.novoOficioEmitido(this.oficioEmitido)
+    private oficioEmitidoService: OficioEmitidoService,
+    private router: Router,
+    private toastr: ToastrService) { super(); }
+    
+    ngOnInit(): void {
+      this.oficioEmitidoForm = this.fb.group({
+        data: ['', [Validators.required]],
+        numeracao: ['', [Validators.required, Validators.maxLength(20)]],
+        mensagem: ['', [Validators.required, Validators.maxLength(1000)]],
+        responsavel: ['', Validators.maxLength(20)],
+        destinatario: ['', [Validators.required, Validators.maxLength(20)]],
+        assunto: ['', [Validators.required, Validators.maxLength(50)]],
+        arquivo: ['']
+      });
+    }
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    adicionarOficioEmitido() {
+      if (this.oficioEmitidoForm.dirty && this.oficioEmitidoForm.valid) {
+        this.oficioEmitido = Object.assign({}, this.oficioEmitido, this.oficioEmitidoForm.value);
+        
+        // this.formResult = JSON.stringify(this.produto);
+        
+        this.oficioEmitidoService.novoOficioEmitido(this.oficioEmitido)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },
           falha => { this.processarFalha(falha) }
-        );
-
-      this.mudancasNaoSalvas = false;
+          );
+          
+          this.mudancasNaoSalvas = false;
+        }
+      }
+      
+      processarSucesso(response: any) {
+        this.oficioEmitidoForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Ofício cadastrado com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/oficios-emitidos/listar-todos']);
+          });
+        }
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      }
     }
-  }
-
-  processarSucesso(response: any) {
-    this.oficioEmitidoForm.reset();
-    this.errors = [];
-
-    let toast = this.toastr.success('Ofício cadastrado com sucesso!', 'Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/oficios-emitidos/listar-todos']);
-      });
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.errors = fail.error.errors;
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-}
-

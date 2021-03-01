@@ -1,14 +1,19 @@
 export interface VooAgendado {
-    id: string;
-    descricao: string;
-    comecaEm: number;
-    terminaEm: number;
-    diaTodo: true;
-    aeronaveId: string;
-    matriculaAeronave: string;
-  }
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  allDay: boolean;
+  editable: boolean;
+  durationEditable: boolean;
+  backgroundColor: string;
+  textColor: string;
+
+  aeronaveId: string;
+  matriculaAeronave: string;
+}
 
 export interface Aeronave {
-    id: string;
-    matricula: string;
-  }
+  id: string;
+  matricula: string;
+}

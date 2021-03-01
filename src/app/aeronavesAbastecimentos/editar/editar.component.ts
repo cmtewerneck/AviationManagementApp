@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AeronaveAbastecimentoService } from '../services/aeronaveAbastecimento.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AeronaveAbastecimentoBaseComponent } from '../aeronaveAbastecimento-form.base.component';
+import { environment } from 'src/environments/environment';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-editar',
@@ -12,7 +14,12 @@ import { AeronaveAbastecimentoBaseComponent } from '../aeronaveAbastecimento-for
 })
 export class EditarComponent extends AeronaveAbastecimentoBaseComponent implements OnInit {
   
+  arquivos: string = environment.filesUrl;
+
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
+
+  arquivoNome: string;
+  arquivoOriginalSrc: string;
 
   constructor(private fb: FormBuilder,
               private aeronaveAbastecimentoService: AeronaveAbastecimentoService,
@@ -33,17 +40,19 @@ export class EditarComponent extends AeronaveAbastecimentoBaseComponent implemen
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
 
-      this.aeronaveAbastecimentoForm = this.fb.group({
+        this.aeronaveAbastecimentoForm = this.fb.group({
           aeronaveId: ['', [Validators.required]],
           data: ['', [Validators.required]],
           litros: ['', [Validators.required]],
-          local: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-          cupom: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
-          notaFiscal: [''],
-          fornecedora: [''],
-          responsavel: [''],
-          observacoes: ['']
-       });
+          local: ['', [Validators.required, Validators.maxLength(20)]],
+          cupom: ['', [Validators.required, Validators.maxLength(20)]],
+          notaFiscal: ['', Validators.maxLength(20)],
+          fornecedora: ['', [Validators.required, Validators.maxLength(20)]],
+          responsavel: ['', [Validators.required, Validators.maxLength(20)]],
+          valor: [''],
+          observacoes: ['', Validators.maxLength(100)],
+          comprovante: ['']
+        });
 
       this.aeronaveAbastecimentoForm.patchValue({
           id: this.aeronaveAbastecimento.id,
@@ -55,8 +64,11 @@ export class EditarComponent extends AeronaveAbastecimentoBaseComponent implemen
           notaFiscal: this.aeronaveAbastecimento.notaFiscal,
           fornecedora: this.aeronaveAbastecimento.fornecedora,
           responsavel: this.aeronaveAbastecimento.responsavel,
+          valor: CurrencyUtils.DecimalParaString(this.aeronaveAbastecimento.valor),
           observacoes: this.aeronaveAbastecimento.observacoes
         });
+
+        this.arquivoOriginalSrc = this.arquivos + this.aeronaveAbastecimento.comprovante;
 
       setTimeout(() => {
           this.spinner.hide();
@@ -70,6 +82,10 @@ export class EditarComponent extends AeronaveAbastecimentoBaseComponent implemen
       editarAeronaveAbastecimento() {
         if (this.aeronaveAbastecimentoForm.dirty && this.aeronaveAbastecimentoForm.valid) {
           this.aeronaveAbastecimento = Object.assign({}, this.aeronaveAbastecimento, this.aeronaveAbastecimentoForm.value);
+
+          // IMPLEMENTAR EDIÇÃO DO ARQUIVO
+
+          this.aeronaveAbastecimento.valor = CurrencyUtils.StringParaDecimal(this.aeronaveAbastecimento.valor);
 
           this.aeronaveAbastecimentoService.atualizarAeronaveAbastecimento(this.aeronaveAbastecimento)
           .subscribe(

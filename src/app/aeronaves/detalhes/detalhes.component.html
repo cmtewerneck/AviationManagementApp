@@ -1,107 +1,155 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Detalhes da Aeronave</h1>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Detalhes da Aeronave</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item active">Aeronaves</li>
+                </ol>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Aeronaves</li>
-          </ol>
-        </div>
-      </div>
     </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
+</section>
+
+<!-- Main content -->
+<section class="content">
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div>
-        <h4>{{ aeronave.matricula }}</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                <label class="control-label">Matrícula</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.matricula }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Fabricante</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.fabricante }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Categoria</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.categoria }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Modelo</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.modelo }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Ano</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.ano }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Peso Vazio</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.pesoVazio }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Horas Totais</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.horasTotais }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Horas Restantes</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.horasRestantes }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Vencimento CA</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.vencimentoCa }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Vencimento CM</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.vencimentoCm }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Última Pesagem</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.ultimaPesagem }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Vencimento Reta</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronave.vencimentoReta }}
-            </dd>            
-        </dl>
-      </div>
-  
-      <div>
-        <a class="btn btn-dark" [routerLink]="['/aeronaves/editar',aeronave.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" [routerLink]="['/aeronaves/listar-todos']">Voltar</a>
-      </div>
-  
-  </div>
-  </section>
-  <!-- /.content -->
+        <div>
+            <h4>{{ aeronave.matricula }}</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    <label class="control-label">Matrícula</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.matricula }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Fabricante</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.fabricante }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Categoria</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.categoria }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Modelo</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.modelo }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Nº de Série</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.numeroSerie }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Ano</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.ano }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Peso Vazio</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.pesoVazio }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Peso Básico</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.pesoBasico }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Horas Totais</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.horasTotais }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Horas Restantes</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.horasRestantes }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Vencimento CA</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.vencimentoCA | date}}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Vencimento CVA</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.vencimentoCVA | date }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Vencimento CM</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.vencimentoCM | date }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Última Pesagem</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.ultimaPesagem | date }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Próxima Pesagem</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.proximaPesagem | date }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Vencimento Reta</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.vencimentoReta | date }}
+                </dd>   
+                <dt class="col-sm-2">
+                    <label class="control-label">Vencimento Casco</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.vencimentoCasco | date }}
+                </dd> 
+                <dt class="col-sm-2">
+                    <label class="control-label">Motor</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.motor }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Modelo Motor</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.modeloMotor }}
+                </dd>
+                <dt class="col-sm-2">
+                    <label class="control-label">Nº de Série do Motor</label>
+                </dt>
+                <dd class="col-sm-10">
+                    {{ aeronave.numeroSerieMotor }}
+                </dd>         
+            </dl>
+        </div>
+        
+        <div>
+            <a class="btn btn-dark" [routerLink]="['/aeronaves/editar',aeronave.id]">Editar</a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/aeronaves/listar-todos']">Voltar</a>
+        </div>
+        
+    </div>
+</section>
+<!-- /.content -->

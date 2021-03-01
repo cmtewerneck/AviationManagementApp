@@ -1,79 +1,79 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Ofícios Emitidos</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Ofícios Emitidos</li>
-          </ol>
-        </div>
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Ofícios Emitidos</h1>
       </div>
-    </div><!-- /.container-fluid -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Ofícios Emitidos</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div class="d-flex">
-        <div class="form-inline mr-auto">
-          <div class="form-group mb-2">
-              <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
-          </div>
-        </div>
-        <div>
-          <a class="btn btn-success" [routerLink]="['/oficios-emitidos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Emitir Ofício</a>
-          <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="d-flex">
+      <div class="form-inline mr-auto">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
         </div>
       </div>
-    <table class="table table-hover" style="white-space: nowrap">
-        <thead class="thead-dark">
-            <tr>
-                <th>Numeração</th>
-                <th>Data</th>
-                <th>Destinatário</th>
-                <th>Assunto</th>
-                <th>Responsável</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="oficiosEmitidos && oficiosEmitidos.length">
-          <tr *ngFor="let oficioEmitido of oficiosEmitidosFiltrados">
-                <td>{{ oficioEmitido.numeracao }}</td>
-                <td>{{ oficioEmitido.data | date }}</td>
-                <td>{{ oficioEmitido.destinatario }}</td>
-                <td>{{ oficioEmitido.assunto }}</td>
-                <td>{{ oficioEmitido.responsavel }}</td>
-                
-                <td class="text-right">
-                  <a class="btn btn-primary" (click)="gerarPdf(oficioEmitido)">
-                    <span class="fa fa-download"></span>
-                </a>&nbsp;
-                    <a class="btn btn-warning" [routerLink]="['/oficios-emitidos/detalhes',oficioEmitido.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info" [routerLink]="['/oficios-emitidos/editar',oficioEmitido.id]">
-                        <span class="fa fa-pencil-alt"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-danger" [routerLink]="['/oficios-emitidos/excluir',oficioEmitido.id]">
-                        <span class="fa fa-trash"></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot *ngIf="!oficiosEmitidos">
-            <tr>
-                <td colspan="7" class="text-center">
-                    <h4>
-                        Nenhum item encontrado!
-                    </h4>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+      <div>
+        <a class="btn btn-success" [routerLink]="['/oficios-emitidos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Emitir Ofício</a>
+        <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+      </div>
     </div>
+    <table class="table table-hover" style="white-space: nowrap">
+      <thead class="thead-dark">
+        <tr>
+          <th>Numeração</th>
+          <th>Data</th>
+          <th>Destinatário</th>
+          <th>Assunto</th>
+          <th>Responsável</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="oficiosEmitidos && oficiosEmitidos.length">
+        <tr *ngFor="let oficioEmitido of oficiosEmitidosFiltrados">
+          <td>{{ oficioEmitido.numeracao }}</td>
+          <td>{{ oficioEmitido.data | date }}</td>
+          <td>{{ oficioEmitido.destinatario }}</td>
+          <td>{{ oficioEmitido.assunto }}</td>
+          <td>{{ oficioEmitido.responsavel }}</td>
+          
+          <td class="text-right">
+            <a class="btn btn-primary" (click)="gerarPdf(oficioEmitido)">
+              <span class="fa fa-download"></span>
+            </a>&nbsp;
+            <a class="btn btn-warning" [routerLink]="['/oficios-emitidos/detalhes',oficioEmitido.id]">
+              <span class="fa fa-search"></span>
+            </a>&nbsp;
+            <a class="btn btn-info" [routerLink]="['/oficios-emitidos/editar',oficioEmitido.id]">
+              <span class="fa fa-pencil-alt"></span>
+            </a>&nbsp;
+            <a class="btn btn-danger" [routerLink]="['/oficios-emitidos/excluir',oficioEmitido.id]">
+              <span class="fa fa-trash"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!oficiosEmitidos">
+        <tr>
+          <td colspan="7" class="text-center">
+            <h4>
+              Nenhum item encontrado!
+            </h4>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </section>
 <!-- /.content -->

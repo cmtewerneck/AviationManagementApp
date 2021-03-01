@@ -19,8 +19,6 @@
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
     <div>
-      <h4>Conta a Pagar: {{ contasPagar.dataVencimento | date }} - {{contasPagar.valorPagar | currencyBrazil}} </h4>
-      <hr />
       <dl class="row">
         <dt class="col-sm-2">
           <label class="control-label">Data do Vencimento</label>
@@ -49,9 +47,8 @@
         <dt class="col-sm-2">
           <label class="control-label">Situação</label>
         </dt>
-        <dd class="col-sm-10">
-          {{ contasPagar.situacao }}
-        </dd>
+        <dd class="col-sm-10" *ngIf="contasPagar.situacao == 1">Pago</dd>
+        <dd class="col-sm-10" *ngIf="contasPagar.situacao == 2">Não Pago</dd>
         <dt class="col-sm-2">
           <label class="control-label">Data do Pagamento</label>
         </dt>

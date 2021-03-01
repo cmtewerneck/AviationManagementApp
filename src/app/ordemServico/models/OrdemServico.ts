@@ -1,3 +1,5 @@
+import { Servico } from '../../servicos/models/Servico';
+
 export class OrdemServico {
   id: string;
   numeroOrdem: string;
@@ -8,9 +10,6 @@ export class OrdemServico {
   ttsnMotor: string;
   tcsnCiclos: string;
   dataFechamento?: Date;
-  descricaoServicosProgramados: string;
-  descricaoServicosRealizados: string;
-  tempoGasto: string;
   requisicaoMateriais: string;
   realizadoPor: string;
   realizadoPorAnac: string;
@@ -18,16 +17,13 @@ export class OrdemServico {
   inspecionadoPor: string;
   inspecionadoPorAnac: string;
   dataInspecao?: Date;
+
   aeronaveId: string;
   matriculaAeronave: string;
+  servicos: Servico[];
 }
 
 export interface Aeronave {
   id: string;
   matricula: string;
-  modelo: string;
-  numeroSerie: string;
-  motor: string;
-  modeloMotor: string;
-  numeroSerieMotor: string;
 }

@@ -1,11 +1,14 @@
 export interface ContasReceber {
-    id: string;
-    dataVencimento: Date;
-    valorPagar: number;
-    descricao: string;
-    codigoBarras: string;
-    dataRecebimento?: Date;
-    valorRecebido?: number;
-    situacao: boolean;
-    formaPagamento: string;
-  }
+  // CONTAS 
+  id: string;
+  dataVencimento?: Date;
+  descricao: string;
+  codigoBarras: string;
+  situacao: number;
+  formaPagamento: string;
+  
+  // CONTAS RECEBER
+  valorReceber: number;
+  valorRecebido?: number;
+  dataRecebimento?: Date;
+}

@@ -29,41 +29,17 @@
           {{ diarioBordo.data | date }}
         </dd>
         <dt class="col-sm-2">
-          <label class="control-label">Base</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.base }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Comandante</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.comandante }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Comandante Canac</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.comandanteCanac }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Copiloto</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.copiloto }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Copiloto Canac</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.copilotoCanac }}
-        </dd> 
-        <dt class="col-sm-2">
           <label class="control-label">Matrícula</label>
         </dt>
         <dd class="col-sm-10">
           {{ diarioBordo.matriculaAeronave }}
         </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Base</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.base }}
+        </dd>
         <dt class="col-sm-2">
           <label class="control-label">De</label>
         </dt>
@@ -80,55 +56,67 @@
           <label class="control-label">Hora Acionamento</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.horaAcionamento }}
+          {{ diarioBordo.horaAcionamento | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Hora Decolagem</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.horaDecolagem }}
+          {{ diarioBordo.horaDecolagem | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Hora Pouso</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.horaPouso }}
+          {{ diarioBordo.horaPouso | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Hora Corte</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.horaCorte }}
+          {{ diarioBordo.horaCorte | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Total Diurno</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.totalDiurno }}
+          {{ diarioBordo.totalDiurno | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Total Noturno</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.totalNoturno }}
+          {{ diarioBordo.totalNoturno | time }}
         </dd>  
         <dt class="col-sm-2">
           <label class="control-label">Total IFR</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.totalIfr }}
+          {{ diarioBordo.totalIfr | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Total Navegação</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.totalNavegacao }}
+          {{ diarioBordo.totalNavegacao | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Total Decimal</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.totalDecimal }}
+          {{ diarioBordo.totalDecimal | time }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Dec/Pouso</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalDecPouso | time }}
+        </dd> 
+        <dt class="col-sm-2">
+          <label class="control-label">Total Acionamento/Corte</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.totalAcionamentoCorte | time }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Pousos</label>
@@ -143,47 +131,54 @@
           {{ diarioBordo.pob }}
         </dd> 
         <dt class="col-sm-2">
-          <label class="control-label">Combustível Decolagem</label>
+          <label class="control-label">Combustível Decolagem (L)</label>
         </dt>
         <dd class="col-sm-10">
           {{ diarioBordo.combustivelDecolagem }}
         </dd> 
         <dt class="col-sm-2">
-          <label class="control-label">Combustível Abastecido</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.combustivelAbastecido }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Cupom de Abastecimento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.cupomAbastecimento }}
-        </dd>    
-        <dt class="col-sm-2">
           <label class="control-label">Natureza</label>
         </dt>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 1">AE</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 2">CQ</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 3">EX</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 4">NR</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 5">RE</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 6">PV</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 7">SA</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 8">TN</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 9">TR</dd>
+        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 10">FR</dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Comandante</label>
+        </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.natureza }}
-        </dd> 
+          {{ diarioBordo.nomeComandante }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Copiloto</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.nomeCopiloto }}
+        </dd>
+        <dt class="col-sm-2">
+          <label class="control-label">Mecânico</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ diarioBordo.nomeMecanico }}
+        </dd>  
         <dt class="col-sm-2">
           <label class="control-label">Pré Voo</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.preVoo }}
+          {{ diarioBordo.preVooResponsavel }}
         </dd> 
         <dt class="col-sm-2">
           <label class="control-label">Pós Voo</label>
         </dt>
         <dd class="col-sm-10">
-          {{ diarioBordo.posVoo }}
+          {{ diarioBordo.posVooResponsavel }}
         </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Chefe da Missão</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.chefeMissao }}
-        </dd>   
         <dt class="col-sm-2">
           <label class="control-label">Discrepâncias</label>
         </dt>
@@ -195,12 +190,6 @@
         </dt>
         <dd class="col-sm-10">
           {{ diarioBordo.acoesCorretivas }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Mecânico Responsável</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.mecanicoResponsavel }}
         </dd>
         <dt class="col-sm-2">
           <label class="control-label">Observações</label>

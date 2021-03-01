@@ -5,43 +5,41 @@ import { utilsBr } from 'js-brasil';
 import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class ProdutoBaseComponent extends FormBaseComponent {
-
+    
     produto: Produto;
     fornecedores: Fornecedor[];
     errors: any[] = [];
     produtoForm: FormGroup;
-
+    
     MASKS = utilsBr.MASKS;
-
+    
     constructor() {
         super();
-
+        
         this.validationMessages = {
             fornecedorId: {
-                required: 'Escolha um fornecedor',
+                required: 'Escolha um fornecedor'
             },
             nome: {
-                required: 'Informe o Nome',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 200 caracteres'
+                required: 'Nome é obrigatório',
+                maxlength: 'Máximo de 100 caracteres'
             },
             descricao: {
-                required: 'Informe a Descrição',
-                minlength: 'Mínimo de 5 caracteres',
-                maxlength: 'Máximo de 1000 caracteres'
-            },
-            imagem: {
-                required: 'Informe a Imagem',
+                required: 'Descrição é obrigatória',
+                maxlength: 'Máximo de 500 caracteres'
             },
             valor: {
-                required: 'Informe o Valor',
+                required: 'Informe o Valor'
+            },
+            imagem: {
+                required: 'Informe a Imagem'
             }
         }
-
+        
         super.configurarMensagensValidacaoBase(this.validationMessages);
     }
-
+    
     protected configurarValidacaoFormulario(formInputElements: ElementRef[]) {
-            super.configurarValidacaoFormularioBase(formInputElements, this.produtoForm);
+        super.configurarValidacaoFormularioBase(formInputElements, this.produtoForm);
     }
 }

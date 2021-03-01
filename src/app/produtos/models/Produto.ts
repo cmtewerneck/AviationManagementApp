@@ -2,12 +2,13 @@ export interface Produto {
     id: string;
     nome: string;
     descricao: string;
-    imagem: string;
-    imagemUpload: string;
     valor: number;
     ativo: true;
     fornecedorId: string;
     fornecedorNome: string;
+    
+    imagem: string;
+    imagemUpload: string;
 }
 
 export interface Fornecedor {

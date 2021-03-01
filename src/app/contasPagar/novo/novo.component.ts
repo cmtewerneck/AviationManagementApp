@@ -22,14 +22,16 @@ export class NovoComponent extends ContasPagarBaseComponent implements OnInit {
   ngOnInit(): void {
 
       this.contasPagarForm = this.fb.group({
-       dataVencimento: ['', [Validators.required]],
-       descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-       codigoBarras: ['', [Validators.maxLength(100)]],
+       // CONTAS
+       dataVencimento: [''],
+       descricao: ['', [Validators.required, Validators.maxLength(50)]],
+       codigoBarras: ['', Validators.maxLength(50)],
+       situacao: ['', [Validators.required]],
+       formaPagamento: ['', Validators.maxLength(30)],
+       // CONTAS PAGAR
        valorPagar: ['', [Validators.required]],
-       situacao: [true],
-       dataPagamento: [''],
        valorPago: [''],
-       formaPagamento: ['']
+       dataPagamento: ['']
      });
   }
 
@@ -71,4 +73,3 @@ export class NovoComponent extends ContasPagarBaseComponent implements OnInit {
     this.toastr.error('Ocorreu um erro!', 'Opa...');
   }
 }
-

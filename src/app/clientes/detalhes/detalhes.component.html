@@ -1,65 +1,89 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Detalhes do Cliente</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Clientes</li>
-          </ol>
-        </div>
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do Cliente</h1>
       </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div>
-        <h4>{{ cliente.primeiroNome }} {{ cliente.ultimoNome }}</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                <label class="control-label">Primeiro Nome</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ cliente.primeiroNome }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Último Nome</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ cliente.ultimoNome }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">CPF</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ cliente.cpf | cpf }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">E-mail</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ cliente.email }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Telefone</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ cliente.telefone }}
-            </dd>
-        </dl>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Clientes</li>
+        </ol>
       </div>
-  
-      <div>
-        <a class="btn btn-dark" [routerLink]="['/clientes/editar',cliente.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" [routerLink]="['/clientes/listar-todos']">Voltar</a>
-      </div>
-  
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div>
+      <h4>Cliente: {{ cliente.nome }} </h4>
+      <hr />
+      <dl class="row">
+        <dt class="col-sm-2">
+          <label class="control-label">Nome</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ cliente.nome }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Tipo de Pessoa</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 1">Física</dd>
+        <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 2">Jurídica</dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Documento</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Sexo</label>
+        </dt>
+        <dd class="col-sm-10" *ngIf="cliente.sexo == 1">Masculino</dd>
+        <dd class="col-sm-10" *ngIf="cliente.sexo == 2">Feminino</dd>
+        <dd class="col-sm-10" *ngIf="cliente.sexo == 3">Outro</dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Estado Civil</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ cliente.estadoCivil }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Ativo</label>
+        </dt>
+        <dd class="col-sm-10">
+          <input [checked]="cliente.ativo" class="check-box" disabled="disabled" type="checkbox">
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">Telefone</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ cliente.telefone | telefone }}
+        </dd>
+        
+        <dt class="col-sm-2">
+          <label class="control-label">E-mail</label>
+        </dt>
+        <dd class="col-sm-10">
+          {{ cliente.email }}
+        </dd>
+      </dl>
+    </div>
+    
+    <div>
+      <a class="btn btn-dark" [routerLink]="['/clientes/editar',cliente.id]">Editar</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/clientes/listar-todos']">Voltar</a>
+    </div>
+    
   </div>
-  </section>
-  <!-- /.content -->
+</section>
+<!-- /.content -->

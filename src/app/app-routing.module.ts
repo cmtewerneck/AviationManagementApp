@@ -28,9 +28,13 @@ const routes: Routes = [
             loadChildren: () => import('./tripulantes/tripulantes.module')
             .then(m => m.TripulanteModule)
         },
-        { path: 'estoque',
-            loadChildren: () => import('./estoque/estoque.module')
-            .then(m => m.EstoqueModule)
+        { path: 'suprimentos',
+            loadChildren: () => import('./suprimentos/suprimento.module')
+            .then(m => m.SuprimentoModule)
+        },
+        { path: 'suprimentos-movimentacoes',
+            loadChildren: () => import('./suprimentosMovimentacao/suprimentoMovimentacao.module')
+            .then(m => m.SuprimentoMovimentacaoModule)
         },
         { path: 'diarios-bordo',
             loadChildren: () => import('./diariosBordo/diariosBordo.module')
@@ -39,6 +43,10 @@ const routes: Routes = [
         { path: 'contas-pagar',
             loadChildren: () => import('./contasPagar/contasPagar.module')
             .then(m => m.ContasPagarModule)
+        },
+        { path: 'turmas',
+            loadChildren: () => import('./turmas/turma.module')
+            .then(m => m.TurmaModule)
         },
         { path: 'contas-receber',
             loadChildren: () => import('./contasReceber/contasReceber.module')
@@ -67,6 +75,10 @@ const routes: Routes = [
         { path: 'voos-agendados',
             loadChildren: () => import('./voosAgendados/voosAgendados.module')
             .then(m => m.VooAgendadoModule)
+        },
+        { path: 'voos-instrucao',
+            loadChildren: () => import('./voosInstrucao/vooInstrucao.module')
+            .then(m => m.VooInstrucaoModule)
         },
         { path: 'veiculos',
             loadChildren: () => import('./veiculos/veiculo.module')
@@ -111,6 +123,14 @@ const routes: Routes = [
         { path: 'instrutores',
             loadChildren: () => import('./instrutores/instrutores.module')
             .then(m => m.InstrutorModule)
+        },
+        { path: 'alunos',
+            loadChildren: () => import('./aluno/alunos.module')
+            .then(m => m.AlunoModule)
+        },
+        { path: 'cursos',
+            loadChildren: () => import('./curso/curso.module')
+            .then(m => m.CursoModule)
         },
         { path: 'acesso-negado', component: AcessoNegadoComponent },
         { path: '**', component: PageNotFoundComponent }

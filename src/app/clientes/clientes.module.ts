@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesRoutingModule } from './clientes.routing';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 // SERVIÇOS
 import { ClienteService } from './services/cliente.service';
@@ -41,7 +42,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         ReactiveFormsModule,
         NgBrazil,
         TextMaskModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        ImageCropperModule
     ],
     providers: [
         // {

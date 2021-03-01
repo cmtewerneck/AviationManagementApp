@@ -3,7 +3,7 @@
     <div class="container-fluid" style="padding-left: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar Ordem de Serviço</h1>
+                <h1>Editar OS: {{ ordemServico.numeroOrdem }}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -38,7 +38,7 @@
                 <div class="form-group col-md-4">
                     <label class="control-label">Número da OS</label>
                     <div>
-                        <input class="form-control" id="numeroOrdem" type="text" placeholder="Número da OS (requerido)" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
+                        <input class="form-control" id="numeroOrdem" type="text" placeholder="(requerido)" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
                         <span class="text-danger" *ngIf="displayMessage.numeroOrdem">
                             <p [innerHTML]="displayMessage.numeroOrdem"></p>
                         </span>
@@ -58,7 +58,10 @@
                 <div class="form-group col-md-4">
                     <label class="control-label">Tipo</label>
                     <div>
-                        <input class="form-control" id="tipo" type="text" placeholder="Tipo" formControlName="tipo" />
+                        <input class="form-control" id="tipo" type="text" placeholder="(opcional)" formControlName="tipo" [ngClass]="{'is-invalid': displayMessage.tipo }" />
+                        <span class="text-danger" *ngIf="displayMessage.tipo">
+                            <p [innerHTML]="displayMessage.tipo"></p>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -73,127 +76,121 @@
                         <p [innerHTML]="displayMessage.aeronaveId"></p>
                     </span>
                 </div>              
-            
+                
                 <div class="form-group col-md-3">
                     <label class="control-label">TTSN</label>
                     <div>
-                        <input class="form-control" id="ttsn" type="text" placeholder="TTSN" formControlName="ttsn" />
+                        <input class="form-control" id="ttsn" type="text" placeholder="(opcional)" formControlName="ttsn" [ngClass]="{'is-invalid': displayMessage.ttsn }" />
+                        <span class="text-danger" *ngIf="displayMessage.ttsn">
+                            <p [innerHTML]="displayMessage.ttsn"></p>
+                        </span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-3">
                     <label class="control-label">TCSN Pousos</label>
                     <div>
-                        <input class="form-control" id="tcsnPousos" type="text" placeholder="TCSN Pousos" formControlName="tcsnPousos" />
+                        <input class="form-control" id="tcsnPousos" type="text" placeholder="(opcional)" formControlName="tcsnPousos" [ngClass]="{'is-invalid': displayMessage.tcsnPousos }" />
+                        <span class="text-danger" *ngIf="displayMessage.tcsnPousos">
+                            <p [innerHTML]="displayMessage.tcsnPousos"></p>
+                        </span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-3">
-                    <label class="control-label">TTSN (Motor)</label>
+                    <label class="control-label">TTSN Motor</label>
                     <div>
-                        <input class="form-control" id="ttsnMotor" type="text" placeholder="TTSN do Motor" formControlName="ttsnMotor" />
+                        <input class="form-control" id="ttsnMotor" type="text" placeholder="(opcional)" formControlName="ttsnMotor" [ngClass]="{'is-invalid': displayMessage.ttsnMotor }" />
+                        <span class="text-danger" *ngIf="displayMessage.ttsnMotor">
+                            <p [innerHTML]="displayMessage.ttsnMotor"></p>
+                        </span>
                     </div>
                 </div>
             </div>
             
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">TCSN Ciclos (Motor)</label>
+                <div class="form-group col-md-3">
+                    <label class="control-label">TCSN Ciclos</label>
                     <div>
-                        <input class="form-control" id="tcsnCiclos" type="text" placeholder="TCSN Ciclos" formControlName="tcsnCiclos" />
+                        <input class="form-control" id="tcsnCiclos" type="text" placeholder="(opcional)" formControlName="tcsnCiclos" [ngClass]="{'is-invalid': displayMessage.tcsnCiclos }" />
+                        <span class="text-danger" *ngIf="displayMessage.tcsnCiclos">
+                            <p [innerHTML]="displayMessage.tcsnCiclos"></p>
+                        </span>
                     </div>
                 </div>
                 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                     <label class="control-label">Fechamento</label>
                     <div>
                         <input class="form-control" id="dataFechamento" type="date" formControlName="dataFechamento" />
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label class="control-label">Serviços Programados</label>
-                    <div>
-                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="descricaoServicosProgramados" placeholder="Descrição dos Serviços Programados (requerido)" formControlName="descricaoServicosProgramados" [ngClass]="{'is-invalid': displayMessage.descricaoServicosProgramados }"></textarea>
-                        <span class="text-danger" *ngIf="displayMessage.descricaoServicosProgramados">
-                            <p [innerHTML]="displayMessage.descricaoServicosProgramados"></p>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label class="control-label">Serviços Realizados</label>
-                    <div>
-                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="descricaoServicosRealizados" placeholder="Descrição dos Serviços Realizados" formControlName="descricaoServicosProgramados"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-8">
+                
+                <div class="form-group col-md-6">
                     <label class="control-label">Requisição de Materiais</label>
                     <div>
-                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="requisicaoMateriais" placeholder="Requisição de Materiais" formControlName="requisicaoMateriais"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label class="control-label">Tempo Gasto</label>
-                    <div>
-                        <input class="form-control" id="tempoGasto" type="text" placeholder="Tempo Total Gasto" formControlName="tempoGasto" />
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="requisicaoMateriais" placeholder="(opcional)" formControlName="requisicaoMateriais"></textarea>
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Realizado Por</label>
                     <div>
-                        <input class="form-control" id="realizadoPor" type="text" placeholder="Realizado Por" formControlName="realizadoPor" />
+                        <input class="form-control" id="realizadoPor" type="text" placeholder="(opcional)" formControlName="realizadoPor" [ngClass]="{'is-invalid': displayMessage.realizadoPor }" />
+                        <span class="text-danger" *ngIf="displayMessage.realizadoPor">
+                            <p [innerHTML]="displayMessage.realizadoPor"></p>
+                        </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
                     <label class="control-label">CANAC</label>
                     <div>
-                        <input class="form-control" id="realizadoPorAnac" type="text" placeholder="CANAC" formControlName="realizadoPorAnac" />
+                        <input class="form-control" id="realizadoPorAnac" type="text" placeholder="(opcional)" formControlName="realizadoPorAnac" />
+                        <span class="text-danger" *ngIf="displayMessage.realizadoPorAnac">
+                            <p [innerHTML]="displayMessage.realizadoPorAnac"></p>
+                        </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
-                    <label class="control-label">Realizado</label>
+                    <label class="control-label">Data da realização</label>
                     <div>
                         <input class="form-control" id="dataRealizacao" type="date" formControlName="dataRealizacao" />
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Inspecionado Por</label>
                     <div>
-                        <input class="form-control" id="inspecionadoPor" type="text" placeholder="Inspecionado Por" formControlName="inspecionadoPor" />
+                        <input class="form-control" id="inspecionadoPor" type="text" placeholder="(opcional)" formControlName="inspecionadoPor" [ngClass]="{'is-invalid': displayMessage.inspecionadoPor }" />
+                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPor">
+                            <p [innerHTML]="displayMessage.inspecionadoPor"></p>
+                        </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
                     <label class="control-label">CANAC</label>
                     <div>
-                        <input class="form-control" id="inspecionadoPorAnac" type="text" placeholder="CANAC" formControlName="inspecionadoPorAnac" />
+                        <input class="form-control" id="inspecionadoPorAnac" type="text" placeholder="(opcional)" formControlName="inspecionadoPorAnac" [ngClass]="{'is-invalid': displayMessage.inspecionadoPorAnac }" />
+                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPorAnac">
+                            <p [innerHTML]="displayMessage.inspecionadoPorAnac"></p>
+                        </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
-                    <label class="control-label">Inspecionado</label>
+                    <label class="control-label">Data da inspeção</label>
                     <div>
-                        <input class="form-control" id="dataInspecao" type="date" formControlName="dataInspecao" />
+                        <input class="form-control" id="dataInspecao" type="date" formControlName="dataRedataInspecaoalizacao" />
                     </div>
-                </div>          
-            </div>   
+                </div>
+            </div>  
             
             <div class="form-group">
                 <input type="submit" value="Editar" class="btn btn-success">&nbsp;
@@ -205,4 +202,3 @@
     </div>
 </section>
 <!-- /.content -->
-

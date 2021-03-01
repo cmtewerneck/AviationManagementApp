@@ -32,21 +32,29 @@
     <table class="table table-hover" style="white-space: nowrap">
         <thead class="thead-dark">
             <tr>
-                <th>Primeiro Nome</th>
-                <th>Último Nome</th>
-                <th>CPF</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th></th>
+              <th>
+                <button (click)="alternarImagem()" class="btn btn-primary">
+                  <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+                </button>
+              </th>
+              <th>Nome</th>
+              <th>Documento</th>
+              <th>Sexo</th>
+              <th>Estado Civil</th>
+              <th>Telefone</th>
+              <th>E-mail</th>
+              <th></th>
             </tr>
         </thead>
         <tbody *ngIf="clientes && clientes.length">
             <tr *ngFor="let cliente of clientesFiltrados">
-                <td>{{ cliente.primeiroNome }}</td>
-                <td>{{ cliente.ultimoNome }}</td>
-                <td>{{ cliente.cpf | cpf }}</td>
-                <td>{{ cliente.email }}</td>
-                <td>{{ cliente.telefone }}</td>
+              <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ cliente.imagem }}" style="width: 70px; height: 100px"></td>
+              <td>{{ cliente.nome }}</td>
+              <td>{{ cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}</td>
+              <td>{{ cliente.sexo }}</td>
+              <td>{{ cliente.estadoCivil }}</td>
+              <td>{{ cliente.telefone | telefone }}</td>
+              <td>{{ cliente.email }}</td>
                 
                 <td class="text-right">
                     <a class="btn btn-warning" [routerLink]="['/clientes/detalhes',cliente.id]">

@@ -1,48 +1,92 @@
-<div class="container main-container">
-  <h4>Excluir: {{ cliente.primeiroNome }} </h4>
-  <br>
-  <h5>Você tem certeza disso?</h5>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Excluir Cliente</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item active">Clientes</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-  <div class="row">
-      <div class="col-md-6">
-          <dl>
-              <dt>
-                  Primeiro Nome
-              </dt>
-              <dd>
-                  {{ cliente.primeiroNome }}
-              </dd>
-              <dt>
-                  Último Nome
-              </dt>
-              <dd>
-                  {{ cliente.ultimoNome }}
-              </dd>
-              <dt>
-                  CPF
-              </dt>
-              <dd>
-                  {{ cliente.cpf | cpf }}
-              </dd>
-              <dt>
-                  E-mail
-              </dt>
-              <dd>
-                  {{ cliente.email }}
-              </dd>
-              <dt>
-                Telefone
-              </dt>
-              <dd>
-                {{ cliente.telefone }}
-              </dd>
-          </dl>
-
-          <div>
-              <a (click)="excluirCliente()" href="javascript:void(0)" class="btn btn-danger">Excluir</a>&nbsp;
-              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
-          </div>
-      </div>
-  </div>
-
-</div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        <h4>Tem certeza que deseja excluir: {{ cliente.nome }} ?</h4>
+        <hr />
+        <div class="alert alert-danger" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+        </div>
+        
+        <dl class="row">
+            <dt class="col-sm-2">
+                <label class="control-label">Nome</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ cliente.nome }}
+            </dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Tipo de Pessoa</label>
+            </dt>
+            <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 1">Física</dd>
+            <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 2">Jurídica</dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Documento</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}
+            </dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Sexo</label>
+            </dt>
+            <dd class="col-sm-10" *ngIf="cliente.sexo == 1">Masculino</dd>
+            <dd class="col-sm-10" *ngIf="cliente.sexo == 2">Feminino</dd>
+            <dd class="col-sm-10" *ngIf="cliente.sexo == 3">Outro</dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Estado Civil</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ cliente.estadoCivil }}
+            </dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Ativo</label>
+            </dt>
+            <dd class="col-sm-10">
+                <input [checked]="cliente.ativo" class="check-box" disabled="disabled" type="checkbox">
+            </dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">Telefone</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ cliente.telefone | telefone }}
+            </dd>
+            
+            <dt class="col-sm-2">
+                <label class="control-label">E-mail</label>
+            </dt>
+            <dd class="col-sm-10">
+                {{ cliente.email }}
+            </dd>
+        </dl>
+        
+        <div>
+            <a (click)="excluirCliente()" href="javascript:void(0)" class="btn btn-danger">Excluir</a>&nbsp;
+            <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+        </div>
+    </div>
+</section>

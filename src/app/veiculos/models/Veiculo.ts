@@ -10,9 +10,10 @@ export class Veiculo {
     kmAtual?: number;
     modelo: string;
     renavam: string;
+    tipoCombustivel: number;
+    
     imagem: string;
     imagemUpload: string;
-    tipoCombustivel: number;
 
     veiculosMultas: VeiculoMulta[];
     veiculosGastos: VeiculoGasto[];

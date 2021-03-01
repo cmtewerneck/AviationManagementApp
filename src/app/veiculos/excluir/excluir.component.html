@@ -23,34 +23,34 @@
     <div class="alert alert-danger" *ngIf="errors.length > 0">
       <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
       <ul>
-          <li *ngFor="let error of errors">{{ error }}</li>
+        <li *ngFor="let error of errors">{{ error }}</li>
       </ul>
-  </div>
-
-  <dl class="row">
+    </div>
+    
+    <dl class="row">
       <dt class="col-sm-2">
         <label class="control-label">Placa</label>
       </dt>
       <dd class="col-sm-10">
-          {{ veiculo.placa }}
+        {{ veiculo.placa }}
       </dd>
       <dt class="col-sm-2">
         <label class="control-label">Modelo</label>
       </dt>
       <dd class="col-sm-10">
-          {{ veiculo.modelo }}
+        {{ veiculo.modelo }}
       </dd>
       <dt class="col-sm-2">
         <label class="control-label">Ano</label>
       </dt>
       <dd class="col-sm-10">
-          {{ veiculo.ano }}
+        {{ veiculo.ano }}
       </dd>
       <dt class="col-sm-2">
         <label class="control-label">Renavam</label>
       </dt>
       <dd class="col-sm-10">
-          {{ veiculo.renavam }}
+        {{ veiculo.renavam }}
       </dd>
       <dt class="col-sm-2">
         <label class="control-label">Combustível</label>
@@ -61,12 +61,12 @@
       <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 4">Flex</dd>
       <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 5">Elétrico</dd>
       
-  </dl>
-
-  <div>
+    </dl>
+    
+    <div>
       <a class="btn btn-danger" href="javascript:void(0)" (click)="excluirVeiculo()">Excluir</a>&nbsp;
       <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
-  </div>
+    </div>
   </div>
 </section>
 <!-- /.content -->

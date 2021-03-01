@@ -1,0 +1,71 @@
+<div class="container main-container">
+    
+    <h3>Editar Movimentação: {{ suprimentoMovimentacao.data }}</h3>
+    
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+                <p style="color: white"> Processando... </p>
+            </ngx-spinner>
+            <form enctype="multipart/form-data" (ngSubmit)="editarSuprimentoMovimentacao()" [formGroup]="suprimentoMovimentacaoForm">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                        <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Data</label>
+                        <div>
+                            <input class="form-control" id="data" type="date" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.data }"/>
+                            <span class="text-danger" *ngIf="displayMessage.data">
+                                <p [innerHTML]="displayMessage.data"></p>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Quantidade</label>
+                        <div>
+                            <input class="form-control" id="quantidade" type="number" formControlName="quantidade" [ngClass]="{'is-invalid': displayMessage.quantidade }" />
+                            <span class="text-danger" *ngIf="displayMessage.quantidade">
+                                <p [innerHTML]="displayMessage.quantidade"></p>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Tipo</label>
+                        <div>
+                            <select class="form-control" id="tipoMovimentacao" formControlName="tipoMovimentacao" [ngClass]="{'is-invalid': displayMessage.tipoMovimentacao }">
+                                <option value="1">Entrada</option>
+                                <option value="2">Saída</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Ítem</label>
+                        <select class="form-control" id="itemId" formControlName="itemId" [ngClass]="{'is-invalid': displayMessage.itemId }">
+                            <option *ngFor="let suprimento of suprimentos" value="{{ suprimento.id }}">{{ suprimento.nomenclatura }}</option>
+                        </select>
+                        <span class="text-danger" *ngIf="displayMessage.itemId">
+                            <p [innerHTML]="displayMessage.itemId"></p>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" [disabled]="!suprimentoMovimentacaoForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                    <a class="btn btn-info" href="/suprimentos-movimentacoes/listar-todos">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,14 @@
 export interface AeronaveTarifa {
   id: string;
-  aeronaveId: string;
-  matriculaAeronave: string;
   data: Date;
   vencimento: Date;
   valor: number;
-  orgaoEmissor: string;
-  numeracao: string;
   situacao: boolean;
+  numeracao: string;
+  orgaoEmissor: number;
+  
+  matriculaAeronave: string;
+  aeronaveId: string;
 }
 
 export interface Aeronave {

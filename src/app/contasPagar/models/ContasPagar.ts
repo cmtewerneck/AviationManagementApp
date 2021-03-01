@@ -1,11 +1,14 @@
 export interface ContasPagar {
+    // CONTAS 
     id: string;
-    dataVencimento: Date;
-    valorPagar: number;
+    dataVencimento?: Date;
     descricao: string;
     codigoBarras: string;
-    dataPagamento?: Date;
-    valorPago?: number;
-    situacao: boolean;
+    situacao: number;
     formaPagamento: string;
-  }
+
+    // CONTAS PAGAR
+    valorPagar: number;
+    valorPago?: number;
+    dataPagamento?: Date;
+}

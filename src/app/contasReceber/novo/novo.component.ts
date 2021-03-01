@@ -22,14 +22,16 @@ export class NovoComponent extends ContasReceberBaseComponent implements OnInit 
   ngOnInit(): void {
 
       this.contasReceberForm = this.fb.group({
-       dataVencimento: ['', [Validators.required]],
-       descricao: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-       codigoBarras: ['', [Validators.maxLength(100)]],
-       valorPagar: ['', [Validators.required]],
-       situacao: [true],
-       dataRecebimento: [''],
+       // CONTAS
+       dataVencimento: [''],
+       descricao: ['', [Validators.required, Validators.maxLength(50)]],
+       codigoBarras: ['', Validators.maxLength(50)],
+       situacao: ['', [Validators.required]],
+       formaPagamento: ['', Validators.maxLength(30)],
+       // CONTAS RECEBER
+       valorReceber: ['', [Validators.required]],
        valorRecebido: [''],
-       formaPagamento: ['']
+       dataRecebimento: ['']
      });
   }
 
@@ -41,7 +43,7 @@ export class NovoComponent extends ContasReceberBaseComponent implements OnInit 
     if (this.contasReceberForm.dirty && this.contasReceberForm.valid) {
       this.contasReceber = Object.assign({}, this.contasReceber, this.contasReceberForm.value);
 
-      this.contasReceber.valorPagar = CurrencyUtils.StringParaDecimal(this.contasReceber.valorPagar);
+      this.contasReceber.valorReceber = CurrencyUtils.StringParaDecimal(this.contasReceber.valorReceber);
       this.contasReceber.valorRecebido = CurrencyUtils.StringParaDecimal(this.contasReceber.valorRecebido);
 
       this.contasReceberService.novoContasReceber(this.contasReceber)

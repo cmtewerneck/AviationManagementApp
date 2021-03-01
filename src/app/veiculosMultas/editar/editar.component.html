@@ -1,61 +1,41 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Editar Multa</h1>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Editar Multa</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item"><a routerLink="/veiculos/listar-todos">Veículos</a></li>
+                    <li class="breadcrumb-item active">Multa</li>
+                </ol>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item"><a routerLink="/veiculos/listar-todos">Veículos</a></li>
-            <li class="breadcrumb-item active">Multa</li>
-          </ol>
-        </div>
-      </div>
     </div><!-- /.container-fluid -->
-  </section>
-            
-  <!-- Main content -->
-  <section class="content">
+</section>
+
+<!-- Main content -->
+<section class="content">
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
         
         <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
             <p style="color: white"> Processando... </p>
         </ngx-spinner>
-
-          <form enctype="multipart/form-data" (ngSubmit)="editarVeiculoMulta()" [formGroup]="veiculoMultaForm">
-
-              <div class="alert alert-danger" *ngIf="errors.length > 0">
-                  <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
-                  <ul>
-                      <li *ngFor="let error of errors">{{ error }}</li>
-                  </ul>
-              </div>
-
-              <input type="hidden" id="id" name="id" value="">
-
-              <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Auto</label>
-                    <div>
-                        <input class="form-control" id="autoInfracao" type="text" placeholder="Auto de Infração (requerido)" formControlName="autoInfracao" [ngClass]="{'is-invalid': displayMessage.autoInfracao }" />
-                        <span class="text-danger" *ngIf="displayMessage.autoInfracao">
-                            <p [innerHTML]="displayMessage.autoInfracao"></p>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label class="control-label">Placa</label>
-                    <select class="form-control" id="veiculoId" formControlName="veiculoId" [ngClass]="{'is-invalid': displayMessage.veiculoId }">
-                        <option *ngFor="let veiculo of veiculos" value="{{ veiculo.id }}">{{ veiculo.placa }}</option>
-                    </select>
-                    <span class="text-danger" *ngIf="displayMessage.veiculoId">
-                        <p [innerHTML]="displayMessage.veiculoId"></p>
-                    </span>
-                </div>
-                
+        
+        <form enctype="multipart/form-data" (ngSubmit)="editarVeiculoMulta()" [formGroup]="veiculoMultaForm">
+            
+            <div class="alert alert-danger" *ngIf="errors.length > 0">
+                <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                <ul>
+                    <li *ngFor="let error of errors">{{ error }}</li>
+                </ul>
+            </div>
+            
+            <input type="hidden" id="id" name="id" value="">
+            
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Data</label>
                     <div>
@@ -65,36 +45,50 @@
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label class="control-label">Descrição</label>
+                
+                <div class="form-group col-md-4">
+                    <label class="control-label">Auto</label>
                     <div>
-                        <input class="form-control" id="descricao" type="text" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
-                        <span class="text-danger" *ngIf="displayMessage.descricao">
-                            <p [innerHTML]="displayMessage.descricao"></p>
+                        <input class="form-control" id="autoInfracao" type="text" placeholder="(requerido)" formControlName="autoInfracao" [ngClass]="{'is-invalid': displayMessage.autoInfracao }" />
+                        <span class="text-danger" *ngIf="displayMessage.autoInfracao">
+                            <p [innerHTML]="displayMessage.autoInfracao"></p>
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
+                
                 <div class="form-group col-md-4">
+                    <label class="control-label">Placa</label>
+                    <select class="form-control" id="veiculoId" formControlName="veiculoId" [ngClass]="{'is-invalid': displayMessage.veiculoId }">
+                        <option *ngFor="let veiculo of veiculos" value="{{ veiculo.id }}">{{ veiculo.placa }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage.veiculoId">
+                        <p [innerHTML]="displayMessage.veiculoId"></p>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group  col-md-3">
+                    <label class="control-label">Responsável</label>
+                    <div>
+                        <input class="form-control" id="responsavel" type="text" placeholder="(opcional)" formControlName="responsavel" [ngClass]="{'is-invalid': displayMessage.responsavel }" />
+                        <span class="text-danger" *ngIf="displayMessage.responsavel">
+                            <p [innerHTML]="displayMessage.responsavel"></p>
+                        </span>
+                    </div>
+                </div> 
+                
+                <div class="form-group col-md-3">
                     <label class="control-label">Classificação</label>
                     <div>
-                        <input class="form-control" id="classificacao" type="text" formControlName="classificacao" />
+                        <input class="form-control" id="classificacao" type="text" placeholder="(opcional)" formControlName="classificacao" [ngClass]="{'is-invalid': displayMessage.classificacao }" />
+                        <span class="text-danger" *ngIf="displayMessage.classificacao">
+                            <p [innerHTML]="displayMessage.classificacao"></p>
+                        </span>
                     </div>
-                </div>
-
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Motorista</label>
-                    <div>
-                        <input class="form-control" id="motorista" type="text" formControlName="motorista" />
-                    </div>
-                </div>             
-                               
-                <div class="form-group  col-md-4">
+                </div>                        
+                
+                <div class="form-group  col-md-3">
                     <label class="control-label">Pagamento</label>
                     <div>
                         <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
@@ -103,14 +97,36 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">Valor</label>
+                    <div>
+                        <input class="form-control" id="valor" type="text" placeholder="(opcional)" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
+                        <span class="text-danger" *ngIf="displayMessage.classificacao">
+                            <p [innerHTML]="displayMessage.valor"></p>
+                        </span>
+                    </div>
+                </div>
             </div>
-
-              <div class="form-group">
-                  <input type="submit" [disabled]="!veiculoMultaForm.valid" value="Editar" class="btn btn-primary">&nbsp;
-                  <a class="btn btn-info" href="/veiculos-multas/listar-todos">Voltar</a>
-              </div>
-          </form>
-
-      </div>
+            
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Descrição</label>
+                    <div>
+                        <input class="form-control" id="descricao" type="text" placeholder="(opcional)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.descricao">
+                            <p [innerHTML]="displayMessage.descricao"></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" [disabled]="!veiculoMultaForm.valid" value="Editar" class="btn btn-primary">&nbsp;
+                <a class="btn btn-info" href="/veiculos-multas/listar-todos">Voltar</a>
+            </div>
+        </form>
+        
+    </div>
 </section>
 <!-- /.content -->

@@ -10,39 +10,38 @@ import { OficioRecebidoService } from '../services/oficioRecebido.service';
   templateUrl: './excluir.component.html'
 })
 export class ExcluirComponent {
-
+  
   oficioRecebido: OficioRecebido;
   errors: any[] = [];
-
+  
   constructor(private oficioRecebidoService: OficioRecebidoService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toastr: ToastrService) {
-
-    this.oficioRecebido = this.route.snapshot.data['oficioRecebido'];
-  }
-
-  public excluirOficioRecebido() {
-    this.oficioRecebidoService.excluirOficioRecebido(this.oficioRecebido.id)
-      .subscribe(
-      evento => { this.sucessoExclusao(evento) },
-      ()     => { this.falha() }
-      );
-  }
-
-  public sucessoExclusao(evento: any) {
-
-    const toast = this.toastr.success('Ofício excluido com Sucesso!', 'Good bye :D');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/oficios-recebidos/listar-todos']);
-      });
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService) {
+      
+      this.oficioRecebido = this.route.snapshot.data['oficioRecebido'];
     }
-  }
-
-  public falha() {
-    this.toastr.error('Houve um erro no processamento!', 'Ops! :(');
-  }
-
-}
-
+    
+    public excluirOficioRecebido() {
+      this.oficioRecebidoService.excluirOficioRecebido(this.oficioRecebido.id)
+      .subscribe(
+        evento => { this.sucessoExclusao(evento) },
+        ()     => { this.falha() }
+        );
+      }
+      
+      public sucessoExclusao(evento: any) {
+        
+        const toast = this.toastr.success('Ofício excluido com Sucesso!', 'Good bye :D');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/oficios-recebidos/listar-todos']);
+          });
+        }
+      }
+      
+      public falha() {
+        this.toastr.error('Houve um erro no processamento!', 'Ops! :(');
+      }
+      
+    }

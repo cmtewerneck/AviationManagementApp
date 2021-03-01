@@ -38,39 +38,39 @@
                 <div class="form-group col-md-4">
                     <label class="control-label">Numeração</label>
                     <div>
-                        <input class="form-control" id="numeracao" type="text" placeholder="Numeração (requerido)" formControlName="numeracao" [ngClass]="{'is-invalid': displayMessage.numeracao }" />
+                        <input class="form-control" id="numeracao" type="text" placeholder="(requerido)" formControlName="numeracao" [ngClass]="{'is-invalid': displayMessage.numeracao }" />
                         <span class="text-danger" *ngIf="displayMessage.numeracao">
                             <p [innerHTML]="displayMessage.numeracao"></p>
                         </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
                     <label class="control-label">Data</label>
                     <div>
-                        <input class="form-control" id="data" type="date" placeholder="Data (requerido)" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
+                        <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
                         <span class="text-danger" *ngIf="displayMessage.data">
                             <p [innerHTML]="displayMessage.data"></p>
                         </span>
                     </div>
                 </div>
-
+                
                 <div class="form-group col-md-4">
                     <label class="control-label">Assunto</label>
                     <div>
-                        <input class="form-control" id="assunto" type="text" placeholder="Assunto (requerido)" formControlName="assunto" [ngClass]="{'is-invalid': displayMessage.assunto }" />
+                        <input class="form-control" id="assunto" type="text" placeholder="(requerido)" formControlName="assunto" [ngClass]="{'is-invalid': displayMessage.assunto }" />
                         <span class="text-danger" *ngIf="displayMessage.assunto">
                             <p [innerHTML]="displayMessage.assunto"></p>
                         </span>
                     </div>
                 </div>
             </div>
-                
+            
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label">Destinatário</label>
                     <div>
-                        <input class="form-control" id="destinatario" type="text" placeholder="Destinatário (requerido)" formControlName="destinatario" [ngClass]="{'is-invalid': displayMessage.destinatario }" />
+                        <input class="form-control" id="destinatario" type="text" placeholder="(requerido)" formControlName="destinatario" [ngClass]="{'is-invalid': displayMessage.destinatario }" />
                         <span class="text-danger" *ngIf="displayMessage.destinatario">
                             <p [innerHTML]="displayMessage.destinatario"></p>
                         </span>
@@ -79,16 +79,19 @@
                 <div class="form-group col-md-6">
                     <label class="control-label">Responsável</label>
                     <div>
-                        <input class="form-control" id="responsavel" type="text" placeholder="Responsável" formControlName="responsavel" />
+                        <input class="form-control" id="responsavel" type="text" placeholder="(opcional)" formControlName="responsavel" [ngClass]="{'is-invalid': displayMessage.responsavel }" />
+                        <span class="text-danger" *ngIf="displayMessage.responsavel">
+                            <p [innerHTML]="displayMessage.responsavel"></p>
+                        </span>
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="form-group col-md-12">
                     <label class="control-label">Mensagem</label>
                     <div>
-                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="mensagem" placeholder="Mensagem (requerido)" formControlName="mensagem" [ngClass]="{'is-invalid': displayMessage.mensagem }"></textarea>
+                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="mensagem" placeholder="(requerido)" formControlName="mensagem" [ngClass]="{'is-invalid': displayMessage.mensagem }"></textarea>
                         <span class="text-danger" *ngIf="displayMessage.mensagem">
                             <p [innerHTML]="displayMessage.mensagem"></p>
                         </span>

@@ -12,140 +12,181 @@ import { utilsBr } from 'js-brasil';
 import { TripulanteBaseComponent } from '../tripulante-form.base.component';
 import { NgBrazilValidators } from 'ng-brazil';
 import { StringUtils } from 'src/app/utils/string-utils';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html'
 })
 export class EditarComponent extends TripulanteBaseComponent implements OnInit {
-
+  
   imagens: string = environment.imagensUrl;
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-
+  
   imageBase64: any;
   imagemPreview: any;
   imagemNome: string;
   imagemOriginalSrc: string;
   
+  textoDocumento: string = '';
+  
+  MASKS = utilsBr.MASKS;
+  
   constructor(private fb: FormBuilder,
-              private tripulanteService: TripulanteService,
-              private router: Router,
-              private spinner: NgxSpinnerService,
-              private route: ActivatedRoute,
-              private toastr: ToastrService) {
+    private tripulanteService: TripulanteService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
       
       super();
       this.tripulante = this.route.snapshot.data['tripulante'];
     }
     
     ngOnInit(): void {
-
+      
       this.spinner.show();
       
       this.tripulanteForm = this.fb.group({
-        nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-        canac: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-        cpf: ['', [Validators.required, NgBrazilValidators.cpf]],
-        email: ['', [Validators.email]],
-        dataNascimento: [''],
-        dataAdmissao: [''],
-        sexo: [''],
-        cargo: ['', [Validators.required]],
-        estadoCivil: [''],
-        salario: [''],
-        situacao: [''],
-        rg: [''],
-        orgaoEmissor: [''],
-        tituloEleitor: [''],
-        numeroPis: [''],
-        numeroCtps: [''],
-        numeroCnh: [''],
+        // PESSOA 
+        nome: ['', [Validators.required, Validators.maxLength(100)]],
+        tipoPessoa: ['', Validators.required],
+        documento: ['', [Validators.required, NgBrazilValidators.cpf]],
+        sexo: ['', Validators.required],
+        estadoCivil: ['', Validators.maxLength(20)],
+        ativo: [true],
+        telefone: ['', Validators.maxLength(20)],
+        email: ['', [Validators.email, Validators.maxLength(20)]],
         imagem: [''],
-        });
-
-      this.tripulanteForm.patchValue({
-          id: this.tripulante.id,
-          nome: this.tripulante.nome,
-          canac: this.tripulante.canac,
-          cpf: this.tripulante.cpf,
-          email: this.tripulante.email,
-          dataNascimento: this.tripulante.dataNascimento,
-          dataAdmissao: this.tripulante.dataAdmissao,
-          sexo: this.tripulante.sexo,
-          cargo: this.tripulante.cargo,
-          salario: CurrencyUtils.DecimalParaString(this.tripulante.salario),
-          situacao: this.tripulante.situacao,
-          rg: this.tripulante.rg,
-          orgaoEmissor: this.tripulante.orgaoEmissor,
-          tituloEleitor: this.tripulante.tituloEleitor,
-          numeroPis: this.tripulante.numeroPis,
-          numeroCtps: this.tripulante.numeroCtps,
-          numeroCnh: this.tripulante.numeroCnh,
+        
+        // TRIPULANTE
+        dataNascimento: [''],
+        dataAdmissao: ['', Validators.required],
+        dataDemissao: [''],
+        tipoColaborador: ['', Validators.required],
+        cargo: ['', Validators.maxLength(30)],
+        canac: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+        salario: [''],
+        tipoVinculo: ['', Validators.required],
+        rg: ['', [Validators.required, Validators.maxLength(20)]],
+        orgaoEmissor: ['', Validators.maxLength(20)],
+        tituloEleitor: ['', Validators.maxLength(30)],
+        numeroPis: ['', Validators.maxLength(30)],
+        numeroCtps: ['', Validators.maxLength(30)],
+        numeroCnh: ['', Validators.maxLength(30)]
       });
-
+      
+      this.tripulanteForm.patchValue({
+        id: this.tripulante.id,
+        nome: this.tripulante.nome,
+        tipoPessoa: this.tripulante.tipoPessoa,
+        documento: this.tripulante.documento,
+        sexo: this.tripulante.sexo,
+        estadoCivil: this.tripulante.estadoCivil,
+        ativo: this.tripulante.ativo,
+        telefone: this.tripulante.telefone,
+        email: this.tripulante.email,
+        
+        dataNascimento: this.tripulante.dataNascimento,
+        dataAdmissao: this.tripulante.dataAdmissao,
+        dataDemissao: this.tripulante.dataDemissao,
+        tipoColaborador: this.tripulante.tipoColaborador,
+        cargo: this.tripulante.cargo,
+        canac: this.tripulante.canac,
+        salario: CurrencyUtils.DecimalParaString(this.tripulante.salario),
+        tipoVinculo: this.tripulante.tipoVinculo,
+        rg: this.tripulante.rg,
+        orgaoEmissor: this.tripulante.orgaoEmissor,
+        tituloEleitor: this.tripulante.tituloEleitor,
+        numeroPis: this.tripulante.numeroPis,
+        numeroCtps: this.tripulante.numeroCtps,
+        numeroCnh: this.tripulante.numeroCnh
+      });
+      
       this.imagemOriginalSrc = this.imagens + this.tripulante.imagem;
-
+      
       setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
+        this.spinner.hide();
+      }, 1000);
     }
-
-      ngAfterViewInit(): void {
-        super.configurarValidacaoFormulario(this.formInputElements);
+    
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+    
+    trocarValidacaoDocumento() {
+      
+      if (this.tipoPessoaForm().value === '1') {
+        this.documento().clearValidators();
+        this.documento().setValidators([Validators.required, NgBrazilValidators.cpf]);
       }
-
-      editarTripulante() {
-        if (this.tripulanteForm.dirty && this.tripulanteForm.valid) {
-          this.tripulante = Object.assign({}, this.tripulante, this.tripulanteForm.value);
-
-          if (this.imageBase64) {
-            this.tripulante.imagemUpload = this.imageBase64;
-            this.tripulante.imagem = this.imagemNome;
-          }
-
-          this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
-          this.tripulante.cpf = StringUtils.somenteNumeros(this.tripulante.cpf);
-
-          this.tripulanteService.atualizarTripulante(this.tripulante)
-          .subscribe(
-            sucesso => { this.processarSucesso(sucesso) },
-            falha => { this.processarFalha(falha) }
-            );
-
+      
+      else {
+        this.documento().clearValidators();
+        this.documento().setValidators([Validators.required, NgBrazilValidators.cnpj]);
+      }
+    }
+    
+    documento(): AbstractControl {
+      return this.tripulanteForm.get('documento');
+    }
+    
+    tipoPessoaForm(): AbstractControl {
+      return this.tripulanteForm.get('tipoPessoa');
+    }
+    
+    editarTripulante() {
+      if (this.tripulanteForm.dirty && this.tripulanteForm.valid) {
+        this.tripulante = Object.assign({}, this.tripulante, this.tripulanteForm.value);
+        
+        if (this.imageBase64) {
+          this.tripulante.imagemUpload = this.imageBase64;
+          this.tripulante.imagem = this.imagemNome;
+        }
+        
+        this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
+        this.tripulante.documento = StringUtils.somenteNumeros(this.tripulante.documento);
+        
+        this.tripulanteService.atualizarTripulante(this.tripulante)
+        .subscribe(
+          sucesso => { this.processarSucesso(sucesso) },
+          falha => { this.processarFalha(falha) }
+          );
+          
           this.mudancasNaoSalvas = false;
-          }
         }
-
-        processarSucesso(response: any) {
-          this.tripulanteForm.reset();
-          this.errors = [];
-
-          let toast = this.toastr.success('Tripulante editado com sucesso!', 'Sucesso!');
-          if (toast) {
-            toast.onHidden.subscribe(() => {
-              this.router.navigate(['/tripulantes/listar-todos']);
-            });
-          }
+      }
+      
+      processarSucesso(response: any) {
+        this.tripulanteForm.reset();
+        this.errors = [];
+        
+        let toast = this.toastr.success('Tripulante editado com sucesso!', 'Sucesso!');
+        if (toast) {
+          toast.onHidden.subscribe(() => {
+            this.router.navigate(['/tripulantes/listar-todos']);
+          });
         }
-
-        processarFalha(fail: any) {
-          this.errors = fail.error.errors;
-          this.toastr.error('Ocorreu um erro!', 'Opa :(');
-        }
-
-        upload(file: any) {
-          this.imagemNome = file[0].name;
-
-          var reader = new FileReader();
-          reader.onload = this.manipularReader.bind(this);
-          reader.readAsBinaryString(file[0]);
-        }
-
-        manipularReader(readerEvt: any) {
-          var binaryString = readerEvt.target.result;
-          this.imageBase64 = btoa(binaryString);
-          this.imagemPreview = 'data:image/jpeg;base64,' + this.imageBase64;
-        }
-
-}
+      }
+      
+      processarFalha(fail: any) {
+        this.errors = fail.error.errors;
+        this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      }
+      
+      upload(file: any) {
+        this.imagemNome = file[0].name;
+        
+        var reader = new FileReader();
+        reader.onload = this.manipularReader.bind(this);
+        reader.readAsBinaryString(file[0]);
+      }
+      
+      manipularReader(readerEvt: any) {
+        var binaryString = readerEvt.target.result;
+        this.imageBase64 = btoa(binaryString);
+        this.imagemPreview = 'data:image/jpeg;base64,' + this.imageBase64;
+      }
+      
+    }

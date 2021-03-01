@@ -1,0 +1,94 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detalhes do item</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Suprimentos</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="col-md-4">
+      <img src="{{ imagens }}{{ suprimento.imagem }}" style="width: 300px; height: 428px">
+    </div>
+    <div class="col-md-6">
+      <dl>
+        <dt>
+          Código
+        </dt>
+        <dd>
+          {{ suprimento.codigo }}
+        </dd>
+        <dt>
+          PartNumber
+        </dt>
+        <dd>
+          {{ suprimento.partNumber }}
+        </dd>
+        <dt>
+          Nomenclatura
+        </dt>
+        <dd>
+          {{ suprimento.nomenclatura }}
+        </dd>
+        <dt>
+          Quantidade
+        </dt>
+        <dd>
+          {{ suprimento.quantidade }}
+        </dd>
+        <dt>
+          Localização
+        </dt>
+        <dd>
+          {{ suprimento.localizacao }}
+        </dd>
+        <dt>
+          PartNumber Alternativo
+        </dt>
+        <dd>
+          {{ suprimento.partNumberAlternativo }}
+        </dd>
+        <dt>
+          Aplicação
+        </dt>
+        <dd>
+          {{ suprimento.aplicacao }}
+        </dd>
+        <dt>
+          Capítulo
+        </dt>
+        <dd>
+          {{ suprimento.capitulo }}
+        </dd>
+        <dt>
+          Serial Number
+        </dt>
+        <dd>
+          {{ suprimento.serialNumber }}
+        </dd>
+        <dt>
+          DOC
+        </dt>
+        <dd>
+          {{ suprimento.doc }}
+        </dd>
+      </dl>
+      
+      <div>
+        <a class="btn btn-warning" [routerLink]="['/suprimentos/editar', suprimento.id]">Editar</a>&nbsp;
+        <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+      </div>
+    </div>
+  </div>
+</section>
