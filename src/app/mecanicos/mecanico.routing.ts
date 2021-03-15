@@ -15,18 +15,18 @@ const mecanicoRouterConfig: Routes = [
         children: [
         {   path: 'listar-todos', component: ListaComponent,
             canActivate: [MecanicoGuard],
-            data: [{ claim: { nome: 'Mecanico', valor: 'Consultar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Consultar' } }],
         },
         {
             path: 'adicionar-novo', component: NovoComponent,
             canDeactivate: [MecanicoGuard],
             canActivate: [MecanicoGuard],
-            data: [{ claim: { nome: 'Mecanico', valor: 'Adicionar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Adicionar' } }],
         },
         {
             path: 'editar/:id', component: EditarComponent,
             canActivate: [MecanicoGuard],
-            data: [{ claim: { nome: 'Mecanico', valor: 'Atualizar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Atualizar' } }],
             resolve: {
                 mecanico: MecanicoResolve
             }
@@ -40,7 +40,7 @@ const mecanicoRouterConfig: Routes = [
         {
             path: 'excluir/:id', component: ExcluirComponent,
             canActivate: [MecanicoGuard],
-            data: [{ claim: { nome: 'Mecanico', valor: 'Excluir' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Excluir' } }],
             resolve: {
                 mecanico: MecanicoResolve
             }

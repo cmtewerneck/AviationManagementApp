@@ -59,6 +59,12 @@ export class NovoComponent extends SuprimentoBaseComponent implements OnInit {
         this.suprimento.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
         this.suprimento.imagem = this.imagemNome;
         
+        // CONVERSÕES PARA JSON
+        this.suprimento.quantidade = Number(this.suprimento.quantidade);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.suprimento);
+
         this.suprimentoService.novoSuprimento(this.suprimento)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

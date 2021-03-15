@@ -49,6 +49,7 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         pesoBasico: [''],
         horasTotais: [''],
         horasRestantes: [''],
+        tipoAeronave: ['', Validators.required],
         vencimentoCA: [''],
         vencimentoCVA: [''],
         vencimentoCM: [''],
@@ -74,6 +75,7 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         pesoBasico: CurrencyUtils.DecimalParaString(this.aeronave.pesoBasico),
         horasTotais: CurrencyUtils.DecimalParaString(this.aeronave.horasTotais),
         horasRestantes: CurrencyUtils.DecimalParaString(this.aeronave.horasRestantes),
+        tipoAeronave: this.aeronave.tipoAeronave,
         vencimentoCA: this.aeronave.vencimentoCA,
         vencimentoCVA: this.aeronave.vencimentoCVA,
         vencimentoCM: this.aeronave.vencimentoCM,
@@ -106,10 +108,22 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
           this.aeronave.imagem = this.imagemNome;
         }
         
+        // CONVERSÕES DE JSON
+        if (this.aeronave.ano) { this.aeronave.ano = Number(this.aeronave.ano); } else { this.aeronave.ano = null; }
         this.aeronave.pesoVazio = CurrencyUtils.StringParaDecimal(this.aeronave.pesoVazio);
         this.aeronave.pesoBasico = CurrencyUtils.StringParaDecimal(this.aeronave.pesoBasico);
         this.aeronave.horasTotais = CurrencyUtils.StringParaDecimal(this.aeronave.horasTotais);
         this.aeronave.horasRestantes = CurrencyUtils.StringParaDecimal(this.aeronave.horasRestantes);
+        if (this.aeronave.vencimentoCA) { this.aeronave.vencimentoCA = new Date(this.aeronave.vencimentoCA); } else { this.aeronave.vencimentoCA = null; }
+        if (this.aeronave.vencimentoCVA) { this.aeronave.vencimentoCVA = new Date(this.aeronave.vencimentoCVA); } else { this.aeronave.vencimentoCVA = null; }
+        if (this.aeronave.vencimentoCM) { this.aeronave.vencimentoCM = new Date(this.aeronave.vencimentoCM); } else { this.aeronave.vencimentoCM = null; }
+        if (this.aeronave.ultimaPesagem) { this.aeronave.ultimaPesagem = new Date(this.aeronave.ultimaPesagem); } else { this.aeronave.ultimaPesagem = null; }
+        if (this.aeronave.proximaPesagem) { this.aeronave.proximaPesagem = new Date(this.aeronave.proximaPesagem); } else { this.aeronave.proximaPesagem = null; }
+        if (this.aeronave.vencimentoReta) { this.aeronave.vencimentoReta = new Date(this.aeronave.vencimentoReta); } else { this.aeronave.vencimentoReta = null; }
+        if (this.aeronave.vencimentoCasco) { this.aeronave.vencimentoCasco = new Date(this.aeronave.vencimentoCasco); } else { this.aeronave.vencimentoCasco = null; }
+        // FIM DAS CONVERSÕES
+
+        console.log(this.aeronave);
         
         this.aeronaveService.atualizarAeronave(this.aeronave)
         .subscribe(

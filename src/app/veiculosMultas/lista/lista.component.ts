@@ -48,5 +48,5 @@ export class ListaComponent implements OnInit {
             console.log(error);
           });
         }
-      }
+}
       

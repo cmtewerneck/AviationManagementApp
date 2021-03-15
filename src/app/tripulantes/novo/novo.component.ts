@@ -57,11 +57,11 @@ export class NovoComponent extends TripulanteBaseComponent implements OnInit {
         dataNascimento: [''],
         dataAdmissao: ['', Validators.required],
         dataDemissao: [''],
-        tipoColaborador: ['', Validators.required],
-        cargo: ['', Validators.maxLength(30)],
-        canac: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+        tipoColaborador: [''],
+        cargo: [''],
+        canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
         salario: [''],
-        tipoVinculo: ['', Validators.required],
+        tipoVinculo: ['', Validators.maxLength(30)],
         rg: ['', [Validators.required, Validators.maxLength(20)]],
         orgaoEmissor: ['', Validators.maxLength(20)],
         tituloEleitor: ['', Validators.maxLength(30)],
@@ -103,9 +103,24 @@ export class NovoComponent extends TripulanteBaseComponent implements OnInit {
         this.tripulante.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
         this.tripulante.imagem = this.imagemNome;
         
-        this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
+        // CONVERSÕES PARA JSON
+        this.tripulante.tipoPessoa = Number(this.tripulante.tipoPessoa);
         this.tripulante.documento = StringUtils.somenteNumeros(this.tripulante.documento);
-        
+        this.tripulante.sexo = Number(this.tripulante.sexo);
+        this.tripulante.ativo = this.tripulante.ativo.toString() == "true";
+        if (this.tripulante.dataNascimento) { this.tripulante.dataNascimento = new Date(this.tripulante.dataNascimento); } else { this.tripulante.dataNascimento = null; }
+        this.tripulante.dataAdmissao = new Date(this.tripulante.dataAdmissao);
+        if (this.tripulante.dataDemissao) { this.tripulante.dataDemissao = new Date(this.tripulante.dataDemissao); } else { this.tripulante.dataDemissao = null; }
+        this.tripulante.tipoColaborador = Number(this.tripulante.tipoColaborador);
+        this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
+        this.tripulante.tipoVinculo = Number(this.tripulante.tipoVinculo);
+        // FIM DAS CONVERSÕES
+
+        this.tripulante.tipoColaborador = 2;
+        this.tripulante.cargo = 'Tripulante';
+
+        console.log(this.tripulante);
+
         this.tripulanteService.novoTripulante(this.tripulante)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

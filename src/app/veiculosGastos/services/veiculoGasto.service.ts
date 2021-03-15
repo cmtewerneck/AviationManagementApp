@@ -54,9 +54,9 @@ export class VeiculoGastoService extends BaseService {
             .pipe(catchError(super.serviceError));
     }
 
-    ObterColaboradores(): Observable<Colaborador[]> {
+    ObterColaboradores(tipoColaborador: number): Observable<Colaborador[]> {
         return this.http
-            .get<Colaborador[]>(this.urlServiceV1 + 'colaboradores', this.ObterAuthHeaderJson())
+            .get<Colaborador[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

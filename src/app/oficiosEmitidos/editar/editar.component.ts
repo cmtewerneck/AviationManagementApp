@@ -62,6 +62,12 @@ export class EditarComponent extends OficioEmitidoBaseComponent implements OnIni
       if (this.oficioEmitidoForm.dirty && this.oficioEmitidoForm.valid) {
         this.oficioEmitido = Object.assign({}, this.oficioEmitido, this.oficioEmitidoForm.value);
         
+        // CONVERSÕES PARA JSON
+        this.oficioEmitido.data = new Date(this.oficioEmitido.data);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.oficioEmitido);
+        
         this.oficioEmitidoService.atualizarOficioEmitido(this.oficioEmitido)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

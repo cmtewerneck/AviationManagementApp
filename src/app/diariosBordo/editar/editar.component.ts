@@ -110,9 +110,26 @@ export class EditarComponent extends DiarioBordoBaseComponent implements OnInit 
         if (this.diarioBordoForm.dirty && this.diarioBordoForm.valid) {
           this.diarioBordo = Object.assign({}, this.diarioBordo, this.diarioBordoForm.value);
           
+          // CONVERSÕES DE JSON
+          this.diarioBordo.data = new Date(this.diarioBordo.data);
+          this.diarioBordo.horaAcionamento = new Date(this.diarioBordo.horaAcionamento);
+          if (this.diarioBordo.horaDecolagem) { this.diarioBordo.horaDecolagem = new Date(this.diarioBordo.horaDecolagem); } else { this.diarioBordo.horaDecolagem = null; }
+          if (this.diarioBordo.horaPouso) { this.diarioBordo.horaPouso = new Date(this.diarioBordo.horaPouso); } else { this.diarioBordo.horaPouso = null; }
+          this.diarioBordo.horaCorte = new Date(this.diarioBordo.horaCorte);
+          if (this.diarioBordo.totalDiurno) { this.diarioBordo.totalDiurno = new Date(this.diarioBordo.totalDiurno); } else { this.diarioBordo.totalDiurno = null; }
+          if (this.diarioBordo.totalNoturno) { this.diarioBordo.totalNoturno = new Date(this.diarioBordo.totalNoturno); } else { this.diarioBordo.totalNoturno = null; }
+          if (this.diarioBordo.totalIfr) { this.diarioBordo.totalIfr = new Date(this.diarioBordo.totalIfr); } else { this.diarioBordo.totalIfr = null; }
+          if (this.diarioBordo.totalNavegacao) { this.diarioBordo.totalNavegacao = new Date(this.diarioBordo.totalNavegacao); } else { this.diarioBordo.totalNavegacao = null; }
           this.diarioBordo.totalDecimal = CurrencyUtils.StringParaDecimal(this.diarioBordo.totalDecimal);
-            this.diarioBordo.totalDecPouso = CurrencyUtils.StringParaDecimal(this.diarioBordo.totalDecPouso);
-            this.diarioBordo.totalAcionamentoCorte = CurrencyUtils.StringParaDecimal(this.diarioBordo.totalAcionamentoCorte);
+          this.diarioBordo.totalDecPouso = CurrencyUtils.StringParaDecimal(this.diarioBordo.totalDecPouso);
+          this.diarioBordo.totalAcionamentoCorte = CurrencyUtils.StringParaDecimal(this.diarioBordo.totalAcionamentoCorte);
+          this.diarioBordo.pousos = Number(this.diarioBordo.pousos);
+          this.diarioBordo.pob = Number(this.diarioBordo.pob);
+          this.diarioBordo.combustivelDecolagem = Number(this.diarioBordo.combustivelDecolagem);
+          this.diarioBordo.naturezaVoo = Number(this.diarioBordo.naturezaVoo);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.diarioBordo);
             
           this.diarioBordoService.atualizarDiarioBordo(this.diarioBordo)
           .subscribe(

@@ -1,15 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Adicionar Gasto</h1>
+                <h3>Novo Gasto</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item"><a routerLink="/veiculos/listar-todos">Veículos</a></li>
-                    <li class="breadcrumb-item active">Gasto</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/veiculos-gastos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -21,7 +19,7 @@
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
         
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">                
                 <form enctype="multipart/form-data" (ngSubmit)="adicionarVeiculoGasto()" [formGroup]="veiculoGastoForm">
                     
                     <div class="alert alert-danger" *ngIf="errors.length > 0">
@@ -32,75 +30,84 @@
                     </div>
                     
                     <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Data</label>
-                            <div>
-                                <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
-                                <span class="text-danger" *ngIf="displayMessage.data">
-                                    <p [innerHTML]="displayMessage.data"></p>
-                                </span>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados do Gasto</h5>
+                                <div class="card-body">
+                                    <div class="row">                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Data<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
+                                                <span class="text-danger" *ngIf="displayMessage.data">
+                                                    <p [innerHTML]="displayMessage.data"></p>
+                                                </span>
+                                            </div>
+                                        </div>     
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Placa<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="veiculoId" formControlName="veiculoId" [ngClass]="{'is-invalid': displayMessage.veiculoId }">
+                                                <option *ngFor="let veiculo of veiculos" value="{{ veiculo.id }}">{{ veiculo.placa }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.veiculoId">
+                                                <p [innerHTML]="displayMessage.veiculoId"></p>
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Valor<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="valor" type="text" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
+                                                <span class="text-danger" *ngIf="displayMessage.valor">
+                                                    <p [innerHTML]="displayMessage.valor"></p>
+                                                </span>
+                                            </div>
+                                        </div>  
+                                    </div>   
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Descrição<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="descricao" type="text" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                                                <span class="text-danger" *ngIf="displayMessage.descricao">
+                                                    <p [innerHTML]="displayMessage.descricao"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Motorista<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="motoristaId" formControlName="motoristaId" [ngClass]="{'is-invalid': displayMessage.motoristaId }">
+                                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.motoristaId">
+                                                <p [innerHTML]="displayMessage.motoristaId"></p>
+                                            </span>
+                                        </div>   
+                                        
+                                        <div class="form-group  col-md-3">
+                                            <label class="control-label">Pagamento<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
+                                                    <option value=true>Pago</option>
+                                                    <option value=false>Pendente</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.situacao">
+                                                    <p [innerHTML]="displayMessage.situacao"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>     
-                        
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Placa</label>
-                            <select class="form-control" id="veiculoId" formControlName="veiculoId" [ngClass]="{'is-invalid': displayMessage.veiculoId }">
-                                <option *ngFor="let veiculo of veiculos" value="{{ veiculo.id }}">{{ veiculo.placa }}</option>
-                            </select>
-                            <span class="text-danger" *ngIf="displayMessage.veiculoId">
-                                <p [innerHTML]="displayMessage.veiculoId"></p>
-                            </span>
                         </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Valor</label>
-                            <div>
-                                <input class="form-control" id="valor" type="text" placeholder="(requerido)" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
-                                <span class="text-danger" *ngIf="displayMessage.valor">
-                                    <p [innerHTML]="displayMessage.valor"></p>
-                                </span>
-                            </div>
-                        </div>                
-                    </div>
+                    </div>                   
                     
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Descrição</label>
-                            <div>
-                                <input class="form-control" id="descricao" type="text" placeholder="(requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
-                                <span class="text-danger" *ngIf="displayMessage.descricao">
-                                    <p [innerHTML]="displayMessage.descricao"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Motorista</label>
-                            <select class="form-control" id="motoristaId" formControlName="motoristaId" [ngClass]="{'is-invalid': displayMessage.motoristaId }">
-                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
-                            </select>
-                            <span class="text-danger" *ngIf="displayMessage.motoristaId">
-                                <p [innerHTML]="displayMessage.motoristaId"></p>
-                            </span>
-                        </div>   
-                        
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Pagamento</label>
-                            <div>
-                                <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
-                                    <option value="true">Pago</option>
-                                    <option value="false">Pendente</option>
-                                </select>
-                                <span class="text-danger" *ngIf="displayMessage.situacao">
-                                    <p [innerHTML]="displayMessage.situacao"></p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" [disabled]="!veiculoGastoForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
-                        <a class="btn btn-info" href="/veiculos-gastos/listar-todos">Voltar</a>
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!veiculoGastoForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/veiculos-gastos/listar-todos">Voltar</a>
                     </div>
                 </form>
             </div>

@@ -5,10 +5,10 @@ export interface AeronaveTarifa {
   valor: number;
   situacao: boolean;
   numeracao: string;
-  orgaoEmissor: number;
+  orgaoEmissorTarifa: number;
   
-  matriculaAeronave: string;
   aeronaveId: string;
+  matriculaAeronave: string;
 }
 
 export interface Aeronave {

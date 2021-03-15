@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes da Ordem de Serviço</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Ordens de Serviço</li>
+          <li><a class="btn btn-dark" [routerLink]="['/ordem-servico/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/ordem-servico/editar',ordemServico.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,112 +19,158 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Número da OS</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.numeroOrdem }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Data de Abertura</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.dataAbertura | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Matrícula</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.matriculaAeronave }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Tipo</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.tipo }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">TTSN</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.ttsn }}
-        </dd>   
-        <dt class="col-sm-2">
-          <label class="control-label">TCSN Pousos</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.tcsnPousos }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">TTSN Motor</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.ttsnMotor }}
-        </dd>   
-        <dt class="col-sm-2">
-          <label class="control-label">TCSN Ciclos</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.tcsnCiclos }}
-        </dd>      
-        <dt class="col-sm-2">
-          <label class="control-label">Data de Fechamento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.dataFechamento | date }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Requisição de Materiais</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.requisicaoMateriais }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Realizado Por</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.realizadoPor }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">CANAC</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.realizadoPorAnac }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Data da Realização</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.dataRealizacao | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Inspecionado Por</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.inspecionadoPor }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">CANAC</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.inspecionadoPorAnac }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Data da Inspeção</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ ordemServico.dataInspecao | date }}
-        </dd>
-      </dl>
+    
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/ordem-servico/editar',ordemServico.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/ordem-servico/listar-todos']">Voltar</a>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados da OS</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Numeração:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.numeroOrdem == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.numeroOrdem != ''">{{ ordemServico.numeroOrdem }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Abertura:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataAbertura == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataAbertura != null">{{ ordemServico.dataAbertura | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Matrícula:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.matriculaAeronave == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.matriculaAeronave != ''">{{ ordemServico.matriculaAeronave }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.tipo == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.tipo != ''">{{ ordemServico.tipo }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">TTSN:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.ttsn == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.ttsn != ''">{{ ordemServico.ttsn }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">TCSN Pousos:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.tcsnPousos == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.tcsnPousos != ''">{{ ordemServico.tcsnPousos }}</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">TTSN Motor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.ttsnMotor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.ttsnMotor != ''">{{ ordemServico.ttsnMotor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">TCSN Ciclos:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.tcsnCiclos == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.tcsnCiclos != ''">{{ ordemServico.tcsnCiclos }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data do Fechamento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataFechamento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataFechamento != null">{{ ordemServico.dataFechamento | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Requisição de Materiais:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.requisicaoMateriais == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.requisicaoMateriais != ''">{{ ordemServico.requisicaoMateriais }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Realizado Por:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.realizadoPor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.realizadoPor != ''">{{ ordemServico.realizadoPor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CANAC:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.realizadoPorAnac == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.realizadoPorAnac != ''">{{ ordemServico.realizadoPorAnac }}</dd>
+              </dl>  
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Data da Realização:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataRealizacao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataRealizacao != null">{{ ordemServico.dataRealizacao | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Inspecionado Por:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.inspecionadoPor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.inspecionadoPor != ''">{{ ordemServico.inspecionadoPor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CANAC:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.inspecionadoPorAnac == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.inspecionadoPorAnac != ''">{{ ordemServico.inspecionadoPorAnac }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data da Inspeção:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataInspecao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="ordemServico.dataInspecao != null">{{ ordemServico.dataInspecao | date: 'dd/MM/yyyy' }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
   </div>
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>A OS de nº {{ordemServico.numeroOrdem}} será excluída!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirOrdemServico(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

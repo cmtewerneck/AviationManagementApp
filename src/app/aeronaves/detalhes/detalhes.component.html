@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Detalhes da Aeronave</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item active">Aeronaves</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/aeronaves/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-warning" [routerLink]="['/aeronaves/editar',aeronave.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -18,138 +19,188 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-        <div>
-            <h4>{{ aeronave.matricula }}</h4>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-2">
-                    <label class="control-label">Matrícula</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.matricula }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Fabricante</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.fabricante }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Categoria</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.categoria }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Modelo</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.modelo }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Nº de Série</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.numeroSerie }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Ano</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.ano }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Peso Vazio</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.pesoVazio }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Peso Básico</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.pesoBasico }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Horas Totais</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.horasTotais }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Horas Restantes</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.horasRestantes }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Vencimento CA</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.vencimentoCA | date}}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Vencimento CVA</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.vencimentoCVA | date }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Vencimento CM</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.vencimentoCM | date }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Última Pesagem</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.ultimaPesagem | date }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Próxima Pesagem</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.proximaPesagem | date }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Vencimento Reta</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.vencimentoReta | date }}
-                </dd>   
-                <dt class="col-sm-2">
-                    <label class="control-label">Vencimento Casco</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.vencimentoCasco | date }}
-                </dd> 
-                <dt class="col-sm-2">
-                    <label class="control-label">Motor</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.motor }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Modelo Motor</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.modeloMotor }}
-                </dd>
-                <dt class="col-sm-2">
-                    <label class="control-label">Nº de Série do Motor</label>
-                </dt>
-                <dd class="col-sm-10">
-                    {{ aeronave.numeroSerieMotor }}
-                </dd>         
-            </dl>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        
-        <div>
-            <a class="btn btn-dark" [routerLink]="['/aeronaves/editar',aeronave.id]">Editar</a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/aeronaves/listar-todos']">Voltar</a>
-        </div>
-        
+
+        <div class="row" style="padding-bottom: 30px;">
+            <div class="col-md-4">
+                <div class="card text-center" style="height: 100%;">
+                    <h5 class="card-header">Foto</h5>
+                    <div class="card-body">
+                        <img src="{{ imagens }}{{ aeronave.imagem }}" style="width: 280px; height: 200px; border-radius: 10px;" /><br><br>
+                        <a class="btn btn-success" [routerLink]="['/aeronaves/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card" style="height: 100%;">
+                    <h5 class="card-header">Dados da Aeronave</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <dl class="col-md-4">
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Matrícula:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.matricula == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.matricula != ''">{{ aeronave.matricula }}</dd>
+                                <br>   
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Fabricante:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.fabricante == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.fabricante != ''">{{ aeronave.fabricante }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Categoria:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.categoria == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.categoria != ''">{{ aeronave.categoria }}</dd>
+                                <br> 
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Modelo:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.modelo == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.modelo != ''">{{ aeronave.modelo }}</dd>
+                                <br> 
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Nº de Série:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerie == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerie != ''">{{ aeronave.numeroSerie }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Ano:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.ano == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.ano != null">{{ aeronave.ano }}</dd>
+                                <br> 
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Peso Vazio:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.pesoVazio == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.pesoVazio != null">{{ aeronave.pesoVazio }}</dd>
+                            </dl>
+                            <dl class="col-md-4">
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Peso Básico:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.pesoBasico == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.pesoBasico != null">{{ aeronave.pesoBasico }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Horas Totais:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.horasTotais == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.horasTotais != null">{{ aeronave.horasTotais }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Horas Restantes:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.horasRestantes == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.horasRestantes != null">{{ aeronave.horasRestantes }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Vencimento CA:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCA == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCA != null">{{ aeronave.vencimentoCA | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Vencimento CVA:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCVA == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCVA != null">{{ aeronave.vencimentoCVA | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Vencimento CM:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCM == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCM != null">{{ aeronave.vencimentoCM | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Última Pesagem:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.ultimaPesagem == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.ultimaPesagem != null">{{ aeronave.ultimaPesagem | date: 'dd/MM/yyyy' }}</dd>
+                            </dl>
+                            <dl class="col-md-4">
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Próxima Pesagem:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.proximaPesagem == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.proximaPesagem != null">{{ aeronave.proximaPesagem | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Vencimento RETA:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoReta == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoReta != null">{{ aeronave.vencimentoReta | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Vencimento CASCO:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCasco == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCasco != null">{{ aeronave.vencimentoCasco | date: 'dd/MM/yyyy' }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Motor:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.motor == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.motor != ''">{{ aeronave.motor }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Modelo Motor:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.modeloMotor == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.modeloMotor != ''">{{ aeronave.modeloMotor }}</dd>
+                                <br>
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Nº de Série do Motor:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerieMotor == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerieMotor != ''">{{ aeronave.numeroSerieMotor }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">
+                    Confirma exclusão?
+                </h4>
+                <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+                <p>A aeronave {{aeronave.matricula}} será excluída!</p>
+            </div>    
+            <div class="modal-footer btn-group d-flex">      
+                <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+                    CENCELAR
+                </button>
+                <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirAeronave(confirmDelete)"> 
+                    EXCLUIR
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

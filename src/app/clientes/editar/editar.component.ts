@@ -58,7 +58,7 @@ export class EditarComponent extends ClienteBaseComponent implements OnInit {
       this.clienteForm.patchValue({
         id: this.cliente.id,
         nome: this.cliente.nome,
-        tipoPessoa: this.cliente.tipoPessoa,
+        tipoPessoa: this.cliente.tipoPessoa.toString(),
         documento: this.cliente.documento,
         sexo: this.cliente.sexo,
         estadoCivil: this.cliente.estadoCivil,
@@ -118,7 +118,14 @@ export class EditarComponent extends ClienteBaseComponent implements OnInit {
           this.cliente.imagem = this.imagemNome;
         }
 
+        // CONVERSÕES PARA JSON
+        this.cliente.tipoPessoa = Number(this.cliente.tipoPessoa);
         this.cliente.documento = StringUtils.somenteNumeros(this.cliente.documento);
+        this.cliente.sexo = Number(this.cliente.sexo);
+        this.cliente.ativo = this.cliente.ativo.toString() == "true";
+        // FIM DAS CONVERSÕES
+
+        console.log(this.cliente);
         
         this.clienteService.EditarCliente(this.cliente)
         .subscribe(

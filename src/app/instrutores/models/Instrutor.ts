@@ -1,16 +1,35 @@
+import { VooInstrucao } from "src/app/voosInstrucao/models/VooInstrucao";
+
 export interface Instrutor {
-  id: string;
-  nome: string;
-  cpf: string;
-  rg: string;
-  email: string;
-  telefone: string;
-  canac: string;
-  dataNascimento: Date;
-  dataAdmissao: Date;
-  sexo: string;
-  estadoCivil: string;
-  salario: number;
-  imagem: string;
-  imagemUpload: string;
+   // PESSOA
+   id: string;
+   nome: string;
+   tipoPessoa: number;
+   documento: string; 
+   sexo: number;
+   estadoCivil: string;
+   ativo: boolean;
+   telefone: string;
+   email: string;
+   
+   imagem: string;
+   imagemUpload: string;
+ 
+   // COLABORADOR - INSTRUTOR
+   dataNascimento?: Date;
+   dataAdmissao: Date;
+   dataDemissao?: Date;
+   tipoColaborador: number; // TRIPULANTE NO ENUM (3)
+   cargo: string; // INSTRUTOR
+   canac: string;
+   salario?: number;
+   tipoVinculo: number;
+   rg: string;
+   orgaoEmissor: string;
+   tituloEleitor: string;
+   numeroPis: string;
+   numeroCtps: string;
+   numeroCnh: string;
+ 
+   voosInstrucao: VooInstrucao[];
 }

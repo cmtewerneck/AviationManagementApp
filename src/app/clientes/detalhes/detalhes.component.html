@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes do Cliente</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Clientes</li>
+          <li><a class="btn btn-dark" [routerLink]="['/clientes/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/clientes/editar',cliente.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,72 +19,118 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <h4>Cliente: {{ cliente.nome }} </h4>
-      <hr />
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Nome</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ cliente.nome }}
-        </dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Tipo de Pessoa</label>
-        </dt>
-        <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 1">Física</dd>
-        <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 2">Jurídica</dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Documento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}
-        </dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Sexo</label>
-        </dt>
-        <dd class="col-sm-10" *ngIf="cliente.sexo == 1">Masculino</dd>
-        <dd class="col-sm-10" *ngIf="cliente.sexo == 2">Feminino</dd>
-        <dd class="col-sm-10" *ngIf="cliente.sexo == 3">Outro</dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Estado Civil</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ cliente.estadoCivil }}
-        </dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Ativo</label>
-        </dt>
-        <dd class="col-sm-10">
-          <input [checked]="cliente.ativo" class="check-box" disabled="disabled" type="checkbox">
-        </dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">Telefone</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ cliente.telefone | telefone }}
-        </dd>
-        
-        <dt class="col-sm-2">
-          <label class="control-label">E-mail</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ cliente.email }}
-        </dd>
-      </dl>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/clientes/editar',cliente.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/clientes/listar-todos']">Voltar</a>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-center" style="height: 100%;">
+          <h5 class="card-header">Foto</h5>
+          <div class="card-body">
+            <img src="{{ imagens }}{{ cliente.imagem }}" style="width: 200px; height: 280px; border-radius: 10px;" /><br><br>
+            <a class="btn btn-success" [routerLink]="['/clientes/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-8">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Cliente</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-4">
+                  <label class="control-label">Nome:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.nome == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="cliente.nome != ''">{{ cliente.nome }}</dd>
+                <br>             
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo de Pessoa:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 1">Física</dd>
+                <dd class="col-sm-10" *ngIf="cliente.tipoPessoa == 2">Jurídica</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Documento:</label>
+                </dt>
+                <dd class="col-sm-10">
+                  {{cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}
+                </dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Sexo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.sexo == 1">Masculino</dd>
+                <dd class="col-sm-10" *ngIf="cliente.sexo == 2">Feminino</dd>
+                <dd class="col-sm-10" *ngIf="cliente.sexo == 3">Outro</dd>
+              </dl>
+              <dl class="col-md-6">
+                <dt class="col-sm-10">
+                  <label class="control-label">Estado Civil:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.estadoCivil == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="cliente.estadoCivil != ''">{{ cliente.estadoCivil }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Ativo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.ativo == true">Sim</dd>
+                <dd class="col-sm-10" *ngIf="cliente.ativo == false">Não</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Telefone:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.telefone == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="cliente.telefone != ''">{{ cliente.telefone | telefone }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">E-mail:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="cliente.email == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="cliente.email != ''">{{ cliente.email }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
-  </div>
+  </div>    
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O cliente {{cliente.nome}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirCliente(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

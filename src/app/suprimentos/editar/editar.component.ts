@@ -85,6 +85,12 @@ export class EditarComponent extends SuprimentoBaseComponent implements OnInit {
           this.suprimento.imagem = this.imagemNome;
         }
         
+        // CONVERSÕES PARA JSON
+        this.suprimento.quantidade = Number(this.suprimento.quantidade);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.suprimento);
+        
         this.suprimentoService.atualizarSuprimento(this.suprimento)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

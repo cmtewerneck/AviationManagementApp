@@ -48,7 +48,7 @@ export class ListaComponent implements OnInit {
       }
       
       ObterTodos() {
-        this.tripulanteService.obterTodos().subscribe(
+        this.tripulanteService.obterTodos(2).subscribe(
           (_tripulantes: Tripulante[]) => {
             this.tripulantes = _tripulantes;
             this.tripulantesFiltrados = this.tripulantes;

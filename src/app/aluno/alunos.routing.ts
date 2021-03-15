@@ -29,14 +29,14 @@ const alunosRouterConfig: Routes = [
             {
                 path: 'detalhes/:id', component: DetalhesComponent,
                 resolve: {
-                    cliente: AlunoResolve
+                    aluno: AlunoResolve
                 },
                 data: [{ claim: { nome: 'Aluno', valor: 'Atualizar' } }],
             },
             {
                 path: 'editar/:id', component: EditarComponent,
                 resolve: {
-                    cliente: AlunoResolve
+                    aluno: AlunoResolve
                 },
                 canDeactivate: [AlunoGuard],
                 canActivate: [AlunoGuard],
@@ -47,7 +47,7 @@ const alunosRouterConfig: Routes = [
                 canActivate: [AlunoGuard],
                 data: [{ claim: { nome: 'Aluno', valor: 'Excluir' } }],
                 resolve: {
-                    cliente: AlunoResolve
+                    aluno: AlunoResolve
                 }
             }
         ]

@@ -1,15 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar Tarifa</h1>
+                <h3>Editar Tarifa</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item"><a routerLink="/aeronaves/listar-todos">Aeronaves</a></li>
-                    <li class="breadcrumb-item active">Tarifas</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/aeronaves-tarifas/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -36,86 +34,93 @@
             <input type="hidden" id="id" name="id" value="">
             
             <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Data</label>
-                    <div>
-                        <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
-                        <span class="text-danger" *ngIf="displayMessage.data">
-                            <p [innerHTML]="displayMessage.data"></p>
-                        </span>
-                    </div>
-                </div>     
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">Vencimento</label>
-                    <div>
-                        <input class="form-control" id="vencimento" type="date" [ngClass]="{'is-invalid': displayMessage.vencimento }" />
-                        <span class="text-danger" *ngIf="displayMessage.vencimento">
-                            <p [innerHTML]="displayMessage.vencimento"></p>
-                        </span>
+                <div class="col-md-12">
+                    <div class="card">
+                        <h5 class="card-header">Dados da Tarifa</h5>
+                        <div class="card-body">
+                            <div class="row">     
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Data<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
+                                        <span class="text-danger" *ngIf="displayMessage.data">
+                                            <p [innerHTML]="displayMessage.data"></p>
+                                        </span>
+                                    </div>
+                                </div>     
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Vencimento<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="vencimento" type="date" formControlName="vencimento" [ngClass]="{'is-invalid': displayMessage.vencimento }" />
+                                        <span class="text-danger" *ngIf="displayMessage.vencimento">
+                                            <p [innerHTML]="displayMessage.vencimento"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Matrícula<span style="color: red;">*</span></label>
+                                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
+                                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
+                                    </select>
+                                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
+                                        <p [innerHTML]="displayMessage.aeronaveId"></p>
+                                    </span>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Valor<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="valor" type="text" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
+                                        <span class="text-danger" *ngIf="displayMessage.valor">
+                                            <p [innerHTML]="displayMessage.valor"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Situação<span style="color: red;">*</span></label>
+                                    <div>
+                                        <select class="form-control" id="situacao" formControlName="situacao">
+                                            <option value=true>Pago</option>
+                                            <option value=false>Pendente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Numeração<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="numeracao" type="text" formControlName="numeracao" [ngClass]="{'is-invalid': displayMessage.numeracao }" />
+                                        <span class="text-danger" *ngIf="displayMessage.numeracao">
+                                            <p [innerHTML]="displayMessage.numeracao"></p>
+                                        </span>
+                                    </div>
+                                </div>   
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Órgão Emissor<span style="color: red;">*</span></label>
+                                    <div>
+                                        <select class="form-control" id="orgaoEmissorTarifa" formControlName="orgaoEmissorTarifa">
+                                            <option value=1>DECEA</option>
+                                            <option value=2>Infraero</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">Matrícula</label>
-                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
-                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
-                    </select>
-                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
-                        <p [innerHTML]="displayMessage.aeronaveId"></p>
-                    </span>
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">Valor</label>
-                    <div>
-                        <input class="form-control" id="valor" type="text" placeholder="(requerido)" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
-                        <span class="text-danger" *ngIf="displayMessage.valor">
-                            <p [innerHTML]="displayMessage.valor"></p>
-                        </span>
-                    </div>
-                </div>
-                
             </div>
             
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Situação</label>
-                    <div>
-                        <select class="form-control" id="situacao" formControlName="situacao">
-                            <option value="true">Pago</option>
-                            <option value="false">Pendente</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label class="control-label">Numeração</label>
-                    <div>
-                        <input class="form-control" id="numeracao" type="text" placeholder="(requerido)" formControlName="numeracao" [ngClass]="{'is-invalid': displayMessage.numeracao }" />
-                        <span class="text-danger" *ngIf="displayMessage.numeracao">
-                            <p [innerHTML]="displayMessage.numeracao"></p>
-                        </span>
-                    </div>
-                </div>   
-
-                <div class="form-group col-md-4">
-                    <label class="control-label">Órgão Emissor</label>
-                    <div>
-                        <select class="form-control" id="orgaoEmissor" formControlName="orgaoEmissor">
-                            <option value="1">DECEA</option>
-                            <option value="2">Infraero</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="form-group" style="text-align: right;">
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" style="margin-top: 20px;">&nbsp;
             </div>
-            
-            <div class="form-group">
-                <input type="submit" [disabled]="!aeronaveTarifaForm.valid" value="Editar" class="btn btn-primary">&nbsp;
-                <a class="btn btn-info" href="/aeronaves-tarifas/listar-todos">Voltar</a>
-            </div>
+
         </form>
-        
     </div>
 </section>
 <!-- /.content -->

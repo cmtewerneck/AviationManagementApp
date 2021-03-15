@@ -1,51 +1,117 @@
-<div class="container main-container">
-  <h4>Excluir {{ produto.nome }} </h4>
-  <br>
-  <h5>Você tem certeza disso?</h5>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/produtos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-warning" [routerLink]="['/produtos/editar',produto.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-  <div class="row">
-      <div class="col-md-4">
-          <img src="{{ imagens }}{{ produto.imagem }}" style="width: 300px; height: 428px">
-      </div>
-      <div class="col-md-6">
-          <dl>
-              <dt>
-                  Fornecedor
-              </dt>
-              <dd>
-                  {{ produto.fornecedorNome }}
-              </dd>
-              <dt>
-                  Nome
-              </dt>
-              <dd>
-                  {{ produto.nome }}
-              </dd>
-              <dt>
-                  Descrição
-              </dt>
-              <dd>
-                  {{ produto.descricao }}
-              </dd>
-              <dt>
-                  Valor
-              </dt>
-              <dd>
-                  {{ produto.valor }}
-              </dd>
-              <dt>
-                  Ativo?
-              </dt>
-              <dd>
-                  <input [checked]="produto.ativo" class="check-box" disabled="disabled" type="checkbox">
-              </dd>
-          </dl>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center" style="height: 100%;">
+                    <h5 class="card-header">Foto</h5>
+                    <div class="card-body">
+                        <img src="{{ imagens }}{{ produto.imagem }}" style="width: 280px; height: 200px; border-radius: 10px;" /><br><br>
+                        <a class="btn btn-success" [routerLink]="['/produtos/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card" style="height: 100%;">
+                    <h5 class="card-header">Dados do Produto</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <dl class="col-md-6">
+                                <dt class="col-sm-4">
+                                    <label class="control-label">Nome:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="produto.nome == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="produto.nome != ''">{{ produto.nome }}</dd>
+                                <br>   
+                                <dt class="col-sm-4">
+                                    <label class="control-label">Fornecedor:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="produto.fornecedorNome == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="produto.fornecedorNome != ''">{{ produto.fornecedorNome }}</dd>
+                            </dl>
+                            <dl class="col-md-6">
+                                <dt class="col-sm-4">
+                                    <label class="control-label">Valor:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="produto.valor == null">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="produto.valor != null">{{ produto.valor | currencyBrazil }}</dd>
+                                <br> 
+                                <dt class="col-sm-10">
+                                    <label class="control-label">Ativo:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="produto.ativo == true">Sim</dd>
+                                <dd class="col-sm-10" *ngIf="produto.ativo == false">Não</dd>
+                            </dl>
+                        </div>
+                        <div class="row">
+                            <dl class="col-md-12">
+                                <dt class="col-sm-4">
+                                    <label class="control-label">Descrição:</label>
+                                </dt>
+                                <dd class="col-sm-10" *ngIf="produto.descricao == ''">Não Informado</dd>
+                                <dd class="col-sm-10" *ngIf="produto.descricao != ''">{{ produto.descricao }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-          <div>
-              <a class="btn btn-warning" [routerLink]="['/produtos/editar',produto.id]">Editar</a>&nbsp;
-              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
-          </div>
-      </div>
-  </div>
-
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">
+                    Confirma exclusão?
+                </h4>
+                <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+                <p>O produto {{produto.nome}} será excluído!</p>
+            </div>    
+            <div class="modal-footer btn-group d-flex">      
+                <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+                    CENCELAR
+                </button>
+                <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirProduto(confirmDelete)"> 
+                    EXCLUIR
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

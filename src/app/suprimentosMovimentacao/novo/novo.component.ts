@@ -52,6 +52,14 @@ export class NovoComponent extends SuprimentoMovimentacaoBaseComponent implement
           this.suprimentoMovimentacao = Object.assign({}, this.suprimentoMovimentacao, this.suprimentoMovimentacaoForm.value);
           
           // this.formResult = JSON.stringify(this.produto);
+
+          // CONVERSÕES PARA JSON
+          this.suprimentoMovimentacao.data = new Date(this.suprimentoMovimentacao.data);
+          this.suprimentoMovimentacao.quantidade = Number(this.suprimentoMovimentacao.quantidade);
+          this.suprimentoMovimentacao.tipoMovimentacao = Number(this.suprimentoMovimentacao.tipoMovimentacao);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.suprimentoMovimentacao);
           
           this.suprimentoMovimentacaoService.novoSuprimentoMovimentacao(this.suprimentoMovimentacao)
           .subscribe(
@@ -70,7 +78,7 @@ export class NovoComponent extends SuprimentoMovimentacaoBaseComponent implement
           let toast = this.toastr.success('Movimentação cadastrada com sucesso!', 'Sucesso!');
           if (toast) {
             toast.onHidden.subscribe(() => {
-              this.router.navigate(['/suprimentosMovimentacao/listar-todos']);
+              this.router.navigate(['/suprimentos-movimentacoes/listar-todos']);
             });
           }
         }

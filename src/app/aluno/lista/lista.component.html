@@ -1,14 +1,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1>Alunos</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Alunos</li>
         </ol>
       </div>
     </div>
@@ -25,60 +23,128 @@
         </div>
       </div>
       <div>
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-info" [routerLink]="['/voos-instrucao/adicionar-novo']"><i class="fas fa-helicopter"></i>&nbsp;&nbsp;Lançar Instrução</a>&nbsp;&nbsp;
         <a class="btn btn-success" [routerLink]="['/alunos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Aluno</a>
-        <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
       </div>
     </div>
-    <table class="table table-hover" style="white-space: nowrap">
-      <thead class="thead-dark">
-        <tr>
-          <th>
-            <button (click)="alternarImagem()" class="btn btn-primary">
-              <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
-            </button>
-          </th>
-          <th>Nome</th>
-          <th>Documento</th>
-          <th>Total Voado</th>
-          <th>Saldo</th>
-          <th>E-mail</th>
-          <th>Telefone</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="alunos && alunos.length">
-        <tr *ngFor="let aluno of alunosFiltrados">
-          <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ aluno.imagem }}" style="width: 70px; height: 100px"></td>
-          <td>{{ aluno.nome }}</td>
-          <td>{{ aluno.tipoPessoa === 1 ? (aluno.documento | cpf) : (aluno.documento | cnpj ) }}</td>
-          <td>{{ aluno.totalVoado }}</td>
-          <td>{{ aluno.saldo }}</td>
-          <td>{{ aluno.email }}</td>
-          <td>{{ aluno.telefone | telefone }}</td>
-          
-          <td class="text-right">
-            <a class="btn btn-warning" [routerLink]="['/alunos/detalhes',aluno.id]">
-              <span class="fa fa-search"></span>
-            </a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/alunos/editar',aluno.id]">
-              <span class="fa fa-pencil-alt"></span>
-            </a>&nbsp;
-            <a class="btn btn-danger" [routerLink]="['/alunos/excluir',aluno.id]">
-              <span class="fa fa-trash"></span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot *ngIf="!alunos">
-        <tr>
-          <td colspan="7" class="text-center">
-            <h4>
-              Nenhum item encontrado!
-            </h4>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+          <tr>
+            <th>
+              <button (click)="alternarImagem()" class="btn btn-primary">
+                <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+              </button>
+            </th>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>Total Voado</th>
+            <th>Saldo</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="alunos && alunos.length">
+          <tr *ngFor="let aluno of alunosFiltrados">
+            <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ aluno.imagem }}" style="width: 70px; height: 100px"></td>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.tipoPessoa === 1 ? (aluno.documento | cpf) : (aluno.documento | cnpj ) }}</td>
+            <td>{{ aluno.totalVoado }}</td>
+            <td>{{ aluno.saldo }}</td>
+            <td>{{ aluno.email }}</td>
+            <td>{{ aluno.telefone | telefone }}</td>
+            
+            <td class="text-right">
+              <a class="btn btn-success btn-sm" (click)="abrirModal(adicionarSaldo)">
+                <span class="fas fa-arrow-up"></span>&nbsp;<span class="fas fa-dollar-sign"></span>
+              </a>&nbsp;
+              <a class="btn btn-danger btn-sm" (click)="abrirModal(removerSaldo)">
+                <span class="fas fa-arrow-down"></span>&nbsp;<span class="fas fa-dollar-sign"></span>
+              </a>&nbsp;
+              <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/alunos/editar',aluno.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+              <!-- <a class="btn btn-danger" [routerLink]="['/alunos/excluir',aluno.id]">
+                <span class="fa fa-trash"></span>
+              </a> -->
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!alunos">
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </section>
 <!-- /.content -->
+
+<!-- INÍCIO MODAL ADICIONAR SALDO -->
+<div bsModal #adicionarSaldo="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Saldo</h4>
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <form [formGroup]="alunoForm">
+
+        <div class="modal-body">
+          <div class="form-group">
+            <input class="form-control" id="saldo" type="text" formControlName="saldo" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <input type="submit" value="Atualizar" (click)="fecharModal(adicionarSaldo)" class="btn btn-success">
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+<!-- FIM DA MODAL -->
+
+<!-- INÍCIO MODAL REMOVER SALDO -->
+<div bsModal #removerSaldo="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Remover Saldo</h4>
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <form [formGroup]="alunoForm">
+
+        <div class="modal-body">
+          <div class="form-group">
+            <input class="form-control" id="saldo" type="text" formControlName="saldo" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <input type="submit" value="Atualizar" (click)="fecharModal(removerSaldo)" class="btn btn-success">
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+<!-- FIM DA MODAL -->

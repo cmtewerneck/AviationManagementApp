@@ -55,6 +55,12 @@ export class EditarComponent extends ManualVooBaseComponent implements OnInit {
         this.manualVoo = Object.assign({}, this.manualVoo, this.manualVooForm.value);
         
         // Implementar upload de arquivo pdf
+
+        // CONVERSÕES PARA JSON
+        if (this.manualVoo.ultimaRevisao) { this.manualVoo.ultimaRevisao = new Date(this.manualVoo.ultimaRevisao); } else { this.manualVoo.ultimaRevisao = null; }
+        // FIM DAS CONVERSÕES
+
+        console.log(this.manualVoo);
         
         this.manualVooService.atualizarManualVoo(this.manualVoo)
         .subscribe(

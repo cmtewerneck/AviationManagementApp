@@ -51,7 +51,7 @@ export class EditarComponent extends AlunoBaseComponent implements OnInit {
         documento: ['', [Validators.required, NgBrazilValidators.cpf]],
         sexo: ['', Validators.required],
         estadoCivil: ['', Validators.maxLength(20)],
-        ativo: [true],
+        ativo: [0],
         telefone: ['', Validators.maxLength(20)],
         email: ['', [Validators.email, Validators.maxLength(20)]],
         imagem: [''],
@@ -59,8 +59,8 @@ export class EditarComponent extends AlunoBaseComponent implements OnInit {
         // ALUNO
         rg: ['', [Validators.required, Validators.maxLength(20)]],
         canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-        totalVoado: ['', Validators.required],
-        saldo: ['', Validators.required],
+        totalVoado: [''],
+        saldo: [''],
         dataNascimento: ['', Validators.required],
         validadeCMA: ['']
       });
@@ -68,7 +68,7 @@ export class EditarComponent extends AlunoBaseComponent implements OnInit {
       this.alunoForm.patchValue({
         id: this.aluno.id,
         nome: this.aluno.nome,
-        tipoPessoa: this.aluno.tipoPessoa,
+        tipoPessoa: this.aluno.tipoPessoa.toString(),
         documento: this.aluno.documento,
         sexo: this.aluno.sexo,
         estadoCivil: this.aluno.estadoCivil,
@@ -135,9 +135,18 @@ export class EditarComponent extends AlunoBaseComponent implements OnInit {
           this.aluno.imagem = this.imagemNome;
         }
         
+        // CONVERSÕES PARA JSON
+        this.aluno.tipoPessoa = Number(this.aluno.tipoPessoa);
         this.aluno.documento = StringUtils.somenteNumeros(this.aluno.documento);
-        this.aluno.saldo = CurrencyUtils.StringParaDecimal(this.aluno.saldo);
+        this.aluno.sexo = Number(this.aluno.sexo);
+        this.aluno.ativo = this.aluno.ativo.toString() == "true";
         this.aluno.totalVoado = CurrencyUtils.StringParaDecimal(this.aluno.totalVoado);
+        this.aluno.saldo = CurrencyUtils.StringParaDecimal(this.aluno.saldo);
+        this.aluno.dataNascimento = new Date(this.aluno.dataNascimento);
+        if (this.aluno.validadeCMA) { this.aluno.validadeCMA = new Date(this.aluno.validadeCMA); } else { this.aluno.validadeCMA = null; }
+        // FIM DAS CONVERSÕES
+        
+        console.log(this.aluno);
         
         this.alunoService.EditarAluno(this.aluno)
         .subscribe(

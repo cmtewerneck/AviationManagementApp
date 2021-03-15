@@ -1,14 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Adicionar Conta a Receber</h1>
+                <h3>Novo Lançamento</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item active">Contas a Receber</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/contas-receber/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -20,7 +19,7 @@
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
         
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <form enctype="multipart/form-data" (ngSubmit)="adicionarContasReceber()" [formGroup]="contasReceberForm">
                     
                     <div class="alert alert-danger" *ngIf="errors.length > 0">
@@ -31,83 +30,92 @@
                     </div>
                     
                     <div class="row">
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Data Vencimento</label>
-                            <div>
-                                <input class="form-control" id="dataVencimento" type="date" formControlName="dataVencimento" [ngClass]="{'is-invalid': displayMessage.dataVencimento }"/>
-                                <span class="text-danger" *ngIf="displayMessage.dataVencimento">
-                                    <p [innerHTML]="displayMessage.dataVencimento"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Descrição</label>
-                            <div>
-                                <input class="form-control" id="descricao" type="text" placeholder="(requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
-                                <span class="text-danger" *ngIf="displayMessage.descricao">
-                                    <p [innerHTML]="displayMessage.descricao"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Código de Barras</label>
-                            <div>
-                                <input class="form-control" id="codigoBarras" type="text" placeholder="(opcional)" formControlName="codigoBarras" [ngClass]="{'is-invalid': displayMessage.codigoBarras }"/>
-                                <span class="text-danger" *ngIf="displayMessage.codigoBarras">
-                                    <p [innerHTML]="displayMessage.codigoBarras"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Valor a Receber</label>
-                            <div>
-                                <input class="form-control" id="valorReceber" type="text" placeholder="(requerido)" formControlName="valorReceber" [ngClass]="{'is-invalid': displayMessage.valorReceber }" />
-                                <span class="text-danger" *ngIf="displayMessage.valorReceber">
-                                    <p [innerHTML]="displayMessage.valorReceber"></p>
-                                </span>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados do Lançamento</h5>
+                                <div class="card-body">
+                                    <div class="row">     
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Data Vencimento<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="dataVencimento" type="date" formControlName="dataVencimento" [ngClass]="{'is-invalid': displayMessage.dataVencimento }"/>
+                                                <span class="text-danger" *ngIf="displayMessage.dataVencimento">
+                                                    <p [innerHTML]="displayMessage.dataVencimento"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Descrição<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="descricao" type="text" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                                                <span class="text-danger" *ngIf="displayMessage.descricao">
+                                                    <p [innerHTML]="displayMessage.descricao"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Código de Barras</label>
+                                            <div>
+                                                <input class="form-control" id="codigoBarras" type="text" formControlName="codigoBarras" [ngClass]="{'is-invalid': displayMessage.codigoBarras }"/>
+                                                <span class="text-danger" *ngIf="displayMessage.codigoBarras">
+                                                    <p [innerHTML]="displayMessage.codigoBarras"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Valor a Receber<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="valorReceber" type="text" formControlName="valorReceber" [ngClass]="{'is-invalid': displayMessage.valorReceber }" />
+                                                <span class="text-danger" *ngIf="displayMessage.valorReceber">
+                                                    <p [innerHTML]="displayMessage.valorReceber"></p>
+                                                </span>
+                                            </div>
+                                        </div>    
+                                    </div>  
+                                    
+                                    <div class="row">     
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Situação<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
+                                                    <option value=1>Pago</option>
+                                                    <option value=2>Não Pago</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Data do Recebimento</label>
+                                            <div>
+                                                <input class="form-control" id="dataRecebimento" type="date" formControlName="dataRecebimento" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Valor Recebido</label>
+                                            <div>
+                                                <input class="form-control" id="valorRecebido" type="text" formControlName="valorRecebido" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Forma de Pagamento</label>
+                                            <div>
+                                                <input class="form-control" id="formaPagamento" type="text" formControlName="formaPagamento" />
+                                            </div>
+                                        </div> 
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Situação</label>
-                            <div>
-                                <select class="form-control" id="situacao" formControlName="situacao" [ngClass]="{ 'is-invalid': displayMessage.situacao }">
-                                    <option value="1">Pago</option>
-                                    <option value="2">Não Pago</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Data do Recebimento</label>
-                            <div>
-                                <input class="form-control" id="dataRecebimento" type="date" formControlName="dataRecebimento" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Valor Recebido</label>
-                            <div>
-                                <input class="form-control" id="valorRecebido" type="text" placeholder="(opcional)" formControlName="valorRecebido" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Forma de Pagamento</label>
-                            <div>
-                                <input class="form-control" id="formaPagamento" type="text" formControlName="formaPagamento" />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" [disabled]="!contasReceberForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
-                        <a class="btn btn-info" href="/contas-receber/listar-todos">Voltar</a>
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!contasReceberForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/contas-receber/listar-todos">Voltar</a>
                     </div>
                 </form>
             </div>

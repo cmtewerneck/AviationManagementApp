@@ -40,6 +40,14 @@ export class NovoComponent extends ManualEmpresaBaseComponent implements OnInit 
         
         // IMPLEMENTAR UPLOAD DO ARQUIVO PDF DO MANUAL
         
+        // CONVERSÕES PARA JSON
+        this.manualEmpresa.revisaoAtual = Number(this.manualEmpresa.revisaoAtual);
+        this.manualEmpresa.dataRevisao = new Date(this.manualEmpresa.dataRevisao);
+        if (this.manualEmpresa.revisaoAnalise) { this.manualEmpresa.revisaoAnalise = Number(this.manualEmpresa.revisaoAnalise); } else { this.manualEmpresa.revisaoAnalise = null; }
+        // FIM DAS CONVERSÕES
+
+        console.log(this.manualEmpresa);
+
         this.manualEmpresaService.novoManualEmpresa(this.manualEmpresa)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

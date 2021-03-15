@@ -57,6 +57,15 @@ export class NovoComponent extends VeiculoBaseComponent implements OnInit {
         this.veiculo.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
         this.veiculo.imagem = this.imagemNome;
         
+        // CONVERSÕES PARA JSON
+        if (this.veiculo.ano) { this.veiculo.ano = Number(this.veiculo.ano); } else { this.veiculo.ano = null; }
+        this.veiculo.proprio = this.veiculo.proprio.toString() == "true";
+        if (this.veiculo.kmAtual) { this.veiculo.kmAtual = Number(this.veiculo.kmAtual); } else { this.veiculo.kmAtual = null; }
+        this.veiculo.tipoCombustivel = Number(this.veiculo.tipoCombustivel);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.veiculo);
+
         this.veiculoService.novoVeiculo(this.veiculo)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

@@ -85,6 +85,15 @@ export class EditarComponent extends OrdemServicoBaseComponent implements OnInit
         if (this.ordemServicoForm.dirty && this.ordemServicoForm.valid) {
           this.ordemServico = Object.assign({}, this.ordemServico, this.ordemServicoForm.value);
           
+          // CONVERSÕES PARA JSON
+          this.ordemServico.dataAbertura = new Date(this.ordemServico.dataAbertura);
+          if (this.ordemServico.dataFechamento) { this.ordemServico.dataFechamento = new Date(this.ordemServico.dataFechamento); } else { this.ordemServico.dataFechamento = null; }
+          if (this.ordemServico.dataRealizacao) { this.ordemServico.dataRealizacao = new Date(this.ordemServico.dataRealizacao); } else { this.ordemServico.dataRealizacao = null; }
+          if (this.ordemServico.dataInspecao) { this.ordemServico.dataInspecao = new Date(this.ordemServico.dataInspecao); } else { this.ordemServico.dataInspecao = null; }
+          // FIM DAS CONVERSÕES
+
+          console.log(this.ordemServico);
+          
           this.ordemServicoService.atualizarOrdemServico(this.ordemServico)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

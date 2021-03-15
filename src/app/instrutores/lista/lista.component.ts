@@ -48,7 +48,7 @@ export class ListaComponent implements OnInit {
   }
 
   ObterTodos() {
-    this.instrutorService.obterTodos().subscribe(
+    this.instrutorService.obterTodos(3).subscribe(
       (_instrutores: Instrutor[]) => {
       this.instrutores = _instrutores;
       this.instrutoresFiltrados = this.instrutores;

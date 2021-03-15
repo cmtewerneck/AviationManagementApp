@@ -1,14 +1,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1>Diários de Bordo</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Diários de Bordo</li>
         </ol>
       </div>
     </div>
@@ -25,61 +23,64 @@
         </div>
       </div>
       <div>
-        <a class="btn btn-success" [routerLink]="['/diarios-bordo/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Diário</a>
-        <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-success" [routerLink]="['/diarios-bordo/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Diário</a>&nbsp;&nbsp;
       </div>
     </div>
-    <table class="table table-hover" style="white-space: nowrap">
-      <thead class="thead-dark">
-        <tr>
-          <th>Data</th>
-          <th>Matrícula</th>
-          <th>De</th>
-          <th>Para</th>
-          <th>Comandante</th>
-          <th>Total Decimal</th>
-          <th>Total Dec/Pouso</th>
-          <th>Total Acionamento/Corte</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="diariosBordo && diariosBordo.length">
-        <tr *ngFor="let diarioBordo of diariosBordoFiltrados">
-          <td>{{ diarioBordo.data | date }}</td>
-          <td>{{ diarioBordo.matriculaAeronave }}</td>
-          <td>{{ diarioBordo.de }}</td>
-          <td>{{ diarioBordo.para }}</td>
-          <td>{{ diarioBordo.nomeComandante }}</td>
-          <td>{{ diarioBordo.totalDecimal }}</td>
-          <td>{{ diarioBordo.totalDecPouso }}</td>
-          <td>{{ diarioBordo.totalAcionamentoCorte }}</td>
-          
-          <td class="text-right">
-            <a class="btn btn-primary">
-              <span class="fa fa-download"></span>
-            </a>&nbsp;
-            <a class="btn btn-warning" [routerLink]="['/diarios-bordo/detalhes',diarioBordo.id]">
-              <span class="fa fa-search"></span>
-            </a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/diarios-bordo/editar',diarioBordo.id]">
-              <span class="fa fa-pencil-alt"></span>
-            </a>&nbsp;
-            <a class="btn btn-danger" [routerLink]="['/diarios-bordo/excluir',diarioBordo.id]">
-              <span class="fa fa-trash"></span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot *ngIf="!diariosBordo">
-        <tr>
-          <td colspan="7" class="text-center">
-            <h4>
-              Nenhum item encontrado!
-            </h4>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+          <tr>
+            <th>Data</th>
+            <th>Matrícula</th>
+            <th>De</th>
+            <th>Para</th>
+            <th>Comandante</th>
+            <th>Total Decimal</th>
+            <th>Total Dec/Pouso</th>
+            <th>Total Acionamento/Corte</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="diariosBordo && diariosBordo.length">
+          <tr *ngFor="let diarioBordo of diariosBordoFiltrados">
+            <td>{{ diarioBordo.data | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ diarioBordo.matriculaAeronave }}</td>
+            <td>{{ diarioBordo.de }}</td>
+            <td>{{ diarioBordo.para }}</td>
+            <td>{{ diarioBordo.nomeComandante }}</td>
+            <td>{{ diarioBordo.totalDecimal }}</td>
+            <td>{{ diarioBordo.totalDecPouso }}</td>
+            <td>{{ diarioBordo.totalAcionamentoCorte }}</td>
+            
+            <td class="text-right">
+              <a class="btn btn-primary">
+                <span class="fa fa-download btn-sm"></span>
+              </a>&nbsp;
+              <a class="btn btn-warning btn-sm" [routerLink]="['/diarios-bordo/detalhes',diarioBordo.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/diarios-bordo/editar',diarioBordo.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+              <!-- <a class="btn btn-danger" [routerLink]="['/diarios-bordo/excluir',diarioBordo.id]">
+                <span class="fa fa-trash"></span>
+              </a> -->
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!diariosBordo">
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </section>
 <!-- /.content -->

@@ -12,21 +12,21 @@ export class InstrutorService extends BaseService {
 
     constructor(private http: HttpClient) { super(); }
 
-    obterTodos(): Observable<Instrutor[]> {
+    obterTodos(tipoColaborador: number): Observable<Instrutor[]> {
         return this.http
-            .get<Instrutor[]>(this.urlServiceV1 + 'instrutores', this.ObterAuthHeaderJson())
+            .get<Instrutor[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     obterPorId(id: string): Observable<Instrutor> {
         return this.http
-            .get<Instrutor>(this.urlServiceV1 + 'instrutores/' + id, this.ObterAuthHeaderJson())
+            .get<Instrutor>(this.urlServiceV1 + 'colaboradores/' + id, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     novoInstrutor(instrutor: Instrutor): Observable<Instrutor> {
         return this.http
-            .post(this.urlServiceV1 + 'instrutores', instrutor, this.ObterAuthHeaderJson())
+            .post(this.urlServiceV1 + 'colaboradores', instrutor, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -34,7 +34,7 @@ export class InstrutorService extends BaseService {
 
     atualizarInstrutor(instrutor: Instrutor): Observable<Instrutor> {
         return this.http
-            .put(this.urlServiceV1 + 'instrutores/' + instrutor.id, instrutor, this.ObterAuthHeaderJson())
+            .put(this.urlServiceV1 + 'colaboradores/' + instrutor.id, instrutor, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -42,7 +42,7 @@ export class InstrutorService extends BaseService {
 
     excluirInstrutor(id: string): Observable<Instrutor> {
         return this.http
-            .delete(this.urlServiceV1 + 'instrutores/' + id, this.ObterAuthHeaderJson())
+            .delete(this.urlServiceV1 + 'colaboradores/' + id, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

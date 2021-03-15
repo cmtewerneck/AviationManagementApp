@@ -61,6 +61,15 @@ export class EditarComponent extends LegislacaoBaseComponent implements OnInit {
         this.legislacao = Object.assign({}, this.legislacao, this.legislacaoForm.value);
         
         // INSERIR UPLOAD DO ARQUIVO PDF
+
+        // CONVERSÕES PARA JSON
+        this.legislacao.tipoLegislacao = Number(this.legislacao.tipoLegislacao);
+        this.legislacao.numero = Number(this.legislacao.numero);
+        if (this.legislacao.emenda) { this.legislacao.emenda = Number(this.legislacao.emenda); } else { this.legislacao.emenda = null; }
+        if (this.legislacao.dataEmenda) { this.legislacao.dataEmenda = new Date(this.legislacao.dataEmenda); } else { this.legislacao.dataEmenda = null; }
+        // FIM DAS CONVERSÕES
+
+        console.log(this.legislacao);
         
         this.legislacaoService.atualizarLegislacao(this.legislacao)
         .subscribe(

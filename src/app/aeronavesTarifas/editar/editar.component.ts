@@ -41,7 +41,7 @@ export class EditarComponent extends AeronaveTarifaBaseComponent implements OnIn
           valor: ['', [Validators.required]],
           situacao: [0],
           numeracao: ['', [Validators.required, Validators.maxLength(30)]],
-          orgaoEmissor: ['', [Validators.required]]
+          orgaoEmissorTarifa: ['', [Validators.required]]
         });
 
       this.aeronaveTarifaForm.patchValue({
@@ -50,7 +50,7 @@ export class EditarComponent extends AeronaveTarifaBaseComponent implements OnIn
           data: this.aeronaveTarifa.data,
           vencimento: this.aeronaveTarifa.vencimento,
           valor: CurrencyUtils.DecimalParaString(this.aeronaveTarifa.valor),
-          orgaoEmissor: this.aeronaveTarifa.orgaoEmissor,
+          orgaoEmissorTarifa: this.aeronaveTarifa.orgaoEmissorTarifa,
           numeracao: this.aeronaveTarifa.numeracao,
           situacao: this.aeronaveTarifa.situacao
         });
@@ -68,7 +68,15 @@ export class EditarComponent extends AeronaveTarifaBaseComponent implements OnIn
         if (this.aeronaveTarifaForm.dirty && this.aeronaveTarifaForm.valid) {
           this.aeronaveTarifa = Object.assign({}, this.aeronaveTarifa, this.aeronaveTarifaForm.value);
 
+          // CONVERSÕES PARA JSON
+          this.aeronaveTarifa.data = new Date(this.aeronaveTarifa.data);
+          this.aeronaveTarifa.vencimento = new Date(this.aeronaveTarifa.vencimento);
           this.aeronaveTarifa.valor = CurrencyUtils.StringParaDecimal(this.aeronaveTarifa.valor);
+          this.aeronaveTarifa.situacao = this.aeronaveTarifa.situacao.toString() == "true";
+          this.aeronaveTarifa.orgaoEmissorTarifa = Number(this.aeronaveTarifa.orgaoEmissorTarifa);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.aeronaveTarifa);
           
           this.aeronaveTarifaService.atualizarAeronaveTarifa(this.aeronaveTarifa)
           .subscribe(

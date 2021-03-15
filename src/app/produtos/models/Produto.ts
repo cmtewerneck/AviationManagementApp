@@ -3,7 +3,7 @@ export interface Produto {
     nome: string;
     descricao: string;
     valor: number;
-    ativo: true;
+    ativo: boolean;
     fornecedorId: string;
     fornecedorNome: string;
     

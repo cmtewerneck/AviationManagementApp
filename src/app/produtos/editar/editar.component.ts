@@ -80,7 +80,12 @@ export class EditarComponent extends ProdutoBaseComponent implements OnInit {
             this.produto.imagem = this.imagemNome;
           }
           
+          // CONVERSÕES PARA JSON
           this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor);
+          this.produto.ativo = this.produto.ativo.toString() == "true";
+          // FIM DAS CONVERSÕES
+          
+          console.log(this.produto);  
           
           this.produtoService.atualizarProduto(this.produto)
           .subscribe(

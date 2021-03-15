@@ -11,11 +11,13 @@ export class FornecedoresComponent implements OnInit {
   
   public fornecedores: Fornecedor[];
   errorMessage: string;
+  errors: any[] = [];
   
   fornecedor: Fornecedor;
   fornecedoresFiltrados: Fornecedor[];
   
-  constructor(private fornecedorService: FornecedorService,
+  constructor(
+    private fornecedorService: FornecedorService,
     private toastr: ToastrService) {}
     
     ngOnInit(): void {
@@ -48,4 +50,4 @@ export class FornecedoresComponent implements OnInit {
             console.log(error);
           });
         }
-      }
+}

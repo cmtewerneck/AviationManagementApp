@@ -129,7 +129,7 @@ export class EditarComponent implements OnInit {
         documento: ['', [Validators.required, NgBrazilValidators.cpf]],
         sexo: ['', Validators.required],
         estadoCivil: ['', Validators.maxLength(20)],
-        ativo: [true],
+        ativo: [0],
         telefone: ['', Validators.maxLength(20)],
         email: ['', [Validators.email, Validators.maxLength(20)]],
         imagem: [''],
@@ -261,9 +261,15 @@ export class EditarComponent implements OnInit {
             this.fornecedor.imagem = this.imagemNome;
           }
           
+          // CONVERSÕES PARA JSON
+          this.fornecedor.tipoPessoa = Number(this.fornecedor.tipoPessoa);
           this.fornecedor.documento = StringUtils.somenteNumeros(this.fornecedor.documento);
-          
-          // console.log(this.fornecedor);
+          this.fornecedor.sexo = Number(this.fornecedor.sexo);
+          this.fornecedor.ativo = this.fornecedor.ativo.toString() == "true";
+          this.fornecedor.endereco.cep = StringUtils.somenteNumeros(this.fornecedor.endereco.cep);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.fornecedor);
           
           this.fornecedorService.EditarFornecedor(this.fornecedor)
           .subscribe(

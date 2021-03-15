@@ -45,9 +45,16 @@ export class NovoComponent extends VeiculoMultaBaseComponent implements OnInit {
         if (this.veiculoMultaForm.dirty && this.veiculoMultaForm.valid) {
           this.veiculoMulta = Object.assign({}, this.veiculoMulta, this.veiculoMultaForm.value);
           
+          // CONVERSÕES PARA JSON
+          this.veiculoMulta.data = new Date(this.veiculoMulta.data);
+          this.veiculoMulta.situacao = this.veiculoMulta.situacao.toString() == "true";
           this.veiculoMulta.valor = CurrencyUtils.StringParaDecimal(this.veiculoMulta.valor);
+          // FIM DAS CONVERSÕES
+          
           // this.formResult = JSON.stringify(this.produto);
           
+          console.log(this.veiculoMulta);
+
           this.veiculoMultaService.novoVeiculoMulta(this.veiculoMulta)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

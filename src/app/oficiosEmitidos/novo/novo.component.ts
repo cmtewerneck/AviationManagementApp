@@ -39,6 +39,12 @@ export class NovoComponent extends OficioEmitidoBaseComponent implements OnInit 
         this.oficioEmitido = Object.assign({}, this.oficioEmitido, this.oficioEmitidoForm.value);
         
         // this.formResult = JSON.stringify(this.produto);
+
+        // CONVERSÕES PARA JSON
+        this.oficioEmitido.data = new Date(this.oficioEmitido.data);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.oficioEmitido);
         
         this.oficioEmitidoService.novoOficioEmitido(this.oficioEmitido)
         .subscribe(

@@ -40,6 +40,13 @@ export class NovoComponent extends TurmaBaseComponent implements OnInit {
         if (this.turmaForm.dirty && this.turmaForm.valid) {
           this.turma = Object.assign({}, this.turma, this.turmaForm.value);
           
+          // CONVERSÕES PARA JSON
+          this.turma.dataInicio = new Date(this.turma.dataInicio);
+          if (this.turma.dataTermino) { this.turma.dataTermino = new Date(this.turma.dataTermino); } else { this.turma.dataTermino = null; }
+          // FIM DAS CONVERSÕES
+          
+          console.log(this.turma);
+
           this.turmaService.novaTurma(this.turma)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

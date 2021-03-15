@@ -1,70 +1,140 @@
-<div class="container main-container">
-  <h4>Detalhes: {{ veiculo.placa }} </h4>
-  <br>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li><a class="btn btn-dark" [routerLink]="['/veiculos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/veiculos/editar',veiculo.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
 
-  <div class="row">
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="row" style="padding-bottom: 30px;">
       <div class="col-md-4">
-          <img src="{{ imagens }}{{ veiculo.imagem }}" style="width: 300px; height: 428px">
-      </div>
-      <div class="col-md-6">
-          <dl>
-              <dt>
-                  Placa
-              </dt>
-              <dd>
-                  {{ veiculo.placa }}
-              </dd>
-              <dt>
-                  UF Placa
-              </dt>
-              <dd>
-                  {{ veiculo.ufPlaca }}
-              </dd>
-              <dt>
-                Ano
-              </dt>
-              <dd>
-                {{ veiculo.ano }}
-              </dd>
-              <dt>
-                Próprio
-              </dt>
-              <dd>
-                {{ veiculo.proprio }}
-              </dd>
-              <dt>
-                Km Atual
-              </dt>
-              <dd>
-                {{ veiculo.kmAtual }}
-              </dd>
-              <dt>
-                Modelo
-              </dt>
-              <dd>
-                {{ veiculo.modelo }}
-              </dd>
-              <dt>
-                Renavam
-              </dt>
-              <dd>
-                {{ veiculo.renavam }}
-              </dd>
-              <dt>
-                Combustível
-              </dt>
-              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 1">Gasolina</dd>
-              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 2">Álcool</dd>
-              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 3">Diesel</dd>
-              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 4">Flex</dd>
-              <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 5">Elétrico</dd>
-          </dl>
-
-          <div>
-              <a class="btn btn-warning" [routerLink]="['/veiculos/editar',veiculo.id]">Editar</a>&nbsp;
-              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+        <div class="card text-center" style="height: 100%;">
+          <h5 class="card-header">Foto</h5>
+          <div class="card-body">
+            <img src="{{ imagens }}{{ veiculo.imagem }}" style="width: 280px; height: 200px; border-radius: 10px;" /><br><br>
+            <a class="btn btn-success" [routerLink]="['/veiculos/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
           </div>
+        </div>
       </div>
+      
+      <div class="col-md-8">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Veículo</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Placa:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.placa == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.placa != ''">{{ veiculo.placa }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">UF Placa:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.ufPlaca == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.ufPlaca != ''">{{ veiculo.ufPlaca }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Ano:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.ano == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.ano != null">{{ veiculo.ano }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Próprio:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.proprio == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.proprio == true">Sim</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.proprio == false">Não</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">KM Atual:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.kmAtual == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.kmAtual != null">{{ veiculo.kmAtual }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Modelo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.modelo == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.modelo != ''">{{ veiculo.modelo }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Renavam:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.renavam == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.renavam != ''">{{ veiculo.renavam }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Combustível:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 1">Gasolina</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 2">Álcool</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 3">Diesel</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 4">Flex</dd>
+                <dd class="col-sm-10" *ngIf="veiculo.tipoCombustivel == 5">Elétrico</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+    
+    
   </div>
+</section>
 
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O veículo {{veiculo.placa}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirVeiculo(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

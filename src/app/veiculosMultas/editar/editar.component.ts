@@ -40,7 +40,7 @@ export class EditarComponent extends VeiculoMultaBaseComponent implements OnInit
           responsavel: ['', Validators.maxLength(30)],
           classificacao: ['', Validators.maxLength(30)],
           descricao: ['', [Validators.required, Validators.maxLength(50)]],
-          situacao: [true],
+          situacao: [0],
           valor: [''],
           veiculoId: ['', [Validators.required]]
         });
@@ -70,7 +70,15 @@ export class EditarComponent extends VeiculoMultaBaseComponent implements OnInit
         if (this.veiculoMultaForm.dirty && this.veiculoMultaForm.valid) {
           this.veiculoMulta = Object.assign({}, this.veiculoMulta, this.veiculoMultaForm.value);
           
-          this.veiculoMulta.valor = CurrencyUtils.DecimalParaString(this.veiculoMulta.valor);
+          // CONVERSÕES PARA JSON
+          this.veiculoMulta.data = new Date(this.veiculoMulta.data);
+          this.veiculoMulta.situacao = this.veiculoMulta.situacao.toString() == "true";
+          this.veiculoMulta.valor = CurrencyUtils.StringParaDecimal(this.veiculoMulta.valor);
+          // FIM DAS CONVERSÕES
+          
+          // this.formResult = JSON.stringify(this.produto);
+          
+          console.log(this.veiculoMulta);
           
           this.veiculoMultaService.atualizarVeiculoMulta(this.veiculoMulta)
           .subscribe(

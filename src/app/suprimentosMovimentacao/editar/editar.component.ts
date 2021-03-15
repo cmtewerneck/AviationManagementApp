@@ -68,6 +68,14 @@ export class EditarComponent extends SuprimentoMovimentacaoBaseComponent impleme
         if (this.suprimentoMovimentacaoForm.dirty && this.suprimentoMovimentacaoForm.valid) {
           this.suprimentoMovimentacao = Object.assign({}, this.suprimentoMovimentacao, this.suprimentoMovimentacaoForm.value);
           
+          // CONVERSÕES PARA JSON
+          this.suprimentoMovimentacao.data = new Date(this.suprimentoMovimentacao.data);
+          this.suprimentoMovimentacao.quantidade = Number(this.suprimentoMovimentacao.quantidade);
+          this.suprimentoMovimentacao.tipoMovimentacao = Number(this.suprimentoMovimentacao.tipoMovimentacao);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.suprimentoMovimentacao);
+          
           this.suprimentoMovimentacaoService.atualizarSuprimentoMovimentacao(this.suprimentoMovimentacao)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

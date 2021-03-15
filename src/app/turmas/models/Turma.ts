@@ -7,8 +7,8 @@ export interface Turma {
   dataTermino?: Date;
 
   cursoId: string;
-  cursoCodigo: string;
-  cursoDescricao: string;
+  codigoCurso: string;
+  descricaoCurso: string;
   //alunosTurmas: AlunosTurmas[];
 }
 

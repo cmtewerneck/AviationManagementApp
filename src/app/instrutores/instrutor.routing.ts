@@ -15,18 +15,18 @@ const instrutorRouterConfig: Routes = [
         children: [
         {   path: 'listar-todos', component: ListaComponent,
             canActivate: [InstrutorGuard],
-            data: [{ claim: { nome: 'Instrutor', valor: 'Consultar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Consultar' } }],
         },
         {
             path: 'adicionar-novo', component: NovoComponent,
             canDeactivate: [InstrutorGuard],
             canActivate: [InstrutorGuard],
-            data: [{ claim: { nome: 'Instrutor', valor: 'Adicionar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Adicionar' } }],
         },
         {
             path: 'editar/:id', component: EditarComponent,
             canActivate: [InstrutorGuard],
-            data: [{ claim: { nome: 'Instrutor', valor: 'Atualizar' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Atualizar' } }],
             resolve: {
                 instrutor: InstrutorResolve
             }
@@ -40,7 +40,7 @@ const instrutorRouterConfig: Routes = [
         {
             path: 'excluir/:id', component: ExcluirComponent,
             canActivate: [InstrutorGuard],
-            data: [{ claim: { nome: 'Instrutor', valor: 'Excluir' } }],
+            data: [{ claim: { nome: 'Colaborador', valor: 'Excluir' } }],
             resolve: {
                 instrutor: InstrutorResolve
             }

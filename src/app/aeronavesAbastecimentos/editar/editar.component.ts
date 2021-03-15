@@ -85,7 +85,15 @@ export class EditarComponent extends AeronaveAbastecimentoBaseComponent implemen
 
           // IMPLEMENTAR EDIÇÃO DO ARQUIVO
 
+          // CONVERSÕES PARA JSON
+          //this.aeronaveAbastecimento.comprovanteUpload = this.comprovante.split(',')[1];
+          this.aeronaveAbastecimento.data = new Date(this.aeronaveAbastecimento.data);
+          this.aeronaveAbastecimento.litros = Number(this.aeronaveAbastecimento.litros);
+          this.aeronaveAbastecimento.comprovante = this.arquivoNome;
           this.aeronaveAbastecimento.valor = CurrencyUtils.StringParaDecimal(this.aeronaveAbastecimento.valor);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.aeronaveAbastecimento);
 
           this.aeronaveAbastecimentoService.atualizarAeronaveAbastecimento(this.aeronaveAbastecimento)
           .subscribe(

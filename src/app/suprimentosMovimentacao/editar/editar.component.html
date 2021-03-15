@@ -21,7 +21,7 @@
                     <div class="form-group col-md-4">
                         <label class="control-label">Data</label>
                         <div>
-                            <input class="form-control" id="data" type="date" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.data }"/>
+                            <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }"/>
                             <span class="text-danger" *ngIf="displayMessage.data">
                                 <p [innerHTML]="displayMessage.data"></p>
                             </span>
@@ -42,8 +42,8 @@
                         <label class="control-label">Tipo</label>
                         <div>
                             <select class="form-control" id="tipoMovimentacao" formControlName="tipoMovimentacao" [ngClass]="{'is-invalid': displayMessage.tipoMovimentacao }">
-                                <option value="1">Entrada</option>
-                                <option value="2">Saída</option>
+                                <option value=1>Entrada</option>
+                                <option value=2>Saída</option>
                             </select>
                         </div>
                     </div>

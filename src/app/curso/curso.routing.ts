@@ -29,13 +29,13 @@ const cursoRouterConfig: Routes = [
                 canActivate: [CursoGuard],
                 data: [{ claim: { nome: 'Curso', valor: 'Atualizar' } }],
                 resolve: {
-                    estoque: CursoResolve
+                    curso: CursoResolve
                 }
             },
             {
                 path: 'detalhes/:id', component: DetalhesComponent,
                 resolve: {
-                    estoque: CursoResolve
+                    curso: CursoResolve
                 }
             },
             {
@@ -43,7 +43,7 @@ const cursoRouterConfig: Routes = [
                 canActivate: [CursoGuard],
                 data: [{ claim: { nome: 'Curso', valor: 'Excluir' } }],
                 resolve: {
-                    estoque: CursoResolve
+                    curso: CursoResolve
                 }
             },
         ]

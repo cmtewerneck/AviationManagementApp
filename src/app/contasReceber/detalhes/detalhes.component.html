@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes da Conta</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Contas a Receber</li>
+          <li><a class="btn btn-dark" [routerLink]="['/contas-receber/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/contas-receber/editar',contasReceber.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,63 +19,107 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Data do Vencimento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.dataVencimento | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Descrição</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.descricao }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Valor a Receber</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.valorReceber | currencyBrazil }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Código de Barras</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.codigoBarras }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Situação</label>
-        </dt>
-        <dd class="col-sm-10" *ngIf="contasReceber.situacao == 1">Pago</dd>
-        <dd class="col-sm-10" *ngIf="contasReceber.situacao == 2">Não Pago</dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Data do Recebimento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.dataRecebimento | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Valor Recebido</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.valorRecebido | currencyBrazil }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Forma de Pagamento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ contasReceber.formaPagamento }}
-        </dd>        
-      </dl>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/contas-receber/editar', contasReceber.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/contas-receber/listar-todos']">Voltar</a>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Lançamento</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-10">
+                  <label class="control-label">Data:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.dataVencimento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.dataVencimento != null">{{ contasReceber.dataVencimento | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Descrição:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.descricao == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.descricao != ''">{{ contasReceber.descricao }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Valor a Receber:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.valorReceber == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.valorReceber != null">{{ contasReceber.valorReceber | currencyBrazil }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Código de Barras:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.codigoBarras == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.codigoBarras != ''">{{ contasReceber.codigoBarras }} </dd>
+              </dl>
+              <dl class="col-md-6">
+                <dt class="col-sm-10">
+                  <label class="control-label">Situação:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.situacao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.situacao == 1">Pago</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.situacao == 2">Pendente</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data do Recebimento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.dataRecebimento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.dataRecebimento != null">{{ contasReceber.dataRecebimento | date: 'dd/MM/yyyy' }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Valor Recebido:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.valorRecebido == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.valorRecebido != null">{{ contasReceber.valorRecebido | currencyBrazil }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Forma de Pagamento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="contasReceber.formaPagamento == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="contasReceber.formaPagamento != ''">{{ contasReceber.formaPagamento }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
-  </div>
+  </div>    
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O lançamento {{contasReceber.descricao}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirContaReceber(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

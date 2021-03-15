@@ -34,7 +34,7 @@ export class EditarComponent extends VooInstrucaoBaseComponent implements OnInit
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
         
-        this.vooInstrucaoService.obterInstrutores()
+        this.vooInstrucaoService.obterInstrutores(3)
         .subscribe(
           colaboradores => this.colaboradores = colaboradores);
           
@@ -46,7 +46,7 @@ export class EditarComponent extends VooInstrucaoBaseComponent implements OnInit
               data: ['', Validators.required],
               tempoVoo: ['', Validators.required],
               avaliacao: [0],
-              observacoes: ['', [Validators.required, Validators.maxLength(200)]],
+              observacoes: ['', Validators.maxLength(200)],
               aeronaveId: ['', [Validators.required]],
               alunoId: ['', [Validators.required]],
               instrutorId: ['', [Validators.required]]
@@ -76,7 +76,13 @@ export class EditarComponent extends VooInstrucaoBaseComponent implements OnInit
             if (this.vooInstrucaoForm.dirty && this.vooInstrucaoForm.valid) {
               this.vooInstrucao = Object.assign({}, this.vooInstrucao, this.vooInstrucaoForm.value);
               
+              // CONVERSÕES PARA JSON
+              this.vooInstrucao.data = new Date(this.vooInstrucao.data);
               this.vooInstrucao.tempoVoo = CurrencyUtils.StringParaDecimal(this.vooInstrucao.tempoVoo);
+              this.vooInstrucao.avaliacao = this.vooInstrucao.avaliacao.toString() == "true";
+              // FIM DAS CONVERSÕES
+
+              console.log(this.vooInstrucao);
               
               this.vooInstrucaoService.atualizarVooInstrucao(this.vooInstrucao)
               .subscribe(

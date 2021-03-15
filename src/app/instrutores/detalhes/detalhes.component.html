@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes do Instrutor</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Instrutores</li>
+          <li><a class="btn btn-dark" [routerLink]="['/instrutores/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/instrutores/editar',instrutor.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,84 +19,194 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <h4>{{ instrutor.nome }}</h4>
-      <hr />
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Nome</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.nome }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">CPF</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.cpf }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">RG</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.rg }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">E-mail</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.email }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Telefone</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.telefone }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">CANAC</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.canac }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Data de Nascimento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.dataNascimento }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Data de Admissão</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.dataAdmissao }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Sexo</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.sexo }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Estado Civil</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.estadoCivil }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Salário</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ instrutor.salario }}
-        </dd>
-      </dl>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/instrutores/editar',instrutor.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/instrutores/listar-todos']">Voltar</a>
+    <div class="row" style="padding-bottom: 30px;">
+      <div class="col-md-4">
+        <div class="card text-center" style="height: 100%;">
+          <h5 class="card-header">Foto</h5>
+          <div class="card-body">
+            <img src="{{ imagens }}{{ instrutor.imagem }}" style="width: 200px; height: 280px; border-radius: 10px;" /><br><br>
+            <a class="btn btn-success" [routerLink]="['/instrutores/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-8">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Instrutor</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-4">
+                <dt class="col-sm-4">
+                  <label class="control-label">Nome:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.nome == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.nome != ''">{{ instrutor.nome }}</dd>
+                <br>             
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo de Pessoa:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.tipoPessoa == 1">Física</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.tipoPessoa == 2">Jurídica</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Documento:</label>
+                </dt>
+                <dd class="col-sm-10">
+                  {{instrutor.tipoPessoa === 1 ? (instrutor.documento | cpf) : (instrutor.documento | cnpj ) }}
+                </dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Sexo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.sexo == 1">Masculino</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.sexo == 2">Feminino</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.sexo == 3">Outro</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Estado Civil:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.estadoCivil == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.estadoCivil != ''">{{ instrutor.estadoCivil }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Ativo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.ativo == true">Sim</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.ativo == false">Não</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Telefone:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.telefone == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.telefone != ''">{{ instrutor.telefone | telefone }}</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">E-mail:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.email == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.email != ''">{{ instrutor.email }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Nascimento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.dataNascimento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.dataNascimento != null">{{ instrutor.dataNascimento | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Admissão:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.dataAdmissao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.dataAdmissao != null">{{ instrutor.dataAdmissao | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Demissão:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.dataDemissao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.dataDemissao != null">{{ instrutor.dataDemissao | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CANAC:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.canac == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.canac != ''">{{ instrutor.canac }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Salário:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.salario == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.salario != null">{{ instrutor.salario | currencyBrazil }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo de Vínculo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.tipoVinculo == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.tipoVinculo == 1">MEI</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.tipoVinculo == 2">CTPS</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">RG:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.rg == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.rg != ''">{{ instrutor.rg }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Órgão Emissor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.orgaoEmissor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.orgaoEmissor != ''">{{ instrutor.orgaoEmissor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Título de Eleitor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.tituloEleitor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.tituloEleitor != ''">{{ instrutor.tituloEleitor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">PIS:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroPis == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroPis != ''">{{ instrutor.numeroPis }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CTPS:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroCtps == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroCtps != ''">{{ instrutor.numeroCtps }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CNH:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroCnh == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.numeroCnh != ''">{{ instrutor.numeroCnh }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
   </div>
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O instrutor {{instrutor.nome}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirInstrutor(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

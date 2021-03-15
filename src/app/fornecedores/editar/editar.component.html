@@ -1,14 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar Fornecedor</h1>
+                <h3>Editar Fornecedor</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item active">Fornecedores</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/fornecedores/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -23,7 +22,7 @@
             <p style="color: white"> Processando... </p>
         </ngx-spinner>
         
-        <form novalidate="novalidate" (ngSubmit)="editarFornecedor()" [formGroup]="fornecedorForm">
+        <form enctype="multipart/form-data" novalidate="novalidate" (ngSubmit)="editarFornecedor()" [formGroup]="fornecedorForm">
             
             <div class="alert alert-danger" *ngIf="errors.length > 0">
                 <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
@@ -36,188 +35,221 @@
             <input type="hidden" id="enderecoId" name="enderecoId" value="">
             
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Nome</label>
-                    <div>
-                        <input class="form-control" id="nome" type="text" placeholder="(requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage.nome }" />
-                        <span class="text-danger" *ngIf="displayMessage.nome">
-                            <p [innerHTML]="displayMessage.nome"></p>
-                        </span>
+                <div class="col-md-12">
+                    <div class="card">
+                        <h5 class="card-header">Dados Pessoais</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Nome<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="nome" type="text" formControlName="nome" [ngClass]="{'is-invalid': displayMessage.nome }"/>
+                                        <span class="text-danger" *ngIf="displayMessage.nome">
+                                            <p [innerHTML]="displayMessage.nome"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Tipo de Pessoa<span style="color: red;">*</span></label>
+                                    <div>
+                                        <select class="form-control" id="tipoPessoa" formControlName="tipoPessoa" [ngClass]="{ 'is-invalid': displayMessage.tipoPessoa }">
+                                            <option value=1>Pessoa Física</option>
+                                            <option value=2>Pessoa Jurídica</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Documento<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="documento" type="text" formControlName="documento" [textMask]="tipoFornecedorForm().value === '1' ? {mask: MASKS.cpf.textMask} : {mask: MASKS.cnpj.textMask}" [ngClass]="{'is-invalid': displayMessage.documento }"
+                                        />
+                                        <span class="text-danger" *ngIf="displayMessage.documento">
+                                            <p [innerHTML]="displayMessage.documento"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Sexo<span style="color: red;">*</span></label>
+                                    <div>
+                                        <select class="form-control" id="sexo" formControlName="sexo" [ngClass]="{ 'is-invalid': displayMessage.sexo }">
+                                            <option value=1>Masculino</option>
+                                            <option value=2>Feminino</option>
+                                            <option value=3>Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Estado Civil</label>
+                                    <div>
+                                        <input class="form-control" id="estadoCivil" type="text" formControlName="estadoCivil" [ngClass]="{'is-invalid': displayMessage.estadoCivil }" />
+                                        <span class="text-danger" *ngIf="displayMessage.estadoCivil">
+                                            <p [innerHTML]="displayMessage.estadoCivil"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Ativo<span style="color: red;">*</span></label>
+                                    <div>
+                                        <select class="form-control" id="ativo" formControlName="ativo" [ngClass]="{ 'is-invalid': displayMessage.ativo }">
+                                            <option value=true>Sim</option>
+                                            <option value=false>Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Telefone</label>
+                                    <div>
+                                        <input class="form-control" id="telefone" type="text" formControlName="telefone" [ngClass]="{'is-invalid': displayMessage.telefone }" />
+                                        <span class="text-danger" *ngIf="displayMessage.telefone">
+                                            <p [innerHTML]="displayMessage.telefone"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-8">
+                                    <label class="control-label">E-mail</label>
+                                    <div>
+                                        <input class="form-control" id="email" type="email" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
+                                        <span class="text-danger" *ngIf="displayMessage.email">
+                                            <p [innerHTML]="displayMessage.email"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-4">
+                    <div class="card" style="height: 100%;">
+                        <h5 class="card-header">Foto Atual</h5>
+                        <div class="card-body">
+                            <div *ngIf="!imagemPreview" class="form-group">
+                                <img [src]="imagemOriginalSrc" style="width: 70px; height: 100px;"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="form-group col-md-3">
-                    <label class="control-label">Tipo de Pessoa</label>
-                    <div>
-                        <select class="form-control" id="tipoPessoa" formControlName="tipoPessoa" [ngClass]="{ 'is-invalid': displayMessage.tipoPessoa }">
-                            <option value="1">Pessoa Física</option>
-                            <option value="2">Pessoa Jurídica</option>
-                        </select>
+                <div class="col-md-8">
+                    <div class="card" style="height: 100%;">
+                        <h5 class="card-header">Nova Foto</h5>
+                        <div class="card-body">
+                            <div *ngIf="imagemPreview" class="form-group">
+                                <img [src]="imagemPreview" style="width: 70px; height: 100px;"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label">Foto do Fornecedor</label>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/jpg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" #fileInput (change)="upload(fileInput.files)" [ngClass]="{'is-invalid': displayMessage.imagem }">
+                                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                                    <span class="text-danger" *ngIf="displayMessage.imagem">
+                                        <p [innerHTML]="displayMessage.imagem"></p>
+                                    </span>
+                                </div>
+                            </div>  
+                        </div>
                     </div>
                 </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">Documento</label>
-                    <div>
-                        <input class="form-control" id="documento" type="text" placeholder="{{ textoDocumento }}" formControlName="documento" [textMask]="tipoFornecedorForm().value === '1' ? {mask: MASKS.cpf.textMask} : {mask: MASKS.cnpj.textMask}" [ngClass]="{'is-invalid': displayMessage.documento }"
-                        />
-                        <span class="text-danger" *ngIf="displayMessage.documento">
-                            <p [innerHTML]="displayMessage.documento"></p>
-                        </span>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="form-group" style="text-align: right;">
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" style="margin-top: 20px;">&nbsp;
             </div>
             
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Sexo</label>
-                    <div>
-                        <select class="form-control" id="sexo" formControlName="sexo" [ngClass]="{ 'is-invalid': displayMessage.sexo }">
-                            <option value="1">Masculino</option>
-                            <option value="2">Feminino</option>
-                            <option value="3">Outro</option>
-                        </select>
+                <div class="col-md-12" style="margin-top: 20px;">
+                    <div class="card">
+                        <h5 class="card-header">Endereço</h5>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>
+                                            Logradouro
+                                        </th>
+                                        <th>
+                                            Numero
+                                        </th>
+                                        <th>
+                                            Complemento
+                                        </th>
+                                        <th>
+                                            Bairro
+                                        </th>
+                                        <th>
+                                            Cep
+                                        </th>
+                                        <th>
+                                            Cidade
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ fornecedor.endereco.logradouro }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.numero }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.complemento }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.bairro }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.cep | cep }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.cidade }}
+                                        </td>
+                                        <td>
+                                            {{ fornecedor.endereco.estado }}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info"  href="javascript:void(0)" (click)="abrirModal(content)">
+                                                <span title="Editar" class="fa fa-pencil-alt"></span>
+                                            </a> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Estado Civil</label>
-                    <div>
-                        <input class="form-control" id="estadoCivil" type="text" placeholder="(opcional)" formControlName="estadoCivil" [ngClass]="{'is-invalid': displayMessage.estadoCivil }" />
-                        <span class="text-danger" *ngIf="displayMessage.estadoCivil">
-                            <p [innerHTML]="displayMessage.estadoCivil"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Ativo</label>
-                    <div>
-                        <select class="form-control" id="ativo" formControlName="ativo" [ngClass]="{ 'is-invalid': displayMessage.ativo }">
-                            <option value="true">Sim</option>
-                            <option value="false">Não</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Telefone</label>
-                    <div>
-                        <input class="form-control" id="telefone" type="text" placeholder="(opcional)" formControlName="telefone" [ngClass]="{'is-invalid': displayMessage.telefone }" />
-                        <span class="text-danger" *ngIf="displayMessage.telefone">
-                            <p [innerHTML]="displayMessage.telefone"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-8">
-                    <label class="control-label">E-mail</label>
-                    <div>
-                        <input class="form-control" id="email" type="email" placeholder="(opcional)" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
-                        <span class="text-danger" *ngIf="displayMessage.email">
-                            <p [innerHTML]="displayMessage.email"></p>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <div *ngIf="!imagemPreview" class="form-group">
-                <label>Foto Atual</label><br>
-                <img [src]="imagemOriginalSrc" style="width: 70px; height: 100px;"/>
-            </div>
-            <div *ngIf="imagemPreview" class="form-group">
-                <label>Nova Foto</label><br>
-                <img [src]="imagemPreview" style="width: 70px; height: 100px;"/>
-            </div>
-            
-            <div class="form-group">
-                <label class="control-label">Foto do Fornecedor</label>
-                
-                <div class="custom-file">
-                    <input type="file" accept="image/jpg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" #fileInput (change)="upload(fileInput.files)" [ngClass]="{'is-invalid': displayMessage.imagem }">
-                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
-                    <span class="text-danger" *ngIf="displayMessage.imagem">
-                        <p [innerHTML]="displayMessage.imagem"></p>
-                    </span>
-                </div>
-            </div> 
-            
-            <div>
-                <div style="padding-top: 20px">
-                    <div>
-                        <hr>
-                        <h4>Endereço</h4>
-                    </div>
-                    
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>
-                                    Logradouro
-                                </th>
-                                <th>
-                                    Numero
-                                </th>
-                                <th>
-                                    Complemento
-                                </th>
-                                <th>
-                                    Bairro
-                                </th>
-                                <th>
-                                    Cep
-                                </th>
-                                <th>
-                                    Cidade
-                                </th>
-                                <th>
-                                    Estado
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            <tr>
-                                <td>
-                                    {{ fornecedor.endereco.logradouro }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.numero }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.complemento }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.bairro }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.cep | cep }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.cidade }}
-                                </td>
-                                <td>
-                                    {{ fornecedor.endereco.estado }}
-                                </td>
-                                <td>
-                                    <a class="btn btn-info"  href="javascript:void(0)" (click)="abrirModal(content)">
-                                        <span title="Editar" class="fa fa-pencil-alt"></span>
-                                    </a> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </form>  
         
-        <lista-produto [produtos]="fornecedor.produtos"></lista-produto>
+        <div class="col-md-12" style="margin-top: 20px;">
+            <div class="card">
+                <h5 class="card-header">Produtos</h5>
+                <div class="card-body">
+                    <lista-produto [produtos]="fornecedor.produtos"></lista-produto>
+                </div>
+            </div>
+        </div>
         
         <!-- INÍCIO MODAL -->
-        
         <div bsModal #content="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -340,7 +372,6 @@
                 </div>
             </div>
         </div>
-        
         <!-- FIM DA MODAL -->
         
     </div>

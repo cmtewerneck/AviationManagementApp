@@ -1,229 +1,261 @@
-<div class="container main-container">
-    
-    <h3>Nova Aeronave </h3>
-    
-    <hr>
-    <div class="row">
-        <div class="col-md-10">
-            <form enctype="multipart/form-data" (ngSubmit)="adicionarAeronave()" [formGroup]="aeronaveForm">
-                
-                <div class="alert alert-danger" *ngIf="errors.length > 0">
-                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
-                    <ul>
-                        <li *ngFor="let error of errors">{{ error }}</li>
-                    </ul>
-                </div>
-                
-                <div class="row">
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Matrícula</label>
-                        <div>
-                            <input class="form-control" id="matricula" type="text" placeholder="(requerido)" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
-                            <span class="text-danger" *ngIf="displayMessage.matricula">
-                                <p [innerHTML]="displayMessage.matricula"></p>
-                            </span>
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Nova Aeronave</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/aeronaves/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" (ngSubmit)="adicionarAeronave()" [formGroup]="aeronaveForm">
+                    
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Especificações</h5>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Matrícula<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="matricula" type="text" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
+                                                <span class="text-danger" *ngIf="displayMessage.matricula">
+                                                    <p [innerHTML]="displayMessage.matricula"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Fabricante<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="fabricante" type="text" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.fabricante}" />
+                                                <span class="text-danger" *ngIf="displayMessage.fabricante">
+                                                    <p [innerHTML]="displayMessage.fabricante"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Categoria<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="categoria" type="text" formControlName="categoria" [ngClass]="{'is-invalid': displayMessage.categoria}" />
+                                                <span class="text-danger" *ngIf="displayMessage.categoria">
+                                                    <p [innerHTML]="displayMessage.categoria"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Modelo<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="modelo" type="text" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo}" />
+                                                <span class="text-danger" *ngIf="displayMessage.modelo">
+                                                    <p [innerHTML]="displayMessage.modelo"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Número de Série<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="numeroSerie" type="text" formControlName="numeroSerie" [ngClass]="{'is-invalid': displayMessage.numeroSerie}" />
+                                                <span class="text-danger" *ngIf="displayMessage.numeroSerie">
+                                                    <p [innerHTML]="displayMessage.numeroSerie"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Ano</label>
+                                            <div>
+                                                <input class="form-control" id="ano" type="number" formControlName="ano" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Peso Vazio</label>
+                                            <div>
+                                                <input class="form-control" id="pezoVazio" type="text" formControlName="pesoVazio" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Peso Básico</label>
+                                            <div>
+                                                <input class="form-control" id="pesoBasico" type="text" formControlName="pesoBasico" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Horas Totais</label>
+                                            <div>
+                                                <input class="form-control" id="horasTotais" type="text" formControlName="horasTotais" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label">Horas Restantes</label>
+                                            <div>
+                                                <input class="form-control" id="horasRestantes" type="text" formControlName="horasRestantes" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Tipo<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="tipoAeronave" formControlName="tipoAeronave">
+                                                    <option value=1>HMNC</option>
+                                                    <option value=2>HMNT</option>
+                                                    <option value=3>HMLT</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Vencimento CA</label>
+                                            <div>
+                                                <input class="form-control" id="vencimentoCA" type="date" formControlName="vencimentoCA" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Vencimento CVA<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="vencimentoCVA" type="date" formControlName="vencimentoCVA" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Vencimento CM</label>
+                                            <div>
+                                                <input class="form-control" id="vencimentoCM" type="date" formControlName="vencimentoCM" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Última Pesagem</label>
+                                            <div>
+                                                <input class="form-control" id="ultimaPesagem" type="date" formControlName="ultimaPesagem" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Próxima Pesagem</label>
+                                            <div>
+                                                <input class="form-control" id="proximaPesagem" type="date" formControlName="proximaPesagem" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Vencimento Reta</label>
+                                            <div>
+                                                <input class="form-control" id="vencimentoReta" type="date" formControlName="vencimentoReta" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Vencimento Casco</label>
+                                            <div>
+                                                <input class="form-control" id="vencimentoCasco" type="date" formControlName="vencimentoCasco" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Motor</label>
+                                            <div>
+                                                <input class="form-control" id="motor" type="text" placeholder="(opcional)" formControlName="motor" [ngClass]="{'is-invalid': displayMessage.motor}" />
+                                                <span class="text-danger" *ngIf="displayMessage.motor">
+                                                    <p [innerHTML]="displayMessage.motor"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Modelo do Motor</label>
+                                            <div>
+                                                <input class="form-control" id="modeloMotor" type="text" placeholder="(opcional)" formControlName="modeloMotor" [ngClass]="{'is-invalid': displayMessage.modeloMotor}" />
+                                                <span class="text-danger" *ngIf="displayMessage.modeloMotor">
+                                                    <p [innerHTML]="displayMessage.modeloMotor"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Nº Série do Motor</label>
+                                            <div>
+                                                <input class="form-control" id="numeroSerieMotor" type="text" placeholder="(opcional)" formControlName="numeroSerieMotor" [ngClass]="{'is-invalid': displayMessage.numeroSerieMotor}" />
+                                                <span class="text-danger" *ngIf="displayMessage.numeroSerieMotor">
+                                                    <p [innerHTML]="displayMessage.numeroSerieMotor"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Fabricante</label>
-                        <div>
-                            <input class="form-control" id="fabricante" type="text" placeholder="(requerido)" formControlName="fabricante" [ngClass]="{'is-invalid': displayMessage.fabricante}" />
-                            <span class="text-danger" *ngIf="displayMessage.fabricante">
-                                <p [innerHTML]="displayMessage.fabricante"></p>
-                            </span>
-                        </div>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <div class="card">
+                                <h5 class="card-header">Foto da Aeronave</h5>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="custom-file">
+                                            <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)">
+                                            <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                                            
+                                            <span *ngIf='imagemNome'><br>{{ imagemNome }} <br></span>
+                                            
+                                            <span class="text-danger" *ngIf="displayMessage.imagem">
+                                                <p [innerHTML]="displayMessage.imagem"></p>
+                                            </span>
+                                        </div>
+                                        
+                                        <div *ngIf='imagemNome' class="row">
+                                            <div class="col col-md-6">
+                                                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 3" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
+                                                [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+                                                (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                            </div>
+                                            <div class="col col-md-6">
+                                                <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
                     
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Categoria</label>
-                        <div>
-                            <input class="form-control" id="categoria" type="text" placeholder="(requerido)" formControlName="categoria" [ngClass]="{'is-invalid': displayMessage.categoria}" />
-                            <span class="text-danger" *ngIf="displayMessage.categoria">
-                                <p [innerHTML]="displayMessage.categoria"></p>
-                            </span>
-                        </div>
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!aeronaveForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/aeronaves/listar-todos">Voltar</a>
                     </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Modelo</label>
-                        <div>
-                            <input class="form-control" id="modelo" type="text" placeholder="(requerido)" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo}" />
-                            <span class="text-danger" *ngIf="displayMessage.modelo">
-                                <p [innerHTML]="displayMessage.modelo"></p>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Número de Série</label>
-                        <div>
-                            <input class="form-control" id="numeroSerie" type="text" placeholder="(requerido)" formControlName="numeroSerie" [ngClass]="{'is-invalid': displayMessage.numeroSerie}" />
-                            <span class="text-danger" *ngIf="displayMessage.numeroSerie">
-                                <p [innerHTML]="displayMessage.numeroSerie"></p>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Ano</label>
-                        <div>
-                            <input class="form-control" id="ano" type="number" placeholder="(opcional)" formControlName="ano" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Peso Vazio</label>
-                        <div>
-                            <input class="form-control" id="pezoVazio" type="text" placeholder="(opcional)" formControlName="pesoVazio" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Peso Básico</label>
-                        <div>
-                            <input class="form-control" id="pesoBasico" type="text" placeholder="(opcional)" formControlName="pesoBasico" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Horas Totais</label>
-                        <div>
-                            <input class="form-control" id="horasTotais" type="text" placeholder="(opcional)" formControlName="horasTotais" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-2">
-                        <label class="control-label">Horas Restantes</label>
-                        <div>
-                            <input class="form-control" id="horasRestantes" type="text" placeholder="(opcional)" formControlName="horasRestantes" />
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Tipo</label>
-                        <div>
-                            <select class="form-control" id="tipoAeronave" formControlName="tipoAeronave">
-                                <option value="1">HMNC</option>
-                                <option value="2">HMNT</option>
-                                <option value="3">HMLT</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Vencimento CA</label>
-                        <div>
-                            <input class="form-control" id="vencimentoCA" type="date" formControlName="vencimentoCA" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Vencimento CVA</label>
-                        <div>
-                            <input class="form-control" id="vencimentoCVA" type="date" formControlName="vencimentoCVA" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Vencimento CM</label>
-                        <div>
-                            <input class="form-control" id="vencimentoCM" type="date" formControlName="vencimentoCM" />
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Última Pesagem</label>
-                        <div>
-                            <input class="form-control" id="ultimaPesagem" type="date" formControlName="ultimaPesagem" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Próxima Pesagem</label>
-                        <div>
-                            <input class="form-control" id="proximaPesagem" type="date" formControlName="proximaPesagem" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Vencimento Reta</label>
-                        <div>
-                            <input class="form-control" id="vencimentoReta" type="date" formControlName="vencimentoReta" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label class="control-label">Vencimento Casco</label>
-                        <div>
-                            <input class="form-control" id="vencimentoCasco" type="date" formControlName="vencimentoCasco" />
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label class="control-label">Motor</label>
-                        <div>
-                            <input class="form-control" id="motor" type="text" placeholder="(opcional)" formControlName="motor" [ngClass]="{'is-invalid': displayMessage.motor}" />
-                            <span class="text-danger" *ngIf="displayMessage.motor">
-                                <p [innerHTML]="displayMessage.motor"></p>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-4">
-                        <label class="control-label">Modelo do Motor</label>
-                        <div>
-                            <input class="form-control" id="modeloMotor" type="text" placeholder="(opcional)" formControlName="modeloMotor" [ngClass]="{'is-invalid': displayMessage.modeloMotor}" />
-                            <span class="text-danger" *ngIf="displayMessage.modeloMotor">
-                                <p [innerHTML]="displayMessage.modeloMotor"></p>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-4">
-                        <label class="control-label">Nº Série do Motor</label>
-                        <div>
-                            <input class="form-control" id="numeroSerieMotor" type="text" placeholder="(opcional)" formControlName="numeroSerieMotor" [ngClass]="{'is-invalid': displayMessage.numeroSerieMotor}" />
-                            <span class="text-danger" *ngIf="displayMessage.numeroSerieMotor">
-                                <p [innerHTML]="displayMessage.numeroSerieMotor"></p>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="control-label">Imagem da Aeronave</label>
-                    
-                    <div class="custom-file">
-                        <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)">
-                        <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
-                        
-                        <span *ngIf='imagemNome'><br>{{ imagemNome }} <br></span>
-                    </div>
-                    
-                    <div *ngIf='imagemNome' class="row">
-                        <div class="col col-md-6">
-                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="3 / 4" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
-                            [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
-                            (loadImageFailed)="loadImageFailed()"></image-cropper>
-                        </div>
-                        <div class="col col-md-6">
-                            <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" [disabled]="!aeronaveForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
-                    <a class="btn btn-info" href="/aeronaves/listar-todos">Voltar</a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</section>

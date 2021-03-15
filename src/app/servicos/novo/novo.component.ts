@@ -36,7 +36,11 @@ export class NovoComponent extends ServicoBaseComponent implements OnInit {
       if (this.servicoForm.dirty && this.servicoForm.valid) {
         this.servico = Object.assign({}, this.servico, this.servicoForm.value);
         
+        // CONVERSÕES PARA JSON
         this.servico.custo = CurrencyUtils.StringParaDecimal(this.servico.custo);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.servico);
         
         this.servicoService.novoServico(this.servico)
         .subscribe(

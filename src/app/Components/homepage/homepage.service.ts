@@ -15,9 +15,9 @@ export class HomepageService extends BaseService {
             .pipe(catchError(super.serviceError));
     }
 
-    obterQuantidadeTripulantesCadastrados(): Observable<number> {
+    obterQuantidadeTripulantesCadastrados(tipoColaborador: number): Observable<number> {
         return this.http
-            .get<number>(this.urlServiceV1 + 'tripulantes/quantidade', this.ObterAuthHeaderJson())
+            .get<number>(this.urlServiceV1 + 'colaboradores/quantidade/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 

@@ -72,6 +72,10 @@ const routes: Routes = [
             loadChildren: () => import('./aeronavesTarifas/aeronavesTarifas.module')
             .then(m => m.AeronaveTarifaModule)
         },
+        { path: 'motoristas',
+            loadChildren: () => import('./motoristas/motoristas.module')
+            .then(m => m.MotoristaModule)
+        },
         { path: 'voos-agendados',
             loadChildren: () => import('./voosAgendados/voosAgendados.module')
             .then(m => m.VooAgendadoModule)

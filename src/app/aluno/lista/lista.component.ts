@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgBrazilValidators } from 'ng-brazil';
 import { ToastrService } from 'ngx-toastr';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 import { environment } from 'src/environments/environment';
 import { Aluno } from '../models/Aluno';
 import { AlunoService } from '../services/aluno.service';
@@ -14,17 +18,21 @@ export class ListaComponent implements OnInit {
   
   public alunos: Aluno[];
   errorMessage: string;
+  errors: any[] = [];
+  alunoForm: FormGroup;
   
   mostrarImagem = true;
   
   aluno: Aluno;
   alunosFiltrados: Aluno[];
   
-  constructor(private alunoService: AlunoService,
+  constructor(
+    private alunoService: AlunoService,
     private toastr: ToastrService) { }
     
     ngOnInit(): void {
       this.ObterTodos();
+      
     }
     
     _filtroLista: string;
@@ -57,5 +65,14 @@ export class ListaComponent implements OnInit {
             console.log(error);
           });
         }
+        
+        abrirModal(content: any) {
+          content.show();
+        }
+        
+        fecharModal(content: any) {
+          content.hide();
+        }
+        
       }
       

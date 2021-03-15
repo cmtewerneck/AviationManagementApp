@@ -12,21 +12,21 @@ export class MecanicoService extends BaseService {
 
     constructor(private http: HttpClient) { super(); }
 
-    obterTodos(): Observable<Mecanico[]> {
+    obterTodos(tipoColaborador: number): Observable<Mecanico[]> {
         return this.http
-            .get<Mecanico[]>(this.urlServiceV1 + 'mecanicos', this.ObterAuthHeaderJson())
+            .get<Mecanico[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     obterPorId(id: string): Observable<Mecanico> {
         return this.http
-            .get<Mecanico>(this.urlServiceV1 + 'mecanicos/' + id, this.ObterAuthHeaderJson())
+            .get<Mecanico>(this.urlServiceV1 + 'colaboradores/' + id, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     novoMecanico(mecanico: Mecanico): Observable<Mecanico> {
         return this.http
-            .post(this.urlServiceV1 + 'mecanicos', mecanico, this.ObterAuthHeaderJson())
+            .post(this.urlServiceV1 + 'colaboradores', mecanico, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -34,7 +34,7 @@ export class MecanicoService extends BaseService {
 
     atualizarMecanico(mecanico: Mecanico): Observable<Mecanico> {
         return this.http
-            .put(this.urlServiceV1 + 'mecanicos/' + mecanico.id, mecanico, this.ObterAuthHeaderJson())
+            .put(this.urlServiceV1 + 'colaboradores/' + mecanico.id, mecanico, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -42,7 +42,7 @@ export class MecanicoService extends BaseService {
 
     excluirMecanico(id: string): Observable<Mecanico> {
         return this.http
-            .delete(this.urlServiceV1 + 'mecanicos/' + id, this.ObterAuthHeaderJson())
+            .delete(this.urlServiceV1 + 'colaboradores/' + id, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

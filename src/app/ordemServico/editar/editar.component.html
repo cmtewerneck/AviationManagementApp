@@ -1,14 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar OS: {{ ordemServico.numeroOrdem }}</h1>
+                <h3>Ordens de Serviço</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item active">Ordens de Serviço</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/ordem-servico/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -35,170 +34,179 @@
             <input type="hidden" id="id" name="id" value="">
             
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Número da OS</label>
-                    <div>
-                        <input class="form-control" id="numeroOrdem" type="text" placeholder="(requerido)" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
-                        <span class="text-danger" *ngIf="displayMessage.numeroOrdem">
-                            <p [innerHTML]="displayMessage.numeroOrdem"></p>
-                        </span>
+                <div class="col-md-12">
+                    <div class="card">
+                        <h5 class="card-header">Dados da OS</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Número da OS<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="numeroOrdem" type="text" formControlName="numeroOrdem" [ngClass]="{'is-invalid': displayMessage.numeroOrdem }" />
+                                        <span class="text-danger" *ngIf="displayMessage.numeroOrdem">
+                                            <p [innerHTML]="displayMessage.numeroOrdem"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Abertura<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="dataAbertura" type="date" formControlName="dataAbertura" [ngClass]="{'is-invalid': displayMessage.dataAbertura }" />
+                                        <span class="text-danger" *ngIf="displayMessage.dataAbertura">
+                                            <p [innerHTML]="displayMessage.dataAbertura"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Tipo</label>
+                                    <div>
+                                        <input class="form-control" id="tipo" type="text" formControlName="tipo" [ngClass]="{'is-invalid': displayMessage.tipo }" />
+                                        <span class="text-danger" *ngIf="displayMessage.tipo">
+                                            <p [innerHTML]="displayMessage.tipo"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Matrícula<span style="color: red;">*</span></label>
+                                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
+                                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
+                                    </select>
+                                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
+                                        <p [innerHTML]="displayMessage.aeronaveId"></p>
+                                    </span>
+                                </div>              
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">TTSN</label>
+                                    <div>
+                                        <input class="form-control" id="ttsn" type="text" formControlName="ttsn" [ngClass]="{'is-invalid': displayMessage.ttsn }" />
+                                        <span class="text-danger" *ngIf="displayMessage.ttsn">
+                                            <p [innerHTML]="displayMessage.ttsn"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">TCSN Pousos</label>
+                                    <div>
+                                        <input class="form-control" id="tcsnPousos" type="text" formControlName="tcsnPousos" [ngClass]="{'is-invalid': displayMessage.tcsnPousos }" />
+                                        <span class="text-danger" *ngIf="displayMessage.tcsnPousos">
+                                            <p [innerHTML]="displayMessage.tcsnPousos"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">TTSN Motor</label>
+                                    <div>
+                                        <input class="form-control" id="ttsnMotor" type="text" formControlName="ttsnMotor" [ngClass]="{'is-invalid': displayMessage.ttsnMotor }" />
+                                        <span class="text-danger" *ngIf="displayMessage.ttsnMotor">
+                                            <p [innerHTML]="displayMessage.ttsnMotor"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">TCSN Ciclos</label>
+                                    <div>
+                                        <input class="form-control" id="tcsnCiclos" type="text" formControlName="tcsnCiclos" [ngClass]="{'is-invalid': displayMessage.tcsnCiclos }" />
+                                        <span class="text-danger" *ngIf="displayMessage.tcsnCiclos">
+                                            <p [innerHTML]="displayMessage.tcsnCiclos"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Fechamento</label>
+                                    <div>
+                                        <input class="form-control" id="dataFechamento" type="date" formControlName="dataFechamento" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">Requisição de Materiais</label>
+                                    <div>
+                                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="requisicaoMateriais" placeholder="(opcional)" formControlName="requisicaoMateriais"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Realizado Por</label>
+                                    <div>
+                                        <input class="form-control" id="realizadoPor" type="text" formControlName="realizadoPor" [ngClass]="{'is-invalid': displayMessage.realizadoPor }" />
+                                        <span class="text-danger" *ngIf="displayMessage.realizadoPor">
+                                            <p [innerHTML]="displayMessage.realizadoPor"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">CANAC</label>
+                                    <div>
+                                        <input class="form-control" id="realizadoPorAnac" type="text" formControlName="realizadoPorAnac" />
+                                        <span class="text-danger" *ngIf="displayMessage.realizadoPorAnac">
+                                            <p [innerHTML]="displayMessage.realizadoPorAnac"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Data da realização</label>
+                                    <div>
+                                        <input class="form-control" id="dataRealizacao" type="date" formControlName="dataRealizacao" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Inspecionado Por</label>
+                                    <div>
+                                        <input class="form-control" id="inspecionadoPor" type="text" formControlName="inspecionadoPor" [ngClass]="{'is-invalid': displayMessage.inspecionadoPor }" />
+                                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPor">
+                                            <p [innerHTML]="displayMessage.inspecionadoPor"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">CANAC</label>
+                                    <div>
+                                        <input class="form-control" id="inspecionadoPorAnac" type="text" formControlName="inspecionadoPorAnac" [ngClass]="{'is-invalid': displayMessage.inspecionadoPorAnac }" />
+                                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPorAnac">
+                                            <p [innerHTML]="displayMessage.inspecionadoPorAnac"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Data da inspeção</label>
+                                    <div>
+                                        <input class="form-control" id="dataInspecao" type="date" formControlName="dataRedataInspecaoalizacao" />
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
                 </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Abertura</label>
-                    <div>
-                        <input class="form-control" id="dataAbertura" type="date" formControlName="dataAbertura" [ngClass]="{'is-invalid': displayMessage.dataAbertura }" />
-                        <span class="text-danger" *ngIf="displayMessage.dataAbertura">
-                            <p [innerHTML]="displayMessage.dataAbertura"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Tipo</label>
-                    <div>
-                        <input class="form-control" id="tipo" type="text" placeholder="(opcional)" formControlName="tipo" [ngClass]="{'is-invalid': displayMessage.tipo }" />
-                        <span class="text-danger" *ngIf="displayMessage.tipo">
-                            <p [innerHTML]="displayMessage.tipo"></p>
-                        </span>
-                    </div>
-                </div>
+            </div> 
+            
+            <div class="form-group" style="text-align: right;">
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" style="margin-top: 20px;">&nbsp;
             </div>
             
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">Matrícula</label>
-                    <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
-                        <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
-                    </select>
-                    <span class="text-danger" *ngIf="displayMessage.aeronaveId">
-                        <p [innerHTML]="displayMessage.aeronaveId"></p>
-                    </span>
-                </div>              
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">TTSN</label>
-                    <div>
-                        <input class="form-control" id="ttsn" type="text" placeholder="(opcional)" formControlName="ttsn" [ngClass]="{'is-invalid': displayMessage.ttsn }" />
-                        <span class="text-danger" *ngIf="displayMessage.ttsn">
-                            <p [innerHTML]="displayMessage.ttsn"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">TCSN Pousos</label>
-                    <div>
-                        <input class="form-control" id="tcsnPousos" type="text" placeholder="(opcional)" formControlName="tcsnPousos" [ngClass]="{'is-invalid': displayMessage.tcsnPousos }" />
-                        <span class="text-danger" *ngIf="displayMessage.tcsnPousos">
-                            <p [innerHTML]="displayMessage.tcsnPousos"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">TTSN Motor</label>
-                    <div>
-                        <input class="form-control" id="ttsnMotor" type="text" placeholder="(opcional)" formControlName="ttsnMotor" [ngClass]="{'is-invalid': displayMessage.ttsnMotor }" />
-                        <span class="text-danger" *ngIf="displayMessage.ttsnMotor">
-                            <p [innerHTML]="displayMessage.ttsnMotor"></p>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label">TCSN Ciclos</label>
-                    <div>
-                        <input class="form-control" id="tcsnCiclos" type="text" placeholder="(opcional)" formControlName="tcsnCiclos" [ngClass]="{'is-invalid': displayMessage.tcsnCiclos }" />
-                        <span class="text-danger" *ngIf="displayMessage.tcsnCiclos">
-                            <p [innerHTML]="displayMessage.tcsnCiclos"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <label class="control-label">Fechamento</label>
-                    <div>
-                        <input class="form-control" id="dataFechamento" type="date" formControlName="dataFechamento" />
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-6">
-                    <label class="control-label">Requisição de Materiais</label>
-                    <div>
-                        <textarea cols="40" rows="10" maxlength="1000" class="form-control" id="requisicaoMateriais" placeholder="(opcional)" formControlName="requisicaoMateriais"></textarea>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Realizado Por</label>
-                    <div>
-                        <input class="form-control" id="realizadoPor" type="text" placeholder="(opcional)" formControlName="realizadoPor" [ngClass]="{'is-invalid': displayMessage.realizadoPor }" />
-                        <span class="text-danger" *ngIf="displayMessage.realizadoPor">
-                            <p [innerHTML]="displayMessage.realizadoPor"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">CANAC</label>
-                    <div>
-                        <input class="form-control" id="realizadoPorAnac" type="text" placeholder="(opcional)" formControlName="realizadoPorAnac" />
-                        <span class="text-danger" *ngIf="displayMessage.realizadoPorAnac">
-                            <p [innerHTML]="displayMessage.realizadoPorAnac"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Data da realização</label>
-                    <div>
-                        <input class="form-control" id="dataRealizacao" type="date" formControlName="dataRealizacao" />
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label">Inspecionado Por</label>
-                    <div>
-                        <input class="form-control" id="inspecionadoPor" type="text" placeholder="(opcional)" formControlName="inspecionadoPor" [ngClass]="{'is-invalid': displayMessage.inspecionadoPor }" />
-                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPor">
-                            <p [innerHTML]="displayMessage.inspecionadoPor"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">CANAC</label>
-                    <div>
-                        <input class="form-control" id="inspecionadoPorAnac" type="text" placeholder="(opcional)" formControlName="inspecionadoPorAnac" [ngClass]="{'is-invalid': displayMessage.inspecionadoPorAnac }" />
-                        <span class="text-danger" *ngIf="displayMessage.inspecionadoPorAnac">
-                            <p [innerHTML]="displayMessage.inspecionadoPorAnac"></p>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label class="control-label">Data da inspeção</label>
-                    <div>
-                        <input class="form-control" id="dataInspecao" type="date" formControlName="dataRedataInspecaoalizacao" />
-                    </div>
-                </div>
-            </div>  
-            
-            <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-success">&nbsp;
-                <a class="btn btn-primary" [routerLink]="['/ordem-servico/listar-todos']">Voltar</a>
-            </div>
-            
-        </form>  
-        
+        </form>
     </div>
 </section>
 <!-- /.content -->

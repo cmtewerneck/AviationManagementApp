@@ -126,7 +126,7 @@ export class NovoComponent extends FormBaseComponent implements OnInit {
         })
       });
       
-      this.fornecedorForm.patchValue({ tipoPessoa: '1', ativo: true, sexo: '1' });
+      this.fornecedorForm.patchValue({ tipoPessoa: 1, ativo: true, sexo: 1 });
     }
     
     ngAfterViewInit(): void {
@@ -191,9 +191,14 @@ export class NovoComponent extends FormBaseComponent implements OnInit {
           this.fornecedor.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
           this.fornecedor.imagem = this.imagemNome;
 
-          this.fornecedor.endereco.cep = StringUtils.somenteNumeros(this.fornecedor.endereco.cep);
+          // CONVERSÕES PARA JSON
+          this.fornecedor.tipoPessoa = Number(this.fornecedor.tipoPessoa);
           this.fornecedor.documento = StringUtils.somenteNumeros(this.fornecedor.documento);
-          
+          this.fornecedor.sexo = Number(this.fornecedor.sexo);
+          this.fornecedor.ativo = this.fornecedor.ativo.toString() == "true";
+          this.fornecedor.endereco.cep = StringUtils.somenteNumeros(this.fornecedor.endereco.cep);
+          // FIM DAS CONVERSÕES
+
           console.log(this.fornecedor);
 
           this.fornecedorService.AdicionarFornecedor(this.fornecedor)

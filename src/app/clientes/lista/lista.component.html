@@ -1,84 +1,85 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Clientes</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Clientes</li>
-          </ol>
-        </div>
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Clientes</h1>
       </div>
-    </div><!-- /.container-fluid -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div class="d-flex">
-        <div class="form-inline mr-auto">
-          <div class="form-group mb-2">
-              <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
-          </div>
-        </div>
-        <div>
-          <a class="btn btn-success" [routerLink]="['/clientes/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Cliente</a>
-          <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="d-flex">
+      <div class="form-inline mr-auto">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
         </div>
       </div>
-    <table class="table table-hover" style="white-space: nowrap">
+      <div>
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-success" [routerLink]="['/clientes/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Cliente</a>
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
         <thead class="thead-dark">
-            <tr>
-              <th>
-                <button (click)="alternarImagem()" class="btn btn-primary">
-                  <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
-                </button>
-              </th>
-              <th>Nome</th>
-              <th>Documento</th>
-              <th>Sexo</th>
-              <th>Estado Civil</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
-              <th></th>
-            </tr>
+          <tr>
+            <th>
+              <button (click)="alternarImagem()" class="btn btn-primary">
+                <i class="{{mostrarImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+              </button>
+            </th>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>Sexo</th>
+            <th>Estado Civil</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody *ngIf="clientes && clientes.length">
-            <tr *ngFor="let cliente of clientesFiltrados">
-              <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ cliente.imagem }}" style="width: 70px; height: 100px"></td>
-              <td>{{ cliente.nome }}</td>
-              <td>{{ cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}</td>
-              <td>{{ cliente.sexo }}</td>
-              <td>{{ cliente.estadoCivil }}</td>
-              <td>{{ cliente.telefone | telefone }}</td>
-              <td>{{ cliente.email }}</td>
-                
-                <td class="text-right">
-                    <a class="btn btn-warning" [routerLink]="['/clientes/detalhes',cliente.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info" [routerLink]="['/clientes/editar',cliente.id]">
-                        <span class="fa fa-pencil-alt"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-danger" [routerLink]="['/clientes/excluir',cliente.id]">
-                        <span class="fa fa-trash"></span>
-                    </a>
-                </td>
-            </tr>
+          <tr *ngFor="let cliente of clientesFiltrados">
+            <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ cliente.imagem }}" style="width: 70px; height: 100px"></td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.tipoPessoa === 1 ? (cliente.documento | cpf) : (cliente.documento | cnpj ) }}</td>
+            <td>{{ cliente.sexo }}</td>
+            <td>{{ cliente.estadoCivil }}</td>
+            <td>{{ cliente.telefone | telefone }}</td>
+            <td>{{ cliente.email }}</td>
+            
+            <td class="text-right">
+              <a class="btn btn-warning btn-sm" [routerLink]="['/clientes/detalhes',cliente.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/clientes/editar',cliente.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+              <!-- <a class="btn btn-danger" [routerLink]="['/clientes/excluir',cliente.id]">
+                <span class="fa fa-trash"></span>
+              </a> -->
+            </td>
+          </tr>
         </tbody>
         <tfoot *ngIf="!clientes">
-            <tr>
-                <td colspan="7" class="text-center">
-                    <h4>
-                        Nenhum item encontrado!
-                    </h4>
-                </td>
-            </tr>
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
         </tfoot>
-    </table>
+      </table>
     </div>
+  </div>
 </section>
 <!-- /.content -->

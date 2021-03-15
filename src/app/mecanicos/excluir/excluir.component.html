@@ -1,111 +1,92 @@
-<div class="container main-container">
-  <h4>Excluir: {{ mecanico.nome }} </h4>
-  <br>
-  <h5>Você tem certeza disso?</h5>
-
-  <div class="row">
-      <div class="col-md-4">
-          <img src="{{ imagens }}{{ mecanico.imagem }}" style="width: 300px; height: 428px">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Excluir Mecânico</h1>
       </div>
-      <div class="col-md-6">
-          <dl>
-            <dt>
-                Nome
-            </dt>
-            <dd>
-                {{ mecanico.nome }}
-            </dd>
-            <dt>
-                CPF
-            </dt>
-            <dd>
-                {{ mecanico.cpf }}
-            </dd>
-            <dt>
-                E-mail
-            </dt>
-            <dd>
-                {{ mecanico.email }}
-            </dd>
-            <dt>
-                Data de Nascimento
-            </dt>
-            <dd>
-                {{ mecanico.dataNascimento }}
-            </dd>
-            <dt>
-                Data de Admissão
-            </dt>
-            <dd>
-              {{ mecanico.dataAdmissao }}
-            </dd>
-            <dt>
-                Sexo
-            </dt>
-            <dd>
-              {{ mecanico.sexo }}
-            </dd>
-            <dt>
-                Cargo
-            </dt>
-            <dd>
-              {{ mecanico.cargo }}
-            </dd>
-            <dt>
-                Salário
-            </dt>
-            <dd>
-              {{ mecanico.salario | currencyBrazil }}
-            </dd>
-            <dt>
-                Situação
-            </dt>
-            <dd>
-              {{ mecanico.situacao }}
-            </dd>
-            <dt>
-                RG
-            </dt>
-            <dd>
-              {{ mecanico.rg }}
-            </dd>
-            <dt>
-                Órgão Emissor
-            </dt>
-            <dd>
-              {{ mecanico.orgaoEmissor }}
-            </dd>
-            <dt>
-                Título de Eleitor
-            </dt>
-            <dd>
-              {{ mecanico.tituloEleitor }}
-            </dd>
-            <dt>
-                Número PIS
-            </dt>
-            <dd>
-              {{ mecanico.numeroPis }}
-            </dd>
-            <dt>
-                Número CTPS
-            </dt>
-            <dd>
-              {{ mecanico.numeroCtps }}
-            </dd>
-            <dt>
-                Número CNH
-            </dt>
-            <dd>
-              {{ mecanico.numeroCnh }}
-            </dd>
-          </dl>
-
-          <div>
-              <a (click)="excluirMecanico()" href="javascript:void(0)" class="btn btn-danger">Excluir</a>&nbsp;
-              <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
-          </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Mecânicos</li>
+        </ol>
       </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <h4>Tem certeza que deseja excluir: {{ mecanico.nome }} ?</h4>
+    <hr />
+    <div class="alert alert-danger" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+    </div>
+    
+    <dl class="row">
+      <dt class="col-sm-2">
+        <label class="control-label">Nome</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{ mecanico.nome }}
+      </dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Tipo de Pessoa</label>
+      </dt>
+      <dd class="col-sm-10" *ngIf="mecanico.tipoPessoa == 1">Física</dd>
+      <dd class="col-sm-10" *ngIf="mecanico.tipoPessoa == 2">Jurídica</dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Documento</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{mecanico.tipoPessoa === 1 ? (mecanico.documento | cpf) : (mecanico.documento | cnpj ) }}
+      </dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Sexo</label>
+      </dt>
+      <dd class="col-sm-10" *ngIf="mecanico.sexo == 1">Masculino</dd>
+      <dd class="col-sm-10" *ngIf="mecanico.sexo == 2">Feminino</dd>
+      <dd class="col-sm-10" *ngIf="mecanico.sexo == 3">Outro</dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Estado Civil</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{ mecanico.estadoCivil }}
+      </dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Ativo</label>
+      </dt>
+      <dd class="col-sm-10" *ngIf="mecanico.ativo == true">Sim</dd>
+      <dd class="col-sm-10" *ngIf="mecanico.ativo == false">Não</dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Telefone</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{ mecanico.telefone | telefone }}
+      </dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">E-mail</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{ mecanico.email }}
+      </dd>
+    </dl>
+    
+    <div>
+      <a class="btn btn-danger" href="javascript:void(0)" (click)="excluirMecanico()">Excluir</a>&nbsp;
+      <a class="btn btn-info" [routerLink]="['/mecanicos/listar-todos']">Voltar</a>
+    </div>
   </div>
-
-</div>
+</section>
+<!-- /.content -->

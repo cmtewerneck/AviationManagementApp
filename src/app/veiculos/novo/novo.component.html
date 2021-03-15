@@ -1,14 +1,13 @@
-<!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Adicionar Veículo</h1>
+                <h3>Novo Veículo</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li class="breadcrumb-item active">Veículos</li>
+                    <li><a class="btn btn-dark" [routerLink]="['/veiculos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
                 </ol>
             </div>
         </div>
@@ -31,121 +30,136 @@
                     </div>
                     
                     <div class="row">
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Placa</label>
-                            <div>
-                                <input class="form-control" id="placa" type="text" placeholder="(requerido)" formControlName="placa" [ngClass]="{'is-invalid': displayMessage.placa }" />
-                                <span class="text-danger" *ngIf="displayMessage.placa">
-                                    <p [innerHTML]="displayMessage.placa"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">UF Placa</label>
-                            <div>
-                                <input class="form-control" id="ufPlaca" type="text" placeholder="(requerido)" formControlName="ufPlaca" [ngClass]="{'is-invalid': displayMessage.ufPlaca }" />
-                                <span class="text-danger" *ngIf="displayMessage.ufPlaca">
-                                    <p [innerHTML]="displayMessage.ufPlaca"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Ano</label>
-                            <div>
-                                <input class="form-control" id="ano" type="number" placeholder="Ano" formControlName="ano" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Próprio</label>
-                            <div>
-                                <select class="form-control" id="proprio" formControlName="proprio" [ngClass]="{'is-invalid': displayMessage.proprio }" >
-                                    <option value="true">Sim</option>
-                                    <option value="false">Não</option>
-                                </select>
-                                <span class="text-danger" *ngIf="displayMessage.proprio">
-                                    <p [innerHTML]="displayMessage.proprio"></p>
-                                </span>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados do Veículo</h5>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Placa<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="placa" type="text" formControlName="placa" [ngClass]="{'is-invalid': displayMessage.placa }" />
+                                                <span class="text-danger" *ngIf="displayMessage.placa">
+                                                    <p [innerHTML]="displayMessage.placa"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">UF Placa<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="ufPlaca" type="text" formControlName="ufPlaca" [ngClass]="{'is-invalid': displayMessage.ufPlaca }" />
+                                                <span class="text-danger" *ngIf="displayMessage.ufPlaca">
+                                                    <p [innerHTML]="displayMessage.ufPlaca"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Ano</label>
+                                            <div>
+                                                <input class="form-control" id="ano" type="number" formControlName="ano" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Próprio<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="proprio" formControlName="proprio" [ngClass]="{'is-invalid': displayMessage.proprio }" >
+                                                    <option value=true>Sim</option>
+                                                    <option value=false>Não</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.proprio">
+                                                    <p [innerHTML]="displayMessage.proprio"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">KM Atual</label>
+                                            <div>
+                                                <input class="form-control" id="kmAtual" type="number" formControlName="kmAtual" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Modelo<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="modelo" type="text" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo }" />
+                                                <span class="text-danger" *ngIf="displayMessage.modelo">
+                                                    <p [innerHTML]="displayMessage.modelo"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Renavam</label>
+                                            <div>
+                                                <input class="form-control" id="renavam" type="text" formControlName="renavam" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Combustível<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="tipoCombustivel" formControlName="tipoCombustivel" [ngClass]="{'is-invalid': displayMessage.tipoCombustivel }" >
+                                                    <option value=1>Gasolina</option>
+                                                    <option value=2>Álcool</option>
+                                                    <option value=3>Diesel</option>
+                                                    <option value=4>Flex</option>
+                                                    <option value=5>Elétrico</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.tipoCombustivel">
+                                                    <p [innerHTML]="displayMessage.tipoCombustivel"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="row">
-                        <div class="form-group col-md-3">
-                            <label class="control-label">KM Atual</label>
-                            <div>
-                                <input class="form-control" id="kmAtual" type="number" placeholder="KM Atual" formControlName="kmAtual" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Modelo</label>
-                            <div>
-                                <input class="form-control" id="modelo" type="text" placeholder="Modelo (requerido)" formControlName="modelo" [ngClass]="{'is-invalid': displayMessage.modelo }" />
-                                <span class="text-danger" *ngIf="displayMessage.modelo">
-                                    <p [innerHTML]="displayMessage.modelo"></p>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Renavam</label>
-                            <div>
-                                <input class="form-control" id="renavam" type="text" placeholder="Renavam" formControlName="renavam" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Combustível</label>
-                            <div>
-                                <select class="form-control" id="tipoCombustivel" formControlName="tipoCombustivel" [ngClass]="{'is-invalid': displayMessage.tipoCombustivel }" >
-                                    <option value="1">Gasolina</option>
-                                    <option value="2">Álcool</option>
-                                    <option value="3">Diesel</option>
-                                    <option value="4">Flex</option>
-                                    <option value="5">Elétrico</option>
-                                </select>
-                                <span class="text-danger" *ngIf="displayMessage.tipoCombustivel">
-                                    <p [innerHTML]="displayMessage.tipoCombustivel"></p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">                
-                        <div class="form-group col-md-8">
-                            <label class="control-label">Foto do Veículo</label>
-                            
-                            <div class="custom-file">
-                                <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': displayMessage.imagem }">
-                                <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
-                                
-                                <span *ngIf='imagemNome'><br>{{ imagemNome }} <br></span>
-                                
-                                <span class="text-danger" *ngIf="displayMessage.imagem">
-                                    <p [innerHTML]="displayMessage.imagem"></p>
-                                </span>
-                            </div>
-                            
-                            <div *ngIf='imagemNome' class="row">
-                                <div class="col col-md-6">
-                                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="3 / 4" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
-                                    [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
-                                    (loadImageFailed)="loadImageFailed()"></image-cropper>
-                                </div>
-                                <div class="col col-md-6">
-                                    <span>Previwew</span><br>
-                                    <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <div class="card">
+                                <h5 class="card-header">Foto do Aluno</h5>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Foto do Veículo</label>
+                                        
+                                        <div class="custom-file">
+                                            <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)">
+                                            <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
+                                            
+                                            <span *ngIf='imagemNome'><br>{{ imagemNome }} <br></span>
+                                            
+                                            <span class="text-danger" *ngIf="displayMessage.imagem">
+                                                <p [innerHTML]="displayMessage.imagem"></p>
+                                            </span>
+                                        </div>
+                                        
+                                        <div *ngIf='imagemNome' class="row">
+                                            <div class="col col-md-6">
+                                                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 3" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
+                                                [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+                                                (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                            </div>
+                                            <div class="col col-md-6">
+                                                <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>          
+                        </div> 
+                    </div> 
                     
-                    <div class="form-group">
-                        <input type="submit" [disabled]="!veiculoForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
-                        <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!veiculoForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/veiculos/listar-todos">Voltar</a>
                     </div>
                 </form>
             </div>

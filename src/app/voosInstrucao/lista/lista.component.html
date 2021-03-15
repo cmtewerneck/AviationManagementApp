@@ -1,14 +1,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1>Voos de Instrução</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Voos de Instrução</li>
         </ol>
       </div>
     </div>
@@ -25,55 +23,58 @@
         </div>
       </div>
       <div>
-        <a class="btn btn-success" [routerLink]="['/voos-instrucao/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Nova Instrução</a>
-        <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-success" [routerLink]="['/voos-instrucao/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Lançar Instrução</a>
       </div>
     </div>
-    <table class="table table-hover" style="white-space: nowrap">
-      <thead class="thead-dark">
-        <tr>
-          <th>Data</th>
-          <th>Aeronave</th>
-          <th>Aluno</th>
-          <th>Instrutor</th>
-          <th>Tempo de Voo</th>
-          <th>Avaliação</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="voosInstrucao && voosInstrucao.length">
-        <tr *ngFor="let vooInstrucao of voosFiltrados">
-          <td>{{ vooInstrucao.data | date }}</td>
-          <td>{{ vooInstrucao.matriculaAeronave }}</td>
-          <td>{{ vooInstrucao.nomeAluno }}</td>
-          <td>{{ vooInstrucao.nomeInstrutor }}</td>
-          <td>{{ vooInstrucao.tempoVoo }}</td>
-          <td *ngIf="vooInstrucao.avaliacao == true">Satisfatório</td>
-          <td *ngIf="vooInstrucao.avaliacao == false">Não Satisfatório</td>
-          
-          <td class="text-right">
-            <a class="btn btn-warning" [routerLink]="['/voos-instrucao/detalhes', vooInstrucao.id]">
-              <span class="fa fa-search"></span>
-            </a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/voos-instrucao/editar', vooInstrucao.id]">
-              <span class="fa fa-pencil-alt"></span>
-            </a>&nbsp;
-            <a class="btn btn-danger" [routerLink]="['/voos-instrucao/excluir', vooInstrucao.id]">
-              <span class="fa fa-trash"></span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot *ngIf="!voosInstrucao">
-        <tr>
-          <td colspan="7" class="text-center">
-            <h4>
-              Nenhum item encontrado!
-            </h4>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+          <tr>
+            <th>Data</th>
+            <th>Aeronave</th>
+            <th>Aluno</th>
+            <th>Instrutor</th>
+            <th>Tempo de Voo</th>
+            <th>Avaliação</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="voosInstrucao && voosInstrucao.length">
+          <tr *ngFor="let vooInstrucao of voosFiltrados">
+            <td>{{ vooInstrucao.data | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ vooInstrucao.matriculaAeronave }}</td>
+            <td>{{ vooInstrucao.nomeAluno }}</td>
+            <td>{{ vooInstrucao.nomeInstrutor }}</td>
+            <td>{{ vooInstrucao.tempoVoo }}</td>
+            <td *ngIf="vooInstrucao.avaliacao == true">Satisfatório</td>
+            <td *ngIf="vooInstrucao.avaliacao == false">Não Satisfatório</td>
+            
+            <td class="text-right">
+              <a class="btn btn-warning btn-sm" [routerLink]="['/voos-instrucao/detalhes', vooInstrucao.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/voos-instrucao/editar', vooInstrucao.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+              <!-- <a class="btn btn-danger" [routerLink]="['/voos-instrucao/excluir', vooInstrucao.id]">
+                <span class="fa fa-trash"></span>
+              </a> -->
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!voosInstrucao">
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </section>
 <!-- /.content -->

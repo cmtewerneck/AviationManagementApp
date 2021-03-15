@@ -61,7 +61,7 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
         validadeCMA: ['']
       });
       
-      this.alunoForm.patchValue({ tipoPessoa: '1', ativo: true, sexo: '1' });
+      this.alunoForm.patchValue({ tipoPessoa: 1, ativo: true, sexo: 1 });
     }
     
     ngAfterViewInit(): void {
@@ -98,13 +98,22 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
         
         this.aluno = Object.assign({}, this.aluno, this.alunoForm.value);
         
-          this.aluno.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
-          this.aluno.imagem = this.imagemNome;
+        this.aluno.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
+        this.aluno.imagem = this.imagemNome;
         
+        // CONVERSÕES PARA JSON
+        this.aluno.tipoPessoa = Number(this.aluno.tipoPessoa);
         this.aluno.documento = StringUtils.somenteNumeros(this.aluno.documento);
-        this.aluno.saldo = CurrencyUtils.StringParaDecimal(this.aluno.saldo);
+        this.aluno.sexo = Number(this.aluno.sexo);
+        this.aluno.ativo = this.aluno.ativo.toString() == "true";
         this.aluno.totalVoado = CurrencyUtils.StringParaDecimal(this.aluno.totalVoado);
-
+        this.aluno.saldo = CurrencyUtils.StringParaDecimal(this.aluno.saldo);
+        this.aluno.dataNascimento = new Date(this.aluno.dataNascimento);
+        if (this.aluno.validadeCMA) { this.aluno.validadeCMA = new Date(this.aluno.validadeCMA); } else { this.aluno.validadeCMA = null; }
+        // FIM DAS CONVERSÕES
+        
+        console.log(this.aluno);
+        
         this.alunoService.AdicionarAluno(this.aluno)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },
@@ -152,6 +161,6 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
       loadImageFailed() {
         this.errors.push('O formato do arquivo ' + this.imagemNome + ' não é aceito.');
       }
-}
+    }
     
     

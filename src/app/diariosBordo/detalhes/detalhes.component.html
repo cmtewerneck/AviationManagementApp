@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes do Diário de Bordo</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Diários de Bordo</li>
+          <li><a class="btn btn-dark" [routerLink]="['/diarios-bordo/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/diarios-bordo/editar',diarioBordo.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,193 +19,247 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <h4>Diário de Bordo: {{ diarioBordo.matriculaAeronave }} - {{diarioBordo.data}} </h4>
-      <hr />
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Data</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.data | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Matrícula</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.matriculaAeronave }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Base</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.base }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">De</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.de }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Para</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.para }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Hora Acionamento</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.horaAcionamento | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Hora Decolagem</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.horaDecolagem | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Hora Pouso</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.horaPouso | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Hora Corte</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.horaCorte | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Diurno</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalDiurno | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Noturno</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalNoturno | time }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Total IFR</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalIfr | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Navegação</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalNavegacao | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Decimal</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalDecimal | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Dec/Pouso</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalDecPouso | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Total Acionamento/Corte</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.totalAcionamentoCorte | time }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Pousos</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.pousos }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">POB</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.pob }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Combustível Decolagem (L)</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.combustivelDecolagem }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Natureza</label>
-        </dt>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 1">AE</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 2">CQ</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 3">EX</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 4">NR</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 5">RE</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 6">PV</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 7">SA</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 8">TN</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 9">TR</dd>
-        <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 10">FR</dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Comandante</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.nomeComandante }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Copiloto</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.nomeCopiloto }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Mecânico</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.nomeMecanico }}
-        </dd>  
-        <dt class="col-sm-2">
-          <label class="control-label">Pré Voo</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.preVooResponsavel }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Pós Voo</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.posVooResponsavel }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Discrepâncias</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.discrepancias }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Ações Corretivas</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.acoesCorretivas }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Observações</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ diarioBordo.observacoes }}
-        </dd>
-      </dl>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/diarios-bordo/editar', diarioBordo.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/diarios-bordo/listar-todos']">Voltar</a>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Diário</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Data:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.data == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.data != null">{{ diarioBordo.data | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Matrícula:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.matriculaAeronave == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.matriculaAeronave != ''">{{ diarioBordo.matriculaAeronave }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Base:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.base == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.base != ''">{{ diarioBordo.base }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">De:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.de == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.de != ''">{{ diarioBordo.de }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Para:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.para == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.para != ''">{{ diarioBordo.para }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Hora Acionamento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaAcionamento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaAcionamento != null">{{ diarioBordo.horaAcionamento | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Hora Decolagem:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaDecolagem == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaDecolagem != null">{{ diarioBordo.horaDecolagem | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Hora Pouso:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaPouso == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaPouso != null">{{ diarioBordo.horaPouso | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Hora Corte:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaCorte == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.horaCorte != null">{{ diarioBordo.horaCorte | time }}</dd>
+              </dl>   
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Diurno:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDiurno == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDiurno != null">{{ diarioBordo.totalDiurno | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Noturno:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalNoturno == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalNoturno != null">{{ diarioBordo.totalNoturno | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total IFR:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalIfr == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalIfr != null">{{ diarioBordo.totalIfr | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Navegação:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalNavegacao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalNavegacao != null">{{ diarioBordo.totalNavegacao | time }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Decimal:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDecimal == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDecimal != null">{{ diarioBordo.totalDecimal }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Dec/Pouso:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDecPouso == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalDecPouso != null">{{ diarioBordo.totalDecPouso }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Total Acionamento/Corte:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalAcionamentoCorte == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.totalAcionamentoCorte != null">{{ diarioBordo.totalAcionamentoCorte }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Pousos:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.pousos == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.pousos != null">{{ diarioBordo.pousos }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">POB:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.pob == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.pob != null">{{ diarioBordo.pob }}</dd>
+              </dl>   
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">Combustível de Decolagem:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.combustivelDecolagem == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.combustivelDecolagem != null">{{ diarioBordo.combustivelDecolagem }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Natureza:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 1">AE</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 2">CQ</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 3">EX</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 4">NR</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 5">RE</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 6">PV</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 7">SA</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 8">TN</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 9">TR</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.naturezaVoo == 10">FR</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Comandante:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeComandante == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeComandante != ''">{{ diarioBordo.nomeComandante }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Copiloto:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeCopiloto == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeCopiloto != ''">{{ diarioBordo.nomeCopiloto }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Mecânico:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeMecanico == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.nomeMecanico != ''">{{ diarioBordo.nomeMecanico }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Pré Voo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.preVooResponsavel == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.preVooResponsavel != ''">{{ diarioBordo.preVooResponsavel }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Pós Voo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.posVooResponsavel == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.posVooResponsavel != ''">{{ diarioBordo.posVooResponsavel }}</dd>
+              </dl>
+            </div>
+            
+            <div class="row">
+              <dl class="col-md-12">
+                <dt class="col-sm-10">
+                  <label class="control-label">Discrepâncias:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.discrepancias == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.discrepancias != ''">{{ diarioBordo.discrepancias }}</dd>
+              </dl>
+              
+              <dl class="col-md-12">
+                <dt class="col-sm-10">
+                  <label class="control-label">Ações Corretivas:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.acoesCorretivas == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.acoesCorretivas != ''">{{ diarioBordo.acoesCorretivas }}</dd>
+              </dl>   
+              
+              <dl class="col-md-12">
+                <dt class="col-sm-10">
+                  <label class="control-label">Observações:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="diarioBordo.observacoes == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="diarioBordo.observacoes != ''">{{ diarioBordo.observacoes }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
   </div>
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O diário da aeronave {{diarioBordo.matriculaAeronave}} na data de {{diarioBordo.data}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirDiarioBordo(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

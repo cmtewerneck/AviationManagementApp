@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes da Instrução</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Voos de Instrução</li>
+          <li><a class="btn btn-dark" [routerLink]="['/voos-instrucao/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/voos-instrucao/editar',vooInstrucao.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,53 +19,96 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div>
-      <h4>Instrução: {{ vooInstrucao.nomeAluno }} - {{ vooInstrucao.data }} </h4>
-      <hr />
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Data</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooInstrucao.data | date }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Aeronave</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooInstrucao.matriculaAeronave }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Aluno</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooInstrucao.nomeAluno }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Instrutor</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooInstrucao.nomeInstrutor }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Tempo de Voo</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooInstrucao.tempoVoo }}
-        </dd> 
-        <dt class="col-sm-2">
-          <label class="control-label">Avaliação</label>
-        </dt>
-        <dd class="col-sm-10" *ngIf="vooInstrucao.avaliacao == true">Satisfatório</dd>
-        <dd class="col-sm-10" *ngIf="vooInstrucao.avaliacao == false">Não Satisfatório</dd>
-      </dl>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     
-    <div>
-      <a class="btn btn-dark" [routerLink]="['/voos-instrucao/editar', vooInstrucao.id]">Editar</a>&nbsp;
-      <a class="btn btn-info" [routerLink]="['/voos-instrucao/listar-todos']">Voltar</a>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados da Instrução</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-4">
+                  <label class="control-label">Data:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.data == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.data != null">{{ vooInstrucao.data | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-4">
+                  <label class="control-label">Aeronave:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.matriculaAeronave == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.matriculaAeronave != ''">{{ vooInstrucao.matriculaAeronave }}</dd>
+                <br>
+                <dt class="col-sm-4">
+                  <label class="control-label">Aluno:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.nomeAluno == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.nomeAluno != ''">{{ vooInstrucao.nomeAluno }}</dd>
+              </dl>
+              
+              <dl class="col-md-6">
+                <dt class="col-sm-4">
+                  <label class="control-label">Instrutor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.nomeInstrutor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.nomeInstrutor != ''">{{ vooInstrucao.nomeInstrutor }}</dd>
+                <br>
+                <dt class="col-sm-4">
+                  <label class="control-label">Tempo de Voo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.tempoVoo == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.tempoVoo != null">{{ vooInstrucao.tempoVoo }}</dd>
+                <br>
+                <dt class="col-sm-4">
+                  <label class="control-label">Avaliação:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.avaliacao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.avaliacao == true">Satisfatório</dd>
+                <dd class="col-sm-10" *ngIf="vooInstrucao.avaliacao == false">Não Satisfatório</dd>
+              </dl>
+            </div>            
+          </div>
+        </div>
+      </div>
     </div>
     
   </div>
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>A instrução do dia {{vooInstrucao.data}} do aluno {{vooInstrucao.nomeAluno}} será excluída!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirVooInstrucao(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
-import { Mecanico } from '../models/mecanico';
+import { Mecanico } from '../models/Mecanico';
 import { MecanicoService } from '../services/mecanico.service';
 
 @Component({
@@ -13,6 +13,8 @@ import { MecanicoService } from '../services/mecanico.service';
 export class ExcluirComponent {
 
   imagens: string = environment.imagensUrl;
+
+  errors: any[] = [];
 
   mecanico: Mecanico;
 

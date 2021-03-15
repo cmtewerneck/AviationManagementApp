@@ -34,71 +34,58 @@
       <dd class="col-sm-10">
         {{ instrutor.nome }}
       </dd>
+      
       <dt class="col-sm-2">
-        <label class="control-label">CPF</label>
+        <label class="control-label">Tipo de Pessoa</label>
+      </dt>
+      <dd class="col-sm-10" *ngIf="instrutor.tipoPessoa == 1">Física</dd>
+      <dd class="col-sm-10" *ngIf="instrutor.tipoPessoa == 2">Jurídica</dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Documento</label>
       </dt>
       <dd class="col-sm-10">
-        {{ instrutor.cpf }}
+        {{instrutor.tipoPessoa === 1 ? (instrutor.documento | cpf) : (instrutor.documento | cnpj ) }}
       </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">RG</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.rg }}
-      </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">E-mail</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.email }}
-      </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">Telefone</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.telefone }}
-      </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">CANAC</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.canac }}
-      </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">Data de Nascimento</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.dataNascimento }}
-      </dd>
-      <dt class="col-sm-2">
-        <label class="control-label">Data de Admissão</label>
-      </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.dataAdmissao }}
-      </dd>
+      
       <dt class="col-sm-2">
         <label class="control-label">Sexo</label>
       </dt>
-      <dd class="col-sm-10">
-        {{ instrutor.sexo }}
-      </dd>
+      <dd class="col-sm-10" *ngIf="instrutor.sexo == 1">Masculino</dd>
+      <dd class="col-sm-10" *ngIf="instrutor.sexo == 2">Feminino</dd>
+      <dd class="col-sm-10" *ngIf="instrutor.sexo == 3">Outro</dd>
+      
       <dt class="col-sm-2">
         <label class="control-label">Estado Civil</label>
       </dt>
       <dd class="col-sm-10">
         {{ instrutor.estadoCivil }}
       </dd>
+      
       <dt class="col-sm-2">
-        <label class="control-label">Salário</label>
+        <label class="control-label">Ativo</label>
+      </dt>
+      <dd class="col-sm-10" *ngIf="instrutor.ativo == true">Sim</dd>
+      <dd class="col-sm-10" *ngIf="instrutor.ativo == false">Não</dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">Telefone</label>
       </dt>
       <dd class="col-sm-10">
-        {{ instrutor.salario }}
+        {{ instrutor.telefone | telefone }}
+      </dd>
+      
+      <dt class="col-sm-2">
+        <label class="control-label">E-mail</label>
+      </dt>
+      <dd class="col-sm-10">
+        {{ instrutor.email }}
       </dd>
     </dl>
     
     <div>
       <a class="btn btn-danger" href="javascript:void(0)" (click)="excluirInstrutor()">Excluir</a>&nbsp;
-      <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+      <a class="btn btn-info" [routerLink]="['/instrutores/listar-todos']">Voltar</a>
     </div>
   </div>
 </section>

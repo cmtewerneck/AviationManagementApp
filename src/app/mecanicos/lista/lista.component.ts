@@ -48,7 +48,7 @@ export class ListaComponent implements OnInit {
   }
 
   ObterTodos() {
-    this.mecanicoService.obterTodos().subscribe(
+    this.mecanicoService.obterTodos(4).subscribe(
       (_mecanicos: Mecanico[]) => {
       this.mecanicos = _mecanicos;
       this.mecanicosFiltrados = this.mecanicos;

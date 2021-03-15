@@ -32,7 +32,7 @@ export class NovoComponent extends AeronaveTarifaBaseComponent implements OnInit
           valor: ['', [Validators.required]],
           situacao: [true],
           numeracao: ['', [Validators.required, Validators.maxLength(30)]],
-          orgaoEmissor: ['', [Validators.required]]
+          orgaoEmissorTarifa: ['', [Validators.required]]
         });
       }
       
@@ -44,8 +44,16 @@ export class NovoComponent extends AeronaveTarifaBaseComponent implements OnInit
         if (this.aeronaveTarifaForm.dirty && this.aeronaveTarifaForm.valid) {
           this.aeronaveTarifa = Object.assign({}, this.aeronaveTarifa, this.aeronaveTarifaForm.value);
           
+          // CONVERSÕES PARA JSON
+          this.aeronaveTarifa.data = new Date(this.aeronaveTarifa.data);
+          this.aeronaveTarifa.vencimento = new Date(this.aeronaveTarifa.vencimento);
           this.aeronaveTarifa.valor = CurrencyUtils.StringParaDecimal(this.aeronaveTarifa.valor);
-          
+          this.aeronaveTarifa.situacao = this.aeronaveTarifa.situacao.toString() == "true";
+          this.aeronaveTarifa.orgaoEmissorTarifa = Number(this.aeronaveTarifa.orgaoEmissorTarifa);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.aeronaveTarifa);
+
           this.aeronaveTarifaService.novaAeronaveTarifa(this.aeronaveTarifa)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

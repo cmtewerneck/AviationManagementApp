@@ -19,8 +19,8 @@ export class Tripulante {
   dataNascimento?: Date;
   dataAdmissao: Date;
   dataDemissao?: Date;
-  tipoColaborador: number = 2; // TRIPULANTE NO ENUM
-  cargo: string = "Tripulante";
+  tipoColaborador: number; // TRIPULANTE NO ENUM
+  cargo: string;
   canac: string;
   salario?: number;
   tipoVinculo: number;

@@ -43,8 +43,15 @@ export class NovoComponent extends ContasReceberBaseComponent implements OnInit 
     if (this.contasReceberForm.dirty && this.contasReceberForm.valid) {
       this.contasReceber = Object.assign({}, this.contasReceber, this.contasReceberForm.value);
 
+      // CONVERSÕES PARA JSON
+      if (this.contasReceber.dataVencimento) { this.contasReceber.dataVencimento = new Date(this.contasReceber.dataVencimento); } else { this.contasReceber.dataVencimento = null; }
+      this.contasReceber.situacao = Number(this.contasReceber.situacao);
       this.contasReceber.valorReceber = CurrencyUtils.StringParaDecimal(this.contasReceber.valorReceber);
       this.contasReceber.valorRecebido = CurrencyUtils.StringParaDecimal(this.contasReceber.valorRecebido);
+      if (this.contasReceber.dataRecebimento) { this.contasReceber.dataRecebimento = new Date(this.contasReceber.dataRecebimento); } else { this.contasReceber.dataRecebimento = null; }
+      // FIM DAS CONVERSÕES
+
+      console.log(this.contasReceber);
 
       this.contasReceberService.novoContasReceber(this.contasReceber)
         .subscribe(

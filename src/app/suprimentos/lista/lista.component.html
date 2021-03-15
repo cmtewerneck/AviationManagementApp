@@ -25,8 +25,8 @@
         </div>
       </div>
       <div>
-        <a class="btn btn-info" [routerLink]="['/estoque/movimentacao']"><i class="fas fa-exchange-alt"></i>&nbsp;&nbsp;Nova Movimentação</a>&nbsp;
-        <a class="btn btn-success" [routerLink]="['/estoque/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Item</a>
+        <a class="btn btn-info" [routerLink]="['/suprimentos-movimentacoes/adicionar-novo']"><i class="fas fa-exchange-alt"></i>&nbsp;&nbsp;Nova Movimentação</a>&nbsp;
+        <a class="btn btn-success" [routerLink]="['/suprimentos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Item</a>
         <!--<button class="btn btn-success" (click)="novoFornecedor(template)"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Fornecedor</button>-->
       </div>
     </div>
@@ -56,15 +56,15 @@
           <td>{{ suprimento.localizacao }}</td>
           
           <td class="text-right">
-            <a class="btn btn-warning" [routerLink]="['/suprimentos/detalhes',suprimento.id]">
+            <a class="btn btn-warning btn-sm" [routerLink]="['/suprimentos/detalhes',suprimento.id]">
               <span class="fa fa-search"></span>
             </a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/suprimentos/editar',suprimento.id]">
+            <a class="btn btn-info btn-sm" [routerLink]="['/suprimentos/editar',suprimento.id]">
               <span class="fa fa-pencil-alt"></span>
-            </a>&nbsp;
-            <a class="btn btn-danger" [routerLink]="['/suprimentos/excluir',suprimento.id]">
-              <span class="fa fa-trash"></span>
             </a>
+            <!-- <a class="btn btn-danger" [routerLink]="['/suprimentos/excluir',suprimento.id]">
+              <span class="fa fa-trash"></span>
+            </a> -->
           </td>
         </tr>
       </tbody>

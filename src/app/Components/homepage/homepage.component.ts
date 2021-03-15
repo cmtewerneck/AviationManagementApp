@@ -30,7 +30,7 @@ export class HomepageComponent implements OnInit {
   }
 
   obterQuantidadeTripulantesCadastrados() {
-    this.homepageService.obterQuantidadeTripulantesCadastrados().subscribe(
+    this.homepageService.obterQuantidadeTripulantesCadastrados(2).subscribe(
       (_tripulantes: number) => {
         this.tripulantesCadastrados = _tripulantes;
       },

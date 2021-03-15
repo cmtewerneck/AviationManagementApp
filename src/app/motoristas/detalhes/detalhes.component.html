@@ -1,0 +1,196 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li><a class="btn btn-dark" [routerLink]="['/motoristas/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/motoristas/editar',motorista.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-center" style="height: 100%;">
+          <h5 class="card-header">Foto</h5>
+          <div class="card-body">
+            <img src="{{ imagens }}{{ motorista.imagem }}" style="width: 200px; height: 280px; border-radius: 10px;" /><br><br>
+            <a class="btn btn-success" [routerLink]="['/motoristas/listar-todos']"><i class="fa fa-camera"></i>&nbsp;&nbsp;Mudar foto</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-8">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Motorista</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-4">
+                <dt class="col-sm-4">
+                  <label class="control-label">Nome:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.nome == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.nome != ''">{{ motorista.nome }}</dd>
+                <br>             
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo de Pessoa:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.tipoPessoa == 1">Física</dd>
+                <dd class="col-sm-10" *ngIf="motorista.tipoPessoa == 2">Jurídica</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Documento:</label>
+                </dt>
+                <dd class="col-sm-10">
+                  {{motorista.tipoPessoa === 1 ? (motorista.documento | cpf) : (motorista.documento | cnpj ) }}
+                </dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Sexo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.sexo == 1">Masculino</dd>
+                <dd class="col-sm-10" *ngIf="motorista.sexo == 2">Feminino</dd>
+                <dd class="col-sm-10" *ngIf="motorista.sexo == 3">Outro</dd>
+                <dt class="col-sm-10">
+                  <label class="control-label">Estado Civil:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.estadoCivil == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.estadoCivil != ''">{{ motorista.estadoCivil }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Ativo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.ativo == true">Sim</dd>
+                <dd class="col-sm-10" *ngIf="motorista.ativo == false">Não</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Telefone:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.telefone == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.telefone != ''">{{ motorista.telefone | telefone }}</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">E-mail:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.email == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.email != ''">{{ motorista.email }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Nascimento:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.dataNascimento == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.dataNascimento != null">{{ motorista.dataNascimento | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Admissão:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.dataAdmissao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.dataAdmissao != null">{{ motorista.dataAdmissao | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Data de Demissão:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.dataDemissao == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.dataDemissao != null">{{ motorista.dataDemissao | date: 'dd/MM/yyyy' }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Salário:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.salario == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.salario != null">{{ motorista.salario | currencyBrazil }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Tipo de Vínculo:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.tipoVinculo == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.tipoVinculo == 1">MEI</dd>
+                <dd class="col-sm-10" *ngIf="motorista.tipoVinculo == 2">CTPS</dd>
+              </dl>
+              
+              <dl class="col-md-4">
+                <dt class="col-sm-10">
+                  <label class="control-label">RG:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.rg == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.rg != ''">{{ motorista.rg }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Órgão Emissor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.orgaoEmissor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.orgaoEmissor != ''">{{ motorista.orgaoEmissor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Título de Eleitor:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.tituloEleitor == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.tituloEleitor != ''">{{ motorista.tituloEleitor }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">PIS:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.numeroPis == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.numeroPis != ''">{{ motorista.numeroPis }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CTPS:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.numeroCtps == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.numeroCtps != ''">{{ motorista.numeroCtps }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">CNH:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="motorista.numeroCnh == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="motorista.numeroCnh != ''">{{ motorista.numeroCnh }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>  
+</section>
+<!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O motorista {{motorista.nome}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirMotorista(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

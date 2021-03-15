@@ -71,6 +71,16 @@ export class EditarComponent extends VooAgendadoBaseComponent implements OnInit 
         if (this.vooAgendadoForm.dirty && this.vooAgendadoForm.valid) {
           this.vooAgendado = Object.assign({}, this.vooAgendado, this.vooAgendadoForm.value);
           
+          // CONVERSÃO PARA JSON
+          this.vooAgendado.start = new Date(this.vooAgendado.start);
+          this.vooAgendado.end = new Date(this.vooAgendado.end);
+          this.vooAgendado.allDay = this.vooAgendado.allDay.toString() == "true";
+          this.vooAgendado.editable = this.vooAgendado.editable.toString() == "true";
+          this.vooAgendado.durationEditable = this.vooAgendado.durationEditable.toString() == "true";
+          // FIM DA CONVERSÃO
+
+          console.log(this.vooAgendado);
+          
           this.vooAgendadoService.atualizarVooAgendado(this.vooAgendado)
           .subscribe(
             sucesso => { this.processarSucesso(sucesso) },

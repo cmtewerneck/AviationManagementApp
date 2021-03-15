@@ -1,4 +1,4 @@
-<!-- <section class="content-header">
+<section class="content-header">
   <div class="container-fluid" style="padding-left: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
@@ -12,65 +12,19 @@
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
-<!-- <section class="content">
+<section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
     <div class="d-flex">
-      <div class="form-inline mr-auto">
-        <div class="form-group mb-2">
-          <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
-        </div>
-      </div>
       <div>
         <a class="btn btn-success" [routerLink]="['/voos-agendados/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Agendamento</a>
       </div>
     </div>
-    <table class="table table-hover" style="white-space: nowrap">
-      <thead class="thead-dark">
-        <tr>
-          <th>Descrição</th>
-          <th>Matrícula</th>
-          <th>Começa Em</th>
-          <th>Termina Em</th>
-          <th>Dia Todo</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="voosAgendados && voosAgendados.length">
-        <tr *ngFor="let vooAgendado of voosAgendadosFiltrados">
-          <td>{{ vooAgendado.descricao }}</td>
-          <td>{{ vooAgendado.matriculaAeronave }}</td>
-          <td>{{ vooAgendado.comecaEm | date:'medium' }}</td>
-          <td>{{ vooAgendado.terminaEm | date:'medium' }}</td>
-          <td *ngIf="vooAgendado.diaTodo == true">Sim</td>
-          <td *ngIf="vooAgendado.diaTodo == false">Não</td>
-          
-          <td class="text-right">
-            <a class="btn btn-warning" [routerLink]="['/voos-agendados/detalhes',vooAgendado.id]">
-              <span class="fa fa-search"></span>
-            </a>&nbsp;
-            <a class="btn btn-info" [routerLink]="['/voos-agendados/editar',vooAgendado.id]">
-              <span class="fa fa-pencil-alt"></span>
-            </a>&nbsp;
-            <a class="btn btn-danger" [routerLink]="['/voos-agendados/excluir',vooAgendado.id]">
-              <span class="fa fa-trash"></span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot *ngIf="!voosAgendados">
-        <tr>
-          <td colspan="7" class="text-center">
-            <h4>
-              Nenhum item encontrado!
-            </h4>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+    
+    <div class="container-fluid">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    
   </div>    
-</section> -->
-<div class="container-fluid">
-  <full-calendar [options]="calendarOptions"></full-calendar>
-</div>
+</section>

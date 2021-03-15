@@ -10,8 +10,13 @@ import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullca
 })
 export class ListaComponent implements OnInit {
   
+  vooAgendado: VooAgendado;
+  public voosAgendados: VooAgendado[];
+  errorMessage: string;
+  
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
+    locale:"pt-br",
     weekends: true,
     editable: true,
     selectable: true,
@@ -23,67 +28,53 @@ export class ListaComponent implements OnInit {
     meridiem: false },
     dateClick: this.handleDateClick.bind(this), // bind is important!
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'dayGridMonth,dayGridWeek,listWeek',
       center: 'title',
-      right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
+      right: 'prev,next today'
+    },
+    buttonText: {
+      today:    'hoje',
+      month:    'mês',
+      week:     'semana',
+      day:      'dia',
+      list:     'lista'
     },
     dayMaxEvents: true, // allow "more" link when too many events
     eventClick: this.handleEventClick.bind(this),
-    events: [
-      { 
-      // IMPLEMENTAR SERVIÇO PARA PEGAR OS EVENTOS
-      // this.obterTodos();
+    events: {
+      url: 'https://localhost:44302/api/v1/voos-agendados',
+      method: 'GET',
+      failure: function() {
+        alert('Houve um erro ao tentar carregar os voos!');
+      }    
     }
-  ]
-};
-
-handleEventClick(clickInfo: EventClickArg) {
-  if (confirm(`Você tem certeza que deseja deletar o agendamento '${clickInfo.event.title}'`)) {
-    clickInfo.event.remove();
-  }
-}
-
-handleDateClick(arg) {
-  alert('Data escolhida ' + arg.dateStr)
-}
-
-public voosAgendados: VooAgendado[];
-errorMessage: string;
-
-vooAgendado: VooAgendado;
-voosAgendadosFiltrados: VooAgendado[];
-
-constructor(private vooAgendadoService: VooAgendadoService,
-  private toastr: ToastrService) { }
+  };
   
-  ngOnInit(): void {
-    this.ObterTodos();
+  handleEventClick(clickInfo: EventClickArg) {
+    if (confirm(`Você tem certeza que deseja deletar o agendamento '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
+    }
   }
   
-  _filtroLista: string;
-  get filtroLista(): string {
-    return this._filtroLista;
-  }
-  set filtroLista(value: string) {
-    this._filtroLista = value;
-    this.voosAgendadosFiltrados = this.filtroLista ? this.filtrarVooAgendado(this.filtroLista) : this.voosAgendados;
+  handleDateClick(arg) {
+    alert('Data escolhida ' + arg.dateStr)
   }
   
-  filtrarVooAgendado(filtrarPor: string): VooAgendado[] {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.voosAgendados.filter(
-      vooAgendado => vooAgendado.matriculaAeronave.toLocaleLowerCase().indexOf(filtrarPor) !== -1
-      );
+  constructor(private vooAgendadoService: VooAgendadoService,
+    private toastr: ToastrService) { }
+    
+    ngOnInit(): void {
+      this.ObterTodos();
     }
     
     ObterTodos() {
       this.vooAgendadoService.obterTodos().subscribe(
         (_voosAgendados: VooAgendado[]) => {
           this.voosAgendados = _voosAgendados;
-          this.voosAgendadosFiltrados = this.voosAgendados;
+          console.log(this.voosAgendados);
         }, error => {
           this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
           console.log(error);
         });
       }
-    }
+}

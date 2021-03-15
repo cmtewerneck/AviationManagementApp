@@ -43,7 +43,7 @@ export abstract class TripulanteBaseComponent extends FormBaseComponent {
         maxlength: 'Máximo de 30 caracteres'
       },
       canac: {
-        minlength: 'Máximo de 6 caracteres',
+        minlength: 'Mínimo de 6 caracteres',
         maxlength: 'Máximo de 6 caracteres'
       },
       tipoVinculo: {

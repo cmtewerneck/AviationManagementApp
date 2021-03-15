@@ -59,6 +59,12 @@ export class EditarComponent extends OficioRecebidoBaseComponent implements OnIn
         this.oficioRecebido = Object.assign({}, this.oficioRecebido, this.oficioRecebidoForm.value);
         
         // Implementar upload de arquivo pdf
+
+        // CONVERSÕES PARA JSON
+        this.oficioRecebido.data = new Date(this.oficioRecebido.data);
+        // FIM DAS CONVERSÕES
+
+        console.log(this.oficioRecebido);
         
         this.oficioRecebidoService.atualizarOficioRecebido(this.oficioRecebido)
         .subscribe(

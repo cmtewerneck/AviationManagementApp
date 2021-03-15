@@ -42,7 +42,6 @@ export abstract class VeiculoBaseComponent extends FormBaseComponent {
                 required: 'Tipo do combustível é obrigatório'
             }
         };
-        
         super.configurarMensagensValidacaoBase(this.validationMessages);
     }
     

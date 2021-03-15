@@ -61,6 +61,14 @@ export class EditarComponent extends ManualEmpresaBaseComponent implements OnIni
         this.manualEmpresa = Object.assign({}, this.manualEmpresa, this.manualEmpresaForm.value);
         
         // Implementar edição do arquivo pdf
+
+        // CONVERSÕES PARA JSON
+        this.manualEmpresa.revisaoAtual = Number(this.manualEmpresa.revisaoAtual);
+        this.manualEmpresa.dataRevisao = new Date(this.manualEmpresa.dataRevisao);
+        if (this.manualEmpresa.revisaoAnalise) { this.manualEmpresa.revisaoAnalise = Number(this.manualEmpresa.revisaoAnalise); } else { this.manualEmpresa.revisaoAnalise = null; }
+        // FIM DAS CONVERSÕES
+
+        console.log(this.manualEmpresa);
         
         this.manualEmpresaService.atualizarManualEmpresa(this.manualEmpresa)
         .subscribe(

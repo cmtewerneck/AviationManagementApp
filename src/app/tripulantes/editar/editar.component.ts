@@ -55,7 +55,7 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
         documento: ['', [Validators.required, NgBrazilValidators.cpf]],
         sexo: ['', Validators.required],
         estadoCivil: ['', Validators.maxLength(20)],
-        ativo: [true],
+        ativo: [0],
         telefone: ['', Validators.maxLength(20)],
         email: ['', [Validators.email, Validators.maxLength(20)]],
         imagem: [''],
@@ -64,9 +64,9 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
         dataNascimento: [''],
         dataAdmissao: ['', Validators.required],
         dataDemissao: [''],
-        tipoColaborador: ['', Validators.required],
-        cargo: ['', Validators.maxLength(30)],
-        canac: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+        tipoColaborador: [''],
+        cargo: [''],
+        canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
         salario: [''],
         tipoVinculo: ['', Validators.required],
         rg: ['', [Validators.required, Validators.maxLength(20)]],
@@ -80,7 +80,7 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
       this.tripulanteForm.patchValue({
         id: this.tripulante.id,
         nome: this.tripulante.nome,
-        tipoPessoa: this.tripulante.tipoPessoa,
+        tipoPessoa: this.tripulante.tipoPessoa.toString(),
         documento: this.tripulante.documento,
         sexo: this.tripulante.sexo,
         estadoCivil: this.tripulante.estadoCivil,
@@ -145,8 +145,23 @@ export class EditarComponent extends TripulanteBaseComponent implements OnInit {
           this.tripulante.imagem = this.imagemNome;
         }
         
-        this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
+        // CONVERSÕES PARA JSON
+        this.tripulante.tipoPessoa = Number(this.tripulante.tipoPessoa);
         this.tripulante.documento = StringUtils.somenteNumeros(this.tripulante.documento);
+        this.tripulante.sexo = Number(this.tripulante.sexo);
+        this.tripulante.ativo = this.tripulante.ativo.toString() == "true";
+        if (this.tripulante.dataNascimento) { this.tripulante.dataNascimento = new Date(this.tripulante.dataNascimento); } else { this.tripulante.dataNascimento = null; }
+        this.tripulante.dataAdmissao = new Date(this.tripulante.dataAdmissao);
+        if (this.tripulante.dataDemissao) { this.tripulante.dataDemissao = new Date(this.tripulante.dataDemissao); } else { this.tripulante.dataDemissao = null; }
+        this.tripulante.tipoColaborador = Number(this.tripulante.tipoColaborador);
+        this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
+        this.tripulante.tipoVinculo = Number(this.tripulante.tipoVinculo);
+        // FIM DAS CONVERSÕES
+
+        this.tripulante.tipoColaborador = 2;
+        this.tripulante.cargo = 'Tripulante';
+
+        console.log(this.tripulante);
         
         this.tripulanteService.atualizarTripulante(this.tripulante)
         .subscribe(

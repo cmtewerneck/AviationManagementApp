@@ -60,7 +60,12 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
           this.produto.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
           this.produto.imagem = this.imagemNome;
           
+          // CONVERSÕES PARA JSON
           this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor);
+          this.produto.ativo = this.produto.ativo.toString() == "true";
+          // FIM DAS CONVERSÕES
+          
+          console.log(this.produto);  
           
           this.produtoService.novoProduto(this.produto)
           .subscribe(

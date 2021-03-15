@@ -55,9 +55,9 @@ export class VooInstrucaoService extends BaseService {
                 }
                 
                 // IMPLEMENTAR PARA BUSCAR SOMENTE OS DE ENUM 3 (INSTRUTOR)
-                obterInstrutores(): Observable<Instrutor[]> {
+                obterInstrutores(tipoColaborador: number): Observable<Instrutor[]> {
                     return this.http
-                    .get<Instrutor[]>(this.urlServiceV1 + 'colaboradores', this.ObterAuthHeaderJson())
+                    .get<Instrutor[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
                     .pipe(catchError(super.serviceError));
                 }
                 

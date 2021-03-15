@@ -91,8 +91,15 @@ export class NovoComponent extends ClienteBaseComponent implements OnInit {
         this.cliente.imagemUpload = this.croppedImage.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
         this.cliente.imagem = this.imagemNome;
 
+        // CONVERSÕES PARA JSON
+        this.cliente.tipoPessoa = Number(this.cliente.tipoPessoa);
         this.cliente.documento = StringUtils.somenteNumeros(this.cliente.documento);
-        
+        this.cliente.sexo = Number(this.cliente.sexo);
+        this.cliente.ativo = this.cliente.ativo.toString() == "true";
+        // FIM DAS CONVERSÕES
+
+        console.log(this.cliente);
+
         this.clienteService.AdicionarCliente(this.cliente)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },

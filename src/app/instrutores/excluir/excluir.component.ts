@@ -13,8 +13,9 @@ import { InstrutorService } from '../services/instrutor.service';
 export class ExcluirComponent {
 
   imagens: string = environment.imagensUrl;
+
   errors: any[] = [];
-  
+
   instrutor: Instrutor;
 
   constructor(private instrutorService: InstrutorService,

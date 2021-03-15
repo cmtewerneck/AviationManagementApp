@@ -68,8 +68,15 @@ export class EditarComponent extends ContasPagarBaseComponent implements OnInit 
       if (this.contasPagarForm.dirty && this.contasPagarForm.valid) {
         this.contasPagar = Object.assign({}, this.contasPagar, this.contasPagarForm.value);
         
+        // CONVERSÕES PARA JSON
+        if (this.contasPagar.dataVencimento) { this.contasPagar.dataVencimento = new Date(this.contasPagar.dataVencimento); } else { this.contasPagar.dataVencimento = null; }
+        this.contasPagar.situacao = Number(this.contasPagar.situacao);
         this.contasPagar.valorPagar = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPagar);
         this.contasPagar.valorPago = CurrencyUtils.StringParaDecimal(this.contasPagar.valorPago);
+        if (this.contasPagar.dataPagamento) { this.contasPagar.dataPagamento = new Date(this.contasPagar.dataPagamento); } else { this.contasPagar.dataPagamento = null; }
+        // FIM DAS CONVERSÕES
+        
+        console.log(this.contasPagar);
         
         this.contasPagarService.atualizarContasPagar(this.contasPagar)
         .subscribe(

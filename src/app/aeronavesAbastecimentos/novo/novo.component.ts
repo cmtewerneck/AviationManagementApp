@@ -50,9 +50,15 @@ export class NovoComponent extends AeronaveAbastecimentoBaseComponent implements
         if (this.aeronaveAbastecimentoForm.dirty && this.aeronaveAbastecimentoForm.valid) {
           this.aeronaveAbastecimento = Object.assign({}, this.aeronaveAbastecimento, this.aeronaveAbastecimentoForm.value);
           
+          // CONVERSÕES PARA JSON
           //this.aeronaveAbastecimento.comprovanteUpload = this.comprovante.split(',')[1];
+          this.aeronaveAbastecimento.data = new Date(this.aeronaveAbastecimento.data);
+          this.aeronaveAbastecimento.litros = Number(this.aeronaveAbastecimento.litros);
           this.aeronaveAbastecimento.comprovante = this.arquivoNome;
           this.aeronaveAbastecimento.valor = CurrencyUtils.StringParaDecimal(this.aeronaveAbastecimento.valor);
+          // FIM DAS CONVERSÕES
+
+          console.log(this.aeronaveAbastecimento);
 
           this.aeronaveAbastecimentoService.novaAeronaveAbastecimento(this.aeronaveAbastecimento)
           .subscribe(

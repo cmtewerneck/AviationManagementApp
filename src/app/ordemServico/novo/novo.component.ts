@@ -53,6 +53,15 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
           this.ordemServico = Object.assign({}, this.ordemServico, this.ordemServicoForm.value);
           
           // this.formResult = JSON.stringify(this.produto);
+
+          // CONVERSÕES PARA JSON
+          this.ordemServico.dataAbertura = new Date(this.ordemServico.dataAbertura);
+          if (this.ordemServico.dataFechamento) { this.ordemServico.dataFechamento = new Date(this.ordemServico.dataFechamento); } else { this.ordemServico.dataFechamento = null; }
+          if (this.ordemServico.dataRealizacao) { this.ordemServico.dataRealizacao = new Date(this.ordemServico.dataRealizacao); } else { this.ordemServico.dataRealizacao = null; }
+          if (this.ordemServico.dataInspecao) { this.ordemServico.dataInspecao = new Date(this.ordemServico.dataInspecao); } else { this.ordemServico.dataInspecao = null; }
+          // FIM DAS CONVERSÕES
+
+          console.log(this.ordemServico);
           
           this.ordemServicoService.novoOrdemServico(this.ordemServico)
           .subscribe(

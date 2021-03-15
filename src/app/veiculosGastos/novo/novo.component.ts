@@ -25,7 +25,7 @@ export class NovoComponent extends VeiculoGastoBaseComponent implements OnInit {
       .subscribe(
         veiculos => this.veiculos = veiculos);
         
-        this.veiculoGastoService.ObterColaboradores()
+        this.veiculoGastoService.ObterColaboradores(5)
         .subscribe(
           colaboradores => this.colaboradores = colaboradores);
           
@@ -47,7 +47,13 @@ export class NovoComponent extends VeiculoGastoBaseComponent implements OnInit {
           if (this.veiculoGastoForm.dirty && this.veiculoGastoForm.valid) {
             this.veiculoGasto = Object.assign({}, this.veiculoGasto, this.veiculoGastoForm.value);
             
+            // CONVERSÕES PARA JSON
+            this.veiculoGasto.data = new Date(this.veiculoGasto.data);
+            this.veiculoGasto.situacao = this.veiculoGasto.situacao.toString() == "true";
             this.veiculoGasto.valor = CurrencyUtils.StringParaDecimal(this.veiculoGasto.valor);
+            // FIM DAS CONVERSÕES
+
+            console.log(this.veiculoGasto);
             
             this.veiculoGastoService.novoVeiculoGasto(this.veiculoGasto)
             .subscribe(

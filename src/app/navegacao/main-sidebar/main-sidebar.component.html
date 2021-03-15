@@ -322,23 +322,43 @@
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/alunos/listar-todos" class="nav-link">
+              <a routerLink="/cursos/listar-todos" class="nav-link">
+                <p>Lista de Cursos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/cursos/adicionar-novo" class="nav-link">
+                <p>Adicionar Curso</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/turmas/listar-todos" class="nav-link">
+                <p>Lista de Turmas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/turmas/adicionar-novo" class="nav-link">
+                <p>Adicionar Turma</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/instrutores/listar-todos" class="nav-link">
                 <p>Lista de Instrutores</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/alunos/adicionar-novo" class="nav-link">
+              <a routerLink="/instrutores/adicionar-novo" class="nav-link">
                 <p>Adicionar Instrutor</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/alunos/listar-todos" class="nav-link">
-                <p>Lista de Voos</p>
+              <a routerLink="/voos-instrucao/listar-todos" class="nav-link">
+                <p>Lista de Instruções</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/alunos/adicionar-novo" class="nav-link">
-                <p>Adicionar Voo</p>
+              <a routerLink="/voos-instrucao/adicionar-novo" class="nav-link">
+                <p>Adicionar Instrução</p>
               </a>
             </li>
           </ul>
@@ -443,28 +463,33 @@
           </a>
         </li>
 
-        <!-- ESTOQUE MENU-->
+        <!-- SUPRIMENTO MENU-->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-hammer"></i>
             <p>
-              Estoque
+              Suprimento
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/estoque/listar-todos" class="nav-link">
+              <a routerLink="/suprimentos/listar-todos" class="nav-link">
                 <p>Lista de Itens</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/estoque/adicionar-novo" class="nav-link">
+              <a routerLink="/suprimentos/adicionar-novo" class="nav-link">
                 <p>Novo Item</p>
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/estoque/adicionar-novo" class="nav-link">
+              <a routerLink="/suprimentos-movimentacoes/listar-todos" class="nav-link">
+                <p>Lista de Movimentações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/suprimentos-movimentacoes/adicionar-novo" class="nav-link">
                 <p>Nova Movimentação</p>
               </a>
             </li>
@@ -511,17 +536,45 @@
                 <p>Novo Gasto</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a routerLink="/motoristas/listar-todos" class="nav-link">
+                <p>Lista de Motoristas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/motoristas/adicionar-novo" class="nav-link">
+                <p>Novo Motirista</p>
+              </a>
+            </li>
           </ul>
         </li>
 
         <!-- USUÁRIOS MENU-->
-        <li class="nav-item">
-          <a routerLink="/usuarios" class="nav-link" routerLinkActive="active">
-            <i class="nav-icon fas fa-users"></i>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
             <p>
-              Usuários
+              Configurações
+              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/usuarios/listar-todos" class="nav-link">
+                <p>Usuários</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="" class="nav-link">
+                <p>Dados Cadastrais</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="" class="nav-link">
+                <p>Backup</p>
+              </a>
+            </li>
+          </ul>
         </li>
 
         <!-- CONTATO MENU-->

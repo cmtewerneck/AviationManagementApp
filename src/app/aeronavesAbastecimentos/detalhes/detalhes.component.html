@@ -1,84 +1,123 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid" style="padding-left: 20px;">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Detalhes do Abastecimento</h1>
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li><a class="btn btn-dark" [routerLink]="['/aeronaves-abastecimentos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/aeronaves-abastecimentos/editar',aeronaveAbastecimento.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Abastecimento</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-10">
+                  <label class="control-label">Data:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.data == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.data != null">{{ aeronaveAbastecimento.data | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-10">
+                  <label class="control-label">Matrícula:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.matriculaAeronave == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.matriculaAeronave != ''">{{ aeronaveAbastecimento.matriculaAeronave }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Litros:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.litros == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.litros != null">{{ aeronaveAbastecimento.litros }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Local:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.local == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.local != ''">{{ aeronaveAbastecimento.local }}</dd>
+              </dl>
+              <dl class="col-md-6">
+                <dt class="col-sm-10">
+                  <label class="control-label">Cupom:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.cupom == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.cupom != ''">{{ aeronaveAbastecimento.cupom }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Nota Fiscal:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.notaFiscal == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.notaFiscal != ''">{{ aeronaveAbastecimento.notaFiscal }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Responsável:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.responsavel == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.responsavel != ''">{{ aeronaveAbastecimento.responsavel }}</dd>
+                <br> 
+                <dt class="col-sm-10">
+                  <label class="control-label">Observações:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.observacoes == ''">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="aeronaveAbastecimento.observacoes != ''">{{ aeronaveAbastecimento.observacoes }}</dd>
+              </dl>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item"><a routerLink="/aeronaves/listar-todos">Aeronaves</a></li>
-            <li class="breadcrumb-item active">Abastecimentos</li>
-          </ol>
-        </div>
       </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-      <div>
-        <h4>Cupom: {{ aeronaveAbastecimento.cupom }} </h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                <label class="control-label">Data</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.data }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Matrícula</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.matriculaAeronave }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Litros</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.litros }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Local</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.local }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Cupom</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.cupom }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Nota Fiscal</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.notaFiscal }}
-            </dd>
-            <dt class="col-sm-2">
-                <label class="control-label">Responsável</label>
-            </dt>
-            <dd class="col-sm-10">
-                {{ aeronaveAbastecimento.responsavel }}
-            </dd>
-            <dt class="col-sm-2">
-              <label class="control-label">Observações</label>
-          </dt>
-          <dd class="col-sm-10">
-              {{ aeronaveAbastecimento.observacoes }}
-          </dd>
-        </dl>
-      </div>
-  
-      <div>
-        <a class="btn btn-dark" [routerLink]="['/aeronaves-abastecimentos/editar',aeronaveAbastecimento.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" [routerLink]="['/aeronaves-abastecimentos/listar-todos']">Voltar</a>
-      </div>
-  
-  </div>
+    </div>
+  </div>  
 </section>
 <!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>{{bodyDeletarFornecedor}}</p> -->
+        <p>O abastecimento {{aeronaveAbastecimento.cupom}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirAbastecimento(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
