@@ -5,7 +5,7 @@ export interface Produto {
     valor: number;
     ativo: boolean;
     fornecedorId: string;
-    fornecedorNome: string;
+    nomeFornecedor: string;
     
     imagem: string;
     imagemUpload: string;

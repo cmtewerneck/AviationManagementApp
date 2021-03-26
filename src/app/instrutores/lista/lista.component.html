@@ -40,7 +40,7 @@
             <th>Nome</th>
             <th>CANAC</th>
             <th>CPF</th>
-            <th>RG</th>
+            <th>Validade CMA</th>
             <th>Data Admissão</th>
             <th></th>
           </tr>
@@ -51,7 +51,7 @@
             <td>{{ instrutor.nome }}</td>
             <td>{{ instrutor.canac }}</td>
             <td>{{ instrutor.tipoPessoa === 1 ? (instrutor.documento | cpf) : (instrutor.documento | cnpj ) }}</td>
-            <td>{{ instrutor.rg }}</td>
+            <td>{{ instrutor.validadeCMA | date: 'dd/MM/yyyy' }}</td>
             <td>{{ instrutor.dataAdmissao | date: 'dd/MM/yyyy' }}</td>
             <td class="text-right">
               <a class="btn btn-warning btn-sm" [routerLink]="['/instrutores/detalhes',instrutor.id]">

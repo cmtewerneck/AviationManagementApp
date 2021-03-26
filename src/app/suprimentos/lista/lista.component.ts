@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
   
   public suprimentos: Suprimento[];
   errorMessage: string;
-  mostrarImagem = true;
+  mostrarImagem = false;
   
   suprimento: Suprimento;
   suprimentosFiltrados: Suprimento[];

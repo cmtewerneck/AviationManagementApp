@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
 
   public veiculos: Veiculo[];
   errorMessage: string;
-  mostrarImagem = true;
+  mostrarImagem = false;
 
   veiculo: Veiculo;
   veiculosFiltrados: Veiculo[];

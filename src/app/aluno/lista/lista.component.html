@@ -58,11 +58,14 @@
             <td>{{ aluno.telefone | telefone }}</td>
             
             <td class="text-right">
-              <a class="btn btn-success btn-sm" (click)="abrirModal(adicionarSaldo)">
-                <span class="fas fa-arrow-up"></span>&nbsp;<span class="fas fa-dollar-sign"></span>
+              <!-- <a class="btn btn-success btn-sm" [routerLink]="['/alunos/adicionar-saldo',aluno.id]">
+                <span class="fas fa-dollar-sign"></span>
               </a>&nbsp;
-              <a class="btn btn-danger btn-sm" (click)="abrirModal(removerSaldo)">
-                <span class="fas fa-arrow-down"></span>&nbsp;<span class="fas fa-dollar-sign"></span>
+              <a class="btn btn-danger btn-sm" [routerLink]="['/alunos/remover-saldo',aluno.id]">
+                <span class="fas fa-dollar-sign"></span>
+              </a>&nbsp; -->
+              <a class="btn btn-dark btn-sm" [routerLink]="['/alunos/atualizar-saldo',aluno.id]">
+                <span class="fa fa-dollar-sign"></span><span class="fa fa-dollar-sign"></span>
               </a>&nbsp;
               <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.id]">
                 <span class="fa fa-search"></span>
@@ -90,61 +93,3 @@
   </div>
 </section>
 <!-- /.content -->
-
-<!-- INÍCIO MODAL ADICIONAR SALDO -->
-<div bsModal #adicionarSaldo="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Adicionar Saldo</h4>
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <form [formGroup]="alunoForm">
-
-        <div class="modal-body">
-          <div class="form-group">
-            <input class="form-control" id="saldo" type="text" formControlName="saldo" />
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <input type="submit" value="Atualizar" (click)="fecharModal(adicionarSaldo)" class="btn btn-success">
-        </div>
-        
-      </form>
-    </div>
-  </div>
-</div>
-<!-- FIM DA MODAL -->
-
-<!-- INÍCIO MODAL REMOVER SALDO -->
-<div bsModal #removerSaldo="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Remover Saldo</h4>
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <form [formGroup]="alunoForm">
-
-        <div class="modal-body">
-          <div class="form-group">
-            <input class="form-control" id="saldo" type="text" formControlName="saldo" />
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <input type="submit" value="Atualizar" (click)="fecharModal(removerSaldo)" class="btn btn-success">
-        </div>
-        
-      </form>
-    </div>
-  </div>
-</div>
-<!-- FIM DA MODAL -->

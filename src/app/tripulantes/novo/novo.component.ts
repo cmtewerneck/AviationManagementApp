@@ -57,6 +57,7 @@ export class NovoComponent extends TripulanteBaseComponent implements OnInit {
         dataNascimento: [''],
         dataAdmissao: ['', Validators.required],
         dataDemissao: [''],
+        validadeCMA: [''],
         tipoColaborador: [''],
         cargo: [''],
         canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
@@ -111,6 +112,7 @@ export class NovoComponent extends TripulanteBaseComponent implements OnInit {
         if (this.tripulante.dataNascimento) { this.tripulante.dataNascimento = new Date(this.tripulante.dataNascimento); } else { this.tripulante.dataNascimento = null; }
         this.tripulante.dataAdmissao = new Date(this.tripulante.dataAdmissao);
         if (this.tripulante.dataDemissao) { this.tripulante.dataDemissao = new Date(this.tripulante.dataDemissao); } else { this.tripulante.dataDemissao = null; }
+        if (this.tripulante.validadeCMA) { this.tripulante.validadeCMA = new Date(this.tripulante.validadeCMA); } else { this.tripulante.validadeCMA = null; }
         this.tripulante.tipoColaborador = Number(this.tripulante.tipoColaborador);
         this.tripulante.salario = CurrencyUtils.StringParaDecimal(this.tripulante.salario);
         this.tripulante.tipoVinculo = Number(this.tripulante.tipoVinculo);

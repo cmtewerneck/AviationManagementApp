@@ -47,10 +47,10 @@
             <td>{{ turma.dataTermino | date: 'dd/MM/yyyy' }}</td>
             
             <td class="text-right">
-              <a class="btn btn-primary btn-sm">
+              <a class="btn btn-success btn-sm" [routerLink]="['/turmas/encerrar',turma.id]">
                 <span class="fas fa-check-square"></span>
               </a>&nbsp;
-              <a class="btn btn-success btn-sm">
+              <a class="btn btn-primary btn-sm" [routerLink]="['/alunos-turmas/adicionar-novo']">
                 <span class="fas fa-user-plus"></span>
               </a>&nbsp;
               <a class="btn btn-warning btn-sm" [routerLink]="['/turmas/detalhes',turma.id]">

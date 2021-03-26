@@ -10,6 +10,7 @@ import { TurmaRoutingModule } from './turma.routing';
 import { TurmaAppComponent } from './turma.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
+import { ListaAlunosComponent } from './alunos/lista.alunos.component';
 import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -24,6 +25,7 @@ import { TurmaGuard } from './services/turma.guard';
     TurmaAppComponent,
     ListaComponent,
     NovoComponent,
+    ListaAlunosComponent,
     EditarComponent,
     ExcluirComponent,
     DetalhesComponent

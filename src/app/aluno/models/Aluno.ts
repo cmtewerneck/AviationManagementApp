@@ -1,4 +1,5 @@
 import { VooInstrucao } from "src/app/voosInstrucao/models/VooInstrucao";
+import { Turma } from "src/app/turmas/models/Turma";
 
 export interface Aluno {
         // PESSOA
@@ -24,5 +25,5 @@ export interface Aluno {
         validadeCMA?: Date;     
         
         vooInstrucao: VooInstrucao[];
-        // alunoTurma: AlunoTurma[];
+        alunosTurmas: Turma[];
 }

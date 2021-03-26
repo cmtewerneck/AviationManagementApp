@@ -19,6 +19,7 @@ export class Tripulante {
   dataNascimento?: Date;
   dataAdmissao: Date;
   dataDemissao?: Date;
+  validadeCMA?: Date;
   tipoColaborador: number; // TRIPULANTE NO ENUM
   cargo: string;
   canac: string;
@@ -31,6 +32,6 @@ export class Tripulante {
   numeroCtps: string;
   numeroCnh: string;
 
-  diariosBordoComandante: DiarioBordo[];
-  diariosBordoCopiloto: DiarioBordo[];
+  diarioBordoComandante: DiarioBordo[];
+  diarioBordoCopiloto: DiarioBordo[];
 }

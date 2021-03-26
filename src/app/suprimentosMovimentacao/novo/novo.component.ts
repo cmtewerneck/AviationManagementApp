@@ -38,7 +38,7 @@ export class NovoComponent extends SuprimentoMovimentacaoBaseComponent implement
         this.suprimentoMovimentacaoForm = this.fb.group({
           data: ['', Validators.required],
           quantidade: ['', Validators.required],
-          tipoMovimentacao: ['', Validators.required],
+          tipoMovimentacaoEnum: ['', Validators.required],
           itemId: ['', Validators.required]
         });
       }
@@ -56,7 +56,7 @@ export class NovoComponent extends SuprimentoMovimentacaoBaseComponent implement
           // CONVERSÕES PARA JSON
           this.suprimentoMovimentacao.data = new Date(this.suprimentoMovimentacao.data);
           this.suprimentoMovimentacao.quantidade = Number(this.suprimentoMovimentacao.quantidade);
-          this.suprimentoMovimentacao.tipoMovimentacao = Number(this.suprimentoMovimentacao.tipoMovimentacao);
+          this.suprimentoMovimentacao.tipoMovimentacaoEnum = Number(this.suprimentoMovimentacao.tipoMovimentacaoEnum);
           // FIM DAS CONVERSÕES
 
           console.log(this.suprimentoMovimentacao);

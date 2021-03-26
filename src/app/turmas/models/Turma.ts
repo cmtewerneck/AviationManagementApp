@@ -1,4 +1,4 @@
-//import { AlunosTurmas } from '../../alunosTurmas/models/AlunoTurma';
+import { Aluno } from '../../aluno/models/Aluno';
 
 export interface Turma {
   id: string;
@@ -9,7 +9,7 @@ export interface Turma {
   cursoId: string;
   codigoCurso: string;
   descricaoCurso: string;
-  //alunosTurmas: AlunosTurmas[];
+  alunosTurmas: Aluno[];
 }
 
 export interface Curso {

@@ -172,6 +172,12 @@
                 </dt>
                 <dd class="col-sm-10" *ngIf="instrutor.numeroCnh == ''">Não Informado</dd>
                 <dd class="col-sm-10" *ngIf="instrutor.numeroCnh != ''">{{ instrutor.numeroCnh }}</dd>
+                <br>
+                <dt class="col-sm-10">
+                  <label class="control-label">Validade CMA:</label>
+                </dt>
+                <dd class="col-sm-10" *ngIf="instrutor.validadeCMA == null">Não Informado</dd>
+                <dd class="col-sm-10" *ngIf="instrutor.validadeCMA != null">{{ instrutor.validadeCMA | date: 'dd/MM/yyyy' }}</dd>
               </dl>
             </div>
           </div>

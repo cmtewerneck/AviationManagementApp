@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgBrazilValidators } from 'ng-brazil';
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
 import { environment } from 'src/environments/environment';
+import { AlunoBaseComponent } from '../aluno-form.base.component';
 import { Aluno } from '../models/Aluno';
 import { AlunoService } from '../services/aluno.service';
 
@@ -21,20 +22,21 @@ export class ListaComponent implements OnInit {
   errors: any[] = [];
   alunoForm: FormGroup;
   
-  mostrarImagem = true;
+  mostrarImagem = false;
   
   aluno: Aluno;
   alunosFiltrados: Aluno[];
   
   constructor(
     private alunoService: AlunoService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router: Router,
+    private fb: FormBuilder) { }
     
     ngOnInit(): void {
       this.ObterTodos();
-      
     }
-    
+
     _filtroLista: string;
     get filtroLista(): string {
       return this._filtroLista;
@@ -51,28 +53,20 @@ export class ListaComponent implements OnInit {
         );
       }
       
-      alternarImagem() {
-        this.mostrarImagem = !this.mostrarImagem;
+    alternarImagem() {
+      this.mostrarImagem = !this.mostrarImagem;
+    }
+    
+    ObterTodos() {
+      this.alunoService.ObterTodos().subscribe(
+        (_alunos: Aluno[]) => {
+          this.alunos = _alunos;
+          this.alunosFiltrados = this.alunos;
+        }, error => {
+          this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
+          console.log(error);
+        });
       }
-      
-      ObterTodos() {
-        this.alunoService.ObterTodos().subscribe(
-          (_alunos: Aluno[]) => {
-            this.alunos = _alunos;
-            this.alunosFiltrados = this.alunos;
-          }, error => {
-            this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
-            console.log(error);
-          });
-        }
-        
-        abrirModal(content: any) {
-          content.show();
-        }
-        
-        fecharModal(content: any) {
-          content.hide();
-        }
-        
-      }
+
+}
       

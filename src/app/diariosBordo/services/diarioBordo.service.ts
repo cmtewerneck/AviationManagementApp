@@ -54,9 +54,9 @@ export class DiarioBordoService extends BaseService {
             .pipe(catchError(super.serviceError));
     }
 
-    obterColaboradores(): Observable<Tripulante[]> {
+    obterColaboradores(tipoColaborador: number): Observable<Tripulante[]> {
         return this.http
-            .get<Tripulante[]>(this.urlServiceV1 + 'colaboradores', this.ObterAuthHeaderJson())
+            .get<Tripulante[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

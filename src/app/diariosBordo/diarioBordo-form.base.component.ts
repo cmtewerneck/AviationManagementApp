@@ -8,7 +8,8 @@ export abstract class DiarioBordoBaseComponent extends FormBaseComponent {
 
     diarioBordo: DiarioBordo;
     aeronaves: Aeronave[];
-    colaboradores: Tripulante[];
+    tripulantes: Tripulante[];
+    mecanicos: Tripulante[];
     errors: any[] = [];
     diarioBordoForm: FormGroup;
 
@@ -80,8 +81,8 @@ export abstract class DiarioBordoBaseComponent extends FormBaseComponent {
             comandanteId: {
                 required: 'Escolha um comandante'
             },
-            mecanicoId: {
-                required: 'Escolha um mecânico responsável'
+            mecanicoResponsavelId: {
+                required: 'Escolha um mecânico'
             }
         };
 

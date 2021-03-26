@@ -15,11 +15,16 @@ export class ListaComponent implements OnInit {
   turma: Turma;
   turmasFiltradas: Turma[];
   
-  constructor(private turmaService: TurmaService,
+  constructor(
+    private turmaService: TurmaService,
     private toastr: ToastrService) { }
     
     ngOnInit(): void {
       this.ObterTodos();
+    }
+
+    openModal(template: any) {
+      template.show();
     }
     
     _filtroLista: string;
@@ -40,13 +45,13 @@ export class ListaComponent implements OnInit {
       
       ObterTodos() {
         this.turmaService.obterTodos().subscribe(
-          (_turmasBordo: Turma[]) => {
-            this.turmas = _turmasBordo;
+          (_turmas: Turma[]) => {
+            this.turmas = _turmas;
             this.turmasFiltradas = this.turmas;
           }, error => {
             this.toastr.error(`Erro de carregamento: ${error.error.errors}`);
             console.log(error);
           });
         }
-      }
-      
+
+}      

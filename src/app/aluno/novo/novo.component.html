@@ -110,7 +110,7 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label class="control-label">E-mail</label>
                                         <div>
                                             <input class="form-control" id="email" type="email" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
@@ -120,7 +120,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label class="control-label">RG<span style="color: red;">*</span></label>
                                         <div>
                                             <input class="form-control" id="rg" type="text" formControlName="rg" [ngClass]="{'is-invalid': displayMessage.rg }" />
@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label class="control-label">CANAC</label>
                                         <div>
                                             <input class="form-control" id="canac" type="text" formControlName="canac" [ngClass]="{'is-invalid': displayMessage.canac }" />
@@ -139,26 +139,13 @@
                                             </span>
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group col-md-3">
-                                        <label class="control-label">Total Voado<span style="color: red;">*</span></label>
-                                        <div>
-                                            <input class="form-control" id="totalVoado" type="text" formControlName="totalVoado" [ngClass]="{'is-invalid': displayMessage.totalVoado }" />
-                                            <span class="text-danger" *ngIf="displayMessage.totalVoado">
-                                                <p [innerHTML]="displayMessage.totalVoado"></p>
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
                                 
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="control-label">Saldo Inicial<span style="color: red;">*</span></label>
+                                        <label class="control-label">Saldo Inicial</label>
                                         <div>
-                                            <input class="form-control" id="saldo" type="text" formControlName="saldo" [ngClass]="{'is-invalid': displayMessage.saldo }" />
-                                            <span class="text-danger" *ngIf="displayMessage.saldo">
-                                                <p [innerHTML]="displayMessage.saldo"></p>
-                                            </span>
+                                            <input class="form-control" id="saldo" type="text" formControlName="saldo" />
                                         </div>
                                     </div>
                                     

@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
 
   public produtos: Produto[];
   errorMessage: string;
-  mostrarImagem = true;
+  mostrarImagem = false;
 
   produto: Produto;
   produtosFiltrados: Produto[];

@@ -39,20 +39,20 @@
                 <dt class="col-sm-4">
                   <label class="control-label">Código:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="servico.codigo == ''">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="servico.codigo != ''">{{ servico.codigo }}</dd>
+                <dd class="col-sm-12" *ngIf="servico.codigo == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="servico.codigo != ''">{{ servico.codigo }}</dd>
                 <br>   
                 <dt class="col-sm-4">
                   <label class="control-label">Título:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="servico.titulo == ''">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="servico.titulo != ''">{{ servico.titulo }}</dd>
+                <dd class="col-sm-12" *ngIf="servico.titulo == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="servico.titulo != ''">{{ servico.titulo }}</dd>
                 <br>
                 <dt class="col-sm-4">
                   <label class="control-label">Custo:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="servico.custo == null">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="servico.custo != null">{{ servico.custo | currencyBrazil }}</dd>
+                <dd class="col-sm-12" *ngIf="servico.custo == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="servico.custo != null">{{ servico.custo | currencyBrazil }}</dd>
               </dl>
             </div>            
           </div>

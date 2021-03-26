@@ -1,14 +1,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid" style="padding-left: 20px;">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Detalhes da Movimentação</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active">Movimentações</li>
+          <li><a class="btn btn-dark" [routerLink]="['/suprimentos-movimentacoes/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/suprimentos-movimentacoes/editar',suprimentoMovimentacao.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
         </ol>
       </div>
     </div>
@@ -18,38 +19,82 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
-    <div class="col-md-6">
-      <dl>
-        <dt>
-          Data
-        </dt>
-        <dd>
-          {{ suprimentoMovimentacao.data | date: 'dd/MM/yyyy' }}
-        </dd>
-        <dt>
-          Item
-        </dt>
-        <dd>
-          {{ suprimentoMovimentacao.itemNomenclatura }}
-        </dd>
-        <dt>
-          Quantidade
-        </dt>
-        <dd>
-          {{ suprimentoMovimentacao.quantidade }}
-        </dd>
-        <dt>
-          Tipo
-        </dt>
-        <dd>
-          {{ suprimentoMovimentacao.tipoMovimentacao }}
-        </dd>
-      </dl>
-      
-      <div>
-        <a class="btn btn-warning" [routerLink]="['/suprimentos-movimentacoes/editar', suprimentoMovimentacao.id]">Editar</a>&nbsp;
-        <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados da Movimentação</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-4">
+                  <label class="control-label">Data:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.data == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.data != null">{{ suprimentoMovimentacao.data | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-4">
+                  <label class="control-label">Item:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.nomenclaturaItem == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.nomenclaturaItem != ''">{{ suprimentoMovimentacao.nomenclaturaItem }}</dd>
+              </dl>
+
+              <dl class="col-md-6">
+                <dt class="col-sm-4">
+                  <label class="control-label">Quantidade:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.quantidade == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.quantidade != null">{{ suprimentoMovimentacao.quantidade }}</dd>
+                <br>
+                <dt class="col-sm-4">
+                  <label class="control-label">Tipo:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.tipoMovimentacaoEnum == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.tipoMovimentacaoEnum == 1">Entrada</dd>
+                <dd class="col-sm-12" *ngIf="suprimentoMovimentacao.tipoMovimentacaoEnum == 2">Saída</dd>
+              </dl>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>A movimentação do dia {{suprimentoMovimentacao.data | date: 'dd/MM/yyyy'}} do ítem {{suprimentoMovimentacao.nomenclaturaItem}} será excluída!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirSuprimentoMovimentacao(confirmDelete)"> 
+          EXCLUIR
+        </button>
       </div>
     </div>
   </div>
-</section>
+</div>

@@ -33,49 +33,23 @@
         </li>
 
         <!-- FORNECEDORES MENU-->        
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item">
+          <a routerLink="/fornecedores/listar-todos" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Fornecedores
-              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/fornecedores/listar-todos" class="nav-link">
-                <p>Lista de Fornecedores</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/fornecedores/adicionar-novo" class="nav-link">
-                <p>Novo Fornecedor</p>
-              </a>
-            </li>
-          </ul>
         </li>
         
         <!-- PRODUTOS MENU-->
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-shopping-basket"></i>
+        <li class="nav-item">
+          <a routerLink="/produtos/listar-todos" class="nav-link">
+            <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Produtos
-              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/produtos/listar-todos" class="nav-link">
-                <p>Lista de Produtos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/produtos/adicionar-novo" class="nav-link">
-                <p>Novo Produto</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <!-- OPERAÇÕES MENU-->
@@ -91,11 +65,6 @@
             <li class="nav-item">
               <a routerLink="/diarios-bordo/listar-todos" class="nav-link">
                 <p>Diário de Bordo</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/diarios-bordo/adicionar-novo" class="nav-link">
-                <p>Novo Diário</p>
               </a>
             </li>
             <li class="nav-item">
@@ -171,32 +140,17 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a routerLink="/aeronaves/listar-todos" class="nav-link">
-                <p>Lista de Aeronaves</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/aeronaves/adicionar-novo" class="nav-link">
-                <p>Nova Aeronave</p>
+                <p>Aeronaves</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/aeronaves-abastecimentos/listar-todos" class="nav-link">
-                <p>Lista de Abastecimentos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/aeronaves-abastecimentos/adicionar-novo" class="nav-link">
-                <p>Novo Abastecimento</p>
+                <p>Abastecimentos</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/aeronaves-tarifas/listar-todos" class="nav-link">
-                <p>Lista de Tarifas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/aeronaves-tarifas/adicionar-novo" class="nav-link">
-                <p>Nova Tarifa</p>
+                <p>Tarifas</p>
               </a>
             </li>
           </ul>
@@ -214,58 +168,30 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a routerLink="/ordem-servico/listar-todos" class="nav-link">
-                <p>Lista de Ordens de Serviço</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/ordem-servico/adicionar-novo" class="nav-link">
-                <p>Nova Ordem de Serviço</p>
+                <p>Ordens de Serviço</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/servicos/listar-todos" class="nav-link">
-                <p>Lista de Serviços</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/servicos/adicionar-novo" class="nav-link">
-                <p>Novo Serviço</p>
+                <p>Serviços</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/mecanicos/listar-todos" class="nav-link">
-                <p>Lista de Mecânicos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/mecanicos/adicionar-novo" class="nav-link">
-                <p>Novo Mecânicos</p>
+                <p>Mecânicos</p>
               </a>
             </li>
           </ul>
         </li>
 
         <!-- TRIPULAÇÃO MENU-->
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item">
+          <a routerLink="/tripulantes/listar-todos" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Tripulantes
-              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/tripulantes/listar-todos" class="nav-link">
-                <p>Lista de Tripulantes</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/tripulantes/adicionar-novo" class="nav-link">
-                <p>Novo Tripulante</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <!-- BIBLIOTECA MENU-->
@@ -313,78 +239,40 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a routerLink="/alunos/listar-todos" class="nav-link">
-                <p>Lista de Alunos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/alunos/adicionar-novo" class="nav-link">
-                <p>Adicionar Alunos</p>
+                <p>Alunos</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/cursos/listar-todos" class="nav-link">
-                <p>Lista de Cursos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/cursos/adicionar-novo" class="nav-link">
-                <p>Adicionar Curso</p>
+                <p>Cursos</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/turmas/listar-todos" class="nav-link">
-                <p>Lista de Turmas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/turmas/adicionar-novo" class="nav-link">
-                <p>Adicionar Turma</p>
+                <p>Turmas</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/instrutores/listar-todos" class="nav-link">
-                <p>Lista de Instrutores</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/instrutores/adicionar-novo" class="nav-link">
-                <p>Adicionar Instrutor</p>
+                <p>Instrutores</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/voos-instrucao/listar-todos" class="nav-link">
-                <p>Lista de Instruções</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/voos-instrucao/adicionar-novo" class="nav-link">
-                <p>Adicionar Instrução</p>
+                <p>Instruções</p>
               </a>
             </li>
           </ul>
         </li>
 
         <!-- CLIENTES MENU-->
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item">
+          <a routerLink="/clientes/listar-todos" class="nav-link">
             <i class="nav-icon fas fa-user-circle"></i>
             <p>
               Clientes
-              <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/clientes/listar-todos" class="nav-link">
-                <p>Lista de Clientes</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/clientes/adicionar-novo" class="nav-link">
-                <p>Novo Cliente</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <!-- FINANCEIRO MENU-->
@@ -426,18 +314,8 @@
               </a>
             </li>
             <li class="nav-item">
-              <a routerLink="/oficios-recebidos/adicionar-novo" class="nav-link">
-                <p>Novo Recebimento</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a routerLink="/oficios-emitidos/listar-todos" class="nav-link">
                 <p>Ofícios Emitidos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/oficios-emitidos/adicionar-novo" class="nav-link">
-                <p>Novo Ofício</p>
               </a>
             </li>
           </ul>
@@ -475,22 +353,12 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a routerLink="/suprimentos/listar-todos" class="nav-link">
-                <p>Lista de Itens</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/suprimentos/adicionar-novo" class="nav-link">
-                <p>Novo Item</p>
+                <p>Itens</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/suprimentos-movimentacoes/listar-todos" class="nav-link">
-                <p>Lista de Movimentações</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/suprimentos-movimentacoes/adicionar-novo" class="nav-link">
-                <p>Nova Movimentação</p>
+                <p>Movimentações</p>
               </a>
             </li>
           </ul>
@@ -508,42 +376,22 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a routerLink="/veiculos/listar-todos" class="nav-link">
-                <p>Lista de Veículos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/veiculos/adicionar-novo" class="nav-link">
-                <p>Novo Veículo</p>
+                <p>Veículos</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/veiculos-multas/listar-todos" class="nav-link">
-                <p>Lista de Multas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/veiculos-multas/adicionar-novo" class="nav-link">
-                <p>Nova Multa</p>
+                <p>Multas</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/veiculos-gastos/listar-todos" class="nav-link">
-                <p>Lista de Gastos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/veiculos-gastos/adicionar-novo" class="nav-link">
-                <p>Novo Gasto</p>
+                <p>Gastos</p>
               </a>
             </li>
             <li class="nav-item">
               <a routerLink="/motoristas/listar-todos" class="nav-link">
-                <p>Lista de Motoristas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/motoristas/adicionar-novo" class="nav-link">
-                <p>Novo Motirista</p>
+                <p>Motoristas</p>
               </a>
             </li>
           </ul>

@@ -6,6 +6,8 @@ import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditarComponent } from './editar/editar.component';
+import { AdicionarSaldoComponent } from './adicionarSaldo/adicionarSaldo.component';
+import { AtualizarSaldoComponent } from './atualizarSaldo/atualizarSaldo.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { AlunoAppComponent } from './aluno.app.component';
 import { AlunoResolve } from './services/aluno.resolve';
@@ -35,6 +37,24 @@ const alunosRouterConfig: Routes = [
             },
             {
                 path: 'editar/:id', component: EditarComponent,
+                resolve: {
+                    aluno: AlunoResolve
+                },
+                canDeactivate: [AlunoGuard],
+                canActivate: [AlunoGuard],
+                data: [{ claim: { nome: 'Aluno', valor: 'Atualizar' } }],
+            },
+            {
+                path: 'adicionar-saldo/:id', component: AdicionarSaldoComponent,
+                resolve: {
+                    aluno: AlunoResolve
+                },
+                canDeactivate: [AlunoGuard],
+                canActivate: [AlunoGuard],
+                data: [{ claim: { nome: 'Aluno', valor: 'Atualizar' } }],
+            },
+            {
+                path: 'atualizar-saldo/:id', component: AtualizarSaldoComponent,
                 resolve: {
                     aluno: AlunoResolve
                 },

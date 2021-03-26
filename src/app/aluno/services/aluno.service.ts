@@ -46,4 +46,20 @@ export class AlunoService extends BaseService {
         map(super.extractData),
         catchError(super.serviceError));
   }
+
+  AdicionarSaldo(aluno: Aluno): Observable<Aluno> {
+    return this.http
+      .put(this.urlServiceV1 + 'alunos/adicionar-saldo/' + aluno.id, aluno, this.ObterAuthHeaderJson())
+      .pipe(
+        map(super.extractData),
+        catchError(super.serviceError));
+  }
+
+  RemoverSaldo(aluno: Aluno): Observable<Aluno> {
+    return this.http
+      .put(this.urlServiceV1 + 'alunos/remover-saldo/' + aluno.id, aluno, this.ObterAuthHeaderJson())
+      .pipe(
+        map(super.extractData),
+        catchError(super.serviceError));
+  }
 }

@@ -17,6 +17,8 @@ import { AlunoAppComponent } from './aluno.app.component';
 import { NovoComponent } from './novo/novo.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditarComponent } from './editar/editar.component';
+import { AdicionarSaldoComponent } from './adicionarSaldo/adicionarSaldo.component';
+import { AtualizarSaldoComponent } from './atualizarSaldo/atualizarSaldo.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { AlunoResolve } from './services/aluno.resolve';
 import { AlunoGuard } from './services/aluno.guard';
@@ -31,6 +33,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         NovoComponent,
         ExcluirComponent,
         EditarComponent,
+        AdicionarSaldoComponent,
+        AtualizarSaldoComponent,
         DetalhesComponent
     ],
     imports: [

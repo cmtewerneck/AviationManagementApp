@@ -51,7 +51,7 @@
             <tr *ngFor="let produto of produtosFiltrados">
               <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ produto.imagem }}" style="width: 100px; height: 70px"></td>
               <td>{{ produto.nome }}</td>
-              <td>{{ produto.fornecedorNome }}</td>
+              <td>{{ produto.nomeFornecedor }}</td>
               <td>{{ produto.valor | currencyBrazil }}</td>
               <td *ngIf="produto.ativo == true">Sim</td>
               <td *ngIf="produto.ativo == false">Não</td>

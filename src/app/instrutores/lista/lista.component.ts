@@ -12,7 +12,7 @@ export class ListaComponent implements OnInit {
 
   imagens: string = environment.imagensUrl;
 
-  mostrarImagem = true;
+  mostrarImagem = false;
 
   public instrutores: Instrutor[];
   errorMessage: string;

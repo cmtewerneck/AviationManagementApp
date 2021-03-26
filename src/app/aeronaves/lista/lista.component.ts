@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
 
   public aeronaves: Aeronave[];
   errorMessage: string;
-  mostrarImagem = true;
+  mostrarImagem = false;
 
   aeronave: Aeronave;
   aeronavesFiltrados: Aeronave[];

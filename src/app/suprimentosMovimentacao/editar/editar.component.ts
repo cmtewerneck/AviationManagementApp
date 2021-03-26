@@ -44,7 +44,7 @@ export class EditarComponent extends SuprimentoMovimentacaoBaseComponent impleme
         this.suprimentoMovimentacaoForm = this.fb.group({
           data: ['', Validators.required],
           quantidade: ['', Validators.required],
-          tipoMovimentacao: ['', Validators.required],
+          tipoMovimentacaoEnum: ['', Validators.required],
           itemId: ['', Validators.required]
         });
         
@@ -52,6 +52,7 @@ export class EditarComponent extends SuprimentoMovimentacaoBaseComponent impleme
           id: this.suprimentoMovimentacao.id,
           data: this.suprimentoMovimentacao.data,
           quantidade: this.suprimentoMovimentacao.quantidade,
+          tipoMovimentacaoEnum: this.suprimentoMovimentacao.tipoMovimentacaoEnum,
           itemId: this.suprimentoMovimentacao.itemId
         });
         
@@ -71,7 +72,7 @@ export class EditarComponent extends SuprimentoMovimentacaoBaseComponent impleme
           // CONVERSÕES PARA JSON
           this.suprimentoMovimentacao.data = new Date(this.suprimentoMovimentacao.data);
           this.suprimentoMovimentacao.quantidade = Number(this.suprimentoMovimentacao.quantidade);
-          this.suprimentoMovimentacao.tipoMovimentacao = Number(this.suprimentoMovimentacao.tipoMovimentacao);
+          this.suprimentoMovimentacao.tipoMovimentacaoEnum = Number(this.suprimentoMovimentacao.tipoMovimentacaoEnum);
           // FIM DAS CONVERSÕES
 
           console.log(this.suprimentoMovimentacao);

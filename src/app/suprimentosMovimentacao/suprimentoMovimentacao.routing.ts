@@ -29,13 +29,13 @@ const suprimentoMovimentacaoRouterConfig: Routes = [
                 canActivate: [SuprimentoMovimentacaoGuard],
                 data: [{ claim: { nome: 'Suprimento', valor: 'Atualizar' } }],
                 resolve: {
-                    Suprimento: SuprimentoMovimentacaoResolve
+                    suprimentoMovimentacao: SuprimentoMovimentacaoResolve
                 }
              },
              {
                 path: 'detalhes/:id', component: DetalhesComponent,
                 resolve: {
-                    Suprimento: SuprimentoMovimentacaoResolve
+                    suprimentoMovimentacao: SuprimentoMovimentacaoResolve
                 }
              },
              {
@@ -43,7 +43,7 @@ const suprimentoMovimentacaoRouterConfig: Routes = [
                 canActivate: [SuprimentoMovimentacaoGuard],
                 data: [{ claim: { nome: 'Suprimento', valor: 'Excluir' } }],
                 resolve: {
-                    Suprimento: SuprimentoMovimentacaoResolve
+                    suprimentoMovimentacao: SuprimentoMovimentacaoResolve
                 }
              },
         ]

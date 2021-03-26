@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -34,6 +35,7 @@ import { AeronaveGuard } from './services/aeronave.guard';
     AeronaveRoutingModule,
     RouterModule,
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgBrazil,
     TextMaskModule,
     NgxSpinnerModule,

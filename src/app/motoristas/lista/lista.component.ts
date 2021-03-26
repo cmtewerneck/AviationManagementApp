@@ -12,7 +12,7 @@ export class ListaComponent implements OnInit {
   
   imagens: string = environment.imagensUrl;
   
-  mostrarImagem = true;
+  mostrarImagem = false;
   
   public motoristas: Motorista[];
   errorMessage: string;
@@ -48,7 +48,7 @@ export class ListaComponent implements OnInit {
       }
       
       ObterTodos() {
-        this.motoristaService.obterTodos(2).subscribe(
+        this.motoristaService.obterTodos(5).subscribe(
           (_motoristas: Motorista[]) => {
             this.motoristas = _motoristas;
             this.motoristasFiltrados = this.motoristas;

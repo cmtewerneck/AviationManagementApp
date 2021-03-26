@@ -2,10 +2,10 @@ export interface SuprimentoMovimentacao {
     id: string;
     data: Date;
     quantidade: number;
-    tipoMovimentacao: number;
+    tipoMovimentacaoEnum: number;
     
     itemId: string;
-    itemNomenclatura: string;
+    nomenclaturaItem: string;
 }
 
 export interface Suprimento {

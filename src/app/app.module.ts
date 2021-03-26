@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NavegacaoModule } from './navegacao/navegacao.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 // COMPONENTES
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NavegacaoModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    TooltipModule.forRoot(),
     HttpClientModule
   ],
   providers: [

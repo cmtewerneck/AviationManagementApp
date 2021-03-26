@@ -38,7 +38,6 @@
             <th>Situação</th>
             <th>Data do Pagamento</th>
             <th>Valor Pago</th>
-            <th>Forma de Pagamento</th>
             <th></th>
           </tr>
         </thead>
@@ -51,7 +50,6 @@
             <td *ngIf="contaPagar.situacao == 2">Pendente</td>
             <td>{{ contaPagar.dataPagamento | date: 'dd/MM/yyyy' }}</td>
             <td>{{ contaPagar.valorPago | currencyBrazil }}</td>
-            <td>{{ contaPagar.formaPagamento }}</td>
             
             <td class="text-right">
               <a class="btn btn-warning btn-sm" [routerLink]="['/contas-pagar/detalhes',contaPagar.id]">

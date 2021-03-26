@@ -55,8 +55,8 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
         // ALUNO
         rg: ['', [Validators.required, Validators.maxLength(20)]],
         canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-        totalVoado: ['', Validators.required],
-        saldo: ['', Validators.required],
+        totalVoado: [''],
+        saldo: [''],
         dataNascimento: ['', Validators.required],
         validadeCMA: ['']
       });

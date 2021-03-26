@@ -19,6 +19,7 @@ export interface Instrutor {
    dataNascimento?: Date;
    dataAdmissao: Date;
    dataDemissao?: Date;
+   validadeCMA?: Date;
    tipoColaborador: number; // TRIPULANTE NO ENUM (3)
    cargo: string; // INSTRUTOR
    canac: string;

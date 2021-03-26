@@ -1,0 +1,72 @@
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Inserir Aluno</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/turmas/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+                <form enctype="multipart/form-data" (ngSubmit)="adicionarAlunoTurma()" [formGroup]="alunoTurmaForm">
+                    
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Cadastro de Aluno</h5>
+                                <div class="card-body">
+                                    <div class="row">                                        
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Aluno<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="alunoId" formControlName="alunoId" [ngClass]="{'is-invalid': displayMessage.alunoId }">
+                                                <option *ngFor="let aluno of alunos" value="{{ aluno.id }}">{{ aluno.nome }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.alunoId">
+                                                <p [innerHTML]="displayMessage.alunoId"></p>
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Turma<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="turmaId" formControlName="turmaId" [ngClass]="{'is-invalid': displayMessage.turmaId }">
+                                                <option *ngFor="let turma of turmas" value="{{ turma.id }}">{{ turma.codigo }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.turmaId">
+                                                <p [innerHTML]="displayMessage.turmaId"></p>
+                                            </span>
+                                        </div>  
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!alunoTurmaForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/turmas/listar-todos">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

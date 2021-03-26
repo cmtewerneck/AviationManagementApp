@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
   
   public clientes: Cliente[];
   errorMessage: string;
-  mostrarImagem = true;
+  mostrarImagem = false;
   
   cliente: Cliente;
   clientesFiltrados: Cliente[];

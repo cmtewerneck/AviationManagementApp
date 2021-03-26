@@ -56,9 +56,10 @@ export class NovoComponent extends InstrutorBaseComponent implements OnInit {
         dataNascimento: [''],
         dataAdmissao: ['', Validators.required],
         dataDemissao: [''],
+        validadeCMA: [''],
         tipoColaborador: [''],
         cargo: [''],
-        canac: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+        canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
         salario: [''],
         tipoVinculo: ['', Validators.maxLength(30)],
         rg: ['', [Validators.required, Validators.maxLength(20)]],
@@ -110,6 +111,7 @@ export class NovoComponent extends InstrutorBaseComponent implements OnInit {
         if (this.instrutor.dataNascimento) { this.instrutor.dataNascimento = new Date(this.instrutor.dataNascimento); } else { this.instrutor.dataNascimento = null; }
         this.instrutor.dataAdmissao = new Date(this.instrutor.dataAdmissao);
         if (this.instrutor.dataDemissao) { this.instrutor.dataDemissao = new Date(this.instrutor.dataDemissao); } else { this.instrutor.dataDemissao = null; }
+        if (this.instrutor.validadeCMA) { this.instrutor.validadeCMA = new Date(this.instrutor.validadeCMA); } else { this.instrutor.validadeCMA = null; }
         this.instrutor.tipoColaborador = Number(this.instrutor.tipoColaborador);
         this.instrutor.salario = CurrencyUtils.StringParaDecimal(this.instrutor.salario);
         this.instrutor.tipoVinculo = Number(this.instrutor.tipoVinculo);

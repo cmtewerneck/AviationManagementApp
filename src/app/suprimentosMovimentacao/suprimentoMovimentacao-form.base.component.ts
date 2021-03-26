@@ -24,9 +24,12 @@ export abstract class SuprimentoMovimentacaoBaseComponent extends FormBaseCompon
             quantidade: {
                 required: 'Quantidade é obrigatória'
             },
-            tipoMovimentacao: {
+            tipoMovimentacaoEnum: {
                 required: 'Tipo é obrigatório'
-            }            
+            },
+            itemId: {
+                required: 'Item é obrigatório'
+            }              
         };
         
         super.configurarMensagensValidacaoBase(this.validationMessages);

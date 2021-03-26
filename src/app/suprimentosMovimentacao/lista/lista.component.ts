@@ -38,7 +38,7 @@ export class ListaComponent implements OnInit {
     filtrarSuprimentoMovimentacao(filtrarPor: string): SuprimentoMovimentacao[] {
       filtrarPor = filtrarPor.toLocaleLowerCase();
       return this.suprimentosMovimentacao.filter(
-        suprimentoMovimentacao => suprimentoMovimentacao.itemNomenclatura.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+        suprimentoMovimentacao => suprimentoMovimentacao.nomenclaturaItem.toLocaleLowerCase().indexOf(filtrarPor) !== -1
         );
       }
       

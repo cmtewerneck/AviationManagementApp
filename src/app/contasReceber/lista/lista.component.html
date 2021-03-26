@@ -38,7 +38,6 @@
             <th>Situação</th>
             <th>Data do Recebimento</th>
             <th>Valor Recebido</th>
-            <th>Forma de Pagamento</th>
             <th></th>
           </tr>
         </thead>
@@ -51,7 +50,6 @@
             <td *ngIf="contaReceber.situacao == 2">Pendente</td>
             <td>{{ contaReceber.dataRecebimento | date: 'dd/MM/yyyy' }}</td>
             <td>{{ contaReceber.valorRecebido | currencyBrazil }}</td>
-            <td>{{ contaReceber.formaPagamento }}</td>
             
             <td class="text-right">
               <a class="btn btn-warning btn-sm" [routerLink]="['/contas-receber/detalhes',contaReceber.id]">

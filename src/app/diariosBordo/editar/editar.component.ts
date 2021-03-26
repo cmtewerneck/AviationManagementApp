@@ -62,7 +62,7 @@ export class EditarComponent extends DiarioBordoBaseComponent implements OnInit 
             aeronaveId: ['', [Validators.required]],
             comandanteId: ['', [Validators.required]],
             copilotoId: [''],
-            mecanicoId: ['', [Validators.required]]
+            mecanicoResponsavelId: ['', [Validators.required]]
         });
         
         this.diarioBordoForm.patchValue({
@@ -94,7 +94,7 @@ export class EditarComponent extends DiarioBordoBaseComponent implements OnInit 
           aeronaveId: this.diarioBordo.aeronaveId,
           comandanteId: this.diarioBordo.comandanteId,
           copilotoId: this.diarioBordo.copilotoId,
-          mecanicoId: this.diarioBordo.mecanicoId
+          mecanicoResponsavelId: this.diarioBordo.mecanicoResponsavelId
         });
         
         setTimeout(() => {

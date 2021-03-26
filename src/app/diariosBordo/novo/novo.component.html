@@ -263,7 +263,7 @@
                                         <div class="form-group col-md-4">
                                             <label class="control-label">Comandante<span style="color: red;">*</span></label>
                                             <select class="form-control" id="comandanteId" formControlName="comandanteId" [ngClass]="{'is-invalid': displayMessage.comandanteId }">
-                                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+                                                <option *ngFor="let tripulante of tripulantes" value="{{ tripulante.id }}">{{ tripulante.nome }}</option>
                                             </select>
                                             <span class="text-danger" *ngIf="displayMessage.comandanteId">
                                                 <p [innerHTML]="displayMessage.comandanteId"></p>
@@ -272,16 +272,16 @@
                                         <div class="form-group col-md-4">
                                             <label class="control-label">Copiloto</label>
                                             <select class="form-control" id="copilotoId" formControlName="copilotoId" >
-                                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+                                                <option *ngFor="let tripulante of tripulantes" value="{{ tripulante.id }}">{{ tripulante.nome }}</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="control-label">Mecânico</label>
-                                            <select class="form-control" id="mecanicoId" formControlName="mecanicoId" [ngClass]="{'is-invalid': displayMessage.mecanicoId }">
-                                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+                                            <select class="form-control" id="mecanicoResponsavelId" formControlName="mecanicoResponsavelId" [ngClass]="{'is-invalid': displayMessage.mecanicoResponsavelId }">
+                                                <option *ngFor="let mecanico of mecanicos" value="{{ mecanico.id }}">{{ mecanico.nome }}</option>
                                             </select>
-                                            <span class="text-danger" *ngIf="displayMessage.mecanicoId">
-                                                <p [innerHTML]="displayMessage.mecanicoId"></p>
+                                            <span class="text-danger" *ngIf="displayMessage.mecanicoResponsavelId">
+                                                <p [innerHTML]="displayMessage.mecanicoResponsavelId"></p>
                                             </span>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <div class="form-group col-md-12">
                                             <label class="control-label">Discrepâncias</label>
                                             <div>
-                                                <textarea cols="40" rows="5" maxlength="300" class="form-control" id="descricao" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }"></textarea>
+                                                <textarea cols="40" rows="5" maxlength="300" class="form-control" id="discrepancias" formControlName="discrepancias" [ngClass]="{'is-invalid': displayMessage.descricao }"></textarea>
                                                 <span class="text-danger" *ngIf="displayMessage.descricao">
                                                     <p [innerHTML]="displayMessage.descricao"></p>
                                                 </span>

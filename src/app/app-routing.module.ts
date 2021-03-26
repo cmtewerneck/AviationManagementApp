@@ -132,6 +132,10 @@ const routes: Routes = [
             loadChildren: () => import('./aluno/alunos.module')
             .then(m => m.AlunoModule)
         },
+        { path: 'alunos-turmas',
+            loadChildren: () => import('./alunosTurmas/alunoTurma.module')
+            .then(m => m.AlunoTurmaModule)
+        },
         { path: 'cursos',
             loadChildren: () => import('./curso/curso.module')
             .then(m => m.CursoModule)

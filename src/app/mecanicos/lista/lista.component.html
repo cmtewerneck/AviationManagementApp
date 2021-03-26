@@ -44,12 +44,11 @@
             <th>Data Admissão</th>
             <th>Data Demissão</th>
             <th>Salário</th>
-            <th>Situação</th>
             <th></th>
           </tr>
         </thead>
         <tbody *ngIf="mecanicos && mecanicos.length">
-          <tr *ngFor="let tripulante of mecanicosFiltrados">
+          <tr *ngFor="let mecanico of mecanicosFiltrados">
             <td><img *ngIf="mostrarImagem" src="{{ imagens }}{{ mecanico.imagem }}" style="width: 70px; height: 100px"></td>
             <td>{{ mecanico.nome }}</td>
             <td>
@@ -60,8 +59,6 @@
             <td>{{ mecanico.dataAdmissao | date: 'dd/MM/yyyy' }}</td>
             <td>{{ mecanico.dataDemissao | date: 'dd/MM/yyyy' }}</td>
             <td>{{ mecanico.salario | currencyBrazil }}</td>
-            <td *ngIf="mecanico.tipoVinculo == 1">MEI</td>
-            <td *ngIf="mecanico.tipoVinculo == 2">CTPS</td>
             
             <td class="text-right">
               <a class="btn btn-warning btn-sm" [routerLink]="['/mecanicos/detalhes',mecanico.id]">

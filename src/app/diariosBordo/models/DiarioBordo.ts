@@ -34,7 +34,7 @@ export interface DiarioBordo {
   copilotoId: string;
   nomeCopiloto: string;
   
-  mecanicoId: string;
+  mecanicoResponsavelId: string;
   nomeMecanico: string;
 }
 
