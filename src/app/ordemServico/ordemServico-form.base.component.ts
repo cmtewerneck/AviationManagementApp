@@ -1,4 +1,5 @@
-import { Aeronave, OrdemServico } from './models/OrdemServico';
+import { Servico} from '../servicos/models/Servico';
+import { Aeronave, OrdemServico} from './models/OrdemServico';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -9,6 +10,7 @@ export abstract class OrdemServicoBaseComponent extends FormBaseComponent {
     ordemServico: OrdemServico;
     ordensServico: OrdemServico[];
     aeronaves: Aeronave[];
+    servicos: Servico[];
     errors: any[] = [];
     ordemServicoForm: FormGroup;
     
@@ -59,6 +61,9 @@ export abstract class OrdemServicoBaseComponent extends FormBaseComponent {
             },
             aeronaveId: {
                 required: 'Escolha uma aeronave'
+            },
+            status: {
+                required: 'Selecione o Status do serviço'
             }
         };
         

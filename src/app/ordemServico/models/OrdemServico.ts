@@ -20,10 +20,15 @@ export class OrdemServico {
 
   aeronaveId: string;
   matriculaAeronave: string;
-  servicos: Servico[];
+  itens: Servico[];
 }
 
 export interface Aeronave {
   id: string;
   matricula: string;
 }
+
+// export interface Servico {
+//   id: string;
+//   titulo: string;
+// }

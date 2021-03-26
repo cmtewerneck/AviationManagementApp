@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
 import { Aeronave, OrdemServico } from '../models/OrdemServico';
+import { Servico } from '../../servicos/models/Servico';
 
 @Injectable()
 export class OrdemServicoService extends BaseService {
@@ -51,6 +52,12 @@ export class OrdemServicoService extends BaseService {
     obterAeronaves(): Observable<Aeronave[]> {
         return this.http
             .get<Aeronave[]>(this.urlServiceV1 + 'aeronaves', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterServicos(): Observable<Servico[]> {
+        return this.http
+            .get<Servico[]>(this.urlServiceV1 + 'servicos', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

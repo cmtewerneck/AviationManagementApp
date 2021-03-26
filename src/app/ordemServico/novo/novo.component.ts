@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
-import { FormBuilder, FormControlName, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrdemServicoService } from '../services/ordemServico.service';
 import { OrdemServicoBaseComponent } from '../ordemServico-form.base.component';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-novo',
@@ -13,6 +14,10 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   
+  get servicosArray(): FormArray {
+    return <FormArray>this.ordemServicoForm.get('itens');
+  }
+
   constructor(private fb: FormBuilder,
     private ordemServicoService: OrdemServicoService,
     private router: Router,
@@ -23,6 +28,10 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
       this.ordemServicoService.obterAeronaves()
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
+
+        this.ordemServicoService.obterServicos()
+      .subscribe(
+        servicos => this.servicos = servicos);
         
         this.ordemServicoForm = this.fb.group({
           numeroOrdem: ['', [Validators.required, Validators.maxLength(20)]],
@@ -40,8 +49,25 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
           inspecionadoPor: ['', Validators.maxLength(20)],
           inspecionadoPorAnac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
           dataInspecao: [''],
-          aeronaveId: ['', [Validators.required]]
+          itens: this.fb.array([this.criaServico()]),
+          aeronaveId: ['', Validators.required]
         });
+      }
+
+      criaServico(): FormGroup {
+        return this.fb.group({
+          servicoId: ['', Validators.required],
+          // custo: [''],
+          status: ['', Validators.required]
+        });
+      }
+
+      adicionarServico(){
+        this.servicosArray.push(this.criaServico());
+      }
+
+      removerServico(id: number){
+        this.servicosArray.removeAt(id);
       }
       
       ngAfterViewInit(): void {
@@ -59,6 +85,7 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
           if (this.ordemServico.dataFechamento) { this.ordemServico.dataFechamento = new Date(this.ordemServico.dataFechamento); } else { this.ordemServico.dataFechamento = null; }
           if (this.ordemServico.dataRealizacao) { this.ordemServico.dataRealizacao = new Date(this.ordemServico.dataRealizacao); } else { this.ordemServico.dataRealizacao = null; }
           if (this.ordemServico.dataInspecao) { this.ordemServico.dataInspecao = new Date(this.ordemServico.dataInspecao); } else { this.ordemServico.dataInspecao = null; }
+          //this.ordemServico. = CurrencyUtils.StringParaDecimal(this.servico.custo);
           // FIM DAS CONVERSÕES
 
           console.log(this.ordemServico);

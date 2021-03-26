@@ -37,7 +37,7 @@ export class DetalhesComponent {
         const toast = this.toastr.success('OS excluida!', 'Sucesso!');
         if (toast) {
           toast.onHidden.subscribe(() => {
-            this.router.navigate(['/ordens-servico/listar-todos']);
+            this.router.navigate(['/ordem-servico/listar-todos']);
           });
         }
       }

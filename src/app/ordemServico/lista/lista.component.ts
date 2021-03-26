@@ -61,7 +61,14 @@ export class ListaComponent implements OnInit {
           //doc.text('Nº de Série: ' + ordemServico.aeronaveNumeroSerie, 15, 60);
           doc.text('TTSN: ' + ordemServico.ttsn, 15, 70);
           doc.text('TCSN Pousos: ' + ordemServico.tcsnPousos, 15, 80);
+          doc.text('Serviços: ' + ordemServico.tcsnPousos, 15, 90);
           
+          var inicial = 90;
+          for (let servico of ordemServico.itens){
+            doc.text(servico.titulo, 15, inicial);
+            inicial += 10;
+          }
+
           // FOOTER
           const pageCount = doc.getNumberOfPages();
           

@@ -49,17 +49,18 @@ export class ListaComponent implements OnInit {
             console.log(error);
           });
         }
-        
+
         gerarPdf(oficioEmitido: OficioEmitido) {
           console.log('Gerando PDF ...');
-          const doc = new jsPDF();
-          
+          const doc = new jsPDF('l', 'mm', 'a4');
+
           doc.text('Ofício Nº: ' + oficioEmitido.numeracao, 15, 20);
           doc.text('Data: ' + oficioEmitido.data, 15, 30);
           doc.text('Destinatário: ' + oficioEmitido.destinatario, 15, 40);
           doc.text('Responsável: ' + oficioEmitido.responsavel, 15, 50);
           doc.text('Assunto: ' + oficioEmitido.assunto, 15, 70);
           doc.text('Mensagem: ' + oficioEmitido.mensagem, 15, 120);
+          doc.roundedRect(10, 10, 280, 200, 10, 10, 'S');
           
           // FOOTER
           const pageCount = doc.getNumberOfPages();
