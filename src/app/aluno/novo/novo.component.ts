@@ -55,8 +55,8 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
         // ALUNO
         rg: ['', [Validators.required, Validators.maxLength(20)]],
         canac: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-        totalVoado: [''],
-        saldo: [''],
+        //totalVoado: [0],
+        saldo: ['0'],
         dataNascimento: ['', Validators.required],
         validadeCMA: ['']
       });
@@ -106,7 +106,7 @@ export class NovoComponent extends AlunoBaseComponent implements OnInit {
         this.aluno.documento = StringUtils.somenteNumeros(this.aluno.documento);
         this.aluno.sexo = Number(this.aluno.sexo);
         this.aluno.ativo = this.aluno.ativo.toString() == "true";
-        this.aluno.totalVoado = CurrencyUtils.StringParaDecimal(this.aluno.totalVoado);
+        //this.aluno.totalVoado = CurrencyUtils.StringParaDecimal(this.aluno.totalVoado);
         this.aluno.saldo = CurrencyUtils.StringParaDecimal(this.aluno.saldo);
         this.aluno.dataNascimento = new Date(this.aluno.dataNascimento);
         if (this.aluno.validadeCMA) { this.aluno.validadeCMA = new Date(this.aluno.validadeCMA); } else { this.aluno.validadeCMA = null; }
