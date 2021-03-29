@@ -25,65 +25,88 @@ export class NovoComponent extends VooInstrucaoBaseComponent implements OnInit {
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
         
-        this.vooInstrucaoService.obterInstrutores(3)
-        .subscribe(
-          colaboradores => this.colaboradores = colaboradores);
+      this.vooInstrucaoService.obterInstrutores(3)
+      .subscribe(
+        colaboradores => this.colaboradores = colaboradores);
           
-          this.vooInstrucaoService.obterAlunos()
-          .subscribe(
-            alunos => this.alunos = alunos);
+      this.vooInstrucaoService.obterAlunos()
+      .subscribe(
+        alunos => this.alunos = alunos);
             
-            this.vooInstrucaoForm = this.fb.group({
-              data: ['', Validators.required],
-              tempoVoo: ['', Validators.required],
-              avaliacao: [true],
-              observacoes: ['', Validators.maxLength(200)],
-              aeronaveId: ['', [Validators.required]],
-              alunoId: ['', [Validators.required]],
-              instrutorId: ['', [Validators.required]]
+      this.vooInstrucaoForm = this.fb.group({
+        data: ['', Validators.required],
+        tempoVoo: ['', Validators.required],
+        avaliacao: [true],
+        observacoes: ['', Validators.maxLength(200)],
+        aeronaveId: ['', [Validators.required]],
+        alunoId: ['', [Validators.required]],
+        instrutorId: ['', [Validators.required]]
+      });
+
+      this.alunoSaldoTotalVoadoForm = this.fb.group({
+        id: [''],
+        tempoVoo: ['']
+      });
+    }
+          
+    ngAfterViewInit(): void {
+      super.configurarValidacaoFormulario(this.formInputElements);
+    }
+          
+    adicionarVooInstrucao() {
+      if (this.vooInstrucaoForm.dirty && this.vooInstrucaoForm.valid) {
+        this.vooInstrucao = Object.assign({}, this.vooInstrucao, this.vooInstrucaoForm.value);
+        
+        this.alunoSaldoTotalVoadoForm.patchValue({
+          id: this.vooInstrucao.alunoId,
+          tempoVoo: this.vooInstrucao.tempoVoo
+        })
+
+        this.alunoSaldoTotalVoado = Object.assign({}, this.alunoSaldoTotalVoado, this.alunoSaldoTotalVoadoForm.value);
+
+        // CONVERSÕES PARA JSON
+        this.vooInstrucao.data = new Date(this.vooInstrucao.data);
+        this.vooInstrucao.tempoVoo = CurrencyUtils.StringParaDecimal(this.vooInstrucao.tempoVoo);
+        this.alunoSaldoTotalVoado.tempoVoo = CurrencyUtils.StringParaDecimal(this.alunoSaldoTotalVoado.tempoVoo);
+        this.vooInstrucao.avaliacao = this.vooInstrucao.avaliacao.toString() == "true";
+        // FIM DAS CONVERSÕES
+
+        console.log(this.vooInstrucao);
+        console.log('');
+        console.log('ALUNO SALDO TOTAL VOADO ABAIXO:');
+        console.log(this.alunoSaldoTotalVoado);
+        
+        this.vooInstrucaoService.novoVooInstrucao(this.vooInstrucao)
+        .subscribe(
+          sucesso => { this.processarSucesso(sucesso) },
+          falha => { this.processarFalha(falha) }
+          );
+          
+          this.mudancasNaoSalvas = false;
+        }
+    }
+          
+    processarSucesso(response: any) {
+      this.vooInstrucaoForm.reset();
+      this.errors = [];
+      
+      this.vooInstrucaoService.atualizarAlunoSaldoTotalVoado(this.alunoSaldoTotalVoado)
+      .subscribe(
+        sucesso => { 
+          let toast = this.toastr.success('Voo cadastrado com sucesso!', 'Sucesso!');
+          if (toast) {
+            toast.onHidden.subscribe(() => {
+              this.router.navigate(['/voos-instrucao/listar-todos']);
             });
           }
+         },
+        falha => { this.processarFalha(falha) }
+        );
+    }
           
-          ngAfterViewInit(): void {
-            super.configurarValidacaoFormulario(this.formInputElements);
-          }
-          
-          adicionarVooInstrucao() {
-            if (this.vooInstrucaoForm.dirty && this.vooInstrucaoForm.valid) {
-              this.vooInstrucao = Object.assign({}, this.vooInstrucao, this.vooInstrucaoForm.value);
-              
-              // CONVERSÕES PARA JSON
-              this.vooInstrucao.data = new Date(this.vooInstrucao.data);
-              this.vooInstrucao.tempoVoo = CurrencyUtils.StringParaDecimal(this.vooInstrucao.tempoVoo);
-              this.vooInstrucao.avaliacao = this.vooInstrucao.avaliacao.toString() == "true";
-              // FIM DAS CONVERSÕES
+    processarFalha(fail: any) {
+      this.errors = fail.error.errors;
+      this.toastr.error('Ocorreu um erro!', 'Opa...');
+    }
 
-              console.log(this.vooInstrucao);
-              
-              this.vooInstrucaoService.novoVooInstrucao(this.vooInstrucao)
-              .subscribe(
-                sucesso => { this.processarSucesso(sucesso) },
-                falha => { this.processarFalha(falha) }
-                );
-                
-                this.mudancasNaoSalvas = false;
-              }
-            }
-            
-            processarSucesso(response: any) {
-              this.vooInstrucaoForm.reset();
-              this.errors = [];
-              
-              let toast = this.toastr.success('Instrução cadastrada com sucesso!', 'Sucesso!');
-              if (toast) {
-                toast.onHidden.subscribe(() => {
-                  this.router.navigate(['/voos-instrucao/listar-todos']);
-                });
-              }
-            }
-            
-            processarFalha(fail: any) {
-              this.errors = fail.error.errors;
-              this.toastr.error('Ocorreu um erro!', 'Opa...');
-            }
-          }      
+}      

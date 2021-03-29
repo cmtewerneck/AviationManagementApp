@@ -90,6 +90,7 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
               this.diarioBordo.pob = Number(this.diarioBordo.pob);
               this.diarioBordo.combustivelDecolagem = Number(this.diarioBordo.combustivelDecolagem);
               this.diarioBordo.naturezaVoo = Number(this.diarioBordo.naturezaVoo);
+              if (this.diarioBordo.copilotoId == "") { this.diarioBordo.copilotoId = null; }
               // FIM DAS CONVERSÕES
               
               console.log(this.diarioBordo);

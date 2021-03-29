@@ -1,4 +1,4 @@
-import { SuprimentoMovimentacao, Suprimento } from './models/suprimentoMovimentacao';
+import { SuprimentoMovimentacao, Suprimento, SuprimentoQuantidade } from './models/suprimentoMovimentacao';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -6,11 +6,13 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class SuprimentoMovimentacaoBaseComponent extends FormBaseComponent {
     
+    suprimentoQuantidade: SuprimentoQuantidade;
     suprimentoMovimentacao: SuprimentoMovimentacao;
     suprimentosMovimentacao: SuprimentoMovimentacao[];
     suprimentos: Suprimento[];
     errors: any[] = [];
     suprimentoMovimentacaoForm: FormGroup;
+    suprimentoQuantidadeForm: FormGroup;
     
     MASKS = utilsBr.MASKS;
     

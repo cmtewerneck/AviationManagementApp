@@ -35,7 +35,7 @@
             <th>Data</th>
             <th>Auto</th>
             <th>Placa</th>
-            <th>Descrição</th>
+            <th>Valor</th>
             <th>Responsável</th>
             <th>Pagamento</th>
             <th></th>
@@ -46,7 +46,7 @@
             <td>{{ veiculoMulta.data | date: 'dd/MM/yyyy' }}</td>
             <td>{{ veiculoMulta.autoInfracao }}</td>
             <td>{{ veiculoMulta.placaVeiculo }}</td>
-            <td>{{ veiculoMulta.descricao }}</td>
+            <td>{{ veiculoMulta.valor | currencyBrazil }}</td>
             <td>{{ veiculoMulta.responsavel }}</td>
             <td *ngIf="veiculoMulta.situacao == true">Pago</td>
             <td *ngIf="veiculoMulta.situacao == false">Pendente</td>

@@ -1,4 +1,4 @@
-import { Aeronave, VooInstrucao, Instrutor, Aluno } from './models/VooInstrucao';
+import { Aeronave, VooInstrucao, Instrutor, Aluno, AlunoSaldoTotalVoado } from './models/VooInstrucao';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -6,12 +6,14 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class VooInstrucaoBaseComponent extends FormBaseComponent {
     
+    alunoSaldoTotalVoado: AlunoSaldoTotalVoado;
     vooInstrucao: VooInstrucao;
     aeronaves: Aeronave[];
     colaboradores: Instrutor[];
     alunos: Aluno[];
     errors: any[] = [];
     vooInstrucaoForm: FormGroup;
+    alunoSaldoTotalVoadoForm: FormGroup;
     
     MASKS = utilsBr.MASKS;
     

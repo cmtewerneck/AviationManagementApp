@@ -29,3 +29,8 @@ export interface Instrutor {
   id: string;
   nome: string;
 }
+
+export interface AlunoSaldoTotalVoado {
+  id: string;
+  tempoVoo: number;
+}

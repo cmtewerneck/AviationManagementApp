@@ -2,40 +2,28 @@
     <table class="table table-hover" style="white-space: nowrap">
         <thead class="thead-dark">
             <tr>
-                <th></th>
                 <th>Nome</th>
-                <th>Documento</th>
-                <th>Total Voado</th>
-                <th>Saldo</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody *ngIf="alunos && alunos.length">
-            <tr *ngFor="let aluno of alunos">
-                <td><img src="{{ imagens }}{{ aluno.imagem }}" style="width: 70px; height: 100px"></td>
-                <td>{{ aluno.nome }}</td>
-                <td>{{ aluno.tipoPessoa === 1 ? (aluno.documento | cpf) : (aluno.documento | cnpj ) }}</td>
-                <td>{{ aluno.totalVoado }}</td>
-                <td>{{ aluno.saldo }}</td>
-                <td>{{ aluno.email }}</td>
-                <td>{{ aluno.telefone | telefone }}</td>
+        <tbody *ngIf="alunosTurmas && alunosTurmas.length">
+            <tr *ngFor="let aluno of alunosTurmas">
+                <td>{{ aluno.nomeAluno }}</td>
                 
                 <td class="text-right">
-                    <a class="btn btn-dark btn-sm" [routerLink]="['/alunos/atualizar-saldo',aluno.id]">
-                        <span class="fa fa-dollar-sign"></span><span class="fa fa-dollar-sign"></span>
+                    <a class="btn btn-danger btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
+                        <span class="fa fa-trash"></span>
                     </a>&nbsp;
-                    <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.id]">
+                    <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
                         <span class="fa fa-search"></span>
                     </a>&nbsp;
-                    <a class="btn btn-info btn-sm" [routerLink]="['/alunos/editar',aluno.id]">
+                    <a class="btn btn-info btn-sm" [routerLink]="['/alunos/editar',aluno.alunoId]">
                         <span class="fa fa-pencil-alt"></span>
                     </a>
                 </td>
             </tr>
         </tbody>
-        <tfoot *ngIf="!alunos">
+        <tfoot *ngIf="!alunosTurmas">
             <tr>
                 <td colspan="7" class="text-center">
                     <h4>

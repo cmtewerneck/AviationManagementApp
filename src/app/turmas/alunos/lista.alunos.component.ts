@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AlunoTurma } from '../../alunosTurmas/models/AlunoTurma';
 import { Aluno } from '../../aluno/models/Aluno';
 import { environment } from '../../../environments/environment';
 
@@ -11,5 +12,6 @@ export class ListaAlunosComponent {
   imagens: string = environment.imagensUrl;
 
   @Input()
-  alunos: Aluno[];
+  //alunosTurmas: Aluno[];
+  alunosTurmas: AlunoTurma[];
 }

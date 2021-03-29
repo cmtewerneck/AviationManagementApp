@@ -52,15 +52,12 @@ export class ListaComponent implements OnInit {
 
         gerarPdf(oficioEmitido: OficioEmitido) {
           console.log('Gerando PDF ...');
+
+          var imgData = 'assets/modelo_certificado.png';
           const doc = new jsPDF('l', 'mm', 'a4');
 
-          doc.text('Ofício Nº: ' + oficioEmitido.numeracao, 15, 20);
-          doc.text('Data: ' + oficioEmitido.data, 15, 30);
-          doc.text('Destinatário: ' + oficioEmitido.destinatario, 15, 40);
-          doc.text('Responsável: ' + oficioEmitido.responsavel, 15, 50);
-          doc.text('Assunto: ' + oficioEmitido.assunto, 15, 70);
           doc.text('Mensagem: ' + oficioEmitido.mensagem, 15, 120);
-          doc.roundedRect(10, 10, 280, 200, 10, 10, 'S');
+          doc.addImage(imgData, 'PNG', 0, 0, 297, 210);
           
           // FOOTER
           const pageCount = doc.getNumberOfPages();

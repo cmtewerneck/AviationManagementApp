@@ -35,7 +35,7 @@ export class NovoComponent extends SuprimentoBaseComponent implements OnInit {
         codigo: ['',  Validators.maxLength(30)],
         partNumber: ['', [Validators.required, Validators.maxLength(30)]],
         nomenclatura: ['', [Validators.required, Validators.maxLength(50)]],
-        quantidade: ['', Validators.required],
+        quantidade: [0, Validators.required],
         localizacao: ['', Validators.maxLength(30)],
         partNumberAlternativo: ['', Validators.maxLength(30)],
         aplicacao: ['', Validators.maxLength(20)],

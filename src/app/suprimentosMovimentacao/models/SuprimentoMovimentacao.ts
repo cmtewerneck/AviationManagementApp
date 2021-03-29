@@ -12,3 +12,9 @@ export interface Suprimento {
     id: string;
     nomenclatura: string;
 }
+
+export interface SuprimentoQuantidade {
+    id: string;
+    quantidade: number
+}
+

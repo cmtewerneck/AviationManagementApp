@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { Aeronave, VooInstrucao, Instrutor, Aluno } from '../models/VooInstrucao';
+import { Aeronave, VooInstrucao, Instrutor, Aluno, AlunoSaldoTotalVoado } from '../models/VooInstrucao';
 
 @Injectable()
 export class VooInstrucaoService extends BaseService {
@@ -40,31 +40,40 @@ export class VooInstrucaoService extends BaseService {
                 catchError(super.serviceError));
             }
             
-            excluirVooInstrucao(id: string): Observable<VooInstrucao> {
-                return this.http
-                .delete(this.urlServiceV1 + 'voos-instrucao/' + id, this.ObterAuthHeaderJson())
-                .pipe(
-                    map(super.extractData),
-                    catchError(super.serviceError));
-                }
-                
-                obterAeronaves(): Observable<Aeronave[]> {
-                    return this.http
-                    .get<Aeronave[]>(this.urlServiceV1 + 'aeronaves', this.ObterAuthHeaderJson())
-                    .pipe(catchError(super.serviceError));
-                }
-                
-                // IMPLEMENTAR PARA BUSCAR SOMENTE OS DE ENUM 3 (INSTRUTOR)
-                obterInstrutores(tipoColaborador: number): Observable<Instrutor[]> {
-                    return this.http
-                    .get<Instrutor[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
-                    .pipe(catchError(super.serviceError));
-                }
-                
-                obterAlunos(): Observable<Aluno[]> {
-                    return this.http
-                    .get<Aluno[]>(this.urlServiceV1 + 'alunos', this.ObterAuthHeaderJson())
-                    .pipe(catchError(super.serviceError));
-                }
+        excluirVooInstrucao(id: string): Observable<VooInstrucao> {
+            return this.http
+            .delete(this.urlServiceV1 + 'voos-instrucao/' + id, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
             }
+                
+        obterAeronaves(): Observable<Aeronave[]> {
+            return this.http
+            .get<Aeronave[]>(this.urlServiceV1 + 'aeronaves', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+        }
+                
+        // IMPLEMENTAR PARA BUSCAR SOMENTE OS DE ENUM 3 (INSTRUTOR)
+        obterInstrutores(tipoColaborador: number): Observable<Instrutor[]> {
+            return this.http
+            .get<Instrutor[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+        }
+                
+        obterAlunos(): Observable<Aluno[]> {
+            return this.http
+            .get<Aluno[]>(this.urlServiceV1 + 'alunos', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+        }
+
+        atualizarAlunoSaldoTotalVoado(alunoSaldoTotalVoado: AlunoSaldoTotalVoado): Observable<AlunoSaldoTotalVoado> {
+            return this.http
+            .put(this.urlServiceV1 + 'alunos/atualizar-saldo/' + alunoSaldoTotalVoado.id, alunoSaldoTotalVoado, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+            }
+
+}
             
