@@ -67,7 +67,7 @@ export class TurmaService extends BaseService {
 
     encerrarTurma(id: string): Observable<Turma> {
         return this.http
-            .put(this.urlServiceV1 + 'turmas/encerrar/' + id, this.ObterAuthHeaderJson())
+            .put(this.urlServiceV1 + 'turmas/encerrar/' + id, null, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

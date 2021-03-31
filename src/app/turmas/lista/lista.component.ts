@@ -65,7 +65,11 @@ export class ListaComponent implements OnInit {
           console.log("ID sendo enviado: " + this.turmaId);
           this.turmaService.encerrarTurma(this.turmaId)
           .subscribe(
-            turma => { this. sucessoExclusao(turma) },
+            turma => {
+              // const index = this.turmas.findIndex(x => x.id == this.turmaId);
+              // this.turmas = this.turmas.splice(index, 1, turma);
+              this.sucessoExclusao(turma);
+            },
             error => { this.falha(error) }
           )
           template.hide();
@@ -77,12 +81,13 @@ export class ListaComponent implements OnInit {
         }
       
         sucessoExclusao(evento: any) {
-          const toast = this.toastr.success('Turma encerrada!', 'Sucesso!');
-          if (toast) {
-            toast.onHidden.subscribe(() => {
-              this.router.navigate(['/turmas/listar-todos']);
-            });
-          }
+          this.toastr.success('Turma encerrada!', 'Sucesso!');
+          this.ObterTodos();
+          // if (toast) {
+          //   toast.onHidden.subscribe(() => {
+          //     this.router.navigate(['/turmas/listar-todos']);
+          //   });
+          // }
         }
 
 }      
