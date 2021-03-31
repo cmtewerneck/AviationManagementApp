@@ -40,6 +40,10 @@ const routes: Routes = [
             loadChildren: () => import('./diariosBordo/diariosBordo.module')
             .then(m => m.DiarioBordoModule)
         },
+        { path: 'licencas-habilitacoes',
+            loadChildren: () => import('./licencaHabilitacao/licencaHabilitacao.module')
+            .then(m => m.LicencaHabilitacaoModule)
+        },
         { path: 'contas-pagar',
             loadChildren: () => import('./contasPagar/contasPagar.module')
             .then(m => m.ContasPagarModule)

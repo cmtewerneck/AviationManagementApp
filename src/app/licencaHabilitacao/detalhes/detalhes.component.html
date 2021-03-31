@@ -6,11 +6,11 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li><a class="btn btn-dark" [routerLink]="['/turmas/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-dark" [routerLink]="['/licencas-habilitacoes/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
           <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
-          <li><a class="btn btn-warning" [routerLink]="['/turmas/editar',turma.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
-          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash" style="color: white;"></i></a></li>
-        </ol> 
+          <li><a class="btn btn-warning" [routerLink]="['/licencas-habilitacoes/editar',licencaHabilitacao.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+        </ol>
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -29,50 +29,34 @@
       </button>
     </div>
     
+    
     <div class="row">
       <div class="col-md-12">
         <div class="card" style="height: 100%;">
-          <h5 class="card-header">Dados da Turma</h5>
+          <h5 class="card-header">Dados</h5>
           <div class="card-body">
             <div class="row">
-              <dl class="col-md-6">
+              <dl class="col-md-12">
                 <dt class="col-sm-4">
-                  <label class="control-label">Código:</label>
+                  <label class="control-label">Título:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="turma.codigo == ''">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="turma.codigo != ''">{{ turma.codigo }}</dd>
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.titulo == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.titulo != ''">{{ licencaHabilitacao.titulo }}</dd>
                 <br>   
                 <dt class="col-sm-4">
-                  <label class="control-label">Curso:</label>
+                  <label class="control-label">Matrícula:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="turma.descricaoCurso == ''">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="turma.descricaoCurso != ''">{{ turma.descricaoCurso }}</dd>
-              </dl>
-              
-              <dl class="col-md-6">
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.validade == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.validade != null">{{ licencaHabilitacao.validade | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
                 <dt class="col-sm-4">
-                  <label class="control-label">Data de Início:</label>
+                  <label class="control-label">Aeronauta:</label>
                 </dt>
-                <dd class="col-sm-10" *ngIf="turma.dataInicio == null">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="turma.dataInicio != null">{{ turma.dataInicio | date: 'dd/MM/yyyy' }}</dd>
-                <br>
-                <dt class="col-sm-4">
-                  <label class="control-label">Data de Término:</label>
-                </dt>
-                <dd class="col-sm-10" *ngIf="turma.dataTermino == null">Não Informado</dd>
-                <dd class="col-sm-10" *ngIf="turma.dataTermino != null">{{ turma.dataTermino | date: 'dd/MM/yyyy' }}</dd>
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.nomeColaborador == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="licencaHabilitacao.nomeColaborador != ''">{{ licencaHabilitacao.nomeColaborador }}</dd>
               </dl>
-            </div>            
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row" style="margin-top: 20px;">
-      <div class="card col-md-12">
-        <h5 class="card-header">Alunos</h5>
-        <div class="card-body">
-          <lista-aluno [alunosTurmas]="turma.alunosTurmas"></lista-aluno>
         </div>
       </div>
     </div>
@@ -95,13 +79,13 @@
       </div>
       <div class="modal-body">
         <!-- <p>{{bodyDeletarFornecedor}}</p> -->
-        <p>A turma {{turma.codigo}} do curso {{turma.descricaoCurso}} será excluída!</p>
+        <p>A licença / habilitação {{licencaHabilitacao.titulo}} do aeronauta {{licencaHabilitacao.nomeColaborador}} será excluída!</p>
       </div>    
       <div class="modal-footer btn-group d-flex">      
         <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
           CENCELAR
         </button>
-        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirTurma(confirmDelete)"> 
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirLicencaHabilitacao(confirmDelete)"> 
           EXCLUIR
         </button>
       </div>

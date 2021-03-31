@@ -29,6 +29,7 @@ export class NovoComponent extends AlunoTurmaBaseComponent implements OnInit {
         turmas => this.turmas = turmas);
         
         this.alunoTurmaForm = this.fb.group({
+          situacao: [''],
           turmaId: ['', [Validators.required]],
           alunoId: ['', [Validators.required]]
         });

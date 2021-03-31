@@ -47,7 +47,7 @@
             <td>{{ turma.dataTermino | date: 'dd/MM/yyyy' }}</td>
             
             <td class="text-right">
-              <a class="btn btn-success btn-sm" [routerLink]="['/turmas/encerrar',turma.id]">
+              <a class="btn btn-success btn-sm" (click)="openModal(confirmEncerrar, turma.id)">
                 <span class="fas fa-check-square"></span>
               </a>&nbsp;
               <a class="btn btn-primary btn-sm" [routerLink]="['/alunos-turmas/adicionar-novo']">
@@ -79,3 +79,34 @@
   </div>
 </section>
 <!-- /.content -->
+
+
+
+
+
+<!-- MODAL ENCERRAR TURMA -->
+<div bsModal #confirmEncerrar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma encerramento?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmEncerrar.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>A turma será encerrada!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmEncerrar.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="encerrarTurma(confirmEncerrar)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

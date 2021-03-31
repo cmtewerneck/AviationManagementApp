@@ -8,12 +8,17 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
 import { ExcluirComponent } from './excluir/excluir.component';
 import { TurmaResolve } from './services/turma.resolve';
 import { TurmaGuard } from './services/turma.guard';
+import { ListaAlunosComponent } from './alunos/lista.alunos.component';
+import { AlunoTurmaGuard } from '../alunosTurmas/services/alunoTurma.guard';
+import { AlunoTurmaResolve } from '../alunosTurmas/services/alunoTurma.resolve';
 
 const turmaRouterConfig: Routes = [
     {
         path: '', component: TurmaAppComponent,
         children: [
-             { path: 'listar-todos', component: ListaComponent },
+             { path: 'listar-todos', component: ListaComponent,
+               data: [{ claim: { nome: 'Turma', valor: 'Consultar' } }]
+             },
              {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [TurmaGuard],

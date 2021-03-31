@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
 import { Curso, Turma } from '../models/Turma';
+import { AlunoTurma } from 'src/app/alunosTurmas/models/AlunoTurma';
 
 @Injectable()
 export class TurmaService extends BaseService {
@@ -43,6 +44,30 @@ export class TurmaService extends BaseService {
     excluirTurma(id: string): Observable<Turma> {
         return this.http
             .delete(this.urlServiceV1 + 'turmas/' + id, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    excluirAlunoTurma(id: string): Observable<AlunoTurma> {
+        return this.http
+            .delete(this.urlServiceV1 + 'turmas/alunos/' + id, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    aprovarAluno(id: string): Observable<AlunoTurma> {
+        return this.http
+            .put(this.urlServiceV1 + 'turmas/alunos/aprovar/' + id, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    encerrarTurma(id: string): Observable<Turma> {
+        return this.http
+            .put(this.urlServiceV1 + 'turmas/encerrar/' + id, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

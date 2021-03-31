@@ -1,0 +1,166 @@
+
+
+<div class="register-page">
+  <div class="alert alert-danger" *ngIf="errors.length > 0">
+    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+    <ul>
+      <li *ngFor="let error of errors">{{ error }}</li>
+    </ul>
+  </div>
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="../../index2.html"><b>Aviation</b>Management</a>
+    </div>
+    
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg">Registro de novo usuário</p>
+        
+        
+        
+        <form [formGroup]="registerForm">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="nome" [ngClass]="{ 'is-invalid': registerForm.get('nome').errors && registerForm.get('nome').touched}" placeholder="Nome">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('nome').hasError('required') &&
+            registerForm.get('nome').touched" class="invalid-feedback">
+            Nome é obrigatório.
+            </div>
+            <div *ngIf="registerForm.get('nome').hasError('maxlength') &&
+            registerForm.get('nome').touched" class="invalid-feedback">
+            Máximo 30 caracteres
+            </div>
+          </div>
+        
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="sobrenome" [ngClass]="{ 'is-invalid': registerForm.get('sobrenome').errors && registerForm.get('sobrenome').touched}" placeholder="Sobrenome">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('sobrenome').hasError('required') &&
+            registerForm.get('sobrenome').touched" class="invalid-feedback">
+            Sobrenome é obrigatório.
+            </div>
+            <div *ngIf="registerForm.get('sobrenome').hasError('maxlength') &&
+            registerForm.get('sobrenome').touched" class="invalid-feedback">
+            Máximo 100 caracteres
+            </div>
+          </div>
+      
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="telefone" [ngClass]="{ 'is-invalid': registerForm.get('telefone').errors && registerForm.get('telefone').touched}" placeholder="Telefone">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('telefone').hasError('maxlength') &&
+            registerForm.get('telefone').touched" class="invalid-feedback">
+            Máximo 20 caracteres.
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="empresa" [ngClass]="{ 'is-invalid': registerForm.get('empresa').errors && registerForm.get('empresa').touched}" placeholder="Empresa">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('empresa').hasError('required') &&
+            registerForm.get('empresa').touched" class="invalid-feedback">
+            Empresa é obrigatório.
+            </div>
+            <div *ngIf="registerForm.get('empresa').hasError('maxlength') &&
+            registerForm.get('empresa').touched" class="invalid-feedback">
+            Máximo 100 caracteres.
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="empresaCnpj" [ngClass]="{ 'is-invalid': registerForm.get('empresaCnpj').errors && registerForm.get('empresaCnpj').touched}" placeholder="CNPJ">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('empresaCnpj').hasError('required') &&
+            registerForm.get('empresaCnpj').touched" class="invalid-feedback">
+            CNPJ é obrigatório.
+            </div>
+            <div *ngIf="registerForm.get('empresaCnpj').hasError('maxlength') &&
+            registerForm.get('empresaCnpj').touched" class="invalid-feedback">
+            Máximo 14 caracteres.
+            </div>
+          </div>
+      
+      <div class="input-group mb-3">
+        <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}" placeholder="E-mail">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+        <div *ngIf="registerForm.get('email').hasError('required') &&
+        registerForm.get('email').touched" class="invalid-feedback">
+        E-mail é obrigatório.
+      </div>
+    </div>
+    
+    <div formGroupName="passwords">
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors && registerForm.get('passwords.password').touched}" placeholder="Senha">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+        <div *ngIf="registerForm.get('passwords.password').hasError('minlength') &&
+        registerForm.get('passwords.password').touched" class="invalid-feedback">
+        Deve conter no mínimo 6 caracters
+      </div>
+      <div *ngIf="registerForm.get('passwords.password').hasError('required') &&
+      registerForm.get('passwords.password').touched" class="invalid-feedback">
+      Senha é obrigatório.
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors && registerForm.get('passwords.confirmPassword').touched 
+    || registerForm.get('passwords.confirmPassword').hasError('mismatch') && registerForm.get('passwords.confirmPassword').touched }" placeholder="Confirmação de senha">
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <span class="fas fa-lock"></span>
+      </div>
+    </div>
+    <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('required') &&
+    registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
+    Confirme a Senha
+  </div>
+  <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('mismatch') 
+  && registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
+  Confirmação não confere
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-lg btn-success btn-block" [disabled]="!registerForm.valid" (click)="cadastrarUsuario()">Registar</button>
+  </div>
+  <!-- /.col -->
+</div>
+</form>
+<br>
+<br>
+<a routerLink="/conta/login" class="text-center">Eu já tenho conta</a>
+</div>
+<!-- /.form-box -->
+</div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+</div>

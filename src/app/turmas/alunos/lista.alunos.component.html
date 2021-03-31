@@ -1,36 +1,107 @@
-<div class="table-responsive">
+  <div class="table-responsive">
     <table class="table table-hover" style="white-space: nowrap">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="alunosTurmas && alunosTurmas.length">
-            <tr *ngFor="let aluno of alunosTurmas">
-                <td>{{ aluno.nomeAluno }}</td>
-                
-                <td class="text-right">
-                    <a class="btn btn-danger btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
-                        <span class="fa fa-trash"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info btn-sm" [routerLink]="['/alunos/editar',aluno.alunoId]">
-                        <span class="fa fa-pencil-alt"></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot *ngIf="!alunosTurmas">
-            <tr>
-                <td colspan="7" class="text-center">
-                    <h4>
-                        Nenhum item encontrado!
-                    </h4>
-                </td>
-            </tr>
-        </tfoot>
+      <thead class="thead-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Situação</th>
+          <th class="text-center">Certificado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="alunosTurmas && alunosTurmas.length">
+        <tr *ngFor="let aluno of alunosTurmas">
+          <td>{{ aluno.nomeAluno }}</td>
+          <td *ngIf="aluno.situacaoAluno == 1">Em Andamento</td>
+          <td *ngIf="aluno.situacaoAluno == 2">Aprovado</td>
+          <td *ngIf="aluno.situacaoAluno == 3">Reprovado</td>
+          <td *ngIf="aluno.situacaoAluno == 2" class="text-center">
+            <a class="btn btn-dark btn-sm" (click)="gerarPdf(aluno)">
+              <span class="fa fa-download" style="color: white;"></span>
+            </a>
+          </td>
+          <td *ngIf="aluno.situacaoAluno == 1 || aluno.situacaoAluno == 3" class="text-center"></td>
+          
+          <td class="text-right">
+            <a class="btn btn-success btn-sm" (click)="openModal(confirmAprovacao, aluno.id)">
+              <span class="fa fa-check" style="color: white;"></span>
+            </a>&nbsp;
+            <a class="btn btn-danger btn-sm" (click)="openModal(confirmAprovacao, aluno.id)">
+              <span class="fa fa-check" style="color: white;"></span>
+            </a>&nbsp;
+            <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
+              <span class="fa fa-search"></span>
+            </a>&nbsp;
+            <a class="btn btn-info btn-sm" [routerLink]="['/alunos/editar',aluno.alunoId]">
+              <span class="fa fa-pencil-alt"></span>
+            </a>&nbsp;
+            <a class="btn btn-danger btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
+              <span class="fa fa-trash"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!alunosTurmas">
+        <tr>
+          <td colspan="7" class="text-center">
+            <h4>
+              Nenhum item encontrado!
+            </h4>
+          </td>
+        </tr>
+      </tfoot>
     </table>
+  </div>
+
+  <!-- MODAL APROVADO -->
+<div bsModal #confirmAprovacao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma aprovação?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmAprovacao.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>O status será alterado para Aprovado!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-danger" (click)="confirmAprovacao.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="aprovarAluno(confirmAprovacao)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+  <!-- MODAL REPROVADO 
+  <div bsModal #confirmReprove="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">
+            Confirma reprovação?
+          </h4>
+          <button type="button" class="close pull-right" (click)="confirmReprove.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>O status será alterado para Reprovado!</p>
+        </div>    
+        <div class="modal-footer btn-group d-flex">      
+          <button type="button" class="btn btn-outline-danger" (click)="confirmReprove.hide()">
+            CENCELAR
+          </button>
+          <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="reprovarAluno(confirmReprove)"> 
+            CONFIRMAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->

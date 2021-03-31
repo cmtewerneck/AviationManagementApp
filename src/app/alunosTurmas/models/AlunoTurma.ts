@@ -1,5 +1,6 @@
 export interface AlunoTurma {
   id: string;
+  situacaoAluno: number;
 
   turmaId: string;
   codigoTurma: string;
