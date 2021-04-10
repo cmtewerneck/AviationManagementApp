@@ -1,0 +1,30 @@
+<!-- <table class="table table-hover" style="white-space: nowrap"> -->
+<table class="card-table table table-hover">
+  <!-- <thead class="thead-dark"> -->
+  <thead>
+    <tr>
+      <th>Matrícula</th>
+      <th>Número</th>
+      <th>Abertura</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="ordensServico && ordensServico.length">
+    <tr *ngFor="let ordemServico of ordensServico">
+      <td>{{ ordemServico.matriculaAeronave }}</td>
+      <td>{{ ordemServico.numeroOrdem }}</td>
+      <td>{{ ordemServico.dataAbertura | date: 'dd/MM/yyyy'}}</td>
+      <td *ngIf="ordemServico.dataFechamento == null"><span class="badge badge-warning">Em Aberto</span></td>
+      <td *ngIf="ordemServico.dataFechamento != null"><span class="badge badge-success">Encerrada</span></td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!ordensServico">
+    <tr>
+      <td colspan="7" class="text-center">
+        <h4>
+          Nenhum item encontrado!
+        </h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>

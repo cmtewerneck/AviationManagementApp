@@ -1,0 +1,153 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Treinamentos</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="d-flex">
+      <div class="form-inline mr-auto">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+        </div>
+      </div>
+      <div>
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-success" [routerLink]="['/treinamentos/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Novo Treinamento</a>&nbsp;&nbsp;
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+          <tr>
+            <th>Data Início</th>
+            <th>Tripulante</th>
+            <th>Classificação</th>
+            <th>Tipo</th>
+            <th>Classe</th>
+            <th>Instrutor</th>
+            <th>Data Término</th>
+            <th class="text-center">Certificado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="treinamentos && treinamentos.length">
+          <tr *ngFor="let treinamento of treinamentosFiltrados">
+            <td>{{ treinamento.dataInicio | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ treinamento.nomeTripulante }}</td>
+            <td *ngIf="treinamento.classificacaoTreinamento == 1">Inicial</td>
+            <td *ngIf="treinamento.classificacaoTreinamento == 2">Periódico</td>
+            <td *ngIf="treinamento.tipoTreinamento == 1">NRT</td>
+            <td *ngIf="treinamento.tipoTreinamento == 2">SAE</td>
+            <td *ngIf="treinamento.tipoTreinamento == 3">NEC</td>
+            <td *ngIf="treinamento.tipoClasse == 1">HMNC</td>
+            <td *ngIf="treinamento.tipoClasse == 2">HMNT</td>
+            <td *ngIf="treinamento.tipoClasse == 3">HMLT</td>
+            <td>{{ treinamento.instrutor }}</td>
+            <td>{{ treinamento.dataTermino | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="treinamento.dataTermino != null" class="text-center">
+              <a class="btn btn-dark btn-sm" (click)="gerarPdf(treinamento)">
+                <span class="fa fa-download" style="color: white;"></span>
+              </a>
+            </td>
+            <td *ngIf="treinamento.dataTermino == null" class="text-center"></td>
+            
+            
+            <td class="text-right">
+              <a class="btn btn-success btn-sm" [ngClass]="{'disabled': treinamento.dataTermino != null }" (click)="openModal(confirmEncerrar, treinamento.id)">
+                <span class="fa fa-check" style="color: white;"></span>
+              </a>&nbsp;
+              <a class="btn btn-dark btn-sm" [ngClass]="{'disabled': treinamento.dataTermino == null }" (click)="openModal(confirmReabrir, treinamento.id)">
+                <span class="fas fa-redo-alt" style="color: white;"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/treinamentos/detalhes',treinamento.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-warning btn-sm" [routerLink]="['/treinamentos/editar',treinamento.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!treinamentos">
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+
+
+
+<!-- MODAL ENCERRAR TREINAMENTO -->
+<div bsModal #confirmEncerrar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma encerramento?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmEncerrar.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>O treinamento será encerrado!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmEncerrar.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="encerrarTreinamento(confirmEncerrar)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REABRIR TREINAMENTO -->
+<div bsModal #confirmReabrir="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma reabertura?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmReabrir.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>O treinamento será reaberto!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmReabrir.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="reabrirTreinamento(confirmReabrir)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

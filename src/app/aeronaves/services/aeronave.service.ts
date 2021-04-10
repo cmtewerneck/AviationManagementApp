@@ -53,4 +53,20 @@ export class AeronaveService extends BaseService {
                 map(super.extractData),
                 catchError(super.serviceError));
     }
+
+    liberarAeronave(id: string): Observable<Aeronave> {
+        return this.http
+            .put(this.urlServiceV1 + 'aeronaves/liberar/' + id, null, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    pararAeronave(id: string): Observable<Aeronave> {
+        return this.http
+            .put(this.urlServiceV1 + 'aeronaves/parar/' + id, null, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
 }

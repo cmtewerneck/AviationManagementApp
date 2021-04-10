@@ -1,0 +1,167 @@
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Novo Treinamento</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/treinamentos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+                <form enctype="multipart/form-data" (ngSubmit)="adicionarTreinamento()" [formGroup]="treinamentoForm">
+                    
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados do Treinamento</h5>
+                                <div class="card-body">
+                                    <div class="row">  
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Data Início<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="dataInicio" type="date" formControlName="dataInicio" [ngClass]="{'is-invalid': displayMessage.dataInicio }" />
+                                                <span class="text-danger" *ngIf="displayMessage.dataInicio">
+                                                    <p [innerHTML]="displayMessage.dataInicio"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Tripulante<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="tripulanteId" formControlName="tripulanteId" [ngClass]="{'is-invalid': displayMessage.tripulanteId }">
+                                                <option *ngFor="let tripulante of tripulantes" value="{{ tripulante.id }}">{{ tripulante.nome }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.tripulanteId">
+                                                <p [innerHTML]="displayMessage.tripulanteId"></p>
+                                            </span>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Classificação<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="classificacaoTreinamento" formControlName="classificacaoTreinamento" [ngClass]="{'is-invalid': displayMessage.classificacaoTreinamento }" >
+                                                    <option value=1>Inicial</option>
+                                                    <option value=2>Periódico</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.classificacaoTreinamento">
+                                                    <p [innerHTML]="displayMessage.classificacaoTreinamento"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row"> 
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Tipo<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="tipoTreinamento" formControlName="tipoTreinamento" [ngClass]="{'is-invalid': displayMessage.tipoTreinamento }" >
+                                                    <option value=1>NRT</option>
+                                                    <option value=2>SAE</option>
+                                                    <option value=3>NEC</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.tipoTreinamento">
+                                                    <p [innerHTML]="displayMessage.tipoTreinamento"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Número<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="numero" type="text" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero }" />
+                                                <span class="text-danger" *ngIf="displayMessage.numero">
+                                                    <p [innerHTML]="displayMessage.numero"></p>
+                                                </span>
+                                            </div>
+                                        </div> 
+
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Classe<span style="color: red;">*</span></label>
+                                            <div>
+                                                <select class="form-control" id="tipoClasse" formControlName="tipoClasse" [ngClass]="{'is-invalid': displayMessage.tipoClasse }" >
+                                                    <option value=1>HMNC</option>
+                                                    <option value=2>HMNT</option>
+                                                    <option value=3>HMLT</option>
+                                                </select>
+                                                <span class="text-danger" *ngIf="displayMessage.tipoClasse">
+                                                    <p [innerHTML]="displayMessage.tipoClasse"></p>
+                                                </span>
+                                            </div>
+                                        </div>                                     
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Modelo da Aeronave<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="modeloAeronave" type="text" formControlName="modeloAeronave" [ngClass]="{'is-invalid': displayMessage.modeloAeronave }" />
+                                                <span class="text-danger" *ngIf="displayMessage.modeloAeronave">
+                                                    <p [innerHTML]="displayMessage.modeloAeronave"></p>
+                                                </span>
+                                            </div>
+                                        </div>                                        
+                                    </div>   
+                                    
+                                    <div class="row">  
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Instrutor<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="instrutor" type="text" formControlName="instrutor" [ngClass]="{'is-invalid': displayMessage.instrutor }" />
+                                                <span class="text-danger" *ngIf="displayMessage.instrutor">
+                                                    <p [innerHTML]="displayMessage.instrutor"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Categoria<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="categoriaId" formControlName="categoriaId" [ngClass]="{'is-invalid': displayMessage.categoriaId }">
+                                                <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.descricao }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.categoriaId">
+                                                <p [innerHTML]="displayMessage.categoriaId"></p>
+                                            </span>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Carga Horária<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="cargaHoraria" type="text" formControlName="cargaHoraria" [ngClass]="{'is-invalid': displayMessage.cargaHoraria }" />
+                                                <span class="text-danger" *ngIf="displayMessage.cargaHoraria">
+                                                    <p [innerHTML]="displayMessage.cargaHoraria"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!treinamentoForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/treinamentos/listar-todos">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

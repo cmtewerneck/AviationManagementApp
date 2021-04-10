@@ -59,7 +59,15 @@ export class TurmaService extends BaseService {
 
     aprovarAluno(id: string): Observable<AlunoTurma> {
         return this.http
-            .put(this.urlServiceV1 + 'turmas/alunos/aprovar/' + id, this.ObterAuthHeaderJson())
+            .put(this.urlServiceV1 + 'turmas/alunos/aprovar/' + id, null, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    reprovarAluno(id: string): Observable<AlunoTurma> {
+        return this.http
+            .put(this.urlServiceV1 + 'turmas/alunos/reprovar/' + id, null, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -68,6 +76,14 @@ export class TurmaService extends BaseService {
     encerrarTurma(id: string): Observable<Turma> {
         return this.http
             .put(this.urlServiceV1 + 'turmas/encerrar/' + id, null, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
+    reabrirTurma(id: string): Observable<Turma> {
+        return this.http
+            .put(this.urlServiceV1 + 'turmas/reabrir/' + id, null, this.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

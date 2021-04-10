@@ -22,11 +22,11 @@
           <td *ngIf="aluno.situacaoAluno == 1 || aluno.situacaoAluno == 3" class="text-center"></td>
           
           <td class="text-right">
-            <a class="btn btn-success btn-sm" (click)="openModal(confirmAprovacao, aluno.id)">
-              <span class="fa fa-check" style="color: white;"></span>
+            <a class="btn btn-success btn-sm" [ngClass]="{'disabled': aluno.situacaoAluno == 2 }" (click)="openModal(confirmAprovacao, aluno.id)">
+              <span class="fas fa-thumbs-up" style="color: white;"></span>
             </a>&nbsp;
-            <a class="btn btn-danger btn-sm" (click)="openModal(confirmAprovacao, aluno.id)">
-              <span class="fa fa-check" style="color: white;"></span>
+            <a class="btn btn-danger btn-sm" [ngClass]="{'disabled': aluno.situacaoAluno == 3 }" (click)="openModal(confirmReprovacao, aluno.id)">
+              <span class="fas fa-thumbs-down" style="color: white;"></span>
             </a>&nbsp;
             <a class="btn btn-warning btn-sm" [routerLink]="['/alunos/detalhes',aluno.alunoId]">
               <span class="fa fa-search"></span>
@@ -79,15 +79,15 @@
   </div>
 </div>
 
-  <!-- MODAL REPROVADO 
-  <div bsModal #confirmReprove="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <!-- MODAL REPROVADO -->
+  <div bsModal #confirmReprovacao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title pull-left">
             Confirma reprovação?
           </h4>
-          <button type="button" class="close pull-right" (click)="confirmReprove.hide()" aria-label="Close">
+          <button type="button" class="close pull-right" (click)="confirmReprovacao.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -95,13 +95,13 @@
           <p>O status será alterado para Reprovado!</p>
         </div>    
         <div class="modal-footer btn-group d-flex">      
-          <button type="button" class="btn btn-outline-danger" (click)="confirmReprove.hide()">
+          <button type="button" class="btn btn-outline-danger" (click)="confirmReprovacao.hide()">
             CENCELAR
           </button>
-          <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="reprovarAluno(confirmReprove)"> 
+          <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="reprovarAluno(confirmReprovacao)"> 
             CONFIRMAR
           </button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>

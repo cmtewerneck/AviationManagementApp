@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { FormBuilder, FormControlName, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 import { TurmaService } from '../services/turma.service';
 import { TurmaBaseComponent } from '../turma-form.base.component';
 
@@ -28,6 +29,8 @@ export class NovoComponent extends TurmaBaseComponent implements OnInit {
           codigo: ['', [Validators.required, Validators.maxLength(30)]],
           dataInicio: ['', Validators.required],
           dataTermino: [''],
+          inscricao: ['0,00'],
+          mensalidade: ['0,00'],
           cursoId: ['', [Validators.required]]
         });
       }
@@ -43,6 +46,8 @@ export class NovoComponent extends TurmaBaseComponent implements OnInit {
           // CONVERSÕES PARA JSON
           this.turma.dataInicio = new Date(this.turma.dataInicio);
           if (this.turma.dataTermino) { this.turma.dataTermino = new Date(this.turma.dataTermino); } else { this.turma.dataTermino = null; }
+          this.turma.inscricao = CurrencyUtils.StringParaDecimal(this.turma.inscricao);
+          this.turma.mensalidade = CurrencyUtils.StringParaDecimal(this.turma.mensalidade);
           // FIM DAS CONVERSÕES
           
           console.log(this.turma);

@@ -1,0 +1,136 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li><a class="btn btn-dark" [routerLink]="['/treinamentos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-warning" [routerLink]="['/treinamentos/editar',treinamento.id]" tooltip="Editar"><i class="fa fa-pen"></i></a></li>&nbsp;&nbsp;
+          <li><a class="btn btn-danger" (click)="openModal(confirmDelete)" tooltip="Excluir"><i class="fa fa-trash"></i></a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="zerarErros()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="height: 100%;">
+          <h5 class="card-header">Dados do Treinamento</h5>
+          <div class="card-body">
+            <div class="row">
+              <dl class="col-md-6">
+                <dt class="col-sm-12">
+                  <label class="control-label">Data Início:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.dataInicio == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.dataInicio != null">{{ treinamento.dataInicio | date: 'dd/MM/yyyy' }}</dd>
+                <br>   
+                <dt class="col-sm-12">
+                  <label class="control-label">Tripulante:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.nomeTripulante == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.nomeTripulante != ''">{{ treinamento.nomeTripulante }}</dd>
+                <br> 
+                <dt class="col-sm-12">
+                  <label class="control-label">Classificação:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.classificacaoTreinamento == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.classificacaoTreinamento == 1">Inicial</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.classificacaoTreinamento == 2">Periódico</dd>
+                <br>     
+                <dt class="col-sm-12">
+                  <label class="control-label">Tipo:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoTreinamento == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoTreinamento == 1">NRT</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoTreinamento == 2">SAE</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoTreinamento == 3">NEC</dd>
+                <br>   
+                <dt class="col-sm-12">
+                  <label class="control-label">Classe:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoClasse == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoClasse == 1">HMNC</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoClasse == 2">HMNT</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.tipoClasse == 3">HMLT</dd>                 
+              </dl>
+
+              <dl class="col-md-6">
+                <dt class="col-sm-12">
+                  <label class="control-label">Modelo da Aeronave:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.modeloAeronave == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.modeloAeronave != ''">{{ treinamento.modeloAeronave }}</dd>
+                <br>   
+                <dt class="col-sm-12">
+                  <label class="control-label">Instrutor:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.instrutor == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.instrutor != ''">{{ treinamento.instrutor }}</dd>
+                <br>   
+                <dt class="col-sm-12">
+                  <label class="control-label">Categoria:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.descricaoCategoria == ''">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.descricaoCategoria != ''">{{ treinamento.descricaoCategoria }}</dd>
+                <br>
+                <dt class="col-sm-12">
+                  <label class="control-label">Data Término:</label>
+                </dt>
+                <dd class="col-sm-12" *ngIf="treinamento.dataTermino == null">Não Informado</dd>
+                <dd class="col-sm-12" *ngIf="treinamento.dataTermino != null">{{ treinamento.dataTermino | date: 'dd/MM/yyyy' }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+<!-- /.content -->
+
+<!-- MODAL EXCLUIR -->
+<div bsModal #confirmDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma exclusão?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmDelete.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>O treinamento {{treinamento.tipoTreinamento}} do tripulante {{treinamento.nomeTripulante}} será excluído!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmDelete.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-danger" style="margin-left: 30px;" (click)="excluirTreinamento(confirmDelete)"> 
+          EXCLUIR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

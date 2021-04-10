@@ -36,6 +36,8 @@
             <th>Curso</th>
             <th>Data Início</th>
             <th>Data Término</th>
+            <th>Inscrição</th>
+            <th>Mensalidade</th>
             <th></th>
           </tr>
         </thead>
@@ -45,18 +47,23 @@
             <td>{{ turma.descricaoCurso }}</td>
             <td>{{ turma.dataInicio | date: 'dd/MM/yyyy' }}</td>
             <td>{{ turma.dataTermino | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ turma.inscricao | currencyBrazil }}</td>
+            <td>{{ turma.mensalidade | currencyBrazil }}</td>
             
             <td class="text-right">
-              <a class="btn btn-success btn-sm" (click)="openModal(confirmEncerrar, turma.id)">
-                <span class="fas fa-check-square"></span>
+              <a class="btn btn-success btn-sm" [ngClass]="{'disabled': turma.dataTermino != null }" (click)="openModal(confirmEncerrar, turma.id)">
+                <span class="fa fa-check" style="color: white;"></span>
               </a>&nbsp;
-              <a class="btn btn-primary btn-sm" [routerLink]="['/alunos-turmas/adicionar-novo']">
+              <a class="btn btn-dark btn-sm" [ngClass]="{'disabled': turma.dataTermino == null }" (click)="openModal(confirmReabrir, turma.id)">
+                <span class="fas fa-redo-alt" style="color: white;"></span>
+              </a>&nbsp;
+              <a class="btn btn-primary btn-sm" [ngClass]="{'disabled': turma.dataTermino != null }" [routerLink]="['/alunos-turmas/adicionar-novo']">
                 <span class="fas fa-user-plus"></span>
               </a>&nbsp;
               <a class="btn btn-warning btn-sm" [routerLink]="['/turmas/detalhes',turma.id]">
                 <span class="fa fa-search"></span>
               </a>&nbsp;
-              <a class="btn btn-info btn-sm" [routerLink]="['/turmas/editar',turma.id]">
+              <a class="btn btn-info btn-sm" [ngClass]="{'disabled': turma.dataTermino != null }" [routerLink]="['/turmas/editar',turma.id]">
                 <span class="fa fa-pencil-alt"></span>
               </a>
               <!-- <a class="btn btn-danger" [routerLink]="['/turmas/excluir',turma.id]">
@@ -104,6 +111,33 @@
           CENCELAR
         </button>
         <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="encerrarTurma(confirmEncerrar)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REABRIR TURMA -->
+<div bsModal #confirmReabrir="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma reabertura?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmReabrir.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>A turma será reaberta!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-primary" (click)="confirmReabrir.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="reabrirTurma(confirmReabrir)"> 
           CONFIRMAR
         </button>
       </div>

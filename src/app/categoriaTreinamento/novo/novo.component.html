@@ -1,0 +1,72 @@
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Nova Categoria</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/categorias-treinamentos/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+                <form enctype="multipart/form-data" (ngSubmit)="adicionarCategoriaTreinamento()" [formGroup]="categoriaTreinamentoForm">
+                    
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados da Categoria</h5>
+                                <div class="card-body">
+                                    <div class="row">  
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Código<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="codigo" type="text" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.codigo }" />
+                                                <span class="text-danger" *ngIf="displayMessage.codigo">
+                                                    <p [innerHTML]="displayMessage.codigo"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-8">
+                                            <label class="control-label">Descrição<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="descricao" type="text" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao }" />
+                                                <span class="text-danger" *ngIf="displayMessage.descricao">
+                                                    <p [innerHTML]="displayMessage.descricao"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!categoriaTreinamentoForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/categorias-treinamentos/listar-todos">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,3 +1,4 @@
+import { Escala } from 'src/app/escala/models/Escala';
 import { DiarioBordo } from '../../diariosBordo/models/DiarioBordo';
 
 export class Tripulante {
@@ -34,4 +35,5 @@ export class Tripulante {
 
   diarioBordoComandante: DiarioBordo[];
   diarioBordoCopiloto: DiarioBordo[];
+  escalas: Escala[];
 }

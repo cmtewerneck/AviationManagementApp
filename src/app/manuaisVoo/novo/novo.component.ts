@@ -13,6 +13,10 @@ export class NovoComponent extends ManualVooBaseComponent implements OnInit {
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   
+  arquivoNome: string;
+  arquivoChangedEvent: any = '';
+  base64textString: any = '';
+
   constructor(private fb: FormBuilder,
     private manualVooService: ManualVooService,
     private router: Router,
@@ -35,7 +39,9 @@ export class NovoComponent extends ManualVooBaseComponent implements OnInit {
       if (this.manualVooForm.dirty && this.manualVooForm.valid) {
         this.manualVoo = Object.assign({}, this.manualVoo, this.manualVooForm.value);
         
-        // Implementar o upload do arquivo pdf
+        //this.manualVoo.arquivoUpload = this.base64textString.split(',')[1]; // TIRAR O HEADER DA IMAGEM EM BASE 64
+        this.manualVoo.arquivoUpload = this.base64textString; // TIRAR O HEADER DA IMAGEM EM BASE 64
+        this.manualVoo.arquivo = this.arquivoNome;
 
         // CONVERSÕES PARA JSON
         if (this.manualVoo.ultimaRevisao) { this.manualVoo.ultimaRevisao = new Date(this.manualVoo.ultimaRevisao); } else { this.manualVoo.ultimaRevisao = null; }
@@ -69,4 +75,40 @@ export class NovoComponent extends ManualVooBaseComponent implements OnInit {
         this.errors = fail.error.errors;
         this.toastr.error('Ocorreu um erro!', 'Opa...');
       }
-    }  
+
+      // UPLOAD ---------------------------------------------
+      // fileChangeEvent(event: any): void {
+      //   //this.arquivoChangedEvent = event.base64;
+
+      //   const file = event.target.files[0];
+      //   const reader = new FileReader();
+      //   reader.readAsDataURL(file);
+
+      //   reader.onload = () => {
+      //     console.log(reader.result);
+      //   };
+
+      //   this.arquivoNome = event.currentTarget.files[0].name;
+      // }
+
+      fileChangeEvent(event: any): void{
+        var files = event.target.files;
+        var file = files[0];
+        this.arquivoNome = file.name;
+
+      if (files && file) {
+          var reader = new FileReader();
+  
+          reader.onload = this.handleFile.bind(this);
+  
+          reader.readAsBinaryString(file);
+      }
+    }
+  
+    handleFile(event) {
+       var binaryString = event.target.result;
+              this.base64textString = btoa(binaryString);
+              console.log(btoa(binaryString));
+      }
+
+}  

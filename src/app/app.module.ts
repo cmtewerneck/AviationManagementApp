@@ -13,6 +13,11 @@ import { AppComponent } from './app.component';
 import { HomepageService } from './Components/homepage/homepage.service';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ListaAeronavesComponent } from './Components/homepage/aeronaves/lista.aeronaves.component';
+import { ListaTripulantesComponent } from './Components/homepage/tripulantes/lista.tripulantes.component';
+import { ListaTreinamentosComponent } from './Components/homepage/treinamentos/lista.treinamentos.component';
+import { ListaTarifasComponent } from './Components/homepage/tarifas/lista.tarifas.component';
+import { ListaOrdensServicoComponent } from './Components/homepage/ordensServico/lista.ordensServico.component';
 // import { ErrorInterceptor } from './_services/error.handler.service';
 
 // export const httpInterceptorProviders = [
@@ -22,7 +27,12 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent
+    HomepageComponent,
+    ListaAeronavesComponent,
+    ListaTripulantesComponent,
+    ListaTreinamentosComponent,
+    ListaTarifasComponent,
+    ListaOrdensServicoComponent
   ],
   imports: [
     BrowserModule,

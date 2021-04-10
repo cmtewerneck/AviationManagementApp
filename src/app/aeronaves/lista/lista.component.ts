@@ -15,6 +15,8 @@ export class ListaComponent implements OnInit {
   public aeronaves: Aeronave[];
   errorMessage: string;
   mostrarImagem = false;
+  aeronaveId: string;
+  errors: any[] = [];
 
   aeronave: Aeronave;
   aeronavesFiltrados: Aeronave[];
@@ -24,6 +26,12 @@ export class ListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.ObterTodos();
+  }
+
+  openModal(template: any, id: string) {
+    template.show();
+    this.aeronaveId = id;
+    console.log(this.aeronaveId);
   }
 
   _filtroLista: string;
@@ -56,4 +64,43 @@ export class ListaComponent implements OnInit {
         console.log(error);
     });
   }
+
+  liberarAeronave(template: any) {
+    this.aeronaveService.liberarAeronave(this.aeronaveId)
+    .subscribe(
+      aeronave => { 
+        // const index = this.aeronaves.findIndex(x => x.id == this.aeronaveId);
+        // this.aeronaves = this.aeronaves.splice(index, 1, aeronave);
+        this.processarSucesso(aeronave) 
+      },
+      falha => { this.processarFalha(falha) }
+      )
+      template.hide();
+   }
+
+   pararAeronave(template: any) {
+    this.aeronaveService.pararAeronave(this.aeronaveId)
+    .subscribe(
+      aeronave => { 
+        // const index = this.aeronaves.findIndex(x => x.id == this.aeronaveId);
+        // this.aeronaves = this.aeronaves.splice(index, 1, aeronave);
+        this.processarSucesso(aeronave) 
+      },
+      falha => { this.processarFalha(falha) }
+      )
+      template.hide();
+   }
+    
+    processarSucesso(response: any) {
+      this.errors = [];
+      this.toastr.success('Status alterado com sucesso!', 'Sucesso!');
+      this.ObterTodos();
+      this.aeronaveId = "";
+    }
+    
+    processarFalha(fail: any) {
+      this.errors = fail.error.errors;
+      this.toastr.error('Ocorreu um erro!', 'Opa :(');
+      this.aeronaveId = "";
+    }
 }

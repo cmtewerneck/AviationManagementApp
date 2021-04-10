@@ -66,9 +66,23 @@ export class ListaComponent implements OnInit {
           this.turmaService.encerrarTurma(this.turmaId)
           .subscribe(
             turma => {
-              // const index = this.turmas.findIndex(x => x.id == this.turmaId);
-              // this.turmas = this.turmas.splice(index, 1, turma);
+              //const index = this.turmas.findIndex(x => x.id == this.turmaId);
+              //this.turmas = this.turmas.splice(index, 1, turma);
               this.sucessoExclusao(turma);
+            },
+            error => { this.falha(error) }
+          )
+          template.hide();
+        }
+
+        reabrirTurma(template: any) {
+          console.log("ID sendo enviado: " + this.turmaId);
+          this.turmaService.reabrirTurma(this.turmaId)
+          .subscribe(
+            turma => {
+              //const index = this.turmas.findIndex(x => x.id == this.turmaId);
+              //this.turmas = this.turmas.splice(index, 1, turma);
+              this.sucessoReabertura(turma);
             },
             error => { this.falha(error) }
           )
@@ -82,6 +96,16 @@ export class ListaComponent implements OnInit {
       
         sucessoExclusao(evento: any) {
           this.toastr.success('Turma encerrada!', 'Sucesso!');
+          this.ObterTodos();
+          // if (toast) {
+          //   toast.onHidden.subscribe(() => {
+          //     this.router.navigate(['/turmas/listar-todos']);
+          //   });
+          // }
+        }
+
+        sucessoReabertura(evento: any) {
+          this.toastr.success('Turma reaberta!', 'Sucesso!');
           this.ObterTodos();
           // if (toast) {
           //   toast.onHidden.subscribe(() => {

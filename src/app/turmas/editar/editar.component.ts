@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TurmaService } from '../services/turma.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TurmaBaseComponent } from '../turma-form.base.component';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-editar',
@@ -37,6 +38,8 @@ export class EditarComponent extends TurmaBaseComponent implements OnInit {
           codigo: ['', [Validators.required, Validators.maxLength(30)]],
           dataInicio: ['', Validators.required],
           dataTermino: [''],
+          inscricao: ['0,00'],
+          mensalidade: ['0,00'],
           cursoId: ['', [Validators.required]]
         });
         
@@ -45,6 +48,8 @@ export class EditarComponent extends TurmaBaseComponent implements OnInit {
           codigo: this.turma.codigo,
           dataInicio: this.turma.dataInicio,
           dataTermino: this.turma.dataTermino,
+          inscricao: CurrencyUtils.DecimalParaString(this.turma.inscricao),
+          mensalidade: CurrencyUtils.DecimalParaString(this.turma.mensalidade),
           cursoId: this.turma.cursoId
         });
         
@@ -64,6 +69,8 @@ export class EditarComponent extends TurmaBaseComponent implements OnInit {
           // CONVERSÕES PARA JSON
           this.turma.dataInicio = new Date(this.turma.dataInicio);
           if (this.turma.dataTermino) { this.turma.dataTermino = new Date(this.turma.dataTermino); } else { this.turma.dataTermino = null; }
+          this.turma.inscricao = CurrencyUtils.StringParaDecimal(this.turma.inscricao);
+          this.turma.mensalidade = CurrencyUtils.StringParaDecimal(this.turma.mensalidade);
           // FIM DAS CONVERSÕES
           
           console.log(this.turma);

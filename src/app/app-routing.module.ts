@@ -40,6 +40,10 @@ const routes: Routes = [
             loadChildren: () => import('./diariosBordo/diariosBordo.module')
             .then(m => m.DiarioBordoModule)
         },
+        { path: 'escalas',
+            loadChildren: () => import('./escala/escala.module')
+            .then(m => m.EscalaModule)
+        },
         { path: 'licencas-habilitacoes',
             loadChildren: () => import('./licencaHabilitacao/licencaHabilitacao.module')
             .then(m => m.LicencaHabilitacaoModule)
@@ -47,6 +51,18 @@ const routes: Routes = [
         { path: 'contas-pagar',
             loadChildren: () => import('./contasPagar/contasPagar.module')
             .then(m => m.ContasPagarModule)
+        },
+        { path: 'treinamentos',
+            loadChildren: () => import('./treinamento/treinamento.module')
+            .then(m => m.TreinamentoModule)
+        },
+        { path: 'categorias-treinamentos',
+            loadChildren: () => import('./categoriaTreinamento/categoriaTreinamento.module')
+            .then(m => m.CategoriaTreinamentoModule)
+        },
+        { path: 'rastreadores',
+            loadChildren: () => import('./rastreador/rastreador.module')
+            .then(m => m.RastreadorModule)
         },
         { path: 'turmas',
             loadChildren: () => import('./turmas/turma.module')

@@ -34,45 +34,57 @@
             <input type="hidden" id="id" name="id" value="">
             
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <h5 class="card-header">Dados da Turma</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Código<span style="color: red;">*</span></label>
-                                    <div>
-                                        <input class="form-control" id="codigo" type="text" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.codigo }" />
-                                        <span class="text-danger" *ngIf="displayMessage.codigo">
-                                            <p [innerHTML]="displayMessage.codigo"></p>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-7">
-                                    <label class="control-label">Curso<span style="color: red;">*</span></label>
-                                    <select class="form-control" id="cursoId" formControlName="cursoId" [ngClass]="{'is-invalid': displayMessage.cursoId }">
-                                        <option *ngFor="let curso of cursos" value="{{ curso.id }}">{{ curso.descricao }}</option>
-                                    </select>
-                                    <span class="text-danger" *ngIf="displayMessage.cursoId">
-                                        <p [innerHTML]="displayMessage.cursoId"></p>
-                                    </span>
-                                </div>
-                                
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Data Inicial<span style="color: red;">*</span></label>
-                                    <div>
-                                        <input class="form-control" id="dataInicio" type="date" formControlName="dataInicio" [ngClass]="{'is-invalid': displayMessage.dataInicio }" />
-                                        <span class="text-danger" *ngIf="displayMessage.dataInicio">
-                                            <p [innerHTML]="displayMessage.dataInicio"></p>
-                                        </span>
-                                    </div>
-                                </div>                      
-                            </div>   
-                        </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">Código<span style="color: red;">*</span></label>
+                    <div>
+                        <input class="form-control" id="codigo" type="text" formControlName="codigo" [ngClass]="{'is-invalid': displayMessage.codigo }" />
+                        <span class="text-danger" *ngIf="displayMessage.codigo">
+                            <p [innerHTML]="displayMessage.codigo"></p>
+                        </span>
                     </div>
                 </div>
-            </div>
+                
+                <div class="form-group col-md-7">
+                    <label class="control-label">Curso<span style="color: red;">*</span></label>
+                    <select class="form-control" id="cursoId" formControlName="cursoId" [ngClass]="{'is-invalid': displayMessage.cursoId }">
+                        <option *ngFor="let curso of cursos" value="{{ curso.id }}">{{ curso.descricao }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage.cursoId">
+                        <p [innerHTML]="displayMessage.cursoId"></p>
+                    </span>
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label class="control-label">Data Inicial<span style="color: red;">*</span></label>
+                    <div>
+                        <input class="form-control" id="dataInicio" type="date" formControlName="dataInicio" [ngClass]="{'is-invalid': displayMessage.dataInicio }" />
+                        <span class="text-danger" *ngIf="displayMessage.dataInicio">
+                            <p [innerHTML]="displayMessage.dataInicio"></p>
+                        </span>
+                    </div>
+                </div>                      
+            </div>  
+            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Valor da Inscrição</label>
+                    <div>
+                        <input class="form-control" id="inscricao" type="text" formControlName="inscricao" [ngClass]="{'is-invalid': displayMessage.inscricao }" />
+                        <span class="text-danger" *ngIf="displayMessage.inscricao">
+                            <p [innerHTML]="displayMessage.inscricao"></p>
+                        </span>
+                    </div>
+                </div> 
+                <div class="form-group col-md-6">
+                    <label class="control-label">Valor da Mensalidade</label>
+                    <div>
+                        <input class="form-control" id="mensalidade" type="text" formControlName="mensalidade" [ngClass]="{'is-invalid': displayMessage.mensalidade }" />
+                        <span class="text-danger" *ngIf="displayMessage.mensalidade">
+                            <p [innerHTML]="displayMessage.mensalidade"></p>
+                        </span>
+                    </div>
+                </div>                    
+            </div>  
             
             <div class="form-group" style="text-align: right;">
                 <input type="submit" value="Salvar Alterações" class="btn btn-primary" style="margin-top: 20px;">&nbsp;

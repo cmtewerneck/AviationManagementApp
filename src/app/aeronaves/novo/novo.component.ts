@@ -55,7 +55,9 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
         motor: ['', Validators.maxLength(30)],
         modeloMotor: ['', Validators.maxLength(30)],
         numeroSerieMotor: ['', Validators.maxLength(30)],
-        imagem: ['']
+        imagem: [''],
+        situacao: [true, Validators.required],
+        ativo: [true, Validators.required]
       });
     }
     
@@ -83,6 +85,8 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
         if (this.aeronave.proximaPesagem) { this.aeronave.proximaPesagem = new Date(this.aeronave.proximaPesagem); } else { this.aeronave.proximaPesagem = null; }
         if (this.aeronave.vencimentoReta) { this.aeronave.vencimentoReta = new Date(this.aeronave.vencimentoReta); } else { this.aeronave.vencimentoReta = null; }
         if (this.aeronave.vencimentoCasco) { this.aeronave.vencimentoCasco = new Date(this.aeronave.vencimentoCasco); } else { this.aeronave.vencimentoCasco = null; }
+        this.aeronave.ativo = this.aeronave.ativo.toString() == "true";
+        this.aeronave.situacao = this.aeronave.situacao.toString() == "true";
         // FIM DAS CONVERSÕES
 
         console.log(this.aeronave);

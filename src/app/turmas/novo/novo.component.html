@@ -65,6 +65,27 @@
                                                 </span>
                                             </div>
                                         </div>                      
+                                    </div>  
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Valor da Inscrição</label>
+                                            <div>
+                                                <input class="form-control" id="inscricao" type="text" formControlName="inscricao" [ngClass]="{'is-invalid': displayMessage.inscricao }" />
+                                                <span class="text-danger" *ngIf="displayMessage.inscricao">
+                                                    <p [innerHTML]="displayMessage.inscricao"></p>
+                                                </span>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Valor da Mensalidade</label>
+                                            <div>
+                                                <input class="form-control" id="mensalidade" type="text" formControlName="mensalidade" [ngClass]="{'is-invalid': displayMessage.mensalidade }" />
+                                                <span class="text-danger" *ngIf="displayMessage.mensalidade">
+                                                    <p [innerHTML]="displayMessage.mensalidade"></p>
+                                                </span>
+                                            </div>
+                                        </div>                    
                                     </div>   
                                 </div>
                             </div>

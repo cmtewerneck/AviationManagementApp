@@ -60,7 +60,9 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         motor: ['', Validators.maxLength(30)],
         modeloMotor: ['', Validators.maxLength(30)],
         numeroSerieMotor: ['', Validators.maxLength(30)],
-        imagem: ['']
+        imagem: [''],
+        situacao: [0, Validators.required],
+        ativo: [0, Validators.required]
       });
       
       this.aeronaveForm.patchValue({
@@ -85,7 +87,9 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         vencimentoCasco: this.aeronave.vencimentoCasco,
         motor: this.aeronave.motor,
         modeloMotor: this.aeronave.modeloMotor,
-        numeroSerieMotor: this.aeronave.numeroSerieMotor
+        numeroSerieMotor: this.aeronave.numeroSerieMotor,
+        ativo: this.aeronave.ativo,
+        situacao: this.aeronave.situacao
       });
       
       this.imagemOriginalSrc = this.imagens + this.aeronave.imagem;
@@ -121,6 +125,8 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         if (this.aeronave.proximaPesagem) { this.aeronave.proximaPesagem = new Date(this.aeronave.proximaPesagem); } else { this.aeronave.proximaPesagem = null; }
         if (this.aeronave.vencimentoReta) { this.aeronave.vencimentoReta = new Date(this.aeronave.vencimentoReta); } else { this.aeronave.vencimentoReta = null; }
         if (this.aeronave.vencimentoCasco) { this.aeronave.vencimentoCasco = new Date(this.aeronave.vencimentoCasco); } else { this.aeronave.vencimentoCasco = null; }
+        this.aeronave.ativo = this.aeronave.ativo.toString() == "true";
+        this.aeronave.situacao = this.aeronave.situacao.toString() == "true";
         // FIM DAS CONVERSÕES
 
         console.log(this.aeronave);

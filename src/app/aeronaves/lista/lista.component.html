@@ -64,15 +64,18 @@
               <td>{{ aeronave.horasRestantes }}</td>
               
               <td class="text-right">
-                <a class="btn btn-warning btn-sm" [routerLink]="['/aeronaves/detalhes',aeronave.id]">
+                <a class="btn btn-success btn-sm" [ngClass]="{'disabled': aeronave.situacao == true }" (click)="openModal(confirmOperacional, aeronave.id)">
+                  <span class="fas fa-thumbs-up" style="color: white;"></span>
+                </a>&nbsp;
+                <a class="btn btn-danger btn-sm" [ngClass]="{'disabled': aeronave.situacao == false }" (click)="openModal(confirmForaOperacao, aeronave.id)">
+                  <span class="fas fa-thumbs-down" style="color: white;"></span>
+                </a>&nbsp;
+                <a class="btn btn-info btn-sm" [routerLink]="['/aeronaves/detalhes',aeronave.id]">
                   <span class="fa fa-search"></span>
                 </a>&nbsp;
-                <a class="btn btn-info btn-sm" [routerLink]="['/aeronaves/editar',aeronave.id]">
+                <a class="btn btn-warning btn-sm" [routerLink]="['/aeronaves/editar',aeronave.id]">
                   <span class="fa fa-pencil-alt"></span>
                 </a>
-                <!-- <a class="btn btn-danger" [routerLink]="['/aeronaves/excluir',aeronave.id]">
-                  <span class="fa fa-trash"></span>
-                </a> -->
               </td>
             </tr>
           </tbody>
@@ -90,3 +93,58 @@
     </div>
   </section>
   <!-- /.content -->
+
+
+    <!-- MODAL OPERACIONAL -->
+<div bsModal #confirmOperacional="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Confirma alteração?
+        </h4>
+        <button type="button" class="close pull-right" (click)="confirmOperacional.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>O status será alterado para Operacional!</p>
+      </div>    
+      <div class="modal-footer btn-group d-flex">      
+        <button type="button" class="btn btn-outline-danger" (click)="confirmOperacional.hide()">
+          CENCELAR
+        </button>
+        <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="liberarAeronave(confirmOperacional)"> 
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL FORA DE OPERAÇÃO -->
+  <div bsModal #confirmForaOperacao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">
+            Confirma alteração?
+          </h4>
+          <button type="button" class="close pull-right" (click)="confirmForaOperacao.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>O status será alterado para Fora de Operação!</p>
+        </div>    
+        <div class="modal-footer btn-group d-flex">      
+          <button type="button" class="btn btn-outline-danger" (click)="confirmForaOperacao.hide()">
+            CENCELAR
+          </button>
+          <button type="button" class="btn btn-outline-success" style="margin-left: 30px;" (click)="pararAeronave(confirmForaOperacao)"> 
+            CONFIRMAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

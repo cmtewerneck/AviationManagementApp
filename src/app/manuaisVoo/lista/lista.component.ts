@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { ManualVoo } from '../models/ManualVoo';
 import { ManualVooService } from '../services/manualVoo.service';
 
@@ -9,6 +10,8 @@ import { ManualVooService } from '../services/manualVoo.service';
 })
 export class ListaComponent implements OnInit {
   
+  files: string = environment.filesUrl;
+
   public manuaisVoo: ManualVoo[];
   errorMessage: string;
   

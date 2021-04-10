@@ -27,6 +27,7 @@
     "admin-lte": "^3.0.5",
     "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.4",
     "cors": "^2.8.5",
     "js-brasil": "^2.2.3",
     "jspdf": "^2.1.1",

@@ -34,6 +34,7 @@
           <tr>
             <th>Modelo da Aeronave</th>
             <th>Última Revisão</th>
+            <th>Baixar</th>
             <th></th>
           </tr>
         </thead>
@@ -41,20 +42,19 @@
           <tr *ngFor="let manualVoo of manuaisVooFiltrados">
             <td>{{ manualVoo.modeloAeronave }}</td>
             <td>{{ manualVoo.ultimaRevisao | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="manualVoo.arquivo != '' && manualVoo.arquivo != null">
+              <a class="btn btn-dark btn-sm" href="{{ files }}{{ manualVoo.arquivo }}" target="_blank">
+                <span class="fa fa-download"></span>
+              </a>
+            </td>
             
             <td class="text-right">
-              <a class="btn btn-primary btn-sm">
-                <span class="fa fa-download"></span>
-              </a>&nbsp;
-              <a class="btn btn-warning btn-sm" [routerLink]="['/manuais-voo/detalhes',manualVoo.id]">
+              <a class="btn btn-info btn-sm" [routerLink]="['/manuais-voo/detalhes',manualVoo.id]">
                 <span class="fa fa-search"></span>
               </a>&nbsp;
-              <a class="btn btn-info btn-sm" [routerLink]="['/manuais-voo/editar',manualVoo.id]">
+              <a class="btn btn-warning btn-sm" [routerLink]="['/manuais-voo/editar',manualVoo.id]">
                 <span class="fa fa-pencil-alt"></span>
               </a>
-              <!-- <a class="btn btn-danger" [routerLink]="['/manuais-voo/excluir',manualVoo.id]">
-                <span class="fa fa-trash"></span>
-              </a> -->
             </td>
           </tr>
         </tbody>

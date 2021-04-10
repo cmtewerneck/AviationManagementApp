@@ -10,6 +10,8 @@ export class MainSidebarComponent {
   LocalStorage = new LocalStorageUtils();
   token: string = '';
   email: string = '';
+  nome: string = '';
+  nomeEmpresa: string = '';
   user: any;
 
   constructor() { }
@@ -19,6 +21,8 @@ export class MainSidebarComponent {
     this.user = this.LocalStorage.obterUsuario();
 
     if (this.user) { this.email = this.user.email; }
+    if (this.user) { this.nome = this.user.nome; }
+    if (this.user) { this.nomeEmpresa = this.user.nomeEmpresa; }
 
     return this.token !== null;
   }

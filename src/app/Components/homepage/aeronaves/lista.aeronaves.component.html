@@ -1,0 +1,28 @@
+<!-- <table class="table table-hover" style="white-space: nowrap"> -->
+<table class="card-table table table-hover">
+  <!-- <thead class="thead-dark"> -->
+  <thead>
+    <tr>
+      <th>Matrícula</th>
+      <th>Horas Restantes</th>
+      <th>Situação</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="aeronaves && aeronaves.length">
+    <tr *ngFor="let aeronave of aeronaves">
+      <td>{{ aeronave.matricula }}</td>
+      <td>{{ aeronave.horasRestantes }}</td>
+      <td *ngIf="aeronave.situacao == true"><span class="badge badge-success">Operacional</span></td>
+      <td *ngIf="aeronave.situacao == false"><span class="badge badge-danger">Fora de Operação</span></td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!aeronaves">
+    <tr>
+      <td colspan="7" class="text-center">
+        <h4>
+          Nenhum item encontrado!
+        </h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>

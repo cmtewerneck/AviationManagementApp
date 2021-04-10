@@ -28,6 +28,8 @@ export interface Aeronave {
   motor: string;
   modeloMotor: string;
   numeroSerieMotor: string;
+  situacao: boolean;
+  ativo: boolean;
 
   imagem: string;
   imagemUpload: string;

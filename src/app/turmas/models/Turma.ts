@@ -5,6 +5,8 @@ export interface Turma {
   codigo: string;
   dataInicio: Date;
   dataTermino?: Date;
+  inscricao?: number;
+  mensalidade?: number;
 
   cursoId: string;
   codigoCurso: string;

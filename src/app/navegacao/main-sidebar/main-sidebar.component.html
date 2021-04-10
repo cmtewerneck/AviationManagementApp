@@ -2,19 +2,17 @@
 <aside *ngIf="usuarioLogado()" class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a routerLink="/" class="brand-link text-center">
-    <span class="brand-text font-weight-light" style="text-align: center">Aviation Management</span>
+    <span *ngIf="!usuarioLogado()" class="brand-text font-weight-light" style="text-align: center">Aviation Management</span>
+    <span *ngIf="usuarioLogado()" class="brand-text font-weight-light" style="text-align: center">{{nomeEmpresa}}</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="assets/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a *ngIf="usuarioLogado()" href="javascript:void(0)"> {{email}} </a>
-        <!---->
+    <div>
+    <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
+      <div class="image" style="text-align: center; padding-bottom: 10px;">
+        <img src="assets/user2-160x160.jpg" class="img-circle elevation-2" style="width: 30%; padding-top: 10px; margin: 0 auto;">
       </div>
     </div>
 
@@ -35,7 +33,7 @@
         <!-- FORNECEDORES MENU-->        
         <li class="nav-item">
           <a routerLink="/fornecedores/listar-todos" class="nav-link">
-            <i class="nav-icon fas fa-user-circle"></i>
+            <i class="nav-icon fas fa-truck-loading"></i>
             <p>
               Fornecedores
             </p>
@@ -45,7 +43,7 @@
         <!-- PRODUTOS MENU-->
         <li class="nav-item">
           <a routerLink="/produtos/listar-todos" class="nav-link">
-            <i class="nav-icon fas fa-user-circle"></i>
+            <i class="nav-icon fas fa-shopping-basket"></i>
             <p>
               Produtos
             </p>
@@ -68,8 +66,23 @@
               </a>
             </li>
             <li class="nav-item">
+              <a routerLink="/escalas/listar-todos" class="nav-link">
+                <p>Escala</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="pages/layout/boxed.html" class="nav-link">
                 <p>Papeleta</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/treinamentos/listar-todos" class="nav-link">
+                <p>Treinamentos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/categorias-treinamentos/listar-todos" class="nav-link">
+                <p>Categorias</p>
               </a>
             </li>
             <li class="nav-item">
@@ -164,7 +177,7 @@
         <!-- MANUTENÇÃO MENU-->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user-circle"></i>
+            <i class="nav-icon fas fa-tools"></i>
             <p>
               Controle de Manutenção
               <i class="fas fa-angle-left right"></i>
@@ -240,7 +253,7 @@
         <!-- ESCOLA MENU-->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user-circle"></i>
+            <i class="nav-icon fas fa-graduation-cap"></i>
             <p>
               Escola
               <i class="fas fa-angle-left right"></i>
@@ -278,7 +291,7 @@
         <!-- CLIENTES MENU-->
         <li class="nav-item">
           <a routerLink="/clientes/listar-todos" class="nav-link">
-            <i class="nav-icon fas fa-user-circle"></i>
+            <i class="nav-icon fas fa-user-check"></i>
             <p>
               Clientes
             </p>
@@ -334,17 +347,17 @@
         <!-- AEROMÉDICO MENU-->
         <li class="nav-item">
           <a routerLink="/operacao-aeromedica" class="nav-link" routerLinkActive="active">
-            <i class="nav-icon fas fa-user-md"></i>
+            <i class="nav-icon fas fa-first-aid"></i>
             <p>
               Operação Aeromédica
             </p>
           </a>
         </li>
 
-        <!-- REGULAMENTAÇÃ MENU-->
+        <!-- REGULAMENTAÇÃO MENU-->
         <li class="nav-item">
           <a routerLink="/regulamentei/listar-todos" class="nav-link" routerLinkActive="active">
-            <i class="nav-icon fas fa-user-md"></i>
+            <i class="nav-icon fas fa-stopwatch"></i>
             <p>
               Regulamentei
             </p>

@@ -1,0 +1,27 @@
+<!-- <table class="table table-hover" style="white-space: nowrap"> -->
+<table class="card-table table table-hover">
+  <!-- <thead class="thead-dark"> -->
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CANAC</th>
+      <th>Admissão</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="tripulantes && tripulantes.length">
+    <tr *ngFor="let tripulante of tripulantes">
+      <td>{{ tripulante.nome }}</td>
+      <td>{{ tripulante.canac }}</td>
+      <td>{{ tripulante.dataAdmissao | date: 'dd/MM/yyyy' }}</td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!tripulantes">
+    <tr>
+      <td colspan="7" class="text-center">
+        <h4>
+          Nenhum item encontrado!
+        </h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>

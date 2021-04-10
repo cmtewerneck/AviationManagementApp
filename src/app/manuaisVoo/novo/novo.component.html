@@ -29,13 +29,13 @@
                         </ul>
                     </div>
                     
-                    <div class="row">
+                    <div class="row" style="padding-bottom: 10px;">
                         <div class="col-md-12">
                             <div class="card">
                                 <h5 class="card-header">Dados do Manual</h5>
                                 <div class="card-body">
                                     <div class="row"> 
-                                        <div class="form-group col-md-8">
+                                        <div class="form-group col-md-4">
                                             <label class="control-label">Modelo da Aeronave<span style="color: red;">*</span></label>
                                             <div>
                                                 <input class="form-control" id="modeloAeronave" type="text" formControlName="modeloAeronave" [ngClass]="{'is-invalid': displayMessage.modeloAeronave }" />
@@ -49,6 +49,17 @@
                                             <div>
                                                 <input class="form-control" id="ultimaRevisao" type="date" formControlName="ultimaRevisao" />
                                             </div>
+                                        </div>
+                                        <div class="custom-file col-md-4">
+                                            <label class="control-label">Upload Manual</label>
+                                            <input type="file" accept="application/pdf" class="custom-file-input" id="arquivo" formControlName="arquivo" (change)="fileChangeEvent($event)">
+                                            <label data-browse="Procurar" class="custom-file-label"></label>
+                                            
+                                            <span *ngIf='arquivoNome'><br>{{ arquivoNome }} <br></span>
+                                            
+                                            <span class="text-danger" *ngIf="displayMessage.arquivo">
+                                                <p [innerHTML]="displayMessage.arquivo"></p>
+                                            </span>
                                         </div>
                                     </div> 
                                 </div>

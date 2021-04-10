@@ -40,22 +40,32 @@ export class ListaAlunosComponent {
     aprovarAluno(template: any) {
       this.turmaService.aprovarAluno(this.alunoTurmaId)
       .subscribe(
-        sucesso => { this.processarSucesso(sucesso) },
+        aluno => { 
+          const index = this.alunosTurmas.findIndex(x => x.id == this.alunoTurmaId);
+          this.alunosTurmas = this.alunosTurmas.splice(index, 1, aluno);
+          this.processarSucesso(aluno) 
+        },
         falha => { this.processarFalha(falha) }
         )
         template.hide();
-        
-      }
+     }
+
+     reprovarAluno(template: any) {
+      this.turmaService.reprovarAluno(this.alunoTurmaId)
+      .subscribe(
+        aluno => { 
+          const index = this.alunosTurmas.findIndex(x => x.id == this.alunoTurmaId);
+          this.alunosTurmas = this.alunosTurmas.splice(index, 1, aluno);
+          this.processarSucesso(aluno) 
+        },
+        falha => { this.processarFalha(falha) }
+        )
+        template.hide();
+     }
       
       processarSucesso(response: any) {
         this.errors = [];
-        
-        let toast = this.toastr.success('Status alterado com sucesso!', 'Sucesso!');
-        if (toast) {
-          toast.onHidden.subscribe(() => {
-            this.router.navigate(['/turmas/listar-todos']);
-          });
-        }
+        this.toastr.success('Status alterado com sucesso!', 'Sucesso!');
 
         this.alunoTurmaId = "";
       }
