@@ -53,4 +53,11 @@ export class VooAgendadoService extends BaseService {
             .get<Aeronave[]>(this.urlServiceV1 + 'aeronaves', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
+
+    obterPorRange(start: string, end: string): Observable<VooAgendado[]> {
+        return this.http
+            .get<VooAgendado[]>(this.urlServiceV1 + `voos-agendados?start=${start}&end=${end}`, this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
 }
