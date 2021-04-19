@@ -76,8 +76,8 @@ export class ListaAlunosComponent {
         this.alunoTurmaId = "";
       }
 
-      gerarPdf(alunoTurma: AlunoTurma) {
-        this.turmaService.gerarCertificadoAluno(alunoTurma.id);
+      gerarPdf() {
+        this.turmaService.gerarCertificadoAluno();
       }
 
       // gerarPdf(alunoTurma: AlunoTurma) {

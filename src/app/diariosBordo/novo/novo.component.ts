@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DiarioBordoService } from '../services/diarioBordo.service';
 import { DiarioBordoBaseComponent } from '../diarioBordo-form.base.component';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
+import { time } from 'ng-brazil/time/validator';
 
 @Component({
   selector: 'app-novo',
@@ -84,10 +85,9 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
               })
               
               this.aeronaveHorasTotais = Object.assign({}, this.aeronaveHorasTotais, this.aeronaveHorasTotaisForm.value);
-              
+
               // CONVERSÕES DE JSON
               this.aeronaveHorasTotais.totalDecimal = CurrencyUtils.StringParaDecimal(this.aeronaveHorasTotais.totalDecimal);
-              
               this.diarioBordo.data = new Date(this.diarioBordo.data);
               this.diarioBordo.horaAcionamento = new Date(this.diarioBordo.horaAcionamento);
               if (this.diarioBordo.horaDecolagem) { this.diarioBordo.horaDecolagem = new Date(this.diarioBordo.horaDecolagem); } else { this.diarioBordo.horaDecolagem = null; }

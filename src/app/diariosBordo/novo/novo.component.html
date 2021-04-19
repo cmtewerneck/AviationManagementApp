@@ -92,7 +92,7 @@
                                         <div class="form-group col-md-2">
                                             <label class="control-label">Acionamento<span style="color: red;">*</span></label>
                                             <div>
-                                                <input class="form-control" id="horaAcionamento" type="date" formControlName="horaAcionamento" [ngClass]="{'is-invalid': displayMessage.horaAcionamento }" />
+                                                <input class="form-control" id="horaAcionamento" type="time" formControlName="horaAcionamento" [ngClass]="{'is-invalid': displayMessage.horaAcionamento }" />
                                                 <span class="text-danger" *ngIf="displayMessage.horaAcionamento">
                                                     <p [innerHTML]="displayMessage.horaAcionamento"></p>
                                                 </span>
