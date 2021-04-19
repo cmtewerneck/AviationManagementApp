@@ -16,7 +16,7 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Acesse o sistema</p>
 
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" autocomplete="on">
           <!-- E-MAIL -->
           <div class="input-group mb-3">
             <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': loginForm.get('email').errors && loginForm.get('email').touched}" placeholder="Email"/>

@@ -15,6 +15,7 @@ import listPlugin from '@fullcalendar/list';
 import { VooAgendadoRoutingModule } from './vooAgendado.routing';
 import { VooAgendadoAppComponent } from './vooAgendado.app.component';
 import { ListaComponent } from './lista/lista.component';
+import { ListaGridComponent } from './listaGrid/listaGrid.component';
 import { NovoComponent } from './novo/novo.component';
 import { EditarComponent } from './editar/editar.component';
 import { ExcluirComponent } from './excluir/excluir.component';
@@ -35,6 +36,7 @@ FullCalendarModule.registerPlugins([
   declarations: [
     VooAgendadoAppComponent,
     ListaComponent,
+    ListaGridComponent,
     NovoComponent,
     EditarComponent,
     ExcluirComponent,

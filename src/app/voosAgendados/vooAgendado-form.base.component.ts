@@ -1,4 +1,4 @@
-import { VooAgendado, Aeronave } from './models/VooAgendado';
+import { VooAgendado, Aeronave, CategoriaVoo } from './models/VooAgendado';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -8,6 +8,7 @@ export abstract class VooAgendadoBaseComponent extends FormBaseComponent {
     
     vooAgendado: VooAgendado;
     aeronaves: Aeronave[];
+    categorias: CategoriaVoo[];
     errors: any[] = [];
     vooAgendadoForm: FormGroup;
     
@@ -46,6 +47,9 @@ export abstract class VooAgendadoBaseComponent extends FormBaseComponent {
             },
             aeronaveId: {
                 required: 'Escolha uma Aeronave',
+            },
+            categoriaId: {
+                required: 'Escolha uma Categoria',
             }
         };
         

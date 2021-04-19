@@ -5,3 +5,13 @@
 #toast-container > div {
     opacity: 1;
 }
+
+.aeronaveHorasVermelho {
+    font-weight: bold;
+    color: red;
+}
+
+.aeronaveHorasAmarelo {
+    font-weight: bold;
+    color: rgba(187, 184, 0, 0.836);
+}

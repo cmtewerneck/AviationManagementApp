@@ -16,9 +16,25 @@ const routes: Routes = [
             loadChildren: () => import('./fornecedores/fornecedores.module')
             .then(m => m.FornecedoresModule)
         },
+        { path: 'diarias-tripulantes',
+            loadChildren: () => import('./diariasTripulantes/diariaTripulante.module')
+            .then(m => m.DiariaTripulanteModule)
+        },
+        { path: 'categorias-voos',
+            loadChildren: () => import('./categoriaVoo/categoriaVoo.module')
+            .then(m => m.CategoriaVooModule)
+        },
+        { path: 'passagens-aereas',
+            loadChildren: () => import('./passagensAereas/passagemAerea.module')
+            .then(m => m.PassagemAereaModule)
+        },
         { path: 'regulamentei',
             loadChildren: () => import('./regulamentei/regulamentei.module')
             .then(m => m.RegulamenteiModule)
+        },
+        { path: 'relprev',
+            loadChildren: () => import('./relprev/relprev.module')
+            .then(m => m.RelprevModule)
         },
         { path: 'produtos',
             loadChildren: () => import('./produtos/produtos.module')
@@ -87,6 +103,18 @@ const routes: Routes = [
         { path: 'aeronaves-abastecimentos',
             loadChildren: () => import('./aeronavesAbastecimentos/aeronavesAbastecimentos.module')
             .then(m => m.AeronaveAbastecimentoModule)
+        },
+        { path: 'aeronaves-motores',
+            loadChildren: () => import('./aeronavesMotores/aeronaveMotor.module')
+            .then(m => m.AeronaveMotorModule)
+        },
+        { path: 'aeronaves-documentos',
+            loadChildren: () => import('./aeronavesDocumentos/aeronaveDocumento.module')
+            .then(m => m.AeronaveDocumentoModule)
+        },
+        { path: 'aeronaves-diretrizes',
+            loadChildren: () => import('./aeronavesDiretrizes/aeronaveDiretriz.module')
+            .then(m => m.AeronaveDiretrizModule)
         },
         { path: 'aeronaves-tarifas',
             loadChildren: () => import('./aeronavesTarifas/aeronavesTarifas.module')

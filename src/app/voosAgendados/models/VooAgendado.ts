@@ -11,9 +11,17 @@ export interface VooAgendado {
 
   aeronaveId: string;
   matriculaAeronave: string;
+
+  categoriaId: string;
+  descricaoCategoria: string;
 }
 
 export interface Aeronave {
   id: string;
   matricula: string;
+}
+
+export interface CategoriaVoo {
+  id: string;
+  descricao: string;
 }

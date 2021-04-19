@@ -90,6 +90,11 @@
                 <p>Licenças e Habilitações</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a routerLink="/relprev/listar-todos" class="nav-link">
+                <p>RELPREV</p>
+              </a>
+            </li>
           </ul>
         </li>
         
@@ -104,8 +109,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/voos-agendados/listar-todos" class="nav-link">
-                <p>Voos Agendados</p>
+              <a routerLink="/voos-agendados/calendario" class="nav-link">
+                <p>Calendário</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/passagens-aereas/listar-todos" class="nav-link">
+                <p>Passagens Aéreas</p>
               </a>
             </li>
             <li class="nav-item">
@@ -146,6 +156,29 @@
           </ul>
         </li>
 
+        <!-- AGENDAMENTOS MENU-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            <p>
+              Agendamentos
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/voos-agendados/listar-todos" class="nav-link">
+                <p>Voos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/categorias-voos/listar-todos" class="nav-link">
+                <p>Categorias</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <!-- AERONAVES MENU-->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -169,6 +202,21 @@
             <li class="nav-item">
               <a routerLink="/aeronaves-tarifas/listar-todos" class="nav-link">
                 <p>Tarifas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves-motores/listar-todos" class="nav-link">
+                <p>Motores</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves-documentos/listar-todos" class="nav-link">
+                <p>Documentos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/aeronaves-diretrizes/listar-todos" class="nav-link">
+                <p>Diretrizes</p>
               </a>
             </li>
           </ul>
@@ -316,6 +364,11 @@
             <li class="nav-item">
               <a routerLink="/contas-receber/listar-todos" class="nav-link">
                 <p>Contas a Receber</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/diarias-tripulantes/listar-todos" class="nav-link">
+                <p>Diárias</p>
               </a>
             </li>
           </ul>

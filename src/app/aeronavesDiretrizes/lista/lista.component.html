@@ -1,0 +1,75 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Diretrizes</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+    <div class="d-flex">
+      <div class="form-inline mr-auto">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control mr 2" placeholder="Buscar" [(ngModel)]="filtroLista">
+        </div>
+      </div>
+      <div>
+        <a class="btn btn-primary" [routerLink]="['/']"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+        <a class="btn btn-success" [routerLink]="['/aeronaves-diretrizes/adicionar-novo']"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Nova Diretriz</a>&nbsp;&nbsp;
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" style="white-space: nowrap">
+        <thead class="thead-dark">
+          <tr>
+            <th>Título</th>
+            <th>Referência</th>
+            <th>Aeronave</th>
+            <th>Efetivação</th>
+            <th>Ação</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="aeronavesDiretrizes && aeronavesDiretrizes.length">
+          <tr *ngFor="let aeronaveDiretriz of aeronavesDiretrizesFiltrados">
+            <td>{{ aeronaveDiretriz.titulo }}</td>
+            <td>{{ aeronaveDiretriz.referencia }}</td>
+            <td>{{ aeronaveDiretriz.matriculaAeronave }}</td>
+            <td>{{ aeronaveDiretriz.dataEfetivacao | date: 'dd/MM/yyyy' }}</td>
+            <td *ngIf="aeronaveDiretriz.tipoDiretriz == 1">Repetitiva</td>
+            <td *ngIf="aeronaveDiretriz.tipoDiretriz == 2">Terminal</td>            
+            
+            <td class="text-right">
+              <a class="btn btn-warning btn-sm" [routerLink]="['/aeronaves-diretrizes/detalhes',aeronaveDiretriz.id]">
+                <span class="fa fa-search"></span>
+              </a>&nbsp;
+              <a class="btn btn-info btn-sm" [routerLink]="['/aeronaves-diretrizes/editar',aeronaveDiretriz.id]">
+                <span class="fa fa-pencil-alt"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!aeronavesDiretrizes">
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4>
+                Nenhum item encontrado!
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- /.content -->

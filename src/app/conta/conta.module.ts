@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContaRoutingModule } from './conta.routing';
 import { HttpClientModule } from '@angular/common/http';
+import { NgBrazil } from 'ng-brazil';
 
 import { AuthService } from './services/auth.service';
 import { ContaGuard } from '../auth/conta.guard';
@@ -12,6 +13,7 @@ import { ContaGuard } from '../auth/conta.guard';
 
 // COMPONENTES
 import { LoginComponent } from './login/login.component';
+import { ListaComponent } from './lista/lista.component';
 import { RegisterComponent } from './register/register.component';
 import { ContaAppComponent } from './conta.app.component';
 
@@ -19,6 +21,7 @@ import { ContaAppComponent } from './conta.app.component';
     declarations: [
         ContaAppComponent,
         LoginComponent,
+        ListaComponent,
         RegisterComponent
     ],
     imports: [
@@ -28,6 +31,7 @@ import { ContaAppComponent } from './conta.app.component';
         FormsModule,
         HttpClientModule,
         ReactiveFormsModule,
+        NgBrazil
     ],
     providers: [
         AuthService,

@@ -11,7 +11,7 @@
   <tbody *ngIf="aeronaves && aeronaves.length">
     <tr *ngFor="let aeronave of aeronaves">
       <td>{{ aeronave.matricula }}</td>
-      <td>{{ aeronave.horasRestantes }}</td>
+      <td [ngStyle]="{'text-color': aeronave.horasRestantes < 0 ? 'red' : 'black' }">{{ aeronave.horasRestantes }}</td>
       <td *ngIf="aeronave.situacao == true"><span class="badge badge-success">Operacional</span></td>
       <td *ngIf="aeronave.situacao == false"><span class="badge badge-danger">Fora de Operação</span></td>
     </tr>

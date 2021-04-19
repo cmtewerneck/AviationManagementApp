@@ -23,17 +23,22 @@ export class NovoComponent extends VooAgendadoBaseComponent implements OnInit {
       this.vooAgendadoService.obterAeronaves()
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
+
+      this.vooAgendadoService.obterCategorias()
+      .subscribe(
+        categorias => this.categorias = categorias);
         
         this.vooAgendadoForm = this.fb.group({
           title: ['', [Validators.required, Validators.maxLength(30)]],
           start: [''],
           end: [''],
-          allDay: [true],
+          allDay: [false],
           editable: [true],
           durationEditable: [true],
-          backgroundColor: ['', [Validators.required, Validators.maxLength(20)]],
-          textColor: ['', [Validators.required, Validators.maxLength(20)]],
-          aeronaveId: ['', [Validators.required]]
+          backgroundColor: ['#000000', [Validators.required, Validators.maxLength(20)]],
+          textColor: ['#ffffff', [Validators.required, Validators.maxLength(20)]],
+          aeronaveId: ['', [Validators.required]],
+          categoriaId: ['', [Validators.required]]
         });
       }
       

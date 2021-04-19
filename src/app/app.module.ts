@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NavegacaoModule } from './navegacao/navegacao.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // COMPONENTES
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { ListaOrdensServicoComponent } from './Components/homepage/ordensServico
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxPaginationModule,
     NavegacaoModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

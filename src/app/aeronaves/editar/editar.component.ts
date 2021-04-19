@@ -48,18 +48,11 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         pesoVazio: [''],
         pesoBasico: [''],
         horasTotais: [''],
+        proximaIntervencao: ['', Validators.required],
         horasRestantes: [''],
         tipoAeronave: ['', Validators.required],
-        vencimentoCA: [''],
-        vencimentoCVA: [''],
-        vencimentoCM: [''],
         ultimaPesagem: [''],
         proximaPesagem: [''],
-        vencimentoReta: [''],
-        vencimentoCasco: [''],
-        motor: ['', Validators.maxLength(30)],
-        modeloMotor: ['', Validators.maxLength(30)],
-        numeroSerieMotor: ['', Validators.maxLength(30)],
         imagem: [''],
         situacao: [0, Validators.required],
         ativo: [0, Validators.required]
@@ -76,18 +69,11 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         pesoVazio: CurrencyUtils.DecimalParaString(this.aeronave.pesoVazio),
         pesoBasico: CurrencyUtils.DecimalParaString(this.aeronave.pesoBasico),
         horasTotais: CurrencyUtils.DecimalParaString(this.aeronave.horasTotais),
+        proximaIntervencao: CurrencyUtils.DecimalParaString(this.aeronave.proximaIntervencao),
         horasRestantes: CurrencyUtils.DecimalParaString(this.aeronave.horasRestantes),
         tipoAeronave: this.aeronave.tipoAeronave,
-        vencimentoCA: this.aeronave.vencimentoCA,
-        vencimentoCVA: this.aeronave.vencimentoCVA,
-        vencimentoCM: this.aeronave.vencimentoCM,
         ultimaPesagem: this.aeronave.ultimaPesagem,
         proximaPesagem: this.aeronave.proximaPesagem,
-        vencimentoReta: this.aeronave.vencimentoReta,
-        vencimentoCasco: this.aeronave.vencimentoCasco,
-        motor: this.aeronave.motor,
-        modeloMotor: this.aeronave.modeloMotor,
-        numeroSerieMotor: this.aeronave.numeroSerieMotor,
         ativo: this.aeronave.ativo,
         situacao: this.aeronave.situacao
       });
@@ -117,14 +103,10 @@ export class EditarComponent extends AeronaveBaseComponent implements OnInit {
         this.aeronave.pesoVazio = CurrencyUtils.StringParaDecimal(this.aeronave.pesoVazio);
         this.aeronave.pesoBasico = CurrencyUtils.StringParaDecimal(this.aeronave.pesoBasico);
         this.aeronave.horasTotais = CurrencyUtils.StringParaDecimal(this.aeronave.horasTotais);
+        this.aeronave.proximaIntervencao = CurrencyUtils.StringParaDecimal(this.aeronave.proximaIntervencao);
         this.aeronave.horasRestantes = CurrencyUtils.StringParaDecimal(this.aeronave.horasRestantes);
-        if (this.aeronave.vencimentoCA) { this.aeronave.vencimentoCA = new Date(this.aeronave.vencimentoCA); } else { this.aeronave.vencimentoCA = null; }
-        if (this.aeronave.vencimentoCVA) { this.aeronave.vencimentoCVA = new Date(this.aeronave.vencimentoCVA); } else { this.aeronave.vencimentoCVA = null; }
-        if (this.aeronave.vencimentoCM) { this.aeronave.vencimentoCM = new Date(this.aeronave.vencimentoCM); } else { this.aeronave.vencimentoCM = null; }
         if (this.aeronave.ultimaPesagem) { this.aeronave.ultimaPesagem = new Date(this.aeronave.ultimaPesagem); } else { this.aeronave.ultimaPesagem = null; }
         if (this.aeronave.proximaPesagem) { this.aeronave.proximaPesagem = new Date(this.aeronave.proximaPesagem); } else { this.aeronave.proximaPesagem = null; }
-        if (this.aeronave.vencimentoReta) { this.aeronave.vencimentoReta = new Date(this.aeronave.vencimentoReta); } else { this.aeronave.vencimentoReta = null; }
-        if (this.aeronave.vencimentoCasco) { this.aeronave.vencimentoCasco = new Date(this.aeronave.vencimentoCasco); } else { this.aeronave.vencimentoCasco = null; }
         this.aeronave.ativo = this.aeronave.ativo.toString() == "true";
         this.aeronave.situacao = this.aeronave.situacao.toString() == "true";
         // FIM DAS CONVERSÕES

@@ -39,7 +39,7 @@
                         <h5 class="card-header">Especificações</h5>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Matrícula<span style="color: red;">*</span></label>
                                     <div>
                                         <input class="form-control" id="matricula" type="text" formControlName="matricula" [ngClass]="{'is-invalid': displayMessage.matricula}" />
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Categoria<span style="color: red;">*</span></label>
                                     <div>
                                         <input class="form-control" id="categoria" type="text" formControlName="categoria" [ngClass]="{'is-invalid': displayMessage.categoria}" />
@@ -78,8 +78,10 @@
                                         </span>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group col-md-2">
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Número de Série<span style="color: red;">*</span></label>
                                     <div>
                                         <input class="form-control" id="numeroSerie" type="text" formControlName="numeroSerie" [ngClass]="{'is-invalid': displayMessage.numeroSerie}" />
@@ -88,9 +90,8 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
+
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Ano</label>
                                     <div>
                                         <input class="form-control" id="ano" type="number" formControlName="ano" />
@@ -110,23 +111,30 @@
                                         <input class="form-control" id="pesoBasico" type="text" formControlName="pesoBasico" />
                                     </div>
                                 </div>
-                                
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Horas Totais</label>
-                                    <div>
-                                        <input class="form-control" id="horasTotais" type="text" formControlName="horasTotais" />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-2">
-                                    <label class="control-label">Horas Restantes</label>
-                                    <div>
-                                        <input class="form-control" id="horasRestantes" type="text" formControlName="horasRestantes" />
-                                    </div>
-                                </div>
                             </div>
+                                
                             <div class="row">
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Horas Totais<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="horasTotais" type="text" formControlName="horasTotais" [ngClass]="{'is-invalid': displayMessage.horasTotais}" />
+                                        <span class="text-danger" *ngIf="displayMessage.horasTotais">
+                                            <p [innerHTML]="displayMessage.horasTotais"></p>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Próxima Intervenção<span style="color: red;">*</span></label>
+                                    <div>
+                                        <input class="form-control" id="proximaIntervencao" type="text" formControlName="proximaIntervencao" [ngClass]="{'is-invalid': displayMessage.proximaIntervencao}" />
+                                        <span class="text-danger" *ngIf="displayMessage.proximaIntervencao">
+                                            <p [innerHTML]="displayMessage.proximaIntervencao"></p>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
                                     <label class="control-label">Tipo<span style="color: red;">*</span></label>
                                     <div>
                                         <select class="form-control" id="tipoAeronave" formControlName="tipoAeronave">
@@ -135,88 +143,25 @@
                                             <option value=3>HMLT</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Vencimento CA</label>
-                                    <div>
-                                        <input class="form-control" id="vencimentoCA" type="date" formControlName="vencimentoCA" />
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Vencimento CVA<span style="color: red;">*</span></label>
-                                    <div>
-                                        <input class="form-control" id="vencimentoCVA" type="date" formControlName="vencimentoCVA" />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Vencimento CM</label>
-                                    <div>
-                                        <input class="form-control" id="vencimentoCM" type="date" formControlName="vencimentoCM" />
-                                    </div>
-                                </div>
+                                </div>  
                             </div>
+                            
                             <div class="row">
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label class="control-label">Última Pesagem</label>
                                     <div>
                                         <input class="form-control" id="ultimaPesagem" type="date" formControlName="ultimaPesagem" />
                                     </div>
                                 </div>
                                 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label class="control-label">Próxima Pesagem</label>
                                     <div>
                                         <input class="form-control" id="proximaPesagem" type="date" formControlName="proximaPesagem" />
                                     </div>
-                                </div>
+                                </div>  
                                 
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Vencimento Reta</label>
-                                    <div>
-                                        <input class="form-control" id="vencimentoReta" type="date" formControlName="vencimentoReta" />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Vencimento Casco</label>
-                                    <div>
-                                        <input class="form-control" id="vencimentoCasco" type="date" formControlName="vencimentoCasco" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Motor</label>
-                                    <div>
-                                        <input class="form-control" id="motor" type="text" placeholder="(opcional)" formControlName="motor" [ngClass]="{'is-invalid': displayMessage.motor}" />
-                                        <span class="text-danger" *ngIf="displayMessage.motor">
-                                            <p [innerHTML]="displayMessage.motor"></p>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Modelo do Motor</label>
-                                    <div>
-                                        <input class="form-control" id="modeloMotor" type="text" placeholder="(opcional)" formControlName="modeloMotor" [ngClass]="{'is-invalid': displayMessage.modeloMotor}" />
-                                        <span class="text-danger" *ngIf="displayMessage.modeloMotor">
-                                            <p [innerHTML]="displayMessage.modeloMotor"></p>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Nº Série do Motor</label>
-                                    <div>
-                                        <input class="form-control" id="numeroSerieMotor" type="text" placeholder="(opcional)" formControlName="numeroSerieMotor" [ngClass]="{'is-invalid': displayMessage.numeroSerieMotor}" />
-                                        <span class="text-danger" *ngIf="displayMessage.numeroSerieMotor">
-                                            <p [innerHTML]="displayMessage.numeroSerieMotor"></p>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label class="control-label">Ativo<span style="color: red;">*</span></label>
                                     <div>
                                         <select class="form-control" id="ativo" formControlName="ativo" [ngClass]="{'is-invalid': displayMessage.ativo }" >

@@ -1,4 +1,5 @@
 import { DiarioBordo } from "src/app/diariosBordo/models/DiarioBordo";
+import { PassagemAerea } from "src/app/passagensAereas/models/PassagemAerea";
 
 export interface Mecanico {
     // PESSOA
@@ -32,4 +33,5 @@ export interface Mecanico {
   numeroCnh: string;
 
   diariosBordoMecanico: DiarioBordo[];
+  passagemAerea: PassagemAerea[];
   }

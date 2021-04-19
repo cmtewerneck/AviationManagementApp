@@ -45,135 +45,86 @@
                     <h5 class="card-header">Dados da Aeronave</h5>
                     <div class="card-body">
                         <div class="row">
-                            <dl class="col-md-4">
-                                <dt class="col-sm-10">
+                            <dl class="col-md-6">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Matrícula:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.matricula == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.matricula != ''">{{ aeronave.matricula }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.matricula == ''">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.matricula != ''">{{ aeronave.matricula }}</dd>
                                 <br>   
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Fabricante:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.fabricante == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.fabricante != ''">{{ aeronave.fabricante }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.fabricante == ''">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.fabricante != ''">{{ aeronave.fabricante }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Categoria:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.categoria == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.categoria != ''">{{ aeronave.categoria }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.categoria == ''">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.categoria != ''">{{ aeronave.categoria }}</dd>
                                 <br> 
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Modelo:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.modelo == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.modelo != ''">{{ aeronave.modelo }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.modelo == ''">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.modelo != ''">{{ aeronave.modelo }}</dd>
                                 <br> 
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Nº de Série:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerie == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerie != ''">{{ aeronave.numeroSerie }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.numeroSerie == ''">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.numeroSerie != ''">{{ aeronave.numeroSerie }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Ano:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.ano == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.ano != null">{{ aeronave.ano }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.ano == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.ano != null">{{ aeronave.ano }}</dd>
                                 <br> 
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Peso Vazio:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.pesoVazio == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.pesoVazio != null">{{ aeronave.pesoVazio }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.pesoVazio == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.pesoVazio != null">{{ aeronave.pesoVazio }}</dd>
                             </dl>
-                            <dl class="col-md-4">
-                                <dt class="col-sm-10">
+
+                            <dl class="col-md-6">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Peso Básico:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.pesoBasico == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.pesoBasico != null">{{ aeronave.pesoBasico }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.pesoBasico == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.pesoBasico != null">{{ aeronave.pesoBasico }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Horas Totais:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.horasTotais == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.horasTotais != null">{{ aeronave.horasTotais }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.horasTotais == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.horasTotais != null">{{ aeronave.horasTotais }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Horas Restantes:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.horasRestantes == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.horasRestantes != null">{{ aeronave.horasRestantes }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.horasRestantes == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.horasRestantes != null">{{ aeronave.horasRestantes }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Vencimento CA:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCA == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCA != null">{{ aeronave.vencimentoCA | date: 'dd/MM/yyyy' }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Vencimento CVA:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCVA == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCVA != null">{{ aeronave.vencimentoCVA | date: 'dd/MM/yyyy' }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Vencimento CM:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCM == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCM != null">{{ aeronave.vencimentoCM | date: 'dd/MM/yyyy' }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Última Pesagem:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.ultimaPesagem == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.ultimaPesagem != null">{{ aeronave.ultimaPesagem | date: 'dd/MM/yyyy' }}</dd>
-                            </dl>
-                            <dl class="col-md-4">
-                                <dt class="col-sm-10">
+                                <dd class="col-sm-'12'" *ngIf="aeronave.ultimaPesagem == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.ultimaPesagem != null">{{ aeronave.ultimaPesagem | date: 'dd/MM/yyyy' }}</dd>
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Próxima Pesagem:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.proximaPesagem == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.proximaPesagem != null">{{ aeronave.proximaPesagem | date: 'dd/MM/yyyy' }}</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.proximaPesagem == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.proximaPesagem != null">{{ aeronave.proximaPesagem | date: 'dd/MM/yyyy' }}</dd>
                                 <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Vencimento RETA:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoReta == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoReta != null">{{ aeronave.vencimentoReta | date: 'dd/MM/yyyy' }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Vencimento CASCO:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCasco == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.vencimentoCasco != null">{{ aeronave.vencimentoCasco | date: 'dd/MM/yyyy' }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Motor:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.motor == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.motor != ''">{{ aeronave.motor }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Modelo Motor:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.modeloMotor == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.modeloMotor != ''">{{ aeronave.modeloMotor }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
-                                    <label class="control-label">Nº de Série do Motor:</label>
-                                </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerieMotor == ''">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.numeroSerieMotor != ''">{{ aeronave.numeroSerieMotor }}</dd>
-                                <br>
-                                <dt class="col-sm-10">
+                                <dt class="col-sm-'12'">
                                     <label class="control-label">Situação:</label>
                                 </dt>
-                                <dd class="col-sm-10" *ngIf="aeronave.situacao == null">Não Informado</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.situacao == true">Operacional</dd>
-                                <dd class="col-sm-10" *ngIf="aeronave.situacao == false">Fora de Operação</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.situacao == null">Não Informado</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.situacao == true">Operacional</dd>
+                                <dd class="col-sm-'12'" *ngIf="aeronave.situacao == false">Fora de Operação</dd>
                             </dl>
                         </div>
                     </div>

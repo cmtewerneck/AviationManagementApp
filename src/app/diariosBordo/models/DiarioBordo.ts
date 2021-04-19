@@ -54,3 +54,8 @@ export interface Mecanico {
   id: string;
   nome: string;
 }
+
+export interface AeronaveHorasTotais {
+  id: string;
+  totalDecimal: number;
+}

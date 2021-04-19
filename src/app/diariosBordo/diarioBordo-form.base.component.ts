@@ -1,4 +1,4 @@
-import { Aeronave, DiarioBordo, Tripulante } from './models/DiarioBordo';
+import { Aeronave, AeronaveHorasTotais, DiarioBordo, Tripulante } from './models/DiarioBordo';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { utilsBr } from 'js-brasil';
@@ -6,12 +6,14 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class DiarioBordoBaseComponent extends FormBaseComponent {
 
+    aeronaveHorasTotais: AeronaveHorasTotais;
     diarioBordo: DiarioBordo;
     aeronaves: Aeronave[];
     tripulantes: Tripulante[];
     mecanicos: Tripulante[];
     errors: any[] = [];
     diarioBordoForm: FormGroup;
+    aeronaveHorasTotaisForm: FormGroup;
 
     MASKS = utilsBr.MASKS;
 

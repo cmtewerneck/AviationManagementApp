@@ -63,6 +63,11 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
               copilotoId: [''],
               mecanicoResponsavelId: ['', [Validators.required]]
             });
+            
+            this.aeronaveHorasTotaisForm = this.fb.group({
+              id: [''],
+              totalDecimal: ['']
+            });
           }
           
           ngAfterViewInit(): void {
@@ -73,7 +78,16 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
             if (this.diarioBordoForm.dirty && this.diarioBordoForm.valid) {
               this.diarioBordo = Object.assign({}, this.diarioBordo, this.diarioBordoForm.value);
               
+              this.aeronaveHorasTotaisForm.patchValue({
+                id: this.diarioBordo.aeronaveId,
+                totalDecimal: this.diarioBordo.totalDecimal
+              })
+              
+              this.aeronaveHorasTotais = Object.assign({}, this.aeronaveHorasTotais, this.aeronaveHorasTotaisForm.value);
+              
               // CONVERSÕES DE JSON
+              this.aeronaveHorasTotais.totalDecimal = CurrencyUtils.StringParaDecimal(this.aeronaveHorasTotais.totalDecimal);
+              
               this.diarioBordo.data = new Date(this.diarioBordo.data);
               this.diarioBordo.horaAcionamento = new Date(this.diarioBordo.horaAcionamento);
               if (this.diarioBordo.horaDecolagem) { this.diarioBordo.horaDecolagem = new Date(this.diarioBordo.horaDecolagem); } else { this.diarioBordo.horaDecolagem = null; }
@@ -94,6 +108,9 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
               // FIM DAS CONVERSÕES
               
               console.log(this.diarioBordo);
+              console.log('');
+              console.log('AERONAVE HORAS TOTAIS ABAIXO:');
+              console.log(this.aeronaveHorasTotais);
               
               this.diarioBordoService.novoDiarioBordo(this.diarioBordo)
               .subscribe(
@@ -109,16 +126,23 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
               this.diarioBordoForm.reset();
               this.errors = [];
               
-              let toast = this.toastr.success('Diário cadastrado com sucesso!', 'Sucesso!');
-              if (toast) {
-                toast.onHidden.subscribe(() => {
-                  this.router.navigate(['/diarios-bordo/listar-todos']);
-                });
+              this.diarioBordoService.atualizarAeronaveHorasTotais(this.aeronaveHorasTotais)
+              .subscribe(
+                sucesso => { 
+                  let toast = this.toastr.success('Voo cadastrado com sucesso!', 'Sucesso!');
+                  if (toast) {
+                    toast.onHidden.subscribe(() => {
+                      this.router.navigate(['/diarios-bordo/listar-todos']);
+                    });
+                  }
+                },
+                falha => { this.processarFalha(falha) }
+                );
               }
-            }
-            
-            processarFalha(fail: any) {
-              this.errors = fail.error.errors;
-              this.toastr.error('Ocorreu um erro!', 'Opa...');
-            }
-          }      
+              
+              processarFalha(fail: any) {
+                this.errors = fail.error.errors;
+                this.toastr.error('Ocorreu um erro!', 'Opa...');
+              }
+
+}      

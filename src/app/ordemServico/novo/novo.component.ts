@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrdemServicoService } from '../services/ordemServico.service';
 import { OrdemServicoBaseComponent } from '../ordemServico-form.base.component';
-import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-novo',
@@ -30,8 +29,8 @@ export class NovoComponent extends OrdemServicoBaseComponent implements OnInit {
         aeronaves => this.aeronaves = aeronaves);
 
         this.ordemServicoService.obterServicos()
-      .subscribe(
-        servicos => this.servicos = servicos);
+         .subscribe(
+           servicos => this.servicos = servicos);
         
         this.ordemServicoForm = this.fb.group({
           numeroOrdem: ['', [Validators.required, Validators.maxLength(20)]],

@@ -33,17 +33,14 @@ export abstract class AeronaveBaseComponent extends FormBaseComponent {
                 required: 'Modelo é obrigatório',
                 maxlength: 'Máximo de 30 caracteres'
             },
+            horasTotais: {
+                required: 'Hora Total é obrigatória'
+            },
+            proximaIntervencao: {
+                required: 'Próxima Intervenção é obrigatória'
+            },
             numeroSerie: {
                 maxlength: 'Máximo de 20 caracteres'
-            },
-            motor: {
-                maxlength: 'Máximo de 30 caracteres'
-            },
-            modeloMotor: {
-                maxlength: 'Máximo de 30 caracteres'
-            },
-            numeroSerieMotore: {
-                maxlength: 'Máximo de 30 caracteres'
             },
             situacao: {
                 required: 'Situação é obrigatória'

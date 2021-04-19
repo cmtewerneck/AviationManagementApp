@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VooAgendadoAppComponent } from './vooAgendado.app.component';
 import { ListaComponent } from './lista/lista.component';
+import { ListaGridComponent } from './listaGrid/listaGrid.component';
 import { NovoComponent } from './novo/novo.component';
 import { EditarComponent } from './editar/editar.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -13,7 +14,10 @@ const vooAgendadoRouterConfig: Routes = [
     {
         path: '', component: VooAgendadoAppComponent,
         children: [
-             { path: 'listar-todos', component: ListaComponent },
+             { path: 'listar-todos', component: ListaGridComponent },
+             { 
+                 path: 'calendario', component: ListaComponent 
+             },
              {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [VooAgendadoGuard],

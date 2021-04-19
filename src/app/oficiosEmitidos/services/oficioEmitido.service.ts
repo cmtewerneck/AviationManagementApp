@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { OficioEmitido } from '../models/oficioEmitido';
+import { OficioEmitido } from '../models/OficioEmitido';
+import { OficioEmitidoPaged } from '../models/OficioEmitidoPaged';
 
 @Injectable()
 export class OficioEmitidoService extends BaseService {
@@ -15,6 +16,12 @@ export class OficioEmitidoService extends BaseService {
     obterTodos(): Observable<OficioEmitido[]> {
         return this.http
             .get<OficioEmitido[]>(this.urlServiceV1 + 'oficios-emitidos', this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterTodosPaginados(ps: number, page: number, query: string): Observable<OficioEmitidoPaged[]> {
+        return this.http
+            .get<OficioEmitidoPaged[]>(this.urlServiceV1 + `oficios-emitidos?ps=${ps}&page=${page}&query=${query}`, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 

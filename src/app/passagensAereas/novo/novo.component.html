@@ -1,0 +1,156 @@
+<section class="content-header">
+    <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Nova Passagem</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li><a class="btn btn-dark" [routerLink]="['/passagens-aereas/listar-todos']" tooltip="Voltar"><i class="fa fa-arrow-left"></i></a></li>&nbsp;&nbsp;
+                    <li><a class="btn btn-primary" [routerLink]="['/']" tooltip="Home"><i class="fa fa-home"></i></a></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+                <form enctype="multipart/form-data" (ngSubmit)="adicionarPassagemAerea()" [formGroup]="passagemAereaForm">
+                    
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Dados da Passagem</h5>
+                                <div class="card-body">
+                                    <div class="row">  
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Data da Compra<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="dataCompra" type="date" formControlName="dataCompra" [ngClass]="{'is-invalid': displayMessage.dataCompra }" />
+                                                <span class="text-danger" *ngIf="displayMessage.dataCompra">
+                                                    <p [innerHTML]="displayMessage.dataCompra"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Data do Voo<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="dataVoo" type="date" formControlName="dataVoo" [ngClass]="{'is-invalid': displayMessage.dataVoo }" />
+                                                <span class="text-danger" *ngIf="displayMessage.dataVoo">
+                                                    <p [innerHTML]="displayMessage.dataVoo"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Origem<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="origem" type="text" formControlName="origem" [ngClass]="{'is-invalid': displayMessage.origem }" />
+                                                <span class="text-danger" *ngIf="displayMessage.origem">
+                                                    <p [innerHTML]="displayMessage.origem"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Destino<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="destino" type="text" formControlName="destino" [ngClass]="{'is-invalid': displayMessage.destino }" />
+                                                <span class="text-danger" *ngIf="displayMessage.destino">
+                                                    <p [innerHTML]="displayMessage.destino"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Companhia Aérea</label>
+                                            <div>
+                                                <input class="form-control" id="empresa" type="text" formControlName="empresa" [ngClass]="{'is-invalid': displayMessage.empresa }" />
+                                                <span class="text-danger" *ngIf="displayMessage.empresa">
+                                                    <p [innerHTML]="displayMessage.empresa"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Assento</label>
+                                            <div>
+                                                <input class="form-control" id="assento" type="text" formControlName="assento" [ngClass]="{'is-invalid': displayMessage.assento }" />
+                                                <span class="text-danger" *ngIf="displayMessage.assento">
+                                                    <p [innerHTML]="displayMessage.assento"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Localizador</label>
+                                            <div>
+                                                <input class="form-control" id="localizador" type="text" formControlName="localizador" [ngClass]="{'is-invalid': displayMessage.localizador }" />
+                                                <span class="text-danger" *ngIf="displayMessage.localizador">
+                                                    <p [innerHTML]="displayMessage.localizador"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Forma de Pagamento</label>
+                                            <div>
+                                                <input class="form-control" id="formaPagamento" type="text" formControlName="formaPagamento" [ngClass]="{'is-invalid': displayMessage.formaPagamento }" />
+                                                <span class="text-danger" *ngIf="displayMessage.formaPagamento">
+                                                    <p [innerHTML]="displayMessage.formaPagamento"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-9">
+                                            <label class="control-label">Colaborador<span style="color: red;">*</span></label>
+                                            <select class="form-control" id="colaboradorId" formControlName="colaboradorId" [ngClass]="{'is-invalid': displayMessage.colaboradorId }">
+                                                <option *ngFor="let colaborador of colaboradores" value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="displayMessage.colaboradorId">
+                                                <p [innerHTML]="displayMessage.colaboradorId"></p>
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label class="control-label">Valor<span style="color: red;">*</span></label>
+                                            <div>
+                                                <input class="form-control" id="valor" type="text" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor }" />
+                                                <span class="text-danger" *ngIf="displayMessage.valor">
+                                                    <p [innerHTML]="displayMessage.valor"></p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" [disabled]="!passagemAereaForm.valid" value="Cadastrar" class="btn btn-success" style="width: 30%;">&nbsp;
+                        <a class="btn btn-primary" href="/passagens-aereas/listar-todos">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

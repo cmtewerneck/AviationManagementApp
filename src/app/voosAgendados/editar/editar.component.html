@@ -35,95 +35,92 @@
                     <input type="hidden" id="id" name="id" value="">
                     
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <h5 class="card-header">Dados do Serviço</h5>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-3">
-                                            <label class="control-label">Início<span style="color: red;">*</span></label>
-                                            <div>
-                                                <input class="form-control" id="start" type="datetime-local" formControlName="start" [ngClass]="{'is-invalid': displayMessage.start }" />
-                                                <span class="text-danger" *ngIf="displayMessage.start">
-                                                    <p [innerHTML]="displayMessage.start"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-3">
-                                            <label class="control-label">Término<span style="color: red;">*</span></label>
-                                            <div>
-                                                <input class="form-control" id="end" type="datetime-local" formControlName="end" [ngClass]="{'is-invalid': displayMessage.end }" />
-                                                <span class="text-danger" *ngIf="displayMessage.end">
-                                                    <p [innerHTML]="displayMessage.end"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group form-check col-md-3">
-                                            <label class="control-label">Dia Todo<span style="color: red;">*</span></label>
-                                            <div>
-                                                <select class="form-control" id="allDay" formControlName="allDay" [ngClass]="{'is-invalid': displayMessage.allDay }" >
-                                                    <option value=true>Sim</option>
-                                                    <option value=false>Não</option>
-                                                </select>
-                                                <span class="text-danger" *ngIf="displayMessage.allDay">
-                                                    <p [innerHTML]="displayMessage.allDay"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group form-check col-md-3">
-                                            <label class="control-label">Editável<span style="color: red;">*</span></label>
-                                            <div>
-                                                <select class="form-control" id="editable" formControlName="editable" [ngClass]="{'is-invalid': displayMessage.editable }" >
-                                                    <option value=true>Sim</option>
-                                                    <option value=false>Não</option>
-                                                </select>
-                                                <span class="text-danger" *ngIf="displayMessage.editable">
-                                                    <p [innerHTML]="displayMessage.editable"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="form-group form-check col-md-4">
-                                            <label class="control-label">Duração Editável<span style="color: red;">*</span></label>
-                                            <div>
-                                                <select class="form-control" id="durationEditable" formControlName="durationEditable" [ngClass]="{'is-invalid': displayMessage.durationEditable }" >
-                                                    <option value=true>Sim</option>
-                                                    <option value=false>Não</option>
-                                                </select>
-                                                <span class="text-danger" *ngIf="displayMessage.durationEditable">
-                                                    <p [innerHTML]="displayMessage.durationEditable"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-4">
-                                            <label class="control-label">Cor de fundo<span style="color: red;">*</span></label>
-                                            <div>
-                                                <input class="form-control" id="backgroundColor" type="color" formControlName="backgroundColor" [ngClass]="{'is-invalid': displayMessage.backgroundColor }" />
-                                                <span class="text-danger" *ngIf="displayMessage.backgroundColor">
-                                                    <p [innerHTML]="displayMessage.backgroundColor"></p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-4">
-                                            <label class="control-label">Cor do texto<span style="color: red;">*</span></label>
-                                            <div>
-                                                <input class="form-control" id="textColor" type="color" formControlName="textColor" [ngClass]="{'is-invalid': displayMessage.textColor }" />
-                                                <span class="text-danger" *ngIf="displayMessage.textColor">
-                                                    <p [innerHTML]="displayMessage.textColor"></p>
-                                                </span>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Aeronave<span style="color: red;">*</span></label>
+                            <select class="form-control" id="aeronaveId" formControlName="aeronaveId" [ngClass]="{'is-invalid': displayMessage.aeronaveId }">
+                                <option *ngFor="let aeronave of aeronaves" value="{{ aeronave.id }}">{{ aeronave.matricula }}</option>
+                            </select>
+                            <span class="text-danger" *ngIf="displayMessage.aeronaveId">
+                                <p [innerHTML]="displayMessage.aeronaveId"></p>
+                            </span>
+                        </div>
+                        
+                        <div class="form-group col-md-8">
+                            <label class="control-label">Título<span style="color: red;">*</span></label>
+                            <div>
+                                <input class="form-control" id="title" type="text" formControlName="title" [ngClass]="{'is-invalid': displayMessage.title }" />
+                                <span class="text-danger" *ngIf="displayMessage.title">
+                                    <p [innerHTML]="displayMessage.title"></p>
+                                </span>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Início<span style="color: red;">*</span></label>
+                            <div>
+                                <input class="form-control" id="start" type="datetime-local" formControlName="start" [ngClass]="{'is-invalid': displayMessage.start }" />
+                                <span class="text-danger" *ngIf="displayMessage.start">
+                                    <p [innerHTML]="displayMessage.start"></p>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Término<span style="color: red;">*</span></label>
+                            <div>
+                                <input class="form-control" id="end" type="datetime-local" formControlName="end" [ngClass]="{'is-invalid': displayMessage.end }" />
+                                <span class="text-danger" *ngIf="displayMessage.end">
+                                    <p [innerHTML]="displayMessage.end"></p>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-check col-md-3">
+                            <label class="control-label">Dia Todo<span style="color: red;">*</span></label>
+                            <div>
+                                <select class="form-control" id="allDay" formControlName="allDay" [ngClass]="{'is-invalid': displayMessage.allDay }" >
+                                    <option value=false>Não</option>
+                                    <option value=true>Sim</option>
+                                </select>
+                                <span class="text-danger" *ngIf="displayMessage.allDay">
+                                    <p [innerHTML]="displayMessage.allDay"></p>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Categoria<span style="color: red;">*</span></label>
+                            <select class="form-control" id="categoriaId" formControlName="categoriaId" [ngClass]="{'is-invalid': displayMessage.categoriaId }">
+                                <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.descricao }}</option>
+                            </select>
+                            <span class="text-danger" *ngIf="displayMessage.categoriaId">
+                                <p [innerHTML]="displayMessage.categoriaId"></p>
+                            </span>
+                        </div>                                     
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Cor de fundo<span style="color: red;">*</span></label>
+                            <div>
+                                <input class="form-control" id="backgroundColor" type="color" formControlName="backgroundColor" [ngClass]="{'is-invalid': displayMessage.backgroundColor }" />
+                                <span class="text-danger" *ngIf="displayMessage.backgroundColor">
+                                    <p [innerHTML]="displayMessage.backgroundColor"></p>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Cor do texto<span style="color: red;">*</span></label>
+                            <div>
+                                <input class="form-control" id="textColor" type="color" formControlName="textColor" [ngClass]="{'is-invalid': displayMessage.textColor }" />
+                                <span class="text-danger" *ngIf="displayMessage.textColor">
+                                    <p [innerHTML]="displayMessage.textColor"></p>
+                                </span>
+                            </div>
+                        </div> 
                     </div>
                     
                     <div class="form-group" style="text-align: right;">

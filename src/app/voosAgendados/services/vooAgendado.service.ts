@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { VooAgendado, Aeronave } from '../models/VooAgendado';
+import { VooAgendado, Aeronave, CategoriaVoo } from '../models/VooAgendado';
 
 @Injectable()
 export class VooAgendadoService extends BaseService {
@@ -57,6 +57,12 @@ export class VooAgendadoService extends BaseService {
     obterPorRange(start: string, end: string): Observable<VooAgendado[]> {
         return this.http
             .get<VooAgendado[]>(this.urlServiceV1 + `voos-agendados?start=${start}&end=${end}`, this.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterCategorias(): Observable<CategoriaVoo[]> {
+        return this.http
+            .get<CategoriaVoo[]>(this.urlServiceV1 + 'categorias-voos', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 

@@ -21,38 +21,49 @@
     <div>
       <h4>Agendamento</h4>
       <hr />
-      <dl class="row">
-        <dt class="col-sm-2">
-          <label class="control-label">Título</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooAgendado.title }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Matrícula</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooAgendado.matriculaAeronave }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Começa Em</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooAgendado.start }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Termina Em</label>
-        </dt>
-        <dd class="col-sm-10">
-          {{ vooAgendado.end }}
-        </dd>
-        <dt class="col-sm-2">
-          <label class="control-label">Dia Todo</label>
-        </dt>
-        <dd class="col-sm-10">
-          <input [checked]="vooAgendado.allDay" class="check-box" disabled="disabled" type="checkbox">
-        </dd>
-      </dl>
+      <div class="row">
+        <dl class="col-md-6">
+          <dt class="col-sm-12">
+            <label class="control-label">Título</label>
+          </dt>
+          <dd class="col-sm-12">
+            {{ vooAgendado.title }}
+          </dd>
+          <dt class="col-sm-12">
+            <label class="control-label">Matrícula</label>
+          </dt>
+          <dd class="col-sm-12">
+            {{ vooAgendado.matriculaAeronave }}
+          </dd>
+          <dt class="col-sm-12">
+            <label class="control-label">Começa Em</label>
+          </dt>
+          <dd class="col-sm-12">
+            {{ vooAgendado.start }}
+          </dd>
+        </dl>
+        
+        <dl class="col-md-6">
+          <dt class="col-sm-12">
+            <label class="control-label">Termina Em</label>
+          </dt>
+          <dd class="col-sm-12">
+            {{ vooAgendado.end }}
+          </dd>
+          <dt class="col-sm-12">
+            <label class="control-label">Dia Todo</label>
+          </dt>
+          <dd class="col-sm-12">
+            <input [checked]="vooAgendado.allDay" class="check-box" disabled="disabled" type="checkbox">
+          </dd>
+          <dt class="col-sm-12">
+            <label class="control-label">Categoria</label>
+          </dt>
+          <dd class="col-sm-12">
+            {{ vooAgendado.descricaoCategoria }}
+          </dd>
+        </dl>
+      </div>
     </div>
     
     <div>

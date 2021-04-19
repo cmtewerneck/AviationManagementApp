@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AeronaveService } from '../services/aeronave.service';
@@ -15,6 +15,15 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   
+  get aeronavesMotoresArray(): FormArray {
+    return <FormArray>this.aeronaveForm.get('aeronavesMotores');
+  }
+
+  get aeronavesDocumentosArray(): FormArray {
+    return <FormArray>this.aeronaveForm.get('aeronavesDocumentos');
+  }
+
+  // VARIÁVEIS PARA IMAGEM
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -25,6 +34,7 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
   transform: ImageTransform = {};
   imageUrl: string;
   imagemNome: string;
+  // FIM DA IMAGEM
   
   constructor(private fb: FormBuilder,
     private aeronaveService: AeronaveService,
@@ -42,23 +52,53 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
         ano: [''],
         pesoVazio: [''],
         pesoBasico: [''],
-        horasTotais: [''],
+        horasTotais: ['', Validators.required],
+        proximaIntervencao: ['', Validators.required],
         horasRestantes: [''],
         tipoAeronave: ['', Validators.required],
-        vencimentoCA: [''],
-        vencimentoCVA: [''],
-        vencimentoCM: [''],
         ultimaPesagem: [''],
         proximaPesagem: [''],
-        vencimentoReta: [''],
-        vencimentoCasco: [''],
-        motor: ['', Validators.maxLength(30)],
-        modeloMotor: ['', Validators.maxLength(30)],
-        numeroSerieMotor: ['', Validators.maxLength(30)],
         imagem: [''],
         situacao: [true, Validators.required],
-        ativo: [true, Validators.required]
+        ativo: [true, Validators.required],
+        aeronavesMotores: this.fb.array([this.criaMotor()]),
+        aeronavesDocumentos: this.fb.array([this.criaDocumento()])
       });
+    }
+
+    criaMotor(): FormGroup {
+      return this.fb.group({
+        fabricante: ['', [Validators.required, Validators.maxLength(50)]],
+        modelo: ['', [Validators.required, Validators.maxLength(50)]],
+        numeroSerie: ['', [Validators.required, Validators.maxLength(50)]],
+        horasTotais: [''],
+        ciclosTotais: ['']
+      });
+    }
+
+    criaDocumento(): FormGroup {
+      return this.fb.group({
+        titulo: ['', [Validators.required, Validators.maxLength(50)]],
+        dataEmissao: [''],
+        dataValidade: ['', Validators.required],
+        arquivo: ['']
+      });
+    }
+
+    adicionarMotor(){
+      this.aeronavesMotoresArray.push(this.criaMotor());
+    }
+
+    adicionarDocumento(){
+      this.aeronavesDocumentosArray.push(this.criaDocumento());
+    }
+
+    removerMotor(id: number){
+      this.aeronavesMotoresArray.removeAt(id);
+    }
+
+    removerDocumento(id: number){
+      this.aeronavesDocumentosArray.removeAt(id);
     }
     
     ngAfterViewInit(): void {
@@ -77,14 +117,10 @@ export class NovoComponent extends AeronaveBaseComponent implements OnInit {
         this.aeronave.pesoVazio = CurrencyUtils.StringParaDecimal(this.aeronave.pesoVazio);
         this.aeronave.pesoBasico = CurrencyUtils.StringParaDecimal(this.aeronave.pesoBasico);
         this.aeronave.horasTotais = CurrencyUtils.StringParaDecimal(this.aeronave.horasTotais);
+        this.aeronave.proximaIntervencao = CurrencyUtils.StringParaDecimal(this.aeronave.proximaIntervencao);
         this.aeronave.horasRestantes = CurrencyUtils.StringParaDecimal(this.aeronave.horasRestantes);
-        if (this.aeronave.vencimentoCA) { this.aeronave.vencimentoCA = new Date(this.aeronave.vencimentoCA); } else { this.aeronave.vencimentoCA = null; }
-        if (this.aeronave.vencimentoCVA) { this.aeronave.vencimentoCVA = new Date(this.aeronave.vencimentoCVA); } else { this.aeronave.vencimentoCVA = null; }
-        if (this.aeronave.vencimentoCM) { this.aeronave.vencimentoCM = new Date(this.aeronave.vencimentoCM); } else { this.aeronave.vencimentoCM = null; }
         if (this.aeronave.ultimaPesagem) { this.aeronave.ultimaPesagem = new Date(this.aeronave.ultimaPesagem); } else { this.aeronave.ultimaPesagem = null; }
         if (this.aeronave.proximaPesagem) { this.aeronave.proximaPesagem = new Date(this.aeronave.proximaPesagem); } else { this.aeronave.proximaPesagem = null; }
-        if (this.aeronave.vencimentoReta) { this.aeronave.vencimentoReta = new Date(this.aeronave.vencimentoReta); } else { this.aeronave.vencimentoReta = null; }
-        if (this.aeronave.vencimentoCasco) { this.aeronave.vencimentoCasco = new Date(this.aeronave.vencimentoCasco); } else { this.aeronave.vencimentoCasco = null; }
         this.aeronave.ativo = this.aeronave.ativo.toString() == "true";
         this.aeronave.situacao = this.aeronave.situacao.toString() == "true";
         // FIM DAS CONVERSÕES

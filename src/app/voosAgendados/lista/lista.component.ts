@@ -42,7 +42,7 @@ export class ListaComponent implements OnInit {
     },
     dayMaxEvents: true, // allow "more" link when too many events
     eventClick: this.handleEventClick.bind(this),
-    events: this.getData.bind(this)
+    events: this.obterEventos.bind(this)
   };
 
   handleEventClick(clickInfo: EventClickArg) {
@@ -61,7 +61,7 @@ export class ListaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getData(info, successCallback, failureCallback) {
+  obterEventos(info, successCallback, failureCallback) {
 
     console.log('info: ', info);
 

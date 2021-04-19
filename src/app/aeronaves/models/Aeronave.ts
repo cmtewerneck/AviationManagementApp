@@ -4,6 +4,8 @@ import { VooAgendado } from 'src/app/voosAgendados/models/VooAgendado';
 import { DiarioBordo } from 'src/app/diariosBordo/models/DiarioBordo';
 import { OrdemServico } from 'src/app/ordemServico/models/OrdemServico';
 import { VooInstrucao } from 'src/app/voosInstrucao/models/VooInstrucao';
+import { AeronaveMotor } from 'src/app/aeronavesMotores/models/AeronaveMotor';
+import { AeronaveDocumento } from 'src/app/aeronavesDocumentos/models/AeronaveDocumento';
 
 export interface Aeronave {
   id: string;
@@ -15,19 +17,12 @@ export interface Aeronave {
   ano?: number;
   pesoVazio?: number;
   pesoBasico?: number;
-  horasTotais?: number;
+  horasTotais: number;
+  proximaIntervencao: number;
   horasRestantes?: number;
   tipoAeronave: number;
-  vencimentoCA?: Date;
-  vencimentoCVA?: Date;
-  vencimentoCM?: Date;
   ultimaPesagem?: Date;
   proximaPesagem?: Date;
-  vencimentoReta?: Date;
-  vencimentoCasco?: Date;
-  motor: string;
-  modeloMotor: string;
-  numeroSerieMotor: string;
   situacao: boolean;
   ativo: boolean;
 
@@ -35,6 +30,8 @@ export interface Aeronave {
   imagemUpload: string;
   
   aeronaveTarifa: AeronaveTarifa[];
+  aeronavesMotores: AeronaveMotor[];
+  aeronavesDocumentos: AeronaveDocumento[];
   aeronaveAbastecimento: AeronaveAbastecimento[];
   vooAgendado: VooAgendado[];
   vooInstrucao: VooInstrucao[];

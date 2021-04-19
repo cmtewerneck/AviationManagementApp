@@ -1,3 +1,4 @@
+import { PassagemAerea } from "src/app/passagensAereas/models/PassagemAerea";
 import { VooInstrucao } from "src/app/voosInstrucao/models/VooInstrucao";
 
 export interface Instrutor {
@@ -33,4 +34,5 @@ export interface Instrutor {
    numeroCnh: string;
  
    voosInstrucao: VooInstrucao[];
+   passagemAerea: PassagemAerea[];
 }

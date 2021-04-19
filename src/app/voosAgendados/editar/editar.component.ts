@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { VooAgendadoService } from '../services/vooAgendado.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VooAgendadoBaseComponent } from '../vooAgendado-form.base.component';
+import { CategoriaTreinamentoResolve } from 'src/app/categoriaTreinamento/services/categoriaTreinamento.resolve';
 
 @Component({
   selector: 'app-editar',
@@ -32,6 +33,10 @@ export class EditarComponent extends VooAgendadoBaseComponent implements OnInit 
       this.vooAgendadoService.obterAeronaves()
       .subscribe(
         aeronaves => this.aeronaves = aeronaves);
+
+      this.vooAgendadoService.obterCategorias()
+      .subscribe(
+        categorias => this.categorias = categorias);
         
         this.vooAgendadoForm = this.fb.group({
           title: ['', [Validators.required, Validators.maxLength(30)]],
@@ -42,7 +47,8 @@ export class EditarComponent extends VooAgendadoBaseComponent implements OnInit 
           durationEditable: [0],
           backgroundColor: ['', [Validators.required, Validators.maxLength(20)]],
           textColor: ['', [Validators.required, Validators.maxLength(20)]],
-          aeronaveId: ['', [Validators.required]]
+          aeronaveId: ['', [Validators.required]],
+          categoriaId: ['', [Validators.required]]
         });
         
         this.vooAgendadoForm.patchValue({
@@ -55,7 +61,8 @@ export class EditarComponent extends VooAgendadoBaseComponent implements OnInit 
           durationEditable: this.vooAgendado.durationEditable,
           backgroundColor: this.vooAgendado.backgroundColor,
           textColor: this.vooAgendado.textColor,
-          aeronaveId: this.vooAgendado.aeronaveId
+          aeronaveId: this.vooAgendado.aeronaveId,
+          categoriaId: this.vooAgendado.categoriaId
         });
         
         setTimeout(() => {
