@@ -94,4 +94,16 @@ export class TurmaService extends BaseService {
             .get<Curso[]>(this.urlServiceV1 + 'cursos', this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
+
+
+
+    // PDF
+    gerarCertificadoAluno(id: string) {
+        return this.http
+            .post(this.urlServiceV1 + 'turmas/alunos/gerarCertificado/' + id, null, this.ObterAuthHeaderJson())
+            .pipe(
+                map(super.extractData),
+                catchError(super.serviceError));
+    }
+
 }
