@@ -15,7 +15,7 @@
           <td *ngIf="aluno.situacaoAluno == 2">Aprovado</td>
           <td *ngIf="aluno.situacaoAluno == 3">Reprovado</td>
           <td *ngIf="aluno.situacaoAluno == 2" class="text-center">
-            <a class="btn btn-dark btn-sm" (click)="gerarPdf()">
+            <a class="btn btn-dark btn-sm" (click)="gerarPdf(aluno)">
               <span class="fa fa-download" style="color: white;"></span>
             </a>
           </td>

@@ -76,8 +76,9 @@ export class ListaAlunosComponent {
         this.alunoTurmaId = "";
       }
 
-      gerarPdf() {
-        this.turmaService.gerarCertificadoAluno();
+      gerarPdf(alunoTurma: AlunoTurma) {
+        const url = this.turmaService.getUrlGeracaoCertificadoAluno(alunoTurma.id);
+        window.open(url);
       }
 
       // gerarPdf(alunoTurma: AlunoTurma) {
