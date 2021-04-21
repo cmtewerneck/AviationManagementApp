@@ -6,6 +6,11 @@ import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { deLocale } from 'ngx-bootstrap/locale';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+defineLocale('pt-br', deLocale);
 
 import { DiarioBordoRoutingModule } from './diarioBordo.routing';
 import { DiarioBordoAppComponent } from './diarioBordo.app.component';
@@ -19,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DiarioBordoResolve } from './services/diarioBordo.resolve';
 import { DiarioBordoGuard } from './services/diarioBordo.guard';
+import { DateFormatPipe } from '../_helps/DateFormat.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,8 @@ import { DiarioBordoGuard } from './services/diarioBordo.guard';
     NovoComponent,
     EditarComponent,
     ExcluirComponent,
-    DetalhesComponent
+    DetalhesComponent,
+    DateFormatPipe
   ],
   imports: [
     CommonModule,
@@ -39,7 +46,9 @@ import { DiarioBordoGuard } from './services/diarioBordo.guard';
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   providers: [
     DiarioBordoService,

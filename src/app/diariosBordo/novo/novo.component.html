@@ -39,7 +39,8 @@
                                         <div class="form-group col-md-3">
                                             <label class="control-label">Data<span style="color: red;">*</span></label>
                                             <div>
-                                                <input class="form-control" id="data" type="date" formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" />
+                                                <input autocomplete="off" class="form-control" id="data" type="text" bsDatepicker formControlName="data" [ngClass]="{'is-invalid': displayMessage.data }" 
+                                                [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'right', dateInputFormat: 'DD/MM/YYYY', selectFromOtherMonth: true }"/>
                                                 <span class="text-danger" *ngIf="displayMessage.data">
                                                     <p [innerHTML]="displayMessage.data"></p>
                                                 </span>
@@ -88,7 +89,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group col-md-2">
                                             <label class="control-label">Acionamento<span style="color: red;">*</span></label>
                                             <div>
@@ -324,6 +325,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        {{ diarioBordoForm.value | json }}
                     </div>
                     
                     <div class="form-group" style="text-align: center;">

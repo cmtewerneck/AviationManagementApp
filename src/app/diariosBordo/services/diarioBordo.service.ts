@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { BaseService } from '../../_services/base.service';
-import { Aeronave, AeronaveHorasTotais, DiarioBordo, Tripulante } from '../models/DiarioBordo';
+import { Aeronave, DiarioBordo, Tripulante } from '../models/DiarioBordo';
 
 @Injectable()
 export class DiarioBordoService extends BaseService {
@@ -58,13 +58,5 @@ export class DiarioBordoService extends BaseService {
         return this.http
             .get<Tripulante[]>(this.urlServiceV1 + 'colaboradores/' + tipoColaborador, this.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
-    }
-
-    atualizarAeronaveHorasTotais(aeronaveHorasTotais: AeronaveHorasTotais): Observable<AeronaveHorasTotais> {
-        return this.http
-        .put(this.urlServiceV1 + 'aeronaves/atualizar-total/' + aeronaveHorasTotais.id, aeronaveHorasTotais, this.ObterAuthHeaderJson())
-        .pipe(
-            map(super.extractData),
-            catchError(super.serviceError));
     }
 }

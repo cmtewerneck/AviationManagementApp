@@ -19,11 +19,6 @@ import { ListaTripulantesComponent } from './Components/homepage/tripulantes/lis
 import { ListaTreinamentosComponent } from './Components/homepage/treinamentos/lista.treinamentos.component';
 import { ListaTarifasComponent } from './Components/homepage/tarifas/lista.tarifas.component';
 import { ListaOrdensServicoComponent } from './Components/homepage/ordensServico/lista.ordensServico.component';
-// import { ErrorInterceptor } from './_services/error.handler.service';
-
-// export const httpInterceptorProviders = [
-//   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-// ];
 
 @NgModule({
   declarations: [
@@ -46,7 +41,6 @@ import { ListaOrdensServicoComponent } from './Components/homepage/ordensServico
     HttpClientModule
   ],
   providers: [
-    // httpInterceptorProviders
     HomepageService,
     {
       provide: HTTP_INTERCEPTORS,

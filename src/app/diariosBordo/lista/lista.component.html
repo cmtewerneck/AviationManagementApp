@@ -38,14 +38,14 @@
             <th>Para</th>
             <th>Comandante</th>
             <th>Total Decimal</th>
-            <th>Total Dec/Pouso</th>
-            <th>Total Acionamento/Corte</th>
+            <th>Total Dec/Pou</th>
+            <th>Total Aci/Cor</th>
             <th></th>
           </tr>
         </thead>
         <tbody *ngIf="diariosBordo && diariosBordo.length">
           <tr *ngFor="let diarioBordo of diariosBordoFiltrados">
-            <td>{{ diarioBordo.data | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ diarioBordo.data | DateFormat }}</td>
             <td>{{ diarioBordo.matriculaAeronave }}</td>
             <td>{{ diarioBordo.de }}</td>
             <td>{{ diarioBordo.para }}</td>
@@ -64,9 +64,6 @@
               <a class="btn btn-info btn-sm" [routerLink]="['/diarios-bordo/editar',diarioBordo.id]">
                 <span class="fa fa-pencil-alt"></span>
               </a>
-              <!-- <a class="btn btn-danger" [routerLink]="['/diarios-bordo/excluir',diarioBordo.id]">
-                <span class="fa fa-trash"></span>
-              </a> -->
             </td>
           </tr>
         </tbody>

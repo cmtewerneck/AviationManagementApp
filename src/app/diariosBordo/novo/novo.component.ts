@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DiarioBordoService } from '../services/diarioBordo.service';
 import { DiarioBordoBaseComponent } from '../diarioBordo-form.base.component';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
-import { time } from 'ng-brazil/time/validator';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-novo',
@@ -15,10 +15,12 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
   
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private diarioBordoService: DiarioBordoService,
     private router: Router,
-    private toastr: ToastrService) {super(); }
+    private toastr: ToastrService,
+    private bsLocaleService: BsLocaleService,) {super(); this.bsLocaleService.use('pt-br');}
     
     ngOnInit(): void {
       
@@ -64,11 +66,6 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
         copilotoId: [''],
         mecanicoResponsavelId: ['', [Validators.required]]
       });
-      
-      this.aeronaveHorasTotaisForm = this.fb.group({
-        id: [''],
-        totalDecimal: ['']
-      });
     }
           
     ngAfterViewInit(): void {
@@ -80,19 +77,11 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
       if (this.diarioBordoForm.dirty && this.diarioBordoForm.valid) {
         this.diarioBordo = Object.assign({}, this.diarioBordo, this.diarioBordoForm.value);
         
-        this.aeronaveHorasTotaisForm.patchValue({
-          id: this.diarioBordo.aeronaveId,
-          totalDecimal: this.diarioBordo.totalDecimal
-        })
-        
-        this.aeronaveHorasTotais = Object.assign({}, this.aeronaveHorasTotais, this.aeronaveHorasTotaisForm.value);
-
         // CONVERSÕES DE JSON
-        this.aeronaveHorasTotais.totalDecimal = CurrencyUtils.StringParaDecimal(this.aeronaveHorasTotais.totalDecimal);
-        this.diarioBordo.data = new Date(this.diarioBordo.data);
-        
-        this.diarioBordo.horaAcionamento = new Date(this.diarioBordoForm.value.data + " " + this.diarioBordoForm.value.horaAcionamento);
-
+        this.diarioBordo.data = new Date(this.diarioBordo.data);   
+        //this.diarioBordo.horaAcionamento = new Date(this.diarioBordo.data.setTime(this.diarioBordoForm.value.horaAcionamento));
+        //this.diarioBordo.horaAcionamento = new Date(this.diarioBordo.data.toString().split('T')[0] + " " + this.diarioBordoForm.value.horaAcionamento);
+        //this.diarioBordo.horaAcionamento = new Date(this.diarioBordoForm.value.data + " " + this.diarioBordoForm.value.horaAcionamento);
         if (this.diarioBordo.horaDecolagem) { this.diarioBordo.horaDecolagem = new Date(this.diarioBordo.horaDecolagem); } else { this.diarioBordo.horaDecolagem = null; }
         if (this.diarioBordo.horaPouso) { this.diarioBordo.horaPouso = new Date(this.diarioBordo.horaPouso); } else { this.diarioBordo.horaPouso = null; }
         this.diarioBordo.horaCorte = new Date(this.diarioBordo.horaCorte);
@@ -111,9 +100,6 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
         // FIM DAS CONVERSÕES
         
         console.log(this.diarioBordo);
-        console.log('');
-        console.log('AERONAVE HORAS TOTAIS ABAIXO:');
-        console.log(this.aeronaveHorasTotais);
         
         this.diarioBordoService.novoDiarioBordo(this.diarioBordo)
         .subscribe(
@@ -128,19 +114,12 @@ export class NovoComponent extends DiarioBordoBaseComponent implements OnInit {
       processarSucesso(response: any) {
         this.diarioBordoForm.reset();
         this.errors = [];
-        
-        this.diarioBordoService.atualizarAeronaveHorasTotais(this.aeronaveHorasTotais)
-        .subscribe(
-          sucesso => { 
             let toast = this.toastr.success('Voo cadastrado com sucesso!', 'Sucesso!');
             if (toast) {
               toast.onHidden.subscribe(() => {
                 this.router.navigate(['/diarios-bordo/listar-todos']);
               });
             }
-          },
-          falha => { this.processarFalha(falha) }
-          );
         }
         
         processarFalha(fail: any) {
